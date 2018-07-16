@@ -9,10 +9,9 @@
     tools:context="com.cxzy.xxjg.ui.activitys.TestActivity">
 
     <View
-        android:id="@+id/fake_status_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/statusbar_view_height"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorAccent"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

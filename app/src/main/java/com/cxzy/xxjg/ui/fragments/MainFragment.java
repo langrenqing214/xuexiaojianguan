@@ -1,34 +1,36 @@
 package com.cxzy.xxjg.ui.fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseFragment;
-import com.cxzy.xxjg.bean.TestBean;
 import com.cxzy.xxjg.di.component.AppComponent;
-import com.cxzy.xxjg.ui.activitys.TestActivity;
-import com.cxzy.xxjg.ui.test.contract.ITestContractContract;
+import com.cxzy.xxjg.ui.test.contract.IMainFragmentContract;
 import com.cxzy.xxjg.ui.test.presenter.TestContractPresenterImpl;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
+ * 监管平台
  * A simple {@link Fragment} subclass.
  */
-public class SecondFragment extends BaseFragment<TestContractPresenterImpl> implements ITestContractContract.View {
+public class MainFragment extends BaseFragment<TestContractPresenterImpl> implements IMainFragmentContract.View {
 
     @BindView(R.id.button_test)
     Button btnTest ;
+    @BindView(R.id.dl_my_main)
+    DrawerLayout dlMyMain ;
 
-    public static SecondFragment newInstance() {
+    public static MainFragment newInstance() {
         Bundle args = new Bundle();
-        SecondFragment fragment = new SecondFragment();
+        MainFragment fragment = new MainFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,17 +56,15 @@ public class SecondFragment extends BaseFragment<TestContractPresenterImpl> impl
 
     }
 
-    @Override
-    public void loadTestDetails(TestBean testBean) {
-
-    }
 
     @OnClick(R.id.button_test)
     public void onViewClicked(View view){
         switch (view.getId()){
             case R.id.button_test :
-                startActivity(new Intent(mContext , TestActivity.class));
+                dlMyMain.openDrawer(Gravity.LEFT);
                 break;
         }
     }
+
+
 }

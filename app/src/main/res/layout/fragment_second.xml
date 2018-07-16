@@ -1,20 +1,51 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dl_my_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@mipmap/ic_launcher">
-    <View
-        android:id="@+id/fake_status_bar"
+    android:background="@color/main_style_color">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/statusbar_view_height"
-        android:background="@color/colorAccent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button_test"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="点击"
-        android:background="@drawable/ic_launcher_foreground"
-        />
+        <View
+            android:id="@+id/fake_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/statusbar_view_height"
+            android:background="@color/main_style_color" />
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_default_actionbar_height"
+            android:background="@color/main_toobar_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_test"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/icon_my_fill" />
+
+            <TextView
+                style="@style/toobar_text_style"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="监管平台" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/icon_scan" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/include_app_bar_main" />
+
+
+</android.support.v4.widget.DrawerLayout>

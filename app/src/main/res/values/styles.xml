@@ -35,4 +35,34 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <!--主体字体-->
+    <style name="main_text_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/main_text_color</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+
+    <!--水平分隔线-->
+    <style name="main_line_style">
+        <item name="android:background">@color/main_line_color</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <!--向右箭头-->
+    <style name="right_arrow">
+        <item name="android:background">@drawable/icon_more</item>
+        <item name="android:layout_height">15dp</item>
+        <item name="android:layout_width">15dp</item>
+    </style>
+
+    <!--向右箭头-->
+    <style name="toobar_text_style">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

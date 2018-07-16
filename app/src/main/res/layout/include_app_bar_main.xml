@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="left"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/statusbar_view_height"
+        android:background="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_user_head"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/iv_user_head"
+            android:text="张XX"
+            android:textColor="@color/main_text_color"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tv_user_belong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_user_name"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_user_head"
+            android:text="张XX"
+            android:textColor="@color/main_text_color"
+            android:textSize="12dp" />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/main_line_style"
+        android:layout_marginTop="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            style="@style/main_text_style"
+            android:layout_weight="1"
+            android:text="修改密码" />
+
+        <ImageView
+            style="@style/right_arrow"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp" />
+
+    </LinearLayout>
+
+    <View style="@style/main_line_style" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            style="@style/main_text_style"
+            android:layout_weight="1"
+            android:text="意见反馈" />
+
+        <ImageView
+            style="@style/right_arrow"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp" />
+
+    </LinearLayout>
+
+    <View style="@style/main_line_style" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            style="@style/main_text_style"
+            android:layout_weight="1"
+            android:text="用户协议" />
+
+        <ImageView
+            style="@style/right_arrow"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp" />
+
+    </LinearLayout>
+
+    <View style="@style/main_line_style" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            style="@style/main_text_style"
+            android:layout_weight="1"
+            android:text="关于我们" />
+
+        <ImageView
+            style="@style/right_arrow"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp" />
+
+    </LinearLayout>
+
+    <View style="@style/main_line_style" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            style="@style/main_text_style"
+            android:layout_weight="1"
+            android:text="退出登录" />
+
+        <ImageView
+            style="@style/right_arrow"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp" />
+
+    </LinearLayout>
+
+    <View style="@style/main_line_style" />
+
+</LinearLayout>
