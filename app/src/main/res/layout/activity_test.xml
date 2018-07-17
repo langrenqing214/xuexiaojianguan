@@ -8,10 +8,10 @@
     android:background="@color/white"
     tools:context="com.cxzy.xxjg.ui.activitys.TestActivity">
 
-    <View
+    <!--<View
         android:layout_width="match_parent"
         android:layout_height="@dimen/statusbar_view_height"
-        android:background="@color/colorAccent"/>
+        android:background="@color/colorAccent"/>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -34,6 +34,11 @@
             />
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/btn_scan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <com.cxzy.xxjg.wideget.SimpleMultiStateView
         android:id="@+id/SimpleMultiStateView"
         android:layout_width="match_parent"
@@ -44,5 +49,6 @@
             android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
     </com.cxzy.xxjg.wideget.SimpleMultiStateView>
+
 
 </LinearLayout>

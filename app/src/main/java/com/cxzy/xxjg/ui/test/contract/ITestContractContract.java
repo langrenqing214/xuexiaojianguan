@@ -1,5 +1,7 @@
 package com.cxzy.xxjg.ui.test.contract;
 
+import android.content.Intent;
+
 import com.cxzy.xxjg.base.BaseContract;
 import com.cxzy.xxjg.bean.TestBean;
 

@@ -1,6 +1,7 @@
 package com.cxzy.xxjg.base;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.cxzy.xxjg.LifeSubscription;
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.app.MyApp;
+import com.cxzy.xxjg.ui.fragments.MainFragment;
 import com.cxzy.xxjg.utils.DialogHelper;
 import com.cxzy.xxjg.utils.StatusBarUtil;
 import com.cxzy.xxjg.utils.T;
@@ -259,5 +261,13 @@ public abstract class BaseActivity<T1 extends BaseContract.BasePresenter> extend
             this.mCompositeSubscription = new CompositeSubscription();
         }
         this.mCompositeSubscription.add(subscription);
+    }
+
+    //解决所依附fragment中onActivityResult无法回调的问题
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //将值传入DemoFragment
+        getSupportFragmentManager().findFragmentByTag(MainFragment.class.getName()).onActivityResult(requestCode, resultCode, data);
     }
 }
