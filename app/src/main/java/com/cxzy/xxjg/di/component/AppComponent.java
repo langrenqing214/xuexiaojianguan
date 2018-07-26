@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.cxzy.xxjg.di.module.AppModule;
 import com.cxzy.xxjg.di.module.HttpModule;
+import com.cxzy.xxjg.net.LoginApi;
 import com.cxzy.xxjg.net.testApi;
 
 import dagger.Component;
@@ -17,5 +18,6 @@ public interface AppComponent {
     Context getContext();  // 提供App的Context
 //    MyApp getApplication();
     testApi getNetTestApi();
+    LoginApi getNetLoginApi();
 }
 

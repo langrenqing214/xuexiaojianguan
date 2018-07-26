@@ -1,10 +1,12 @@
-package com.cxzy.xxjg.net;
+package com.cxzy.xxjg.http;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.cxzy.xxjg.app.MyApp;
+import com.cxzy.xxjg.net.Constants;
 import com.cxzy.xxjg.utils.NetUtil;
+import com.cxzy.xxjg.utils.SharedPreferencesUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -55,6 +57,8 @@ public class RetrofitConfig {
                 String cacheControl = request.cacheControl().toString();
                 return originalResponse.newBuilder()
                         .header("Cache-Control", cacheControl)
+                        .header("Content-Type" , "application/json")
+                        .header("Authrization" , "Bearer " + SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "app_token" , ""))
                         .removeHeader("Pragma")
                         .build();
             } else {
@@ -75,7 +79,8 @@ public class RetrofitConfig {
             Request originalRequest = chain.request();
             Request request;
             HttpUrl modifiedUrl = originalRequest.url().newBuilder()
-                    .addQueryParameter("uid", Constants.uid)
+                    .build();
+                    /*.addQueryParameter("uid", Constants.uid)
                     .addQueryParameter("devid", Constants.uid)
                     .addQueryParameter("proid", "ifengnews")
                     .addQueryParameter("vt", "5")
@@ -84,7 +89,7 @@ public class RetrofitConfig {
                     .addQueryParameter("df", "androidphone")
                     .addQueryParameter("os", "android_22")
                     .addQueryParameter("nw", "wifi")
-                    .build();
+                    .build();*/
             request = originalRequest.newBuilder().url(modifiedUrl).build();
             return chain.proceed(request);
         }

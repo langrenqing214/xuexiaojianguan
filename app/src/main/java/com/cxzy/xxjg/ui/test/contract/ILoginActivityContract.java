@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.cxzy.xxjg.base.BaseContract;
+import com.cxzy.xxjg.bean.LoginBean;
 import com.cxzy.xxjg.ui.test.BasePresenter;
 import com.cxzy.xxjg.ui.test.BaseView;
 
@@ -15,7 +16,7 @@ import com.cxzy.xxjg.ui.test.BaseView;
 public interface ILoginActivityContract {
 
     interface View extends BaseContract.BaseView {
-
+        void loginResult(LoginBean loginBean);
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {

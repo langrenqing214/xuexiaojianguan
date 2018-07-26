@@ -5,5 +5,5 @@ package com.cxzy.xxjg.net;
  */
 
 public class ApiConstants {
-    public static final String sIFengApi = "http://192.168.1.209:8282/amishii-server/";
+    public static final String sIFengApi = "http://47.95.252.122:8080/";
 }
