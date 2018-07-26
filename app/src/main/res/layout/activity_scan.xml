@@ -24,9 +24,9 @@
         <RelativeLayout
             android:id="@+id/action_bar_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/app_default_actionbar_height"
             android:layout_weight="0"
-            android:background="#202020">
+            android:background="@color/main_style_color">
 
             <LinearLayout
                 android:id="@+id/back_btn_id"
@@ -38,19 +38,20 @@
 
                 <ImageView
                     android:id="@+id/main_person_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
                     android:layout_alignParentLeft="true"
                     android:paddingBottom="14dp"
                     android:paddingLeft="12dp"
                     android:paddingRight="4dp"
                     android:paddingTop="14dp"
-                    android:src="@drawable/icon_back_dark" />
+                    android:src="@drawable/icon_left_white" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="返回"
+                    android:textSize="14dp"
                     android:textColor="@android:color/white" />
 
             </LinearLayout>
@@ -62,7 +63,7 @@
                 android:layout_centerInParent="true"
                 android:text="扫描二维码"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
+                android:textSize="14dp"
                 android:textStyle="bold" />
 
         </RelativeLayout>

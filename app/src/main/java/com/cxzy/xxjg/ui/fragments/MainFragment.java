@@ -5,23 +5,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.app.MyApp;
 import com.cxzy.xxjg.base.BaseFragment;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
+import com.cxzy.xxjg.ui.activitys.HealthExaminationActivity;
+import com.cxzy.xxjg.ui.activitys.ListoricalWarningActivity;
+import com.cxzy.xxjg.ui.activitys.MenuActivity;
+import com.cxzy.xxjg.ui.activitys.MyCanteenActivity;
+import com.cxzy.xxjg.ui.activitys.PurchaseActivity;
+import com.cxzy.xxjg.ui.activitys.RegulatoryInformationActivity;
+import com.cxzy.xxjg.ui.activitys.RetentionManageActivity;
 import com.cxzy.xxjg.ui.activitys.ScanActivity;
 import com.cxzy.xxjg.ui.activitys.TestActivity;
+import com.cxzy.xxjg.ui.activitys.TrialManagementActivity;
+import com.cxzy.xxjg.ui.activitys.VideoActivity;
 import com.cxzy.xxjg.ui.test.contract.IMainFragmentContract;
 import com.cxzy.xxjg.ui.test.presenter.MainFragmentContractPresenterImpl;
-import com.cxzy.xxjg.ui.test.presenter.TestContractPresenterImpl;
-import com.cxzy.xxjg.utils.StatusBarUtil;
 import com.cxzy.xxjg.utils.T;
 import com.google.zxing.integration.android.IntentIntegrator;
 
@@ -38,8 +43,6 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
     Button btnTest;
     @BindView(R.id.dl_my_main)
     DrawerLayout dlMyMain;
-    @BindView(R.id.tv_phone_info)
-    TextView tvInfo ;
 
 
     public static MainFragment newInstance() {
@@ -69,16 +72,17 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
 
     @Override
     public void initData() {
-        tvInfo.setText("系统版本号：" + StatusBarUtil.getSystemVersion() + "  状态栏高度：" + StatusBarUtil.getStatusBarHeight(mContext));
+
     }
 
 
-    @OnClick({R.id.button_test, R.id.iv_to_zxing})
+    @OnClick({R.id.button_test, R.id.iv_to_zxing , R.id.cv_listorical_warning , R.id.cv_regulatory_information , R.id.cv_video , R.id.cv_menu ,
+            R.id.cv_purchase , R.id.cv_health_examination , R.id.cv_retention_manage , R.id.cv_trial_management , R.id.ll_my_canteen})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button_test:
-//                dlMyMain.openDrawer(Gravity.LEFT);
-                startActivity(new Intent(mContext, TestActivity.class));
+                dlMyMain.openDrawer(Gravity.LEFT);
+//                startActivity(new Intent(mContext, TestActivity.class));
                 break;
             case R.id.iv_to_zxing:
                 new IntentIntegrator(_mActivity)
@@ -90,6 +94,33 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
                         .setBeepEnabled(true)// 是否开启声音,扫完码之后会"哔"的一声
                         .setBarcodeImageEnabled(false)// 扫完码之后生成二维码的图片
                         .initiateScan();// 初始化扫码
+                break;
+            case R.id.cv_listorical_warning://历史警告
+                startActivity(new Intent(mContext , ListoricalWarningActivity.class));
+                break;
+            case R.id.cv_regulatory_information://监管信息
+                startActivity(new Intent(mContext , RegulatoryInformationActivity.class));
+                break;
+            case R.id.cv_video://视频
+                startActivity(new Intent(mContext , VideoActivity.class));
+                break;
+            case R.id.cv_menu://菜谱
+                startActivity(new Intent(mContext , MenuActivity.class));
+                break;
+            case R.id.cv_purchase://采购
+                startActivity(new Intent(mContext , PurchaseActivity.class));
+                break;
+            case R.id.cv_health_examination://卫生检查
+                startActivity(new Intent(mContext , HealthExaminationActivity.class));
+                break;
+            case R.id.cv_retention_manage://留样管理
+                startActivity(new Intent(mContext , RetentionManageActivity.class));
+                break;
+            case R.id.cv_trial_management://试吃管理
+                startActivity(new Intent(mContext , TrialManagementActivity.class));
+                break;
+            case R.id.ll_my_canteen://我的食堂
+                startActivity(new Intent(mContext , MyCanteenActivity.class));
                 break;
         }
     }

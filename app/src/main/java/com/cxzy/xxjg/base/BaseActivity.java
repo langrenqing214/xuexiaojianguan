@@ -1,11 +1,13 @@
 package com.cxzy.xxjg.base;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +38,7 @@ import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
-public abstract class BaseActivity<T1 extends BaseContract.BasePresenter> extends SupportActivity implements LifeSubscription , IBase, BaseContract.BaseView, BGASwipeBackHelper.Delegate{
+public abstract class BaseActivity<T1 extends BaseContract.BasePresenter> extends SupportActivity implements LifeSubscription, IBase, BaseContract.BaseView, BGASwipeBackHelper.Delegate {
 
     // 管理运行的所有的activity
     public final static List<AppCompatActivity> mActivities = new LinkedList<AppCompatActivity>();
@@ -46,10 +48,11 @@ public abstract class BaseActivity<T1 extends BaseContract.BasePresenter> extend
     protected View mRootView;
     protected Dialog mLoadingDialog = null;
     Unbinder unbinder;
+    protected Context mContext = MyApp.appComponent.getContext();
 
     @Nullable
     @BindView(R.id.actionbar_title)
-    TextView titleTv ;
+    TextView titleTv;
 
     @Nullable
     @BindView(R.id.SimpleMultiStateView)
@@ -267,7 +270,17 @@ public abstract class BaseActivity<T1 extends BaseContract.BasePresenter> extend
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        /**
+         * 1.使用getSupportFragmentManager().getFragments()获取到当前Activity中添加的Fragment集合
+         * 2.遍历Fragment集合，手动调用在当前Activity中的Fragment中的onActivityResult()方法。
+         */
+        if (getSupportFragmentManager().getFragments() != null && getSupportFragmentManager().getFragments().size() > 0) {
+            List<Fragment> fragments = getSupportFragmentManager().getFragments();
+            for (Fragment mFragment : fragments) {
+                mFragment.onActivityResult(requestCode, resultCode, data);
+            }
+        }
         //将值传入DemoFragment
-        getSupportFragmentManager().findFragmentByTag(MainFragment.class.getName()).onActivityResult(requestCode, resultCode, data);
+//        getSupportFragmentManager().findFragmentByTag(MainFragment.class.getName()).onActivityResult(requestCode, resultCode, data);
     }
 }

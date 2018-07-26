@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_trial_date"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="@color/main_line_color"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="周一"
+        android:textColor="@color/text_gray_color"
+        android:textSize="12dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_food"
+            android:layout_width="109dp"
+            android:layout_height="59dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@color/green_text"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_food_name"
+            style="@style/main_text_style"
+            android:layout_toRightOf="@id/iv_food"
+            android:text="土豆烧牛肉"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tv_trial_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:text="未出结果"
+            android:textColor="@color/green_text"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tv_trial_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_food_name"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/iv_food"
+            android:text="还未出结果，间隔时间未到案发时发生发的萨芬"
+            android:textColor="@color/text_gray_color"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tv_trial_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_trial_des"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/iv_food"
+            android:text="试吃人:张楚师"
+            android:textColor="@color/text_gray_color"
+            android:textSize="12dp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_trial_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:text="试吃时间:2018-6-7 10:30"
+            android:textColor="@color/text_gray_color"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tv_reaction_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="试吃时间:2018-6-7 10:30"
+            android:textColor="@color/text_gray_color"
+            android:textSize="12dp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_trial"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_green_box"
+            android:text="试吃跟进"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/main_line_style"
+        android:layout_marginLeft="20dp" />
+
+</LinearLayout>

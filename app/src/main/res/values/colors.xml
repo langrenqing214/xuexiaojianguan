@@ -11,4 +11,11 @@
     <color name="tab_unselect">#a3a3a3</color>
     <color name="white">#ffffff</color>
     <color name="title_text">#1a1a1a</color>
+    <color name="main_tab_color">#a3a3a3</color>
+    <color name="image_checked_bg">#66000000</color>
+    <color name="text_gray_color">#666666</color>
+    <color name="e6">#eeeeee</color>
+    <color name="green_text">#259B24</color>
+    <color name="red_text">#E51C23</color>
+    <color name="blue_text">#FF3F51B5</color>
 </resources>

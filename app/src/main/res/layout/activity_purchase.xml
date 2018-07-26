@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.cxzy.xxjg.ui.activitys.PurchaseActivity">
+
+    <RelativeLayout
+        android:id="@+id/action_bar_id"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_default_actionbar_height"
+        android:layout_weight="0"
+        android:background="@color/main_style_color">
+
+        <LinearLayout
+            android:id="@+id/back_btn_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/main_person_id"
+                android:layout_width="30dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:paddingBottom="14dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="4dp"
+                android:paddingTop="14dp"
+                android:src="@drawable/icon_left_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="返回"
+                android:textColor="@android:color/white"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/main_title_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="食材采购"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="17dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/main_text_style"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    android:text="批次号:　" />
+
+                <TextView
+                    style="@style/main_text_style"
+                    android:text="YU000"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <View style="@style/main_line_style"
+                android:layout_marginLeft="17dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/main_text_style"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    android:text="名称:　　" />
+
+                <EditText
+                    style="@style/main_text_style"
+                    android:background="@null"
+                    android:hint="请输入食材名称"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <View style="@style/main_line_style"
+                android:layout_marginLeft="17dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/main_text_style"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    android:text="食材类别:" />
+
+                <EditText
+                    style="@style/main_text_style"
+                    android:background="@null"
+                    android:hint="请输入食材类别"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <View style="@style/main_line_style"
+                android:layout_marginLeft="17dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/main_text_style"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    android:text="价格:　　" />
+
+                <EditText
+                    style="@style/main_text_style"
+                    android:background="@null"
+                    android:hint="请输入价格"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <View style="@style/main_line_style"
+                android:layout_marginLeft="17dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/main_text_style"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    android:text="重量:　　" />
+
+                <EditText
+                    style="@style/main_text_style"
+                    android:background="@null"
+                    android:hint="请输入重量"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <View style="@style/main_line_style"
+                android:layout_marginLeft="17dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/main_text_style"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    android:text="采购人:　" />
+
+                <EditText
+                    style="@style/main_text_style"
+                    android:background="@null"
+                    android:hint="请输入采购人"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <View style="@style/main_line_style"
+                android:layout_marginLeft="17dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/main_text_style"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    android:text="生产日期:" />
+
+                <EditText
+                    style="@style/main_text_style"
+                    android:background="@null"
+                    android:hint="请输入生产日期"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <View style="@style/main_line_style"
+                android:layout_marginLeft="17dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/main_text_style"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    android:text="保质期:　" />
+
+                <EditText
+                    style="@style/main_text_style"
+                    android:background="@null"
+                    android:hint="请输入保质期"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <View style="@style/main_line_style"
+                android:layout_marginLeft="17dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/main_text_style"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    android:text="保质到期:" />
+
+                <EditText
+                    style="@style/main_text_style"
+                    android:background="@null"
+                    android:hint="请输入保质到期"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <View style="@style/main_line_style"
+                android:layout_marginLeft="17dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/main_text_style"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    android:text="供应商:　" />
+
+                <EditText
+                    style="@style/main_text_style"
+                    android:background="@null"
+                    android:hint="请输入供应商"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <View style="@style/main_line_style"
+                android:layout_marginLeft="17dp"/>
+
+
+            <TextView
+                style="@style/main_text_style"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="采购发票:" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_add_pic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:horizontalSpacing="6dp"
+                android:verticalSpacing="6dp"
+                android:layout_marginLeft="17dp"
+                ></android.support.v7.widget.RecyclerView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="30dp"
+                >
+
+                <Button
+                    android:layout_width="72dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_green_box"
+                    android:text="入库"
+                    android:textSize="14dp"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="51dp"
+                    />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_green_box"
+                    android:text="入库并全部出库"
+                    android:textSize="14dp"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="51dp"
+                    android:layout_marginRight="51dp"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    
+
+
+</LinearLayout>

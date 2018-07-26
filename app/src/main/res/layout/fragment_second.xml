@@ -45,12 +45,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_my_canteen"
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_marginLeft="20dp"
-            android:background="@color/tab_unselect"
+            android:layout_marginTop="40dp"
+            android:background="@color/main_tab_color"
             >
 
             <LinearLayout
@@ -88,10 +90,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <android.support.v7.widget.CardView
+                        android:id="@+id/cv_listorical_warning"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginLeft="20dp"
@@ -102,7 +105,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:background="@color/tab_unselect"
+                            android:background="@color/main_tab_color"
                             android:orientation="vertical">
 
                             <ImageView
@@ -119,6 +122,7 @@
                     </android.support.v7.widget.CardView>
 
                     <android.support.v7.widget.CardView
+                        android:id="@+id/cv_regulatory_information"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginLeft="20dp"
@@ -129,6 +133,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
+                            android:background="@color/main_tab_color"
                             android:orientation="vertical">
 
                             <ImageView
@@ -138,7 +143,7 @@
 
                             <TextView
                                 style="@style/main_text_style"
-                                android:text="历史警告" />
+                                android:text="监管信息" />
 
                         </LinearLayout>
 
@@ -149,37 +154,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <android.support.v7.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:background="@color/tab_unselect">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:background="@drawable/icon_more" />
-
-                            <TextView
-                                style="@style/main_text_style"
-                                android:text="历史警告" />
-
-                        </LinearLayout>
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
+                        android:id="@+id/cv_video"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginLeft="20dp"
@@ -190,6 +169,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
+                            android:background="@color/main_tab_color"
                             android:orientation="vertical">
 
                             <ImageView
@@ -199,7 +179,35 @@
 
                             <TextView
                                 style="@style/main_text_style"
-                                android:text="历史警告" />
+                                android:text="视频" />
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cv_menu"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:background="@color/main_tab_color"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:background="@drawable/icon_more" />
+
+                            <TextView
+                                style="@style/main_text_style"
+                                android:text="菜谱" />
 
                         </LinearLayout>
 
@@ -210,37 +218,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <android.support.v7.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        android:background="@color/tab_unselect">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:background="@drawable/icon_more" />
-
-                            <TextView
-                                style="@style/main_text_style"
-                                android:text="历史警告" />
-
-                        </LinearLayout>
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
+                        android:id="@+id/cv_purchase"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginLeft="20dp"
@@ -251,6 +233,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
+                            android:background="@color/main_tab_color"
                             android:orientation="vertical">
 
                             <ImageView
@@ -260,7 +243,35 @@
 
                             <TextView
                                 style="@style/main_text_style"
-                                android:text="历史警告" />
+                                android:text="采购" />
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cv_health_examination"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:background="@color/main_tab_color"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:background="@drawable/icon_more" />
+
+                            <TextView
+                                style="@style/main_text_style"
+                                android:text="卫生检查" />
 
                         </LinearLayout>
 
@@ -271,21 +282,23 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <android.support.v7.widget.CardView
+                        android:id="@+id/cv_retention_manage"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
-                        android:background="@color/tab_unselect">
+                        >
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
+                            android:background="@color/main_tab_color"
                             android:orientation="vertical">
 
                             <ImageView
@@ -295,13 +308,14 @@
 
                             <TextView
                                 style="@style/main_text_style"
-                                android:text="历史警告" />
+                                android:text="留样管理" />
 
                         </LinearLayout>
 
                     </android.support.v7.widget.CardView>
 
                     <android.support.v7.widget.CardView
+                        android:id="@+id/cv_trial_management"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginLeft="20dp"
@@ -312,6 +326,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
+                            android:background="@color/main_tab_color"
                             android:orientation="vertical">
 
                             <ImageView
@@ -321,7 +336,7 @@
 
                             <TextView
                                 style="@style/main_text_style"
-                                android:text="历史警告" />
+                                android:text="试吃管理" />
 
                         </LinearLayout>
 

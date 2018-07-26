@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_retention_date"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="@color/main_line_color"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="周一"
+        android:textColor="@color/text_gray_color"
+        android:textSize="12dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp">
+
+        <TextView
+            android:id="@+id/tv_food_name"
+            style="@style/main_text_style"
+            android:layout_weight="1"
+            android:text="土豆烧牛肉"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tv_food_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:text="正常"
+            android:textColor="@color/green_text"
+            android:textSize="12dp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp">
+
+        <TextView
+            android:id="@+id/tv_retention_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="留样时间：7-8 12:20"
+            android:textColor="@color/text_gray_color" />
+
+        <TextView
+            android:id="@+id/tv_retention_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:text="留样人：刘丽"
+            android:textColor="@color/text_gray_color" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp">
+
+        <TextView
+            android:id="@+id/tv_expiry_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="到期时间：12-10 12:20"
+            android:textColor="@color/green_text" />
+
+        <TextView
+            android:id="@+id/tv_handle_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:text="留样人：刘丽丽丽"
+            android:textColor="@color/text_gray_color" />
+        
+        
+        <Button
+            android:id="@+id/btn_is_handle"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_green_box"
+            android:text="处理"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            />
+
+
+    </RelativeLayout>
+
+    <View
+        style="@style/main_line_style"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        />
+
+</LinearLayout>

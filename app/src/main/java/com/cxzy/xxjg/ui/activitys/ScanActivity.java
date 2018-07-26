@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -69,7 +70,7 @@ public class ScanActivity extends BaseActivity {
 
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
-        setStatusBarColor(Color.parseColor("#BDBDBD"), 30);
+        setStatusBarColor(ContextCompat.getColor(mContext , R.color.main_style_color), 30);
         ButterKnife.bind(this);
         captureManager = new CaptureManager(this,mDBV);
         captureManager.initializeFromIntent(getIntent(),savedInstanceState);
