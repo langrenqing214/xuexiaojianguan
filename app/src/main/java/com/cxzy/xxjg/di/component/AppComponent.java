@@ -6,6 +6,7 @@ import android.content.Context;
 import com.cxzy.xxjg.di.module.AppModule;
 import com.cxzy.xxjg.di.module.HttpModule;
 import com.cxzy.xxjg.net.LoginApi;
+import com.cxzy.xxjg.net.MainFragmentApi;
 import com.cxzy.xxjg.net.testApi;
 
 import dagger.Component;
@@ -19,5 +20,6 @@ public interface AppComponent {
 //    MyApp getApplication();
     testApi getNetTestApi();
     LoginApi getNetLoginApi();
+    MainFragmentApi getUserInfoApi();
 }
 

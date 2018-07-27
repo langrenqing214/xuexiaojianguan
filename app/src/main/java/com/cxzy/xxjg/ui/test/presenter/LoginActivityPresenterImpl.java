@@ -37,14 +37,14 @@ public class LoginActivityPresenterImpl extends BasePresenter<ILoginActivityCont
     }
 
     @Override
-    public void toLogin(String userName, String passWord, Activity activity) {
+    public void toLogin(String userName, String passWord) {
         if (TextUtils.isEmpty(userName)) {
-            T.showShort(activity, "请输入用户名");
+            T.showShort(MyApp.appComponent.getContext(), "请输入用户名");
             return;
         }
 
         if (TextUtils.isEmpty(passWord)) {
-            T.showShort(activity, "请输入密码");
+            T.showShort(MyApp.appComponent.getContext(), "请输入密码");
             return;
         }
 
@@ -59,8 +59,7 @@ public class LoginActivityPresenterImpl extends BasePresenter<ILoginActivityCont
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        mView.showFaild();
-                        Log.e("haha" , "error == " + e.getMessage());
+                        T.showShort(MyApp.appComponent.getContext() , e.getMessage());
                     }
 
                     @Override

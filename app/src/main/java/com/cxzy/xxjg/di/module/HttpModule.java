@@ -5,6 +5,8 @@ import com.cxzy.xxjg.net.ApiConstants;
 import com.cxzy.xxjg.net.LoginApi;
 import com.cxzy.xxjg.net.LoginService;
 import com.cxzy.xxjg.http.RetrofitConfig;
+import com.cxzy.xxjg.net.MainFragmentApi;
+import com.cxzy.xxjg.net.MainFragmentService;
 import com.cxzy.xxjg.net.testApi;
 import com.cxzy.xxjg.net.testService;
 
@@ -72,5 +74,19 @@ public class HttpModule {
         return LoginApi.getIntance(retrofitBuilder
                 .baseUrl(ApiConstants.sIFengApi)
                 .build().create(LoginService.class));
+    }
+
+    @Provides
+    MainFragmentApi provideNetUserInfo(OkHttpClient.Builder builder) {
+        builder.addInterceptor(RetrofitConfig.sQueryParameterInterceptor);
+
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(builder.build());
+
+        return MainFragmentApi.getInstance(retrofitBuilder
+                .baseUrl(ApiConstants.sIFengApi)
+                .build().create(MainFragmentService.class));
     }
 }

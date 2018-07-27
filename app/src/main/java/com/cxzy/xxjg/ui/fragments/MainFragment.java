@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,7 @@ import com.cxzy.xxjg.ui.activitys.TrialManagementActivity;
 import com.cxzy.xxjg.ui.activitys.VideoActivity;
 import com.cxzy.xxjg.ui.test.contract.IMainFragmentContract;
 import com.cxzy.xxjg.ui.test.presenter.MainFragmentContractPresenterImpl;
+import com.cxzy.xxjg.utils.SharedPreferencesUtils;
 import com.cxzy.xxjg.utils.T;
 import com.google.zxing.integration.android.IntentIntegrator;
 
@@ -68,6 +70,9 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
 
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
+        mPresenter.getUserInfo();
+        Log.e("haha" , "token == " + SharedPreferencesUtils.getParam(mContext , "app_token" , ""));
+
     }
 
     @Override
@@ -133,5 +138,10 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    public void getUserInfo(Object o) {
+        T.showShort(mContext, o.toString());
     }
 }

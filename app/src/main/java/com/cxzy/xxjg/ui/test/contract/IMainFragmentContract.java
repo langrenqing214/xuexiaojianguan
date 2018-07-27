@@ -14,10 +14,12 @@ import com.cxzy.xxjg.ui.test.BaseView;
 public interface IMainFragmentContract {
 
     interface View extends BaseContract.BaseView {
+        void getUserInfo(Object o);
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {
         String getZxingResult(int requestCode, int resultCode, Intent data);
+        void getUserInfo();
     }
 
 }

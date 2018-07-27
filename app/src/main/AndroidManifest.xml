@@ -35,9 +35,7 @@
         </provider>
 
         <activity
-            android:name=".ui.activitys.LoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
+            android:name=".ui.activitys.SplashActivityActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,17 +43,25 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"
+
+        <activity
+            android:name=".MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            >
+            android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.activitys.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+
         </activity>
 
         <activity
@@ -128,7 +134,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
     </application>
 
 </manifest>

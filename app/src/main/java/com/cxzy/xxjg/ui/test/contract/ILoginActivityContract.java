@@ -20,7 +20,7 @@ public interface ILoginActivityContract {
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {
-        void toLogin(String userName , String passWord , Activity activity);
+        void toLogin(String userName , String passWord);
     }
 
     interface Model {
