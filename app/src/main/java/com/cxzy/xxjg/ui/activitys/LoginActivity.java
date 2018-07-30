@@ -55,6 +55,10 @@ public class LoginActivity extends BaseActivity<LoginActivityPresenterImpl> impl
     }
 
     @Override
+    public void refreshView(Object mData) {
+    }
+
+    @Override
     public void onRetry() {
 
     }

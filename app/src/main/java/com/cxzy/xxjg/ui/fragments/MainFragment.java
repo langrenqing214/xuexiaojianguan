@@ -5,14 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.app.MyApp;
 import com.cxzy.xxjg.base.BaseFragment;
+import com.cxzy.xxjg.bean.MainFragmentBean;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.ui.activitys.HealthExaminationActivity;
@@ -23,14 +24,13 @@ import com.cxzy.xxjg.ui.activitys.PurchaseActivity;
 import com.cxzy.xxjg.ui.activitys.RegulatoryInformationActivity;
 import com.cxzy.xxjg.ui.activitys.RetentionManageActivity;
 import com.cxzy.xxjg.ui.activitys.ScanActivity;
-import com.cxzy.xxjg.ui.activitys.TestActivity;
 import com.cxzy.xxjg.ui.activitys.TrialManagementActivity;
 import com.cxzy.xxjg.ui.activitys.VideoActivity;
 import com.cxzy.xxjg.ui.test.contract.IMainFragmentContract;
 import com.cxzy.xxjg.ui.test.presenter.MainFragmentContractPresenterImpl;
-import com.cxzy.xxjg.utils.SharedPreferencesUtils;
-import com.cxzy.xxjg.utils.T;
+import com.cxzy.xxjg.utils.ToastUtil;
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -45,6 +45,13 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
     Button btnTest;
     @BindView(R.id.dl_my_main)
     DrawerLayout dlMyMain;
+    @BindView(R.id.tv_alarm)
+    TextView tvAlarm ;
+    @BindView(R.id.tv_warning)
+    TextView tvWarning ;
+    @BindView(R.id.tv_deal)
+    TextView tvDeal ;
+    private MainFragmentBean bean = new MainFragmentBean();
 
 
     public static MainFragment newInstance() {
@@ -71,8 +78,6 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         mPresenter.getUserInfo();
-        Log.e("haha" , "token == " + SharedPreferencesUtils.getParam(mContext , "app_token" , ""));
-
     }
 
     @Override
@@ -122,7 +127,9 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
                 startActivity(new Intent(mContext , RetentionManageActivity.class));
                 break;
             case R.id.cv_trial_management://试吃管理
-                startActivity(new Intent(mContext , TrialManagementActivity.class));
+                Intent trialIntent = new Intent(mContext , TrialManagementActivity.class);
+                trialIntent.putExtra("canteenList" , bean.canteenList);
+                startActivity(trialIntent);
                 break;
             case R.id.ll_my_canteen://我的食堂
                 startActivity(new Intent(mContext , MyCanteenActivity.class));
@@ -134,14 +141,23 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         String result = mPresenter.getZxingResult(requestCode, resultCode, data);
         if (result != null) {
-            T.showShort(MyApp.appComponent.getContext(), result);
+            ToastUtil.showShort(MyApp.appComponent.getContext(), result);
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
     @Override
-    public void getUserInfo(Object o) {
-        T.showShort(mContext, o.toString());
+    public void refreshView(Object mData) {
+        bean = (MainFragmentBean) mData;
+        tvAlarm.setText(bean.alarmTotal);
+        tvWarning.setText(bean.warnTotal);
+        tvDeal.setText(bean.dealTotal);
     }
+
+
+    /*@Override
+    public void getUserInfo(Object bean) {
+
+    }*/
 }

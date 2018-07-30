@@ -7,6 +7,8 @@ import com.cxzy.xxjg.net.LoginService;
 import com.cxzy.xxjg.http.RetrofitConfig;
 import com.cxzy.xxjg.net.MainFragmentApi;
 import com.cxzy.xxjg.net.MainFragmentService;
+import com.cxzy.xxjg.net.TrialManagementApi;
+import com.cxzy.xxjg.net.TrialManagementService;
 import com.cxzy.xxjg.net.testApi;
 import com.cxzy.xxjg.net.testService;
 
@@ -31,11 +33,10 @@ public class HttpModule {
         // 指定缓存路径,缓存大小100Mb
         Cache cache = new Cache(new File(MyApp.appComponent.getContext().getCacheDir(), "HttpCache"),
                 1024 * 1024 * 100);
-//        return new OkHttpClient().newBuilder().cache(cache)
         return new OkHttpClient().newBuilder()
                 .retryOnConnectionFailure(true)
                 .addInterceptor(RetrofitConfig.sLoggingInterceptor)
-                .addInterceptor(RetrofitConfig.sRewriteCacheControlInterceptor)
+//                .addInterceptor(RetrofitConfig.sRewriteCacheControlInterceptor)
                 .addNetworkInterceptor(RetrofitConfig.sRewriteCacheControlInterceptor)
                 .connectTimeout(10, TimeUnit.SECONDS);
     }
@@ -88,5 +89,19 @@ public class HttpModule {
         return MainFragmentApi.getInstance(retrofitBuilder
                 .baseUrl(ApiConstants.sIFengApi)
                 .build().create(MainFragmentService.class));
+    }
+
+    @Provides
+    TrialManagementApi provideNetTrialList(OkHttpClient.Builder builder) {
+        builder.addInterceptor(RetrofitConfig.sQueryParameterInterceptor);
+
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(builder.build());
+
+        return TrialManagementApi.getIntance(retrofitBuilder
+                .baseUrl(ApiConstants.sIFengApi)
+                .build().create(TrialManagementService.class));
     }
 }

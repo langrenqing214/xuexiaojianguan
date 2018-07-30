@@ -83,6 +83,11 @@ public class ScanActivity extends BaseActivity {
     }
 
     @Override
+    public void refreshView(Object mData) {
+
+    }
+
+    @Override
     public void onRetry() {
 
     }

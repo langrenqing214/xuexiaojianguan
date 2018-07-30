@@ -18,10 +18,9 @@ import android.widget.TextView;
 import com.cxzy.xxjg.LifeSubscription;
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.app.MyApp;
-import com.cxzy.xxjg.ui.fragments.MainFragment;
 import com.cxzy.xxjg.utils.DialogHelper;
 import com.cxzy.xxjg.utils.StatusBarUtil;
-import com.cxzy.xxjg.utils.T;
+import com.cxzy.xxjg.utils.ToastUtil;
 import com.cxzy.xxjg.wideget.MultiStateView;
 import com.cxzy.xxjg.wideget.SimpleMultiStateView;
 import com.trello.rxlifecycle2.LifecycleTransformer;
@@ -232,7 +231,7 @@ public abstract class BaseActivity<T1 extends BaseContract.BasePresenter> extend
     }
 
     protected void T(String string) {
-        T.showShort(MyApp.appComponent.getContext(), string);
+        ToastUtil.showShort(MyApp.appComponent.getContext(), string);
     }
 
     @Override

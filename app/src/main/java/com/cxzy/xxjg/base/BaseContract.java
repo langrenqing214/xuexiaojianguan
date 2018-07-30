@@ -1,5 +1,6 @@
 package com.cxzy.xxjg.base;
 
+import com.cxzy.xxjg.utils.ToastUtil;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
 /**
@@ -27,6 +28,9 @@ public interface BaseContract {
 
         //显示当前网络不可用
         void showNoNet();
+
+        //获取数据成功调用该方法。
+        void refreshView(Object mData);
 
         //重试
         void onRetry();

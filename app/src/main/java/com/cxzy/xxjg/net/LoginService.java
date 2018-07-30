@@ -1,5 +1,6 @@
 package com.cxzy.xxjg.net;
 
+import com.cxzy.xxjg.bean.BaseBean;
 import com.cxzy.xxjg.bean.LoginBean;
 
 
@@ -15,6 +16,6 @@ import io.reactivex.Observable;
  */
 
 public interface LoginService {
-    @POST("wisdom/auth/token")
-    Observable<LoginBean> login(@Body Map<String , String> params) ;
+    @POST("auth/token")
+    Observable<BaseBean<LoginBean>> login(@Body Map<String , String> params) ;
 }

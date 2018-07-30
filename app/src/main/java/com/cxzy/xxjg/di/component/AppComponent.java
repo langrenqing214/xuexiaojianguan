@@ -7,6 +7,7 @@ import com.cxzy.xxjg.di.module.AppModule;
 import com.cxzy.xxjg.di.module.HttpModule;
 import com.cxzy.xxjg.net.LoginApi;
 import com.cxzy.xxjg.net.MainFragmentApi;
+import com.cxzy.xxjg.net.TrialManagementApi;
 import com.cxzy.xxjg.net.testApi;
 
 import dagger.Component;
@@ -21,5 +22,6 @@ public interface AppComponent {
     testApi getNetTestApi();
     LoginApi getNetLoginApi();
     MainFragmentApi getUserInfoApi();
+    TrialManagementApi getTrialApi();
 }
 

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.app.MyApp;
 import com.cxzy.xxjg.utils.DialogHelper;
-import com.cxzy.xxjg.utils.T;
+import com.cxzy.xxjg.utils.ToastUtil;
 import com.cxzy.xxjg.wideget.MultiStateView;
 import com.cxzy.xxjg.wideget.SimpleMultiStateView;
 import com.trello.rxlifecycle2.LifecycleTransformer;
@@ -166,13 +166,9 @@ public abstract class BaseFragment <T1 extends BaseContract.BasePresenter> exten
     }
 
     protected void T(String string) {
-        T.showShort(MyApp.appComponent.getContext(), string);
+        ToastUtil.showShort(MyApp.appComponent.getContext(), string);
     }
 
-    @Override
-    public <T> LifecycleTransformer<T> bindToLife() {
-        return this.<T>bindToLifecycle();
-    }
 
     @Override
     public void onDestroy() {
@@ -181,5 +177,10 @@ public abstract class BaseFragment <T1 extends BaseContract.BasePresenter> exten
         if (mPresenter != null) {
             mPresenter.detachView();
         }
+    }
+
+    @Override
+    public <T> LifecycleTransformer<T> bindToLife() {
+        return this.<T>bindToLifecycle();
     }
 }

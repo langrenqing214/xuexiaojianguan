@@ -1,0 +1,27 @@
+package com.cxzy.xxjg.ui.test.presenter;
+
+import com.cxzy.xxjg.net.TrialManagementApi;
+import com.cxzy.xxjg.ui.test.BasePresenter;
+import com.cxzy.xxjg.ui.test.contract.ITrialManagementContract;
+import com.cxzy.xxjg.ui.test.model.TrialManagementModelImpl;
+
+import javax.inject.Inject;
+
+/**
+ * Author: demo
+ * Created on 2018/7/30
+ */
+public class TrialManagementPresenterImpl extends BasePresenter<ITrialManagementContract.View> implements ITrialManagementContract.Presenter {
+
+    private TrialManagementApi api ;
+
+    @Inject
+    TrialManagementPresenterImpl(TrialManagementApi api){
+        this.api = api ;
+    }
+
+    @Override
+    public void getTrialList(String pageNumber , int canteenId , String eatTimeStart, String eatTimeEnd, int pageSize) {
+        invoke(api.getTrialList(pageNumber , canteenId , eatTimeStart , eatTimeEnd , pageSize));
+    }
+}

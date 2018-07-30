@@ -1,5 +1,6 @@
 package com.cxzy.xxjg.net;
 
+import com.cxzy.xxjg.bean.BaseBean;
 import com.cxzy.xxjg.bean.MainFragmentBean;
 
 import io.reactivex.Observable;
@@ -25,7 +26,7 @@ public class MainFragmentApi {
         return sInstance;
     }
 
-    public Observable<Object> getUserInfo(){
+    public Observable<BaseBean<MainFragmentBean>> getUserInfo(){
         return mService.getUserInfo();
     }
 }

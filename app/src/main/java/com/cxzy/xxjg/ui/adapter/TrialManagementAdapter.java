@@ -1,5 +1,6 @@
 package com.cxzy.xxjg.ui.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.utils.ImageUtils;
 import com.cxzy.xxjg.R;
+import com.cxzy.xxjg.app.MyApp;
+import com.cxzy.xxjg.bean.TrialListBean;
+import com.cxzy.xxjg.utils.BitmapUtil;
+import com.cxzy.xxjg.utils.DateUtil;
+import com.cxzy.xxjg.utils.ImageLoaderUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 试吃管理
@@ -16,6 +26,13 @@ import com.cxzy.xxjg.R;
  */
 
 public class TrialManagementAdapter extends RecyclerView.Adapter<TrialManagementAdapter.TrialHolder> {
+    private List<TrialListBean> data = new ArrayList<>();
+    private Context mContext ;
+
+    public TrialManagementAdapter(Context mContext){
+        this.mContext = mContext ;
+    }
+
     @Override
     public TrialHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_trial , parent , false);
@@ -24,12 +41,20 @@ public class TrialManagementAdapter extends RecyclerView.Adapter<TrialManagement
 
     @Override
     public void onBindViewHolder(TrialHolder holder, int position) {
-
+        TrialListBean info = data.get(position);
+        holder.tvFoodName.setText(info.foodName);
+        holder.tvTrialPerson.setText("试吃人:" + info.eatPerson);
+        holder.tvTrialTime.setText("试吃时间:" + DateUtil.date2NYRSF(DateUtil.string2Date(info.createDate, "yyyy-MM-dd HH:mm")));
+        ImageLoaderUtil.LoadImage(mContext , info.eatImage == null ? "" : info.eatImage , holder.ivFood);
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return data.size();
+    }
+
+    public void setData(List<TrialListBean> data) {
+        this.data = data;
     }
 
     class TrialHolder extends RecyclerView.ViewHolder {

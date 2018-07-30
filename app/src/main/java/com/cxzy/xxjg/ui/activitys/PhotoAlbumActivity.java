@@ -115,6 +115,11 @@ public class PhotoAlbumActivity extends BaseActivity {
     }
 
     @Override
+    public void refreshView(Object mData) {
+
+    }
+
+    @Override
     public void onRetry() {
 
     }

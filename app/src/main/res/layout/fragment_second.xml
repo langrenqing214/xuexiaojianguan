@@ -63,9 +63,9 @@
                 >
 
                 <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:background="@drawable/icon_more"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/icon_my_canteen"
                     />
 
                 <TextView
@@ -74,6 +74,39 @@
                     />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_alarm"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:textColor="@color/white"
+                android:background="@drawable/circle_red"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:textSize="14dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_warning"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:textColor="@color/text_gray_color"
+                android:background="@drawable/circle_orange"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:textSize="14dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_deal"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:textColor="@color/text_gray_color"
+                android:background="@drawable/circle_green"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:textSize="14dp"
+                />
 
         </LinearLayout>
 
@@ -109,9 +142,9 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:background="@drawable/icon_more" />
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/icon_listorical_warning" />
 
                             <TextView
                                 style="@style/main_text_style"
@@ -137,9 +170,9 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:background="@drawable/icon_more" />
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/icon_regulatory_information" />
 
                             <TextView
                                 style="@style/main_text_style"
@@ -173,9 +206,9 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:background="@drawable/icon_more" />
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/icon_video" />
 
                             <TextView
                                 style="@style/main_text_style"
@@ -201,9 +234,9 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:background="@drawable/icon_more" />
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/icon_my_menu" />
 
                             <TextView
                                 style="@style/main_text_style"
@@ -237,9 +270,9 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:background="@drawable/icon_more" />
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/icon_purchase" />
 
                             <TextView
                                 style="@style/main_text_style"
@@ -265,9 +298,9 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:background="@drawable/icon_more" />
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/icon_health_examination" />
 
                             <TextView
                                 style="@style/main_text_style"
@@ -302,9 +335,9 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:background="@drawable/icon_more" />
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/icon_retention_manage" />
 
                             <TextView
                                 style="@style/main_text_style"
@@ -330,9 +363,9 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:background="@drawable/icon_more" />
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/icon_trial_management" />
 
                             <TextView
                                 style="@style/main_text_style"

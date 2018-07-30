@@ -13,6 +13,7 @@ import com.cxzy.xxjg.ui.fragments.MainFragment;
 import com.cxzy.xxjg.ui.test.presenter.MainActivityPresenterImpl;
 import com.cxzy.xxjg.utils.StatusBarUtil;
 import com.cxzy.xxjg.wideget.BottomBar;
+import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import butterknife.BindView;
 
@@ -78,6 +79,11 @@ public class MainActivity extends BaseActivity<MainActivityPresenterImpl> {
 
     @Override
     public void initData() {
+
+    }
+
+    @Override
+    public void refreshView(Object mData) {
 
     }
 

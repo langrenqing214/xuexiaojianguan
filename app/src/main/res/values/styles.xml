@@ -71,4 +71,16 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <!-- 自定义对话框风格 -->
+    <style name="select_canteen_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- 自定义底部菜单弹出动画 -->
+    <style name="BottomMenuAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/in_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/out_to_bottom</item>
+    </style>
+
 </resources>

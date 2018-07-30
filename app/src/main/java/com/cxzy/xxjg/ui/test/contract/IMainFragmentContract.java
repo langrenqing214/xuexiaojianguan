@@ -14,7 +14,7 @@ import com.cxzy.xxjg.ui.test.BaseView;
 public interface IMainFragmentContract {
 
     interface View extends BaseContract.BaseView {
-        void getUserInfo(Object o);
+//        void getUserInfo(Object o);
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {

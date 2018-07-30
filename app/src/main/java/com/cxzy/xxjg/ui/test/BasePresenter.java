@@ -1,6 +1,11 @@
 package com.cxzy.xxjg.ui.test;
 
 import com.cxzy.xxjg.base.BaseContract;
+import com.cxzy.xxjg.bean.BaseBean;
+import com.cxzy.xxjg.http.util.CallBack;
+import com.cxzy.xxjg.http.util.HttpUtils;
+
+import io.reactivex.Observable;
 
 
 /**
@@ -21,5 +26,9 @@ public class BasePresenter<T extends BaseContract.BaseView> implements BaseContr
         if (mView != null) {
             mView = null;
         }
+    }
+
+    protected <T> void invoke(Observable<BaseBean<T>> observable) {
+        HttpUtils.invoke( mView, observable);
     }
 }

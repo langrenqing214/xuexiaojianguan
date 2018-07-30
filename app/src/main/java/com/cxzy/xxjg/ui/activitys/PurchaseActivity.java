@@ -1,7 +1,6 @@
 package com.cxzy.xxjg.ui.activitys;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -22,7 +20,7 @@ import com.cxzy.xxjg.ui.adapter.PurchaseAdapter;
 import com.cxzy.xxjg.ui.test.contract.IPurchaseActivityContract;
 import com.cxzy.xxjg.ui.test.presenter.PurchaseActivityPresenterImpl;
 import com.cxzy.xxjg.utils.ScreenUtils;
-import com.cxzy.xxjg.utils.T;
+import com.cxzy.xxjg.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +62,11 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
 
     @Override
     public void initData() {
+
+    }
+
+    @Override
+    public void refreshView(Object mData) {
 
     }
 
@@ -114,7 +117,7 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
                 } else {
                     //用户授权拒绝之后，友情提示一下就可以了
                     if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                        T.showShort(mContext, "权限已拒绝请到设置页面手动开启");
+                        ToastUtil.showShort(mContext, "权限已拒绝请到设置页面手动开启");
                     }
                 }
                 break;

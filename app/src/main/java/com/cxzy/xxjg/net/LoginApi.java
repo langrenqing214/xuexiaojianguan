@@ -1,5 +1,6 @@
 package com.cxzy.xxjg.net;
 
+import com.cxzy.xxjg.bean.BaseBean;
 import com.cxzy.xxjg.bean.LoginBean;
 
 import java.util.Map;
@@ -28,7 +29,7 @@ public class LoginApi {
         return intance ;
     }
 
-    public Observable<LoginBean> login(Map<String , String> params) {
+    public Observable<BaseBean<LoginBean>> login(Map<String , String> params) {
         return service.login(params);
     }
 }

@@ -9,15 +9,15 @@ import java.io.Serializable;
  */
 
 public class LoginBean implements Serializable {
-    public String code;// 0,
-    public String message;// public String public String ,
-    public boolean ok;// true
-    @Nullable
-    public Data data = new Data();
+//    public String code;// 0,
+//    public String message;// public String public String ,
+//    public boolean ok;// true
+//    @Nullable
+//    public Data data = new Data();
 
-    public static class Data {
+//    public static class Data {
         public String access_token;// token码 ,
         public String expires_in;// token有效时间 ,
         public String token_type;// token类型
-    }
+//    }
 }

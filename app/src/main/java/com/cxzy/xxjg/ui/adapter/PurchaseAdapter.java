@@ -1,9 +1,7 @@
 package com.cxzy.xxjg.ui.adapter;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +10,11 @@ import android.widget.LinearLayout;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.app.MyApp;
-import com.cxzy.xxjg.ui.activitys.PhotoWallActivity;
 import com.cxzy.xxjg.utils.BitmapUtil;
-import com.cxzy.xxjg.utils.ScreenUtils;
-import com.cxzy.xxjg.utils.T;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
 
 /**
  * Created by demo on 2018/7/18.

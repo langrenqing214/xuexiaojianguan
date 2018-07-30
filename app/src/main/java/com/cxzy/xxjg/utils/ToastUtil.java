@@ -7,11 +7,11 @@ import android.widget.Toast;
 /**
  * Toast统一管理类
  */
-public class T {
+public class ToastUtil {
 
     public static Toast toast = null;
 
-    private T() {
+    private ToastUtil() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }

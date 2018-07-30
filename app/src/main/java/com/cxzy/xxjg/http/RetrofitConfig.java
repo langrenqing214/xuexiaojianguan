@@ -13,6 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 import okhttp3.CacheControl;
+import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -51,19 +52,18 @@ public class RetrofitConfig {
                 Log.e(TAG, "no network");
             }
             Response originalResponse = chain.proceed(request);
-
+            Log.e("haha" , SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "app_token" , "").toString());
+            Headers headers = request.headers();
+            Log.e("haha" , "header == " + headers.toString());
             if (NetUtil.isNetworkAvailable(MyApp.appComponent.getContext())) {
                 //有网的时候读接口上的@Headers里的配置，你可以在这里进行统一的设置
                 String cacheControl = request.cacheControl().toString();
                 return originalResponse.newBuilder()
-                        .header("Cache-Control", cacheControl)
-                        .header("Content-Type" , "application/json")
-                        .header("Authrization" , "Bearer " + SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "app_token" , ""))
                         .removeHeader("Pragma")
                         .build();
             } else {
                 return originalResponse.newBuilder()
-                        .header("Cache-Control", "public, " + CACHE_CONTROL_CACHE)
+                        .addHeader("Cache-Control", "public, " + CACHE_CONTROL_CACHE)
                         .removeHeader("Pragma")
                         .build();
             }
@@ -90,7 +90,12 @@ public class RetrofitConfig {
                     .addQueryParameter("os", "android_22")
                     .addQueryParameter("nw", "wifi")
                     .build();*/
-            request = originalRequest.newBuilder().url(modifiedUrl).build();
+            request = originalRequest.newBuilder()
+                    .url(modifiedUrl)
+                    .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
+                    .addHeader("Content-Type" , "application/json")
+                    .addHeader("Authorization" , "Bearer " + SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "app_token" , ""))
+                    .build();
             return chain.proceed(request);
         }
     };

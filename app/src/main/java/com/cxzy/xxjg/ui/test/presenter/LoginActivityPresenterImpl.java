@@ -1,18 +1,17 @@
 package com.cxzy.xxjg.ui.test.presenter;
 
-import android.app.Activity;
-import android.content.SharedPreferences;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.cxzy.xxjg.app.MyApp;
+import com.cxzy.xxjg.bean.BaseBean;
 import com.cxzy.xxjg.bean.LoginBean;
+import com.cxzy.xxjg.http.util.CallBack;
 import com.cxzy.xxjg.net.LoginApi;
 import com.cxzy.xxjg.http.RxSchedulers;
 import com.cxzy.xxjg.ui.test.BasePresenter;
 import com.cxzy.xxjg.ui.test.contract.ILoginActivityContract;
 import com.cxzy.xxjg.utils.SharedPreferencesUtils;
-import com.cxzy.xxjg.utils.T;
+import com.cxzy.xxjg.utils.ToastUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,12 +38,12 @@ public class LoginActivityPresenterImpl extends BasePresenter<ILoginActivityCont
     @Override
     public void toLogin(String userName, String passWord) {
         if (TextUtils.isEmpty(userName)) {
-            T.showShort(MyApp.appComponent.getContext(), "请输入用户名");
+            ToastUtil.showShort(MyApp.appComponent.getContext(), "请输入用户名");
             return;
         }
 
         if (TextUtils.isEmpty(passWord)) {
-            T.showShort(MyApp.appComponent.getContext(), "请输入密码");
+            ToastUtil.showShort(MyApp.appComponent.getContext(), "请输入密码");
             return;
         }
 
@@ -53,13 +52,13 @@ public class LoginActivityPresenterImpl extends BasePresenter<ILoginActivityCont
         params.put("password" , passWord);
 
         api.login(params)
-                .compose(RxSchedulers.<LoginBean>applySchedulers())
-                .compose(mView.<LoginBean>bindToLife())
-                .subscribe(new Observer<LoginBean>() {
+                .compose(RxSchedulers.<BaseBean<LoginBean>>applySchedulers())
+                .compose(mView.<BaseBean<LoginBean>>bindToLife())
+                .subscribe(new Observer<BaseBean<LoginBean>>() {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        T.showShort(MyApp.appComponent.getContext() , e.getMessage());
+                        ToastUtil.showShort(MyApp.appComponent.getContext() , e.getMessage());
                     }
 
                     @Override
@@ -73,12 +72,12 @@ public class LoginActivityPresenterImpl extends BasePresenter<ILoginActivityCont
                     }
 
                     @Override
-                    public void onNext(@NonNull LoginBean loginBean) {
-                        if (loginBean != null && loginBean.ok && loginBean.data != null) {
-                            SharedPreferencesUtils.setParam(MyApp.appComponent.getContext() , "app_token" , loginBean.data.access_token);
-                            mView.loginResult(loginBean);
+                    public void onNext(BaseBean<LoginBean> bean) {
+                        if (bean != null && bean.ok && bean.data != null) {
+                            SharedPreferencesUtils.setParam(MyApp.appComponent.getContext() , "app_token" , bean.data.access_token);
+                            mView.loginResult(bean.data);
                         }else {
-                            T.showShort(MyApp.appComponent.getContext() , loginBean.message);
+                            ToastUtil.showShort(MyApp.appComponent.getContext() , bean.message);
                         }
                     }
 

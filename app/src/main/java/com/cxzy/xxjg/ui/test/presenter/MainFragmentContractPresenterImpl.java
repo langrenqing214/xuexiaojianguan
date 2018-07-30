@@ -3,18 +3,15 @@ package com.cxzy.xxjg.ui.test.presenter;
 import android.content.Intent;
 
 import com.cxzy.xxjg.app.MyApp;
-import com.cxzy.xxjg.http.RxSchedulers;
+import com.cxzy.xxjg.http.util.CallBack;
 import com.cxzy.xxjg.net.MainFragmentApi;
 import com.cxzy.xxjg.ui.test.BasePresenter;
 import com.cxzy.xxjg.ui.test.contract.IMainFragmentContract;
-import com.cxzy.xxjg.utils.T;
+import com.cxzy.xxjg.utils.ToastUtil;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import javax.inject.Inject;
-
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 /**
  * Author: demo
@@ -35,7 +32,7 @@ public class MainFragmentContractPresenterImpl extends BasePresenter<IMainFragme
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
         if(intentResult != null) {
             if(intentResult.getContents() == null) {
-                T.showShort(MyApp.appComponent.getContext() , "内容为空");
+                ToastUtil.showShort(MyApp.appComponent.getContext() , "内容为空");
             } else {
 //                T.showShort(MyApp.appComponent.getContext() , "扫描成功");
                 // ScanResult 为 获取到的字符串
@@ -47,7 +44,8 @@ public class MainFragmentContractPresenterImpl extends BasePresenter<IMainFragme
 
     @Override
     public void getUserInfo() {
-        api.getUserInfo()
+        invoke(api.getUserInfo());
+        /*api.getUserInfo()
                 .compose(RxSchedulers.<Object>applySchedulers())
                 .compose(mView.<Object>bindToLife())
                 .subscribe(new Observer<Object>() {
@@ -63,13 +61,13 @@ public class MainFragmentContractPresenterImpl extends BasePresenter<IMainFragme
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e("haha" , e.getMessage());
                     }
 
                     @Override
                     public void onComplete() {
 
                     }
-                });
+                });*/
     }
 }
