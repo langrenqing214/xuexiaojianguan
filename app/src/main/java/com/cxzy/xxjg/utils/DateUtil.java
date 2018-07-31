@@ -190,7 +190,7 @@ public class DateUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        return new SimpleDateFormat("yyyy年MM月dd日 星期").format(date) + WEEK[dayOfWeek - 1];
+        return new SimpleDateFormat("yyyy-MM-dd 周").format(date) + WEEK[dayOfWeek - 1];
     }
 
     /**

@@ -86,8 +86,9 @@
 
             </LinearLayout>
 
-            <View style="@style/main_line_style"
-                android:layout_marginLeft="17dp"/>
+            <View
+                style="@style/main_line_style"
+                android:layout_marginLeft="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,15 +103,19 @@
                     android:text="名称:　　" />
 
                 <EditText
+                    android:id="@+id/et_food_name"
                     style="@style/main_text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入食材名称"
                     android:textSize="14dp" />
 
             </LinearLayout>
 
-            <View style="@style/main_line_style"
-                android:layout_marginLeft="17dp"/>
+            <View
+                style="@style/main_line_style"
+                android:layout_marginLeft="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -125,15 +130,19 @@
                     android:text="食材类别:" />
 
                 <EditText
+                    android:id="@+id/et_food_style"
                     style="@style/main_text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入食材类别"
                     android:textSize="14dp" />
 
             </LinearLayout>
 
-            <View style="@style/main_line_style"
-                android:layout_marginLeft="17dp"/>
+            <View
+                style="@style/main_line_style"
+                android:layout_marginLeft="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -148,15 +157,19 @@
                     android:text="价格:　　" />
 
                 <EditText
+                    android:id="@+id/et_food_price"
                     style="@style/main_text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入价格"
                     android:textSize="14dp" />
 
             </LinearLayout>
 
-            <View style="@style/main_line_style"
-                android:layout_marginLeft="17dp"/>
+            <View
+                style="@style/main_line_style"
+                android:layout_marginLeft="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -171,15 +184,19 @@
                     android:text="重量:　　" />
 
                 <EditText
+                    android:id="@+id/et_food_weight"
                     style="@style/main_text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入重量"
                     android:textSize="14dp" />
 
             </LinearLayout>
 
-            <View style="@style/main_line_style"
-                android:layout_marginLeft="17dp"/>
+            <View
+                style="@style/main_line_style"
+                android:layout_marginLeft="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -194,15 +211,19 @@
                     android:text="采购人:　" />
 
                 <EditText
+                    android:id="@+id/et_purchaser"
                     style="@style/main_text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入采购人"
                     android:textSize="14dp" />
 
             </LinearLayout>
 
-            <View style="@style/main_line_style"
-                android:layout_marginLeft="17dp"/>
+            <View
+                style="@style/main_line_style"
+                android:layout_marginLeft="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -217,15 +238,19 @@
                     android:text="生产日期:" />
 
                 <EditText
+                    android:id="@+id/et_manufacture_date"
                     style="@style/main_text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入生产日期"
                     android:textSize="14dp" />
 
             </LinearLayout>
 
-            <View style="@style/main_line_style"
-                android:layout_marginLeft="17dp"/>
+            <View
+                style="@style/main_line_style"
+                android:layout_marginLeft="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -240,15 +265,19 @@
                     android:text="保质期:　" />
 
                 <EditText
+                    android:id="@+id/et_shelf_life"
                     style="@style/main_text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入保质期"
                     android:textSize="14dp" />
 
             </LinearLayout>
 
-            <View style="@style/main_line_style"
-                android:layout_marginLeft="17dp"/>
+            <View
+                style="@style/main_line_style"
+                android:layout_marginLeft="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -263,15 +292,19 @@
                     android:text="保质到期:" />
 
                 <EditText
+                    android:id="@+id/et_shelf_life_end"
                     style="@style/main_text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入保质到期"
                     android:textSize="14dp" />
 
             </LinearLayout>
 
-            <View style="@style/main_line_style"
-                android:layout_marginLeft="17dp"/>
+            <View
+                style="@style/main_line_style"
+                android:layout_marginLeft="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -286,22 +319,26 @@
                     android:text="供应商:　" />
 
                 <EditText
+                    android:id="@+id/et_suppliers"
                     style="@style/main_text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请输入供应商"
                     android:textSize="14dp" />
 
             </LinearLayout>
 
-            <View style="@style/main_line_style"
-                android:layout_marginLeft="17dp"/>
+            <View
+                style="@style/main_line_style"
+                android:layout_marginLeft="17dp" />
 
 
             <TextView
                 style="@style/main_text_style"
+                android:layout_height="45dp"
                 android:layout_marginLeft="17dp"
                 android:layout_marginRight="17dp"
-                android:layout_height="45dp"
                 android:gravity="center_vertical"
                 android:text="采购发票:" />
 
@@ -310,47 +347,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:horizontalSpacing="6dp"
-                android:verticalSpacing="6dp"
                 android:layout_marginLeft="17dp"
-                ></android.support.v7.widget.RecyclerView>
+                android:horizontalSpacing="6dp"
+                android:verticalSpacing="6dp"></android.support.v7.widget.RecyclerView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="28dp"
                 android:layout_marginBottom="30dp"
-                >
+                android:layout_marginTop="28dp"
+                android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btn_warehousing"
                     android:layout_width="72dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="51dp"
                     android:background="@drawable/btn_green_box"
                     android:text="入库"
-                    android:textSize="14dp"
                     android:textColor="@color/white"
-                    android:layout_marginLeft="51dp"
-                    />
+                    android:textSize="14dp" />
 
                 <Button
+                    android:id="@+id/btn_warehousing_and_out_treasury"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="51dp"
+                    android:layout_marginRight="51dp"
                     android:layout_weight="1"
                     android:background="@drawable/btn_green_box"
                     android:text="入库并全部出库"
-                    android:textSize="14dp"
                     android:textColor="@color/white"
-                    android:layout_marginLeft="51dp"
-                    android:layout_marginRight="51dp"
-                    />
+                    android:textSize="14dp" />
 
 
             </LinearLayout>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-    
 
 
 </LinearLayout>

@@ -14,7 +14,7 @@ public class TrialManagementApi {
     private TrialManagementService mService ;
     private static TrialManagementApi intance ;
 
-    public TrialManagementApi(TrialManagementService mService){
+    private TrialManagementApi(TrialManagementService mService){
         this.mService = mService ;
     }
 

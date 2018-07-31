@@ -2,17 +2,19 @@ package com.cxzy.xxjg.ui.test.contract;
 
 import com.cxzy.xxjg.base.BaseContract;
 
+import java.util.Map;
+
 /**
  * Author: demo
- * Created on 2018/7/30
+ * Created on 2018/7/31
  */
-public interface ITrialManagementContract {
+public interface IAddMenuContract {
 
     interface View extends BaseContract.BaseView {
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {
-        void getTrialList(String pageNumber , int canteenId , String eatTimeStart, String eatTimeEnd, int pageSize);
+       void saveMenu(Map<String , Object> param);
     }
 
     interface Model {

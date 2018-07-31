@@ -1,4 +1,4 @@
-package com.cxzy.xxjg.ui.test;
+package com.cxzy.xxjg.presenter;
 
 import com.cxzy.xxjg.base.BaseContract;
 import com.cxzy.xxjg.bean.BaseBean;

@@ -1,5 +1,6 @@
 package com.cxzy.xxjg.ui.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
+import com.cxzy.xxjg.bean.MenuItemBean;
+import com.cxzy.xxjg.utils.DateUtil;
+import com.cxzy.xxjg.utils.ImageLoaderUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 菜谱
@@ -16,6 +23,14 @@ import com.cxzy.xxjg.R;
  */
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
+
+    private List<MenuItemBean> data = new ArrayList<>();
+    private Context mContext ;
+
+    public MenuAdapter(Context mContext){
+        this.mContext = mContext ;
+    }
+
 
     @Override
     public MenuHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -25,17 +40,27 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 
     @Override
     public void onBindViewHolder(MenuHolder holder, int position) {
+        MenuItemBean info = data.get(position);
         if (position == 0 ){
             holder.shadow.setVisibility(View.VISIBLE);
         }else {
             holder.shadow.setVisibility(View.GONE);
         }
 
+        holder.tvMorningMenu.setText(info.breakfast);
+        holder.tvNoonMenu.setText(info.lunch);
+        holder.tvNightMenu.setText(info.dinner);
+        holder.tvMenuTime.setText(DateUtil.date2yyyyMMddWeek(DateUtil.string2Date(info.releaseTime == null ? "" : info.releaseTime , "yyyy-MM-dd")));
+
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return data.size();
+    }
+
+    public void setData(List<MenuItemBean> list) {
+        this.data = list ;
     }
 
     class MenuHolder extends RecyclerView.ViewHolder {

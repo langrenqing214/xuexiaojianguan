@@ -3,9 +3,8 @@ package com.cxzy.xxjg.ui.test.presenter;
 import android.content.Intent;
 
 import com.cxzy.xxjg.app.MyApp;
-import com.cxzy.xxjg.http.util.CallBack;
 import com.cxzy.xxjg.net.MainFragmentApi;
-import com.cxzy.xxjg.ui.test.BasePresenter;
+import com.cxzy.xxjg.presenter.BasePresenter;
 import com.cxzy.xxjg.ui.test.contract.IMainFragmentContract;
 import com.cxzy.xxjg.utils.ToastUtil;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -22,7 +21,7 @@ public class MainFragmentContractPresenterImpl extends BasePresenter<IMainFragme
     private MainFragmentApi api ;
 
     @Inject
-    MainFragmentContractPresenterImpl(MainFragmentApi api){
+    public MainFragmentContractPresenterImpl(MainFragmentApi api){
         this.api = api ;
     }
 

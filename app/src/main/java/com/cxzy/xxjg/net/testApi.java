@@ -12,7 +12,7 @@ public class testApi {
     private testService mService;
     public static testApi sInstance;
 
-    public testApi(testService service) {
+    private testApi(testService service) {
         this.mService = service;
     }
 

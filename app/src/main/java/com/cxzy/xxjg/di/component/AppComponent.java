@@ -5,8 +5,12 @@ import android.content.Context;
 
 import com.cxzy.xxjg.di.module.AppModule;
 import com.cxzy.xxjg.di.module.HttpModule;
+import com.cxzy.xxjg.net.AddMenuApi;
+import com.cxzy.xxjg.net.AddRetentionApi;
 import com.cxzy.xxjg.net.LoginApi;
 import com.cxzy.xxjg.net.MainFragmentApi;
+import com.cxzy.xxjg.net.MenuApi;
+import com.cxzy.xxjg.net.PurchaseApi;
 import com.cxzy.xxjg.net.TrialManagementApi;
 import com.cxzy.xxjg.net.testApi;
 
@@ -23,5 +27,9 @@ public interface AppComponent {
     LoginApi getNetLoginApi();
     MainFragmentApi getUserInfoApi();
     TrialManagementApi getTrialApi();
+    MenuApi getMenuApi();
+    AddMenuApi getAddMenuApi();
+    PurchaseApi getPurchaseApi();
+    AddRetentionApi getAddRetentApi();
 }
 

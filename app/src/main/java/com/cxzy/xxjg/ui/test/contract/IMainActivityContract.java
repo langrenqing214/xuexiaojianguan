@@ -1,8 +1,6 @@
 package com.cxzy.xxjg.ui.test.contract;
 
 import com.cxzy.xxjg.base.BaseContract;
-import com.cxzy.xxjg.ui.test.BasePresenter;
-import com.cxzy.xxjg.ui.test.BaseView;
 
 /**
  * Author: demo

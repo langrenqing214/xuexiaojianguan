@@ -1,7 +1,7 @@
 package com.cxzy.xxjg.ui.test.presenter;
 
 import com.cxzy.xxjg.app.MyApp;
-import com.cxzy.xxjg.ui.test.BasePresenter;
+import com.cxzy.xxjg.presenter.BasePresenter;
 import com.cxzy.xxjg.ui.test.contract.IMainActivityContract;
 import com.cxzy.xxjg.utils.ToastUtil;
 

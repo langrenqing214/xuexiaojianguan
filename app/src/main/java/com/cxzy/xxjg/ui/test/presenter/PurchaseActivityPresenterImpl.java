@@ -9,9 +9,9 @@ import android.text.TextUtils;
 
 import com.cxzy.xxjg.app.MyApp;
 import com.cxzy.xxjg.net.Constants;
-import com.cxzy.xxjg.ui.test.BasePresenter;
+import com.cxzy.xxjg.net.PurchaseApi;
+import com.cxzy.xxjg.presenter.BasePresenter;
 import com.cxzy.xxjg.ui.test.contract.IPurchaseActivityContract;
-import com.cxzy.xxjg.ui.test.model.PurchaseActivityModelImpl;
 import com.cxzy.xxjg.utils.BitmapUtil;
 import com.cxzy.xxjg.utils.ScreenUtils;
 
@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -31,15 +32,11 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
     private List<String> pictureList = new ArrayList<String>();//图片地址集合
     private List<String> originalPicList = new ArrayList<String>();//图片原始地址
     private String picName;//图片名字
+    private PurchaseApi api ;
 
     @Inject
-    PurchaseActivityPresenterImpl(){
-
-    }
-
-    @Override
-    public void getReadStoragePermission() {
-        
+    public PurchaseActivityPresenterImpl(PurchaseApi api){
+        this.api = api ;
     }
 
     @Override
@@ -124,6 +121,11 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
 
         }
         return pictureList ;
+    }
+
+    @Override
+    public void savePurchase(Map<String, Object> param) {
+        invoke(api.savePurchase(param));
     }
 
     /**

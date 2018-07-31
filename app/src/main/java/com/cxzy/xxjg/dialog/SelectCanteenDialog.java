@@ -24,9 +24,13 @@ public class SelectCanteenDialog extends Dialog {
     ListView lvSelectCanteen ;
 
     private Window window = null;
+    private SelectCanteenItemListener itemListener ;
+    private Context mContext ;
 
-    public SelectCanteenDialog(@NonNull Context context) {
+    public SelectCanteenDialog(@NonNull Context context , SelectCanteenItemListener itemListener) {
         super(context, R.style.select_canteen_dialog);
+        this.itemListener = itemListener ;
+        this.mContext = context ;
     }
 
     @Override
@@ -39,6 +43,7 @@ public class SelectCanteenDialog extends Dialog {
         lvSelectCanteen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                itemListener.selectCanteenItem(i);
                 dismiss();
             }
         });
@@ -69,5 +74,9 @@ public class SelectCanteenDialog extends Dialog {
         // wl.alpha = 0.6f; //设置透明度
 //        wl.gravity = Gravity.BOTTOM; //设置重力
         window.setAttributes(wl);
+    }
+
+    public interface SelectCanteenItemListener{
+        void selectCanteenItem(int positon);
     }
 }

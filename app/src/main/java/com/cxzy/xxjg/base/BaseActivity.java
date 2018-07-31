@@ -282,4 +282,8 @@ public abstract class BaseActivity<T1 extends BaseContract.BasePresenter> extend
         //将值传入DemoFragment
 //        getSupportFragmentManager().findFragmentByTag(MainFragment.class.getName()).onActivityResult(requestCode, resultCode, data);
     }
+
+    public void onViewClicked(View view){
+
+    }
 }

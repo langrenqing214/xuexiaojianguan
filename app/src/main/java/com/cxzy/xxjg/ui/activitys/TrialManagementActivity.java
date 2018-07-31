@@ -24,6 +24,7 @@ import com.cxzy.xxjg.ui.test.presenter.TrialManagementPresenterImpl;
 import com.cxzy.xxjg.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -31,7 +32,7 @@ import butterknife.OnClick;
 /**
  * 试吃管理
  */
-public class TrialManagementActivity extends BaseActivity<TrialManagementPresenterImpl> implements DatePickerDialog.OnDateSetListener {
+public class TrialManagementActivity extends BaseActivity<TrialManagementPresenterImpl> implements DatePickerDialog.OnDateSetListener, SelectCanteenDialog.SelectCanteenItemListener {
 
     @BindView(R.id.rv_trial_management)
     RecyclerView rvTrial ;
@@ -95,7 +96,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
             case R.id.ll_add_retention ://添加试吃
                 break;
             case R.id.ll_canteen_select ://选择食堂
-                SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this);
+                SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this , this);
                 canteenDialog.show();
                 break;
             case R.id.ll_time_select ://选择时间
@@ -106,7 +107,17 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
     }
 
     @Override
-    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+        Calendar startcal = Calendar.getInstance();
+        startcal.set(Calendar.YEAR,year);
+        startcal.set(Calendar.MONTH,month);
+        startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+        String date = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+        tvTimeShow.setText(date);
+    }
+
+    @Override
+    public void selectCanteenItem(int positon) {
 
     }
 }

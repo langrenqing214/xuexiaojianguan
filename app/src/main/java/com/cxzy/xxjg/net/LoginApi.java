@@ -18,7 +18,7 @@ public class LoginApi {
     private LoginService service ;
     public static LoginApi intance ;
 
-    public LoginApi(LoginService service){
+    private LoginApi(LoginService service){
         this.service = service ;
     }
 

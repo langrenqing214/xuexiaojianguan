@@ -4,10 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.cxzy.xxjg.base.BaseContract;
-import com.cxzy.xxjg.ui.test.BasePresenter;
-import com.cxzy.xxjg.ui.test.BaseView;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 食材采购
@@ -21,7 +20,7 @@ public interface IPurchaseActivityContract {
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {
-       void getReadStoragePermission();
        List<String> dealPicResult(Activity activity , int requestCode, int resultCode, Intent data);
+       void savePurchase(Map<String , Object> param);
     }
 }

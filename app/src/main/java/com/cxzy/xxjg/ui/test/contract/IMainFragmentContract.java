@@ -1,11 +1,8 @@
 package com.cxzy.xxjg.ui.test.contract;
 
 import android.content.Intent;
-import android.support.v4.widget.DrawerLayout;
 
 import com.cxzy.xxjg.base.BaseContract;
-import com.cxzy.xxjg.ui.test.BasePresenter;
-import com.cxzy.xxjg.ui.test.BaseView;
 
 /**
  * Author: demo
