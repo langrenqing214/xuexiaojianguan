@@ -13,7 +13,7 @@ public interface IRetentionContract {
     }
 
     interface Presenter extends BaseContract. BasePresenter<View> {
-       void getRetentionList(String canteenId ,int pageNumber ,int pageSize);
+       void getRetentionList(String canteenId, String eatTimeStart , String eatTimeEnd , int pageNumber, int pageSize);
     }
 
     interface Model {

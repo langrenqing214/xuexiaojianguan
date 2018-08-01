@@ -23,6 +23,7 @@ import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.ui.adapter.RetentionManageAdapter;
 import com.cxzy.xxjg.ui.test.presenter.RetentionPresenterImpl;
+import com.cxzy.xxjg.utils.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,6 +51,10 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
     private RetentionManageAdapter mAdapter;
     private int page = 0;
     private int pageSize = 10;
+    private String createDateStart = "" ;
+    private String createDateEnd = "" ;
+    private String dateStart = "";
+    private String dateEnd = "";
 
     @Override
     public int getContentLayout() {
@@ -70,7 +75,14 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
         dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
         tvCanteenShow.setText(dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name);
         canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id;
-        mPresenter.getRetentionList(canteenId, page, pageSize);
+        String canteenName = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name ;
+        tvCanteenShow.setText(canteenName);
+        dateStart = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
+        createDateStart = DateUtil.date2NYR(Calendar.getInstance().getTime());
+        dateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
+        createDateEnd = DateUtil.date2NYR(Calendar.getInstance().getTime());
+        tvTimeShow.setText(dateStart + "-" + dateEnd);
+        mPresenter.getRetentionList(canteenId, createDateStart , createDateEnd , page, pageSize);
         rvRetention.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new RetentionManageAdapter(this);
         rvRetention.setAdapter(mAdapter);
@@ -85,6 +97,7 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
     public void refreshView(Object mData) {
         RetentionBean bean = (RetentionBean) mData;
         mAdapter.setData(bean.list);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -119,7 +132,7 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
     public void selectCanteenItem(int positon, String canteenName, String canteenId) {
         this.canteenId = canteenId ;
         tvCanteenShow.setText(canteenName);
-        mPresenter.getRetentionList(canteenId , page , pageSize);
+        mPresenter.getRetentionList(canteenId , createDateStart , createDateEnd , page , pageSize);
     }
 
     @Override
@@ -128,8 +141,21 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
         startcal.set(Calendar.YEAR,year);
         startcal.set(Calendar.MONTH,month);
         startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-        String date = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
-        tvTimeShow.setText(date);
-        mPresenter.getRetentionList(canteenId , page , pageSize);
+        dateStart = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+        createDateStart = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
+        SelectTimeDialog timeDialog = new SelectTimeDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                Calendar startcal = Calendar.getInstance();
+                startcal.set(Calendar.YEAR,year);
+                startcal.set(Calendar.MONTH,month);
+                startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                dateEnd = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+                createDateEnd = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
+                tvTimeShow.setText(createDateStart + "-" + createDateEnd);
+                mPresenter.getRetentionList(canteenId , createDateStart , createDateEnd , page , pageSize);
+            }
+        });
+        timeDialog.show();
     }
 }

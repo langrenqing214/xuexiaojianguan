@@ -15,6 +15,8 @@ import retrofit2.http.Query;
 public interface RetentionService {
     @GET("foodReserved/list")
     Observable<BaseBean<RetentionBean>> getRetentionList(@Query("canteenId") String canteenId ,
+                                                         @Query("eatTimeStart") String eatTimeStart ,
+                                                         @Query("eatTimeEnd") String eatTimeEnd ,
                                                          @Query("pageNumber") int pageNumber ,
                                                          @Query("pageSize") int pageSize);
 }

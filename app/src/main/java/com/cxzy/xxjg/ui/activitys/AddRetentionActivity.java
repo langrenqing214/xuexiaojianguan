@@ -125,10 +125,10 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
         startcal.set(Calendar.MONTH, month);
         startcal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         if (clickType == 1) {
-            expiryTime = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+            expiryTime = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
             tvExpiryTime.setText(expiryTime);
         }else {
-            retentionDate = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+            retentionDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
             tvRetentionDate.setText(retentionDate);
         }
     }

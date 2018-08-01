@@ -217,6 +217,16 @@ public class DateUtil {
     }
 
     /**
+     * Date 转换 yyyy-MM-dd
+     *
+     * @param date
+     * @return
+     */
+    public static String date2NYR(Date date) {
+        return new SimpleDateFormat("yyyy-MM-dd").format(date);
+    }
+
+    /**
      * Date 转换 MM-dd MM:dd
      *
      * @param date

@@ -135,7 +135,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
                 param.put("eatPerson" , trialPerson);
                 param.put("eatTime" , createDateStart);
                 param.put("internalTime" , timeInterval);
-                param.put("status" , canteenId);
+                param.put("status" , "NORMAL");
                 param.put("remarks" , trialDes);
                 param.put("eatImage" , file);
                 mPresenter.saveTrial(param);
@@ -156,7 +156,8 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
         startcal.set(Calendar.YEAR,year);
         startcal.set(Calendar.MONTH,month);
         startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-        createDateStart = DateUtil.date2MMddWeek(startcal.getTime());
-        tvTrialTime.setText(createDateStart);
+        String data = DateUtil.date2MMddWeek(startcal.getTime());
+        createDateStart = DateUtil.date2NYR(startcal.getTime());
+        tvTrialTime.setText(data);
     }
 }

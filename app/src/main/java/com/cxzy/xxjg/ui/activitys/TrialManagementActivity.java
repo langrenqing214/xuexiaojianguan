@@ -53,6 +53,8 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
     private int pageSize = 10 ;
     private String createDateStart = "" ;
     private String createDateEnd = "" ;
+    private String dateStart = "";
+    private String dateEnd = "";
 
     @Override
     public int getContentLayout() {
@@ -74,8 +76,11 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
         canteenId = canteenList == null || canteenList.size() == 0 ? "" : canteenList.get(0).id ;
         canteenName = canteenList == null || canteenList.size() == 0 ? "" : canteenList.get(0).name ;
         tvCanteenShow.setText(canteenName);
-        createDateStart = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
-        createDateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
+        dateStart = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
+        createDateStart = DateUtil.date2NYR(Calendar.getInstance().getTime());
+        dateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
+        createDateEnd = DateUtil.date2NYR(Calendar.getInstance().getTime());
+        tvTimeShow.setText(dateStart + "-" + dateEnd);
         mPresenter.getTrialList(page , canteenId , createDateStart , createDateEnd , pageSize);
 
         rvTrial.setLayoutManager(new LinearLayoutManager(this));
@@ -128,7 +133,8 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
         startcal.set(Calendar.YEAR,year);
         startcal.set(Calendar.MONTH,month);
         startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-        createDateStart = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+        dateStart = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+        createDateStart = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
         SelectTimeDialog timeDialog = new SelectTimeDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
@@ -136,7 +142,8 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
                 startcal.set(Calendar.YEAR,year);
                 startcal.set(Calendar.MONTH,month);
                 startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-                createDateEnd = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+                dateEnd = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+                createDateEnd = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
                 tvTimeShow.setText(createDateStart + "-" + createDateEnd);
                 mPresenter.getTrialList(page , canteenId , createDateStart , createDateEnd , pageSize);
             }
