@@ -5,6 +5,8 @@ import com.cxzy.xxjg.net.AddMenuApi;
 import com.cxzy.xxjg.net.AddMenuService;
 import com.cxzy.xxjg.net.AddRetentionApi;
 import com.cxzy.xxjg.net.AddRetentionService;
+import com.cxzy.xxjg.net.AddTrialApi;
+import com.cxzy.xxjg.net.AddTrialService;
 import com.cxzy.xxjg.net.ApiConstants;
 import com.cxzy.xxjg.net.LoginApi;
 import com.cxzy.xxjg.net.LoginService;
@@ -15,8 +17,12 @@ import com.cxzy.xxjg.net.MenuApi;
 import com.cxzy.xxjg.net.MenuService;
 import com.cxzy.xxjg.net.PurchaseApi;
 import com.cxzy.xxjg.net.PurchaseService;
+import com.cxzy.xxjg.net.RetentionApi;
+import com.cxzy.xxjg.net.RetentionService;
 import com.cxzy.xxjg.net.TrialManagementApi;
 import com.cxzy.xxjg.net.TrialManagementService;
+import com.cxzy.xxjg.net.WarningApi;
+import com.cxzy.xxjg.net.WarningService;
 import com.cxzy.xxjg.net.testApi;
 import com.cxzy.xxjg.net.testService;
 
@@ -174,5 +180,50 @@ public class HttpModule {
         return AddRetentionApi.getInstance(retrofitBuilder
                 .baseUrl(ApiConstants.sIFengApi)
                 .build().create(AddRetentionService.class));
+    }
+
+    //留样管理
+    @Provides
+    RetentionApi provideNetRetention(OkHttpClient.Builder builder) {
+        builder.addInterceptor(RetrofitConfig.sQueryParameterInterceptor);
+
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(builder.build());
+
+        return RetentionApi.getInstance(retrofitBuilder
+                .baseUrl(ApiConstants.sIFengApi)
+                .build().create(RetentionService.class));
+    }
+
+    //历史告警
+    @Provides
+    WarningApi provideNetWarningList(OkHttpClient.Builder builder) {
+        builder.addInterceptor(RetrofitConfig.sQueryParameterInterceptor);
+
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(builder.build());
+
+        return WarningApi.getInstance(retrofitBuilder
+                .baseUrl(ApiConstants.sIFengApi)
+                .build().create(WarningService.class));
+    }
+
+    //添加试吃
+    @Provides
+    AddTrialApi provideNetAddTrial(OkHttpClient.Builder builder) {
+        builder.addInterceptor(RetrofitConfig.sQueryParameterInterceptor);
+
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(builder.build());
+
+        return AddTrialApi.getInstance(retrofitBuilder
+                .baseUrl(ApiConstants.sIFengApi)
+                .build().create(AddTrialService.class));
     }
 }

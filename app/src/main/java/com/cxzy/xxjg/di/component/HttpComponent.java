@@ -3,9 +3,12 @@ package com.cxzy.xxjg.di.component;
 import com.cxzy.xxjg.MainActivity;
 import com.cxzy.xxjg.ui.activitys.AddMenuActivity;
 import com.cxzy.xxjg.ui.activitys.AddRetentionActivity;
+import com.cxzy.xxjg.ui.activitys.AddTrialActivity;
+import com.cxzy.xxjg.ui.activitys.ListoricalWarningActivity;
 import com.cxzy.xxjg.ui.activitys.LoginActivity;
 import com.cxzy.xxjg.ui.activitys.MenuActivity;
 import com.cxzy.xxjg.ui.activitys.PurchaseActivity;
+import com.cxzy.xxjg.ui.activitys.RetentionManageActivity;
 import com.cxzy.xxjg.ui.activitys.TrialManagementActivity;
 import com.cxzy.xxjg.ui.fragments.MainFragment;
 
@@ -24,5 +27,8 @@ public interface HttpComponent {
     void inject(MenuActivity menuActivity);
     void inject(AddMenuActivity addMenuActivity);
     void inject(AddRetentionActivity addRetentionActivity);
+    void inject(RetentionManageActivity retentionManageActivity);
+    void inject(ListoricalWarningActivity listoricalWarningActivity);
+    void inject(AddTrialActivity addTrialActivity);
 //    void inject(ListoricalWarningActivity listoricalWarningActivity);
 }

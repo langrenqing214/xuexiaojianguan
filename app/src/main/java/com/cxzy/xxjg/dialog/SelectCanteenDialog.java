@@ -11,7 +11,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.cxzy.xxjg.R;
+import com.cxzy.xxjg.bean.SchoolCanteenBean;
 import com.cxzy.xxjg.ui.adapter.SelectCanteenAdapter;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -26,11 +29,13 @@ public class SelectCanteenDialog extends Dialog {
     private Window window = null;
     private SelectCanteenItemListener itemListener ;
     private Context mContext ;
+    private ArrayList<SchoolCanteenBean> canteenList = new ArrayList<>();
 
-    public SelectCanteenDialog(@NonNull Context context , SelectCanteenItemListener itemListener) {
+    public SelectCanteenDialog(@NonNull Context context ,ArrayList<SchoolCanteenBean> canteenList , SelectCanteenItemListener itemListener) {
         super(context, R.style.select_canteen_dialog);
         this.itemListener = itemListener ;
         this.mContext = context ;
+        this.canteenList = canteenList ;
     }
 
     @Override
@@ -38,12 +43,12 @@ public class SelectCanteenDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_canteen_dialog);
         lvSelectCanteen = findViewById(R.id.lv_select_canteen);
-        SelectCanteenAdapter mAdapter = new SelectCanteenAdapter();
+        SelectCanteenAdapter mAdapter = new SelectCanteenAdapter(canteenList);
         lvSelectCanteen.setAdapter(mAdapter);
         lvSelectCanteen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                itemListener.selectCanteenItem(i);
+                itemListener.selectCanteenItem(i , canteenList.get(i).name , canteenList.get(i).id);
                 dismiss();
             }
         });
@@ -77,6 +82,6 @@ public class SelectCanteenDialog extends Dialog {
     }
 
     public interface SelectCanteenItemListener{
-        void selectCanteenItem(int positon);
+        void selectCanteenItem(int positon , String canteenName , String canteenId);
     }
 }

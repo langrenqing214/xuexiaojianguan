@@ -19,7 +19,7 @@ public class MenuActivityPresenterImpl extends BasePresenter<IMenuActivityContra
     }
 
     @Override
-    public void getMenuList(int canteenId ,int pageNumber ,int pageSize) {
+    public void getMenuList(String canteenId ,int pageNumber ,int pageSize) {
         invoke(api.getMenuList(canteenId , pageNumber , pageSize));
     }
 }

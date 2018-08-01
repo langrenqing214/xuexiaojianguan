@@ -158,13 +158,13 @@ public class DateUtil {
     }
 
     /**
-     * Date 转换 yyyy.MM.dd
+     * Date 转换 yyyy/MM/dd
      *
      * @param date
      * @return
      */
     public static String date2yyyyMMdd(Date date) {
-        return new SimpleDateFormat("yyyy.MM.dd").format(date);
+        return new SimpleDateFormat("yyyy/MM/dd").format(date);
     }
 
     /**
@@ -194,13 +194,36 @@ public class DateUtil {
     }
 
     /**
-     * Date 转换 yyyy-MM-dd MM:dd
+     * Date 转换星期
+     *
+     * @param date
+     * @return
+     */
+    public static String date2Week(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        return new SimpleDateFormat("周").format(date) + WEEK[dayOfWeek - 1];
+    }
+
+    /**
+     * Date 转换 yyyy-MM-dd HH:mm
      *
      * @param date
      * @return
      */
     public static String date2NYRSF(Date date) {
-        return new SimpleDateFormat("yyyy-MM-dd MM:dd").format(date);
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date);
+    }
+
+    /**
+     * Date 转换 MM-dd MM:dd
+     *
+     * @param date
+     * @return
+     */
+    public static String date2MMddHHmm(Date date) {
+        return new SimpleDateFormat("MM-dd HH:mm").format(date);
     }
 
 }

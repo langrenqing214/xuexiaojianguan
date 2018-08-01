@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="left"
     android:background="@color/white"
+    android:clickable="true"
     android:orientation="vertical">
 
     <View
@@ -141,6 +142,7 @@
     <View style="@style/main_line_style" />
 
     <LinearLayout
+        android:id="@+id/ll_exit_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"

@@ -7,6 +7,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
+import com.cxzy.xxjg.bean.SchoolCanteenBean;
+
+import java.util.ArrayList;
 
 /**
  * Created by demo on 2018/7/30.
@@ -14,18 +17,20 @@ import com.cxzy.xxjg.R;
 
 public class SelectCanteenAdapter extends BaseAdapter {
 
-    public SelectCanteenAdapter(){
+    private ArrayList<SchoolCanteenBean> canteenList = new ArrayList<>();
 
+    public SelectCanteenAdapter(ArrayList<SchoolCanteenBean> canteenList) {
+        this.canteenList = canteenList ;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return canteenList == null ? 0 : canteenList.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public SchoolCanteenBean getItem(int i) {
+        return canteenList.get(i);
     }
 
     @Override
@@ -44,6 +49,9 @@ public class SelectCanteenAdapter extends BaseAdapter {
         }else {
             holder = (CanteenHolder) convertView.getTag();
         }
+
+        SchoolCanteenBean info = getItem(position);
+        holder.tvCanteen.setText(info.name);
 
         return convertView;
     }

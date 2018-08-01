@@ -93,8 +93,9 @@ public class MainActivity extends BaseActivity<MainActivityPresenterImpl> {
     }
 
     //退出APP
-     @Override
+    @Override
     public void onBackPressedSupport() {
-         mPresenter.isBackApp();
-     }
+        mPresenter.isBackApp();
+    }
+
 }

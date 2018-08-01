@@ -13,7 +13,7 @@ import android.support.annotation.Nullable;
 public class SelectTimeDialog extends DatePickerDialog {
 
     public SelectTimeDialog(@NonNull Context context, @Nullable OnDateSetListener listener) {
-        super(context, DatePickerDialog.THEME_HOLO_LIGHT, listener, 1949, 10, 1);
+        super(context, DatePickerDialog.THEME_HOLO_LIGHT, listener, 2018, 8, 1);
     }
 
 }

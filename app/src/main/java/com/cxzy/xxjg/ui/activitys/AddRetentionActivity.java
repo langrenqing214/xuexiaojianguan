@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
+import com.cxzy.xxjg.bean.SchoolCanteenBean;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
@@ -17,6 +18,7 @@ import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.ui.test.presenter.AddRetentionPresenterImpl;
 import com.cxzy.xxjg.utils.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +45,8 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
     private int clickType = 0;//0 为留样时间 1 为到期时间
     private String expiryTime;
     private String retentionDate;
+    private ArrayList<SchoolCanteenBean> dataList;
+    private String canteenId = "";
 
     @Override
     public int getContentLayout() {
@@ -60,6 +64,7 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
+        dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
     }
 
     @Override
@@ -83,12 +88,13 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
         super.onViewClicked(view);
         switch (view.getId()) {
             case R.id.back_btn_id://返回
+                finish();
                 break;
             case R.id.btn_add_retention://添加留样
                 String foodName = etFoodName.getText().toString().trim();
                 String person = tvRetentionPerson.getText().toString().trim();
                 Map<String, Object> param = new HashMap<>();
-                param.put("canteenId" , 1);
+                param.put("canteenId" , canteenId);
                 param.put("foodName" , foodName);
                 param.put("createDate" , retentionDate);
                 param.put("expiryTime" , expiryTime);
@@ -96,7 +102,7 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
                 mPresenter.saveRetention(param);
                 break;
             case R.id.tv_select_canteen://选择食堂
-                SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this, this);
+                SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this, dataList , this);
                 canteenDialog.show();
                 break;
             case R.id.tv_select_expiry_time://选择到期时间
@@ -113,11 +119,6 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
     }
 
     @Override
-    public void selectCanteenItem(int positon) {
-
-    }
-
-    @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         Calendar startcal = Calendar.getInstance();
         startcal.set(Calendar.YEAR, year);
@@ -130,5 +131,11 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
             retentionDate = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
             tvRetentionDate.setText(retentionDate);
         }
+    }
+
+    @Override
+    public void selectCanteenItem(int positon, String canteenName, String canteenId) {
+        this.canteenId = canteenId ;
+        tvSelectCanteen.setText(canteenName);
     }
 }

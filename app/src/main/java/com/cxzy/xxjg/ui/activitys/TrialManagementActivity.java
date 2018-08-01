@@ -21,6 +21,7 @@ import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.ui.adapter.TrialManagementAdapter;
 import com.cxzy.xxjg.ui.test.presenter.TrialManagementPresenterImpl;
+import com.cxzy.xxjg.utils.DateUtil;
 import com.cxzy.xxjg.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -36,7 +37,6 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
 
     @BindView(R.id.rv_trial_management)
     RecyclerView rvTrial ;
-    private TrialManagementAdapter mAdapter;
     @BindView(R.id.ll_canteen_select)
     LinearLayout llCanteenSelect ;
     @BindView(R.id.tv_canteen_show)
@@ -45,6 +45,14 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
     LinearLayout llTimeSelect ;
     @BindView(R.id.tv_time_show)
     TextView tvTimeShow ;
+    private ArrayList<SchoolCanteenBean> canteenList;
+    private String canteenId = "";
+    private String canteenName = "";
+    private TrialManagementAdapter mAdapter;
+    private int page = 0 ;
+    private int pageSize = 10 ;
+    private String createDateStart = "" ;
+    private String createDateEnd = "" ;
 
     @Override
     public int getContentLayout() {
@@ -62,12 +70,17 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
-        ArrayList<SchoolCanteenBean> canteenList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
-        tvCanteenShow.setText(canteenList == null || canteenList.size() == 0 ? "" : canteenList.get(0).name);
+        canteenList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
+        canteenId = canteenList == null || canteenList.size() == 0 ? "" : canteenList.get(0).id ;
+        canteenName = canteenList == null || canteenList.size() == 0 ? "" : canteenList.get(0).name ;
+        tvCanteenShow.setText(canteenName);
+        createDateStart = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
+        createDateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
+        mPresenter.getTrialList(page , canteenId , createDateStart , createDateEnd , pageSize);
+
         rvTrial.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new TrialManagementAdapter(mContext);
         rvTrial.setAdapter(mAdapter);
-        mPresenter.getTrialList("2015" , 1 , "10" , "2016" , 10);
     }
 
     @Override
@@ -87,16 +100,19 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
 
     }
 
-    @OnClick({R.id.back_btn_id , R.id.ll_add_trial , R.id.ll_canteen_select , R.id.ll_time_select})
+    @OnClick({R.id.back_btn_id , R.id.ll_add_trial , R.id.ll_canteen_select , R.id.ll_time_select })
     public void onViewClicked(View view){
         switch (view.getId()){
             case R.id.back_btn_id ://返回
                 finish();
                 break;
-            case R.id.ll_add_retention ://添加试吃
+            case R.id.ll_add_trial ://添加试吃
+                Intent intent = new Intent(mContext , AddTrialActivity.class);
+                intent.putExtra("canteenList" ,canteenList);
+                startActivity(intent);
                 break;
             case R.id.ll_canteen_select ://选择食堂
-                SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this , this);
+                SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this ,canteenList , this);
                 canteenDialog.show();
                 break;
             case R.id.ll_time_select ://选择时间
@@ -112,12 +128,26 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
         startcal.set(Calendar.YEAR,year);
         startcal.set(Calendar.MONTH,month);
         startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-        String date = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
-        tvTimeShow.setText(date);
+        createDateStart = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+        SelectTimeDialog timeDialog = new SelectTimeDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                Calendar startcal = Calendar.getInstance();
+                startcal.set(Calendar.YEAR,year);
+                startcal.set(Calendar.MONTH,month);
+                startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                createDateEnd = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+                tvTimeShow.setText(createDateStart + "-" + createDateEnd);
+                mPresenter.getTrialList(page , canteenId , createDateStart , createDateEnd , pageSize);
+            }
+        });
+        timeDialog.show();
     }
 
     @Override
-    public void selectCanteenItem(int positon) {
-
+    public void selectCanteenItem(int positon, String canteenName, String canteenId) {
+        this.canteenId = canteenId ;
+        tvCanteenShow.setText(canteenName);
+        mPresenter.getTrialList(page , canteenId , createDateStart , createDateEnd , pageSize);
     }
 }

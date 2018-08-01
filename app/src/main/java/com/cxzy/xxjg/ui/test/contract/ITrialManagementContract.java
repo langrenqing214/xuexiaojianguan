@@ -12,7 +12,7 @@ public interface ITrialManagementContract {
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {
-        void getTrialList(String pageNumber , int canteenId , String eatTimeStart, String eatTimeEnd, int pageSize);
+        void getTrialList(int pageNumber , String canteenId , String eatTimeStart, String eatTimeEnd, int pageSize);
     }
 
     interface Model {

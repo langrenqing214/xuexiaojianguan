@@ -32,6 +32,8 @@ public class HttpUtils {
                     public void onNext(BaseBean<T> t) {
                         if (t != null && t.ok){
                             mView.refreshView(t.data);
+                        }else {
+                            ToastUtil.showShort(MyApp.appComponent.getContext() , t.message);
                         }
                     }
 

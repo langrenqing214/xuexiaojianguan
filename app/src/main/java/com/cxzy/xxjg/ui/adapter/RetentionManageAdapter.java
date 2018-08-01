@@ -1,6 +1,9 @@
 package com.cxzy.xxjg.ui.adapter;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +11,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
+import com.cxzy.xxjg.bean.RetentionBean;
+import com.cxzy.xxjg.bean.RetentionItemBean;
+import com.cxzy.xxjg.utils.DateUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 留样
@@ -15,6 +24,15 @@ import com.cxzy.xxjg.R;
  */
 
 public class RetentionManageAdapter extends RecyclerView.Adapter<RetentionManageAdapter.RetentionHolder> {
+
+    private List<RetentionItemBean> data = new ArrayList<>();
+    private Context mContext ;
+
+    public RetentionManageAdapter(Context mContext){
+        this.mContext = mContext ;
+    }
+
+
     @Override
     public RetentionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_retention , parent , false);
@@ -23,11 +41,43 @@ public class RetentionManageAdapter extends RecyclerView.Adapter<RetentionManage
 
     @Override
     public void onBindViewHolder(RetentionHolder holder, int position) {
+        RetentionItemBean info = data.get(position);
+        holder.tvDate.setText(DateUtil.date2Week(DateUtil.string2Date(info.statusTime == null ? "" : info.statusTime , "yyyy-MM-dd HH:mm")));
+        holder.tvFoodName.setText(info.foodName);
+        holder.tvRetentionTime.setText("留样时间:" + DateUtil.date2MMddHHmm(DateUtil.string2Date(info.reservedTime == null ? "" : info.reservedTime , "yyyy-MM-dd HH:mm")));
+        Long statusTime = TextUtils.isEmpty(info.statusTime) ? 0 : Long.valueOf(info.statusTime);
+        Long expiryTime = TextUtils.isEmpty(info.expiryTime) ? 0 : Long.valueOf(info.expiryTime);
+        if (statusTime - expiryTime > 0){//正常
+            holder.tvFoodState.setText("正常");
+            holder.tvFoodState.setTextColor(ContextCompat.getColor(mContext , R.color.green_text));
+            holder.tvRetentionTime.setText("到期时间:" + DateUtil.date2MMddHHmm(DateUtil.string2Date(info.expiryTime == null ? "" : info.expiryTime , "yyyy-MM-dd HH:mm")));
+            holder.tvRetentionTime.setTextColor(ContextCompat.getColor(mContext , R.color.green_text));
+        }else if (statusTime - expiryTime < 0){
+            holder.tvFoodState.setText("已过期");
+            holder.tvFoodState.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
+            holder.tvRetentionTime.setText("到期时间:" + DateUtil.date2MMddHHmm(DateUtil.string2Date(info.expiryTime == null ? "" : info.expiryTime , "yyyy-MM-dd HH:mm")));
+            holder.tvRetentionTime.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
+            holder.tvRetentionPerson.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
+        }
+
+        if (info.status == 0){//未处理
+            holder.tvRetentionPerson.setText("未处理");
+            holder.tvRetentionPerson.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
+            holder.btnIsHandle.setVisibility(View.VISIBLE);
+        }else {
+            holder.tvRetentionPerson.setText("留样人:" + info.reservedPerson);
+            holder.tvRetentionPerson.setTextColor(ContextCompat.getColor(mContext , R.color.text_gray_color));
+            holder.btnIsHandle.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return data.size();
+    }
+
+    public void setData(List<RetentionItemBean> list) {
+        this.data = list ;
     }
 
     class RetentionHolder extends RecyclerView.ViewHolder {

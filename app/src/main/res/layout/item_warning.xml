@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <View
+        style="@style/main_line_style"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:id="@+id/tv_canteen_name"
+        style="@style/main_text_style"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="17dp" />
+
+    <View
+        style="@style/main_line_style"
+        android:layout_marginLeft="22dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="22dp"
+        android:paddingTop="10dp">
+
+        <View
+            android:id="@+id/view_state_show"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:id="@+id/tv_state_des"
+            style="@style/main_text_style"
+            android:layout_marginLeft="10dp"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="22dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_staff_name"
+            style="@style/main_text_style"
+            android:textSize="14dp"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/tv_staff_state"
+            style="@style/main_text_style"
+            android:textSize="14dp"
+            android:layout_weight="1"
+            android:layout_marginRight="22dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="22dp"
+        android:layout_marginTop="5dp"
+        >
+
+        <TextView
+            style="@style/main_text_style"
+            android:textSize="14dp"
+            android:text="检查时间:"
+            />
+
+        <TextView
+            android:id="@+id/tv_check_time"
+            style="@style/main_text_style"
+            android:textSize="14dp"
+            android:layout_marginRight="22dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="22dp"
+        android:layout_marginTop="5dp"
+        >
+
+        <TextView
+            style="@style/main_text_style"
+            android:textSize="14dp"
+            android:text="异常项:"
+            />
+
+        <TextView
+            android:id="@+id/tv_abnormal_term"
+            style="@style/main_text_style"
+            android:textSize="14dp"
+            android:layout_marginRight="22dp"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

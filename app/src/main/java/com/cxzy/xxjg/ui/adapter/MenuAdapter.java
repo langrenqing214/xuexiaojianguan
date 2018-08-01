@@ -2,6 +2,7 @@ package com.cxzy.xxjg.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.cxzy.xxjg.utils.DateUtil;
 import com.cxzy.xxjg.utils.ImageLoaderUtil;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -26,9 +28,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 
     private List<MenuItemBean> data = new ArrayList<>();
     private Context mContext ;
+    private EditMenuClickListener editMenuClickListener ;
 
-    public MenuAdapter(Context mContext){
+    public MenuAdapter(Context mContext , EditMenuClickListener editMenuClickListener){
         this.mContext = mContext ;
+        this.editMenuClickListener = editMenuClickListener ;
     }
 
 
@@ -39,7 +43,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
     }
 
     @Override
-    public void onBindViewHolder(MenuHolder holder, int position) {
+    public void onBindViewHolder(MenuHolder holder, final int position) {
         MenuItemBean info = data.get(position);
         if (position == 0 ){
             holder.shadow.setVisibility(View.VISIBLE);
@@ -47,11 +51,26 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
             holder.shadow.setVisibility(View.GONE);
         }
 
+        Long localTime = Calendar.getInstance().getTimeInMillis();
+        Long releaseTime =  TextUtils.isEmpty(info.releaseTime) ? 0 : Long.valueOf(info.releaseTime);
+        if (localTime - releaseTime > 3*24*60*60*1000){
+            holder.ivTimeShow.setBackgroundResource(R.drawable.ico_time_gray);
+            holder.llEditMenu.setVisibility(View.GONE);
+        }else {
+            holder.ivTimeShow.setBackgroundResource(R.drawable.ico_time);
+            holder.llEditMenu.setVisibility(View.VISIBLE);
+        }
         holder.tvMorningMenu.setText(info.breakfast);
         holder.tvNoonMenu.setText(info.lunch);
         holder.tvNightMenu.setText(info.dinner);
         holder.tvMenuTime.setText(DateUtil.date2yyyyMMddWeek(DateUtil.string2Date(info.releaseTime == null ? "" : info.releaseTime , "yyyy-MM-dd")));
 
+        holder.llEditMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editMenuClickListener.editMenuClickListener(position);
+            }
+        });
     }
 
     @Override
@@ -61,6 +80,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 
     public void setData(List<MenuItemBean> list) {
         this.data = list ;
+    }
+
+    public interface EditMenuClickListener{
+        void editMenuClickListener(int position);
     }
 
     class MenuHolder extends RecyclerView.ViewHolder {

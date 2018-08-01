@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
 import com.cxzy.xxjg.bean.MenuBean;
+import com.cxzy.xxjg.bean.SchoolCanteenBean;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerAppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
@@ -20,13 +21,15 @@ import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.ui.adapter.MenuAdapter;
 import com.cxzy.xxjg.ui.test.presenter.MenuActivityPresenterImpl;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
  * 菜谱
  */
-public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener {
+public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, MenuAdapter.EditMenuClickListener {
 
     @BindView(R.id.rv_canteen_menu)
     RecyclerView rvMenu;
@@ -34,6 +37,12 @@ public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implem
     TextView tvTitle;
 
     private MenuAdapter menuAdapter;
+    private ArrayList<SchoolCanteenBean> dataList;
+    private String canteenId;
+    private String canteenName;
+    private int page = 0 ;
+    private int pageSize = 10 ;
+    private MenuBean bean;
 
     @Override
     public int getContentLayout() {
@@ -51,9 +60,13 @@ public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implem
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
-        mPresenter.getMenuList(1, 0, 10);
+        dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
+        canteenName = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name ;
+        tvTitle.setText(canteenName);
+        canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id ;
+        mPresenter.getMenuList(canteenId, page, pageSize);
         rvMenu.setLayoutManager(new LinearLayoutManager(this));
-        menuAdapter = new MenuAdapter(this);
+        menuAdapter = new MenuAdapter(this , this);
         rvMenu.setAdapter(menuAdapter);
     }
 
@@ -64,7 +77,7 @@ public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implem
 
     @Override
     public void refreshView(Object mData) {
-        MenuBean bean = (MenuBean) mData;
+        bean = (MenuBean) mData;
         menuAdapter.setData(bean.list);
         menuAdapter.notifyDataSetChanged();
     }
@@ -83,17 +96,43 @@ public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implem
                 finish();
                 break;
             case R.id.ll_select_canteen://选择食堂
-                SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this , this);
+                SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this ,dataList , this);
                 canteenDialog.show();
                 break;
             case R.id.ll_add_menu://添加菜谱
-                startActivity(new Intent(this , AddMenuActivity.class));
+                Intent intent = new Intent(this , AddMenuActivity.class);
+                intent.putExtra("canteenList" , dataList);
+                intent.putExtra("type" , 0);
+                startActivityForResult(intent , 1);
                 break;
         }
     }
 
     @Override
-    public void selectCanteenItem(int positon) {
+    public void selectCanteenItem(int positon, String canteenName, String canteenId) {
+        this.canteenId = canteenId;
+        this.canteenName = canteenName ;
+        tvTitle.setText(canteenName);
+        mPresenter.getMenuList(canteenId , page , pageSize);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mPresenter.getMenuList(canteenId , page , pageSize);
+    }
+
+    @Override
+    public void editMenuClickListener(int position) {
+        Intent intent = new Intent(this , AddMenuActivity.class);
+        intent.putExtra("canteenList" , dataList);
+        intent.putExtra("canteenName" , canteenName);
+        intent.putExtra("canteenId" , canteenId);
+        intent.putExtra("breakfast" , bean.list.get(position).breakfast);
+        intent.putExtra("lunch" , bean.list.get(position).lunch);
+        intent.putExtra("dinner" , bean.list.get(position).dinner);
+        intent.putExtra("releaseTime" , bean.list.get(position).releaseTime);
+        intent.putExtra("type" , 1);
+        startActivityForResult(intent , 1);
     }
 }

@@ -7,11 +7,14 @@ import com.cxzy.xxjg.di.module.AppModule;
 import com.cxzy.xxjg.di.module.HttpModule;
 import com.cxzy.xxjg.net.AddMenuApi;
 import com.cxzy.xxjg.net.AddRetentionApi;
+import com.cxzy.xxjg.net.AddTrialApi;
 import com.cxzy.xxjg.net.LoginApi;
 import com.cxzy.xxjg.net.MainFragmentApi;
 import com.cxzy.xxjg.net.MenuApi;
 import com.cxzy.xxjg.net.PurchaseApi;
+import com.cxzy.xxjg.net.RetentionApi;
 import com.cxzy.xxjg.net.TrialManagementApi;
+import com.cxzy.xxjg.net.WarningApi;
 import com.cxzy.xxjg.net.testApi;
 
 import dagger.Component;
@@ -31,5 +34,8 @@ public interface AppComponent {
     AddMenuApi getAddMenuApi();
     PurchaseApi getPurchaseApi();
     AddRetentionApi getAddRetentApi();
+    RetentionApi getRetentApi();
+    WarningApi getWarningApi();
+    AddTrialApi getAddTrialApi();
 }
 
