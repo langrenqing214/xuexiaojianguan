@@ -57,7 +57,7 @@ public class SelectPersonAdapter extends BaseAdapter {
         PersonsBean info = getItem(position);
         holder.tvPerson.setText(info.personName);
         if (TextUtils.isEmpty(info.personState)){
-            holder.ivIsCheck.setVisibility(View.GONE);
+            holder.ivIsCheck.setVisibility(View.INVISIBLE);
         }else {
             holder.ivIsCheck.setVisibility(View.VISIBLE);
         }

@@ -21,8 +21,15 @@ import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectPersonDialog;
 import com.cxzy.xxjg.ui.adapter.CheckItemsAdapter;
+import com.cxzy.xxjg.ui.adapter.PersonLabelAdapter;
 import com.cxzy.xxjg.ui.test.presenter.HealthExaminationPresenterImpl;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,7 +113,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
 
     }
 
-    @OnClick({R.id.back_btn_id, R.id.ll_select_canteen, R.id.btn_add_through_person, R.id.btn_save_morningcheck})
+    @OnClick({R.id.back_btn_id, R.id.ll_select_canteen, R.id.btn_add_through_person, R.id.btn_save_morningcheck ,R.id.btn_add_no_through_person})
     @Override
     public void onViewClicked(View view) {
         super.onViewClicked(view);
@@ -119,14 +126,30 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 canteenDialog.show();
                 break;
             case R.id.btn_save_morningcheck://提交晨检
-//                mPresenter.saveMorningCheck();
+                List<File> fileList = new ArrayList<>();
+                File file = new File("/Users/tianwei/Desktop/xuexiaojianguan/app/src/main/res/mipmap-xhdpi/ic_launcher.png");
+                fileList.add(file);
+                mPresenter.saveMorningCheck(personBean , fileList);
                 break;
             case R.id.btn_add_through_person://添加检查通过
                 SelectPersonDialog dialog = new SelectPersonDialog(this,0 , personBean, new SelectPersonDialog.SelectPersonClickLister() {
                     @Override
-                    public void selectItemPerson(PersonsBean info) {
-                        info.personState = "NORMAL" ;
-                        throughPerson.add(info);
+                    public void selectItemPerson(List<PersonsBean> infoList) {
+                        throughPerson.addAll(infoList);
+                        for (PersonsBean bean:infoList) {
+                            if (personBean != null && personBean.contains(bean)){
+                                personBean.remove(bean);
+                            }
+                        }
+                        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(mContext);
+                        layoutManager.setFlexWrap(FlexWrap.WRAP);
+                        layoutManager.setFlexDirection(FlexDirection.ROW);
+                        layoutManager.setAlignItems(AlignItems.STRETCH);
+                        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+                        rvThroughPerson.setLayoutManager(layoutManager);
+                        PersonLabelAdapter adapter = new PersonLabelAdapter(throughPerson);
+                        rvThroughPerson.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
                     }
                 });
                 dialog.show();
@@ -134,9 +157,22 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
             case R.id.btn_add_no_through_person://添加检查未通过
                 SelectPersonDialog dialog1 = new SelectPersonDialog(this,1 , personBean, new SelectPersonDialog.SelectPersonClickLister() {
                     @Override
-                    public void selectItemPerson(PersonsBean info) {
-                        info.personState = "ERROR" ;
-                        noThroughPerson.add(info);
+                    public void selectItemPerson(List<PersonsBean> infoList) {
+                        noThroughPerson.addAll(infoList);
+                        for (PersonsBean bean:infoList) {
+                            if (personBean != null && personBean.contains(bean)){
+                                personBean.remove(bean);
+                            }
+                        }
+                        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(mContext);
+                        layoutManager.setFlexWrap(FlexWrap.WRAP);
+                        layoutManager.setFlexDirection(FlexDirection.ROW);
+                        layoutManager.setAlignItems(AlignItems.STRETCH);
+                        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+                        rvNoThroughPerson.setLayoutManager(layoutManager);
+                        PersonLabelAdapter adapter = new PersonLabelAdapter(noThroughPerson);
+                        rvNoThroughPerson.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
                     }
                 });
                 dialog1.show();

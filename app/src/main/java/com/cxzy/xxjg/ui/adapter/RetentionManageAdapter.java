@@ -77,6 +77,7 @@ public class RetentionManageAdapter extends RecyclerView.Adapter<RetentionManage
     }
 
     public void setData(List<RetentionItemBean> list) {
+        this.data.clear();
         this.data = list ;
     }
 

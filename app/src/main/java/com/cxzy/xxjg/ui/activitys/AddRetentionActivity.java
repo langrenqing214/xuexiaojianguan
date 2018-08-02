@@ -96,9 +96,9 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
                 Map<String, Object> param = new HashMap<>();
                 param.put("canteenId" , canteenId);
                 param.put("foodName" , foodName);
-                param.put("reservedTime " , retentionDate);
-                param.put("expiryTime  " , expiryTime);
-                param.put("reservedPerson " , person);
+                param.put("reservedTimeStr" , retentionDate);
+                param.put("expiryTimeStr" , expiryTime);
+                param.put("reservedPerson" , person);
                 mPresenter.saveRetention(param);
                 break;
             case R.id.tv_select_canteen://选择食堂

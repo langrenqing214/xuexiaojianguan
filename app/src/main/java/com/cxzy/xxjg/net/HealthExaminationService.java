@@ -15,6 +15,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * 卫生检查
@@ -27,10 +28,10 @@ public interface HealthExaminationService {
     Observable<BaseBean<HealthExaminationBean>> getHealthCheck(@Query("canteenId") String canteenId);
 
     //提交晨检
-    @FormUrlEncoded
+//    @FormUrlEncoded
     @GET("api/check/saveMorningCheck")
-    Observable<BaseBean<Object>> saveMorningCheck(@Field("persons")List<PersonsBean> persons ,
-                                                  @Field("files")List<File> files);
+    Observable<BaseBean<Object>> saveMorningCheck(@Query("persons")List<PersonsBean> persons ,
+                                                  @Query("files") List<File> files);
 
     //提交环境检查
     @GET("api/check/saveEnvCheck")
