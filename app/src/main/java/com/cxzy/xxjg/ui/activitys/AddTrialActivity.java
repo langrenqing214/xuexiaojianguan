@@ -91,7 +91,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
 
     }
 
-    @OnClick({R.id.back_btn_id , R.id.btn_add_trial , R.id.tv_select_canteen , R.id.tv_trial_time})
+    @OnClick({R.id.back_btn_id , R.id.btn_add_trial , R.id.tv_select_canteen , R.id.tv_trial_time , R.id.iv_add_trial_pic})
     @Override
     public void onViewClicked(View view) {
         super.onViewClicked(view);
@@ -107,23 +107,10 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
                 SelectTimeDialog timeDialog = new SelectTimeDialog(this, this);
                 timeDialog.show();
                 break;
+            case R.id.iv_add_trial_pic ://拍照
+
+                break;
             case R.id.btn_add_trial ://添加试吃
-//                @BindView(R.id.tv_select_canteen)
-//                TextView tvSelectCanteen;
-//                @BindView(R.id.et_put_food_name)
-//                EditText etFoodName;
-//                @BindView(R.id.et_trial_person)
-//                EditText etTrialPerson;
-//                @BindView(R.id.tv_trial_time)
-//                TextView tvTrialTime;
-//                @BindView(R.id.et_trial_time_interval)
-//                EditText etTimeInterval;
-//                @BindView(R.id.tv_select_trial_reaction)
-//                TextView tvSelectTrialReaction;
-//                @BindView(R.id.et_trial_des)
-//                EditText etTrialDes;
-//                @BindView(R.id.iv_add_trial_pic)
-//                ImageView ivAddTrialPic;
                 File file = new File("F:\\myLearnMvp\\xuexiaojianguan\\app\\src\\main\\res\\drawable-xhdpi\\camera.png");
                 String foodName = etFoodName.getText().toString().trim();
                 String trialPerson = etTrialPerson.getText().toString().trim();

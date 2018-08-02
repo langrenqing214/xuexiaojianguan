@@ -8,6 +8,7 @@ import com.cxzy.xxjg.di.module.HttpModule;
 import com.cxzy.xxjg.net.AddMenuApi;
 import com.cxzy.xxjg.net.AddRetentionApi;
 import com.cxzy.xxjg.net.AddTrialApi;
+import com.cxzy.xxjg.net.HealthExaminationApi;
 import com.cxzy.xxjg.net.LoginApi;
 import com.cxzy.xxjg.net.MainFragmentApi;
 import com.cxzy.xxjg.net.MenuApi;
@@ -37,5 +38,6 @@ public interface AppComponent {
     RetentionApi getRetentApi();
     WarningApi getWarningApi();
     AddTrialApi getAddTrialApi();
+    HealthExaminationApi getHealthApi();
 }
 

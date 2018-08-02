@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_morning_check"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/A6" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="通过检查的人员"
+            android:textColor="@color/main_style_color"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_add_through_person"
+            android:layout_width="56dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_green_box"
+            android:text="添加"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+    </LinearLayout>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white90">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_through_person"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"></android.support.v7.widget.RecyclerView>
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/A6" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="未通过检查的人员"
+            android:textColor="@color/red_text"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/btn_add_no_through_person"
+            android:layout_width="56dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_green_box"
+            android:text="添加"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+    </LinearLayout>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white90">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_no_through_person"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"></android.support.v7.widget.RecyclerView>
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:text="晨检通过人员拍照"
+        android:textColor="@color/main_text_color"
+        android:textSize="14dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        >
+        
+        <TextView
+            android:id="@+id/tv_positive_pic"
+            android:layout_width="128dp"
+            android:layout_height="match_parent"
+            android:background="@color/A6"
+            android:text="正面"
+            android:textSize="14dp"
+            android:textColor="@color/main_text_color"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="128dp"
+            android:layout_height="match_parent"
+            android:background="@color/A6"
+            android:text="反面"
+            android:textSize="14dp"
+            android:textColor="@color/main_text_color"
+            android:gravity="center"
+            android:layout_marginLeft="44dp"
+            />
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        >
+
+        <TextView
+            android:layout_width="128dp"
+            android:layout_height="match_parent"
+            android:background="@color/A6"
+            android:text="正面"
+            android:textSize="14dp"
+            android:textColor="@color/main_text_color"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="128dp"
+            android:layout_height="match_parent"
+            android:background="@color/A6"
+            android:text="反面"
+            android:textSize="14dp"
+            android:textColor="@color/main_text_color"
+            android:gravity="center"
+            android:layout_marginLeft="44dp"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_save_morningcheck"
+        android:layout_width="192dp"
+        android:layout_height="30dp"
+        android:background="@drawable/btn_green_box"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
+        />
+
+</LinearLayout>

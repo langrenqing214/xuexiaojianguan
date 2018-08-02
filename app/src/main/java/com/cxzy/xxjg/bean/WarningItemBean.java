@@ -20,9 +20,10 @@ public class WarningItemBean implements Serializable {
     public String dealUserId ;// 处置人 ,
     public String dealUserName ;// 处置人姓名 ,
     public String id ;//
-    public int level ;// 告警等级 ,
+    public String level ;// 告警等级 ,
     public String remarks ;//
     public String searchKeys ;//
     public String updateDate ;//
     public String updateUserId ;//
+    public String levelcolor ;//颜色值
 }

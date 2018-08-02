@@ -8,6 +8,8 @@ import com.cxzy.xxjg.net.AddRetentionService;
 import com.cxzy.xxjg.net.AddTrialApi;
 import com.cxzy.xxjg.net.AddTrialService;
 import com.cxzy.xxjg.net.ApiConstants;
+import com.cxzy.xxjg.net.HealthExaminationApi;
+import com.cxzy.xxjg.net.HealthExaminationService;
 import com.cxzy.xxjg.net.LoginApi;
 import com.cxzy.xxjg.net.LoginService;
 import com.cxzy.xxjg.http.RetrofitConfig;
@@ -225,5 +227,20 @@ public class HttpModule {
         return AddTrialApi.getInstance(retrofitBuilder
                 .baseUrl(ApiConstants.sIFengApi)
                 .build().create(AddTrialService.class));
+    }
+
+    //卫生检查
+    @Provides
+    HealthExaminationApi provideNetHealthExamination(OkHttpClient.Builder builder) {
+        builder.addInterceptor(RetrofitConfig.sQueryParameterInterceptor);
+
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(builder.build());
+
+        return HealthExaminationApi.getInstance(retrofitBuilder
+                .baseUrl(ApiConstants.sIFengApi)
+                .build().create(HealthExaminationService.class));
     }
 }

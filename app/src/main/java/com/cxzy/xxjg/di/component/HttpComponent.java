@@ -4,6 +4,7 @@ import com.cxzy.xxjg.MainActivity;
 import com.cxzy.xxjg.ui.activitys.AddMenuActivity;
 import com.cxzy.xxjg.ui.activitys.AddRetentionActivity;
 import com.cxzy.xxjg.ui.activitys.AddTrialActivity;
+import com.cxzy.xxjg.ui.activitys.HealthExaminationActivity;
 import com.cxzy.xxjg.ui.activitys.ListoricalWarningActivity;
 import com.cxzy.xxjg.ui.activitys.LoginActivity;
 import com.cxzy.xxjg.ui.activitys.MenuActivity;
@@ -30,5 +31,5 @@ public interface HttpComponent {
     void inject(RetentionManageActivity retentionManageActivity);
     void inject(ListoricalWarningActivity listoricalWarningActivity);
     void inject(AddTrialActivity addTrialActivity);
-//    void inject(ListoricalWarningActivity listoricalWarningActivity);
+    void inject(HealthExaminationActivity examinationActivity);
 }

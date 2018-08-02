@@ -52,6 +52,8 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     private String createDateStart = "" ;
     private String createDateEnd = "" ;
     private String timeStr = "";
+    private String dateStart = "";
+    private String dateEnd = "";
 
     @Override
     public int getContentLayout() {
@@ -69,8 +71,10 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext , R.color.main_style_color));
-        createDateStart = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
-        createDateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
+        dateStart = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
+        createDateStart = DateUtil.date2NYR(Calendar.getInstance().getTime());
+        dateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
+        createDateEnd = DateUtil.date2NYR(Calendar.getInstance().getTime());
         dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
         tvCanteenShow.setText(dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name);
         canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id;
@@ -91,6 +95,7 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     public void refreshView(Object mData) {
         WarningBean bean = (WarningBean) mData;
         mAdapter.setData(bean.list);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -118,7 +123,8 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
         startcal.set(Calendar.YEAR,year);
         startcal.set(Calendar.MONTH,month);
         startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-        createDateStart = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+        dateStart = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+        createDateStart = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
         SelectTimeDialog timeDialog = new SelectTimeDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
@@ -126,7 +132,8 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
                 startcal.set(Calendar.YEAR,year);
                 startcal.set(Calendar.MONTH,month);
                 startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-                createDateEnd = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+                dateEnd = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+                createDateEnd = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
                 tvTimeShow.setText(createDateStart + "-" + createDateEnd);
                 mPresenter.getWarningList(canteenId , createDateStart , createDateEnd , page , pageSize);
             }

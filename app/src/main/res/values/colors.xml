@@ -19,4 +19,7 @@
     <color name="red_text">#E51C23</color>
     <color name="blue_text">#FF3F51B5</color>
     <color name="orange_text">#ffff00</color>
+    <color name="bg_blue">#0076ff</color>
+    <color name="white90">#e5ffffff</color>
+    <color name="A6">#AAAAAA</color>
 </resources>

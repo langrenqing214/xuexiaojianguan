@@ -73,7 +73,6 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
         dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
-        tvCanteenShow.setText(dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name);
         canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id;
         String canteenName = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name ;
         tvCanteenShow.setText(canteenName);

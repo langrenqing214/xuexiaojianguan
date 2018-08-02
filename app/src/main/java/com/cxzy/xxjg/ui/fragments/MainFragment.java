@@ -133,7 +133,9 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
                 startActivity(new Intent(mContext , PurchaseActivity.class));
                 break;
             case R.id.cv_health_examination://卫生检查
-                startActivity(new Intent(mContext , HealthExaminationActivity.class));
+                Intent healthIntent = new Intent(mContext , HealthExaminationActivity.class);
+                healthIntent.putExtra("canteenList" , bean.canteenList);
+                startActivity(healthIntent);
                 break;
             case R.id.cv_retention_manage://留样管理
                 Intent retentionIntent = new Intent(mContext , RetentionManageActivity.class);

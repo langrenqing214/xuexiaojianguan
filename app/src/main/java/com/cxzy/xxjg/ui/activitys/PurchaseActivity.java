@@ -23,6 +23,7 @@ import com.cxzy.xxjg.ui.test.presenter.PurchaseActivityPresenterImpl;
 import com.cxzy.xxjg.utils.ScreenUtils;
 import com.cxzy.xxjg.utils.ToastUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -176,6 +177,13 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
                 String shelfLife = etShelfLife.getText().toString().trim();
                 String shelfLifeEnd = etShelfLifeEnd.getText().toString().trim();
                 String suppliers = etSuppliers.getText().toString().trim();
+
+                List<File> fileList = new ArrayList<>();
+                for (String str :picList) {
+                    File folder = new File(str);
+                    fileList.add(folder);
+                }
+
                 Map<String , Object> param = new HashMap<>();
                 param.put("name" , foodName);
                 param.put("type" , foodStyle);
@@ -185,6 +193,7 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
                 param.put("manufactureDate" , manufactureDate);
                 param.put("qualityGuaranteeDate" , shelfLife);
                 param.put("qualityGuaranteeEndDate" , suppliers);
+                param.put("files" , fileList);
                 mPresenter.savePurchase(param);
                 break;
             case R.id.btn_warehousing_and_out_treasury ://入库并出库

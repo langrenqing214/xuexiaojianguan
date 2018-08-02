@@ -3,16 +3,16 @@
     android:shape="rectangle" >
 
     <!-- 填充颜色 -->
-    <solid android:color="@color/red_text" >
+    <solid android:color="@color/white" >
     </solid>
 
     <!-- 线的宽度，颜色灰色 -->
     <stroke
-        android:width="0px"
-        android:color="@color/red_text" >
+        android:width="1dp"
+        android:color="@color/bg_blue" >
     </stroke>
 
     <!-- 矩形的圆角半径 -->
-    <corners android:radius="15dp" />
+    <corners android:radius="2dp" />
 
 </shape>

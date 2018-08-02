@@ -31,21 +31,20 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
     @Override
     public void onBindViewHolder(WarningHolder holder, int position) {
         WarningItemBean info = data.get(position);
-        holder.tvCanteenName.setText(info.canteenId);
         switch (info.level){
-            case 0 ://警告
+            case "ALARM" ://警告
                 holder.stateShow.setBackgroundResource(R.drawable.circle_red);
                 break;
-            case 1 ://警戒
+            case "WARN"://警戒
                 holder.stateShow.setBackgroundResource(R.drawable.circle_orange);
                 break;
-            case 2://处理
+            case "COMPLETE"://处理
                 holder.stateShow.setBackgroundResource(R.drawable.circle_green);
                 break;
         }
         holder.tvStateDes.setText(info.configDesc);
-        holder.tvStaffName.setText("人员" + info.dealUserName);
         holder.tvCheckTime.setText(DateUtil.date2NYRSF(DateUtil.string2Date(info.dealDate == null ? "" : info.dealDate , "yyyy-MM-dd")));
+        holder.tvAbnormalTerm.setText(info.remarks);
     }
 
     @Override
@@ -59,21 +58,15 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
 
     class WarningHolder extends RecyclerView.ViewHolder{
 
-        TextView tvCanteenName ;
         View stateShow ;
         TextView tvStateDes ;
-        TextView tvStaffName ;
-        TextView tvStaffState ;
         TextView tvCheckTime ;
         TextView tvAbnormalTerm ;
 
         public WarningHolder(View itemView) {
             super(itemView);
-            tvCanteenName = itemView.findViewById(R.id.tv_canteen_name);
             stateShow = itemView.findViewById(R.id.view_state_show);
             tvStateDes = itemView.findViewById(R.id.tv_state_des);
-            tvStaffName = itemView.findViewById(R.id.tv_staff_name);
-            tvStaffState = itemView.findViewById(R.id.tv_staff_state);
             tvCheckTime = itemView.findViewById(R.id.tv_check_time);
             tvAbnormalTerm = itemView.findViewById(R.id.tv_abnormal_term);
 

@@ -130,7 +130,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.activitys.AddTrialActivity"></activity>
+        <activity android:name=".ui.activitys.AddTrialActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            />
     </application>
 
 </manifest>
