@@ -236,4 +236,96 @@ public class DateUtil {
         return new SimpleDateFormat("MM-dd HH:mm").format(date);
     }
 
+    /**
+     * 转换时间
+     *
+     * @param time
+     * @return
+     */
+    public static String timeToDataTimeString(String time) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.valueOf(time));
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return sDateFormat.format(calendar.getTime());
+
+    }
+
+    public static String timeToDataTime(String time) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.valueOf(time));
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        return sDateFormat.format(calendar.getTime());
+
+    }
+
+    public static String timeToAdviserTimeString(String time) {
+        try {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(Long.valueOf(time));
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            return sDateFormat.format(calendar.getTime());
+        } catch (Exception e) {
+            return time;
+        }
+    }
+
+    public static String timeToSeckillTimeString(String time) {
+        try {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(Long.valueOf(time));
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("MM-dd HH:mm");
+            return sDateFormat.format(calendar.getTime());
+        } catch (Exception e) {
+            return time;
+        }
+    }
+
+    public static String timeToMsgDetailTimeString(String time) {
+        try {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(Long.valueOf(time));
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            return sDateFormat.format(calendar.getTime());
+        } catch (Exception e) {
+            return time;
+        }
+    }
+
+    public static String timeToHourString(String time) {
+        try {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(Long.valueOf(time));
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("HH:mm:ss");
+            return sDateFormat.format(calendar.getTime());
+        } catch (Exception e) {
+            return time;
+        }
+    }
+
+    /**
+     * 转换月日
+     *
+     * @param time
+     * @return
+     */
+    public static String timeToTimeString(String time) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.valueOf(time));
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("MM月dd日");
+        return sDateFormat.format(calendar.getTime());
+    }
+
+    /**
+     * 转换月日
+     *
+     * @param time
+     * @return
+     */
+    public static String timeToTimeString1(String time) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.valueOf(time));
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("MM/dd");
+        return sDateFormat.format(calendar.getTime());
+    }
+
 }

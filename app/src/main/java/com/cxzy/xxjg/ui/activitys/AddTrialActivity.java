@@ -1,6 +1,11 @@
 package com.cxzy.xxjg.ui.activitys;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,12 +18,15 @@ import android.widget.TextView;
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
 import com.cxzy.xxjg.bean.SchoolCanteenBean;
+import com.cxzy.xxjg.bean.TrialListBean;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectTimeDialog;
+import com.cxzy.xxjg.net.Constants;
 import com.cxzy.xxjg.ui.test.presenter.AddTrialPresenterImpl;
 import com.cxzy.xxjg.utils.DateUtil;
+import com.cxzy.xxjg.utils.ScreenUtils;
 import com.cxzy.xxjg.utils.ToastUtil;
 
 import java.io.File;
@@ -55,6 +63,8 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
     private String createDateStart = "";
     private String canteenId = "";
     private String canteenName = "";
+    private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE = 1;
+    private File file;
 
     @Override
     public int getContentLayout() {
@@ -71,9 +81,8 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
 
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
-        setStatusBarColor(ContextCompat.getColor(mContext , R.color.main_style_color));
+        setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
         dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
-
     }
 
     @Override
@@ -83,7 +92,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
 
     @Override
     public void refreshView(Object mData) {
-        ToastUtil.showShort(this , "添加试吃成功");
+        ToastUtil.showShort(this, "添加试吃成功");
     }
 
     @Override
@@ -91,7 +100,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
 
     }
 
-    @OnClick({R.id.back_btn_id , R.id.btn_add_trial , R.id.tv_select_canteen , R.id.tv_trial_time , R.id.iv_add_trial_pic})
+    @OnClick({R.id.back_btn_id, R.id.btn_add_trial, R.id.tv_select_canteen, R.id.tv_trial_time, R.id.iv_add_trial_pic})
     @Override
     public void onViewClicked(View view) {
         super.onViewClicked(view);
@@ -107,42 +116,90 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
                 SelectTimeDialog timeDialog = new SelectTimeDialog(this, this);
                 timeDialog.show();
                 break;
-            case R.id.iv_add_trial_pic ://拍照
-
+            case R.id.iv_add_trial_pic://拍照
+                if (!hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE) || !hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            MY_PERMISSIONS_READ_EXTERNAL_STORAGE);
+                } else {
+                    ScreenUtils.initScreen(this);
+                    Intent intent = new Intent(mContext, PhotoWallActivity.class);
+                    intent.putExtra("isRadio", true);
+                    startActivityForResult(intent, Constants.FLAG_CHOOSE_IMG);
+                }
                 break;
-            case R.id.btn_add_trial ://添加试吃
-                File file = new File("F:\\myLearnMvp\\xuexiaojianguan\\app\\src\\main\\res\\drawable-xhdpi\\camera.png");
+            case R.id.btn_add_trial://添加试吃
                 String foodName = etFoodName.getText().toString().trim();
                 String trialPerson = etTrialPerson.getText().toString().trim();
                 String timeInterval = etTimeInterval.getText().toString().trim();
                 String trialDes = etTrialDes.getText().toString().trim();
-                Map<String , Object> param = new HashMap<>();
-                param.put("canteenId" , canteenId);
-                param.put("foodName" , foodName);
-                param.put("eatPerson" , trialPerson);
-                param.put("eatTime" , createDateStart);
-                param.put("internalTime" , timeInterval);
-                param.put("status" , "NORMAL");
-                param.put("remarks" , trialDes);
-                param.put("eatImage" , file);
+                Map<String, Object> param = new HashMap<>();
+                param.put("canteenId", canteenId);
+                param.put("foodName", foodName);
+                param.put("eatPerson", trialPerson);
+                param.put("eatTime", createDateStart);
+                param.put("internalTime", timeInterval);
+                param.put("status", "NORMAL");
+                param.put("remarks", trialDes);
+                param.put("eatImage", file);
                 mPresenter.saveTrial(param);
                 break;
         }
     }
 
+    private boolean canMakeSmores() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+    }
+
+    private boolean hasPermission(String permission) {
+        if (canMakeSmores()) {
+            return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults) {
+        switch (permsRequestCode) {
+            case MY_PERMISSIONS_READ_EXTERNAL_STORAGE:
+                if (grantResults == null || grantResults.length == 0) {
+                    return;
+                }
+                boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                if (cameraAccepted) {
+                    //授权成功之后，调用系统相机进行拍照操作等
+                    ScreenUtils.initScreen(this);
+                    Intent picintent = new Intent(mContext, PhotoWallActivity.class);
+                    startActivityForResult(picintent, Constants.FLAG_CHOOSE_IMG);
+                } else {
+                    //用户授权拒绝之后，友情提示一下就可以了
+                    if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE) || !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        ToastUtil.showShort(mContext, "权限已拒绝请到设置页面手动开启");
+                    }
+                }
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        file = mPresenter.getPicUrl(requestCode, resultCode, data, ivAddTrialPic);
+    }
+
     @Override
     public void selectCanteenItem(int positon, String canteenName, String canteenId) {
-        this.canteenId = canteenId ;
-        this.canteenName = canteenName ;
+        this.canteenId = canteenId;
+        this.canteenName = canteenName;
         tvSelectCanteen.setText(canteenName);
     }
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         Calendar startcal = Calendar.getInstance();
-        startcal.set(Calendar.YEAR,year);
-        startcal.set(Calendar.MONTH,month);
-        startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+        startcal.set(Calendar.YEAR, year);
+        startcal.set(Calendar.MONTH, month);
+        startcal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         String data = DateUtil.date2MMddWeek(startcal.getTime());
         createDateStart = DateUtil.date2NYR(startcal.getTime());
         tvTrialTime.setText(data);

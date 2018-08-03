@@ -18,8 +18,6 @@ import io.reactivex.disposables.Disposable;
 
 public class HttpUtils {
     public static <T> void invoke(final BaseContract.BaseView mView, Observable<BaseBean<T>> observable) {
-//        Stateful target = null;
-//        target.setState(mView);
         observable.compose(RxSchedulers.<BaseBean<T>>applySchedulers())
                 .compose(mView.<BaseBean<T>>bindToLife())
                 .subscribe(new Observer<BaseBean<T>>() {

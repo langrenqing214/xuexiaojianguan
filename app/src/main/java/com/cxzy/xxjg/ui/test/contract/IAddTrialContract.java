@@ -1,5 +1,8 @@
 package com.cxzy.xxjg.ui.test.contract;
 
+import android.content.Intent;
+import android.widget.ImageView;
+
 import com.cxzy.xxjg.base.BaseContract;
 import com.cxzy.xxjg.ui.test.BasePresenter;
 import com.cxzy.xxjg.ui.test.BaseView;
@@ -22,6 +25,7 @@ public interface IAddTrialContract {
 
     interface Presenter extends BaseContract.BasePresenter<View> {
         void saveTrial(Map<String , Object> param);
+        File getPicUrl(int requestCode, int resultCode, Intent data , ImageView ivPic);
     }
 
     interface Model {

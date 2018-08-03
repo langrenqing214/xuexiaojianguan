@@ -42,31 +42,32 @@ public class RetentionManageAdapter extends RecyclerView.Adapter<RetentionManage
     @Override
     public void onBindViewHolder(RetentionHolder holder, int position) {
         RetentionItemBean info = data.get(position);
-        holder.tvDate.setText(DateUtil.date2Week(DateUtil.string2Date(info.statusTime == null ? "" : info.statusTime , "yyyy-MM-dd HH:mm")));
+//        holder.tvDate.setText(DateUtil.date2Week(DateUtil.string2Date(info.statusTime == null ? "" : info.statusTime , "yyyy-MM-dd HH:mm")));
         holder.tvFoodName.setText(info.foodName);
-        holder.tvRetentionTime.setText("留样时间:" + DateUtil.date2MMddHHmm(DateUtil.string2Date(info.reservedTime == null ? "" : info.reservedTime , "yyyy-MM-dd HH:mm")));
-        Long statusTime = TextUtils.isEmpty(info.statusTime) ? 0 : Long.valueOf(info.statusTime);
+        holder.tvRetentionTime.setText("留样时间:" + DateUtil.timeToSeckillTimeString(info.reservedTime == null ? "" : info.reservedTime ));
+        holder.tvRetentionPerson.setText("留样人:" + info.reservedPerson);
+        Long statusTime = TextUtils.isEmpty(info.reservedTime) ? 0 : Long.valueOf(info.reservedTime);
         Long expiryTime = TextUtils.isEmpty(info.expiryTime) ? 0 : Long.valueOf(info.expiryTime);
-        if (statusTime - expiryTime > 0){//正常
+        if (statusTime - expiryTime >= 0){//正常
             holder.tvFoodState.setText("正常");
             holder.tvFoodState.setTextColor(ContextCompat.getColor(mContext , R.color.green_text));
-            holder.tvRetentionTime.setText("到期时间:" + DateUtil.date2MMddHHmm(DateUtil.string2Date(info.expiryTime == null ? "" : info.expiryTime , "yyyy-MM-dd HH:mm")));
-            holder.tvRetentionTime.setTextColor(ContextCompat.getColor(mContext , R.color.green_text));
+            holder.tvExpiryTime.setText("到期时间:" + DateUtil.timeToSeckillTimeString(info.expiryTime == null ? "" : info.expiryTime ));
+            holder.tvExpiryTime.setTextColor(ContextCompat.getColor(mContext , R.color.green_text));
         }else if (statusTime - expiryTime < 0){
             holder.tvFoodState.setText("已过期");
             holder.tvFoodState.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
-            holder.tvRetentionTime.setText("到期时间:" + DateUtil.date2MMddHHmm(DateUtil.string2Date(info.expiryTime == null ? "" : info.expiryTime , "yyyy-MM-dd HH:mm")));
-            holder.tvRetentionTime.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
-            holder.tvRetentionPerson.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
+            holder.tvExpiryTime.setText("到期时间:" + DateUtil.timeToSeckillTimeString(info.expiryTime == null ? "" : info.expiryTime));
+            holder.tvExpiryTime.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
+            holder.tvHandleState.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
         }
 
         if (info.status == 0){//未处理
-            holder.tvRetentionPerson.setText("未处理");
-            holder.tvRetentionPerson.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
+            holder.tvHandleState.setText("未处理");
+            holder.tvHandleState.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
             holder.btnIsHandle.setVisibility(View.VISIBLE);
         }else {
-            holder.tvRetentionPerson.setText("留样人:" + info.reservedPerson);
-            holder.tvRetentionPerson.setTextColor(ContextCompat.getColor(mContext , R.color.text_gray_color));
+            holder.tvHandleState.setText("留样人:" + info.reservedPerson);
+            holder.tvHandleState.setTextColor(ContextCompat.getColor(mContext , R.color.text_gray_color));
             holder.btnIsHandle.setVisibility(View.GONE);
         }
     }
@@ -77,12 +78,13 @@ public class RetentionManageAdapter extends RecyclerView.Adapter<RetentionManage
     }
 
     public void setData(List<RetentionItemBean> list) {
+        this.data.clear();
         this.data = list ;
     }
 
     class RetentionHolder extends RecyclerView.ViewHolder {
 
-        TextView tvDate ;
+//        TextView tvDate ;
         TextView tvFoodName ;
         TextView tvFoodState ;
         TextView tvRetentionTime ;
@@ -94,7 +96,7 @@ public class RetentionManageAdapter extends RecyclerView.Adapter<RetentionManage
 
         public RetentionHolder(View itemView) {
             super(itemView);
-            tvDate = itemView.findViewById(R.id.tv_retention_date);
+//            tvDate = itemView.findViewById(R.id.tv_retention_date);
             tvFoodName = itemView.findViewById(R.id.tv_food_name);
             tvFoodState = itemView.findViewById(R.id.tv_food_state);
             tvRetentionTime = itemView.findViewById(R.id.tv_retention_time);

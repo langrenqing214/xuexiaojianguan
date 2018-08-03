@@ -277,6 +277,7 @@
                     android:background="@drawable/bg_white_gray_line_box"
                     android:gravity="center_vertical"
                     android:paddingLeft="5dp"
+                    android:scaleType="centerCrop"
                     android:textColor="@color/text_gray_color"
                     android:textSize="14dp" />
 

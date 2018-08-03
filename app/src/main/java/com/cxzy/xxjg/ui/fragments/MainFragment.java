@@ -37,7 +37,6 @@ import com.cxzy.xxjg.ui.test.presenter.MainFragmentContractPresenterImpl;
 import com.cxzy.xxjg.utils.SharedPreferencesUtils;
 import com.cxzy.xxjg.utils.ToastUtil;
 import com.google.zxing.integration.android.IntentIntegrator;
-import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -95,12 +94,11 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
 
     @OnClick({R.id.button_test, R.id.iv_to_zxing , R.id.cv_listorical_warning , R.id.cv_regulatory_information , R.id.cv_video , R.id.cv_menu ,
             R.id.cv_purchase , R.id.cv_health_examination , R.id.cv_retention_manage , R.id.cv_trial_management , R.id.ll_my_canteen ,
-            R.id.ll_exit_login})
+            R.id.ll_exit_login , R.id.tv_alarm , R.id.tv_warning , R.id.tv_deal})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button_test:
                 dlMyMain.openDrawer(Gravity.LEFT);
-//                startActivity(new Intent(mContext, TestActivity.class));
                 break;
             case R.id.iv_to_zxing:
                 new IntentIntegrator(_mActivity)
@@ -148,10 +146,25 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
                 startActivity(trialIntent);
                 break;
             case R.id.ll_my_canteen://我的食堂
-                startActivity(new Intent(mContext , MyCanteenActivity.class));
+//                startActivity(new Intent(mContext , MyCanteenActivity.class));
                 break;
             case R.id.ll_exit_login://退出登录
                 exitdialog();
+                break;
+            case R.id.tv_alarm ://警告
+                Intent alarmIntent = new Intent(mContext , ListoricalWarningActivity.class);
+                alarmIntent.putExtra("canteenList" , bean.canteenList);
+                startActivity(alarmIntent);
+                break;
+            case R.id.tv_warning ://告警
+                Intent warningIntent1 = new Intent(mContext , ListoricalWarningActivity.class);
+                warningIntent1.putExtra("canteenList" , bean.canteenList);
+                startActivity(warningIntent1);
+                break;
+            case R.id.tv_deal ://已处理
+                Intent dealIntent = new Intent(mContext , ListoricalWarningActivity.class);
+                dealIntent.putExtra("canteenList" , bean.canteenList);
+                startActivity(dealIntent);
                 break;
         }
     }

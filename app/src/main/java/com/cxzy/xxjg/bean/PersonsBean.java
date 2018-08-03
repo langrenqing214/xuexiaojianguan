@@ -11,4 +11,14 @@ public class PersonsBean implements Serializable {
     public String personId ;// 人员ID ,
     public String personName ;// 人员名称 ,
     public String personState ;// 人员状态（正常：NORMAL，异常：ERROR）
+
+    @Override
+    public String toString() {
+        return "PersonsBean{" +
+                "canteenId='" + canteenId + '\'' +
+                ", personId='" + personId + '\'' +
+                ", personName='" + personName + '\'' +
+                ", personState='" + personState + '\'' +
+                '}';
+    }
 }

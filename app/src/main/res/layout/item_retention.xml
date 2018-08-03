@@ -12,8 +12,8 @@
         android:background="@color/main_line_color"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:text="周一"
         android:textColor="@color/text_gray_color"
+        android:visibility="gone"
         android:textSize="12dp" />
 
     <LinearLayout

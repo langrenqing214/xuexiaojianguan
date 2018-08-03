@@ -1,7 +1,9 @@
 package com.cxzy.xxjg.ui.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +30,11 @@ import java.util.List;
 public class TrialManagementAdapter extends RecyclerView.Adapter<TrialManagementAdapter.TrialHolder> {
     private List<TrialListBean> data = new ArrayList<>();
     private Context mContext ;
+    private DealTrialListener mListener ;
 
-    public TrialManagementAdapter(Context mContext){
+    public TrialManagementAdapter(Context mContext , DealTrialListener mListener){
         this.mContext = mContext ;
+        this.mListener = mListener ;
     }
 
     @Override
@@ -41,11 +45,37 @@ public class TrialManagementAdapter extends RecyclerView.Adapter<TrialManagement
 
     @Override
     public void onBindViewHolder(TrialHolder holder, int position) {
-        TrialListBean info = data.get(position);
+        final TrialListBean info = data.get(position);
         holder.tvFoodName.setText(info.foodName);
         holder.tvTrialPerson.setText("试吃人:" + info.eatPerson);
-        holder.tvTrialTime.setText("试吃时间:" + DateUtil.date2NYRSF(DateUtil.string2Date(info.createDate, "yyyy-MM-dd HH:mm")));
+        holder.tvTrialTime.setText("试吃时间:" + DateUtil.timeToAdviserTimeString(info.eatTime));
+        holder.tvTrialDes.setText(info.remarks);
         ImageLoaderUtil.LoadImage(mContext , info.eatImage == null ? "" : info.eatImage , holder.ivFood);
+        if (TextUtils.isEmpty(info.status)){//未出结果
+            holder.tvTrialState.setText("未出结果");
+            holder.tvTrialState.setTextColor(ContextCompat.getColor(mContext , R.color.green_text));
+            holder.tvReactionTime.setVisibility(View.GONE);
+            holder.btnTrial.setVisibility(View.VISIBLE);
+        }else if ("NORMAL".equals(info.status)){//正常
+            holder.tvTrialState.setText("正常");
+            holder.tvTrialState.setTextColor(ContextCompat.getColor(mContext , R.color.green_text));
+            holder.tvReactionTime.setVisibility(View.VISIBLE);
+            holder.btnTrial.setVisibility(View.GONE);
+            holder.tvReactionTime.setText("反应时间:" + DateUtil.timeToAdviserTimeString(info.statusTime));
+        }else {//不正常
+            holder.tvTrialState.setText("异常");
+            holder.tvTrialState.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
+            holder.tvReactionTime.setVisibility(View.VISIBLE);
+            holder.btnTrial.setVisibility(View.GONE);
+            holder.tvReactionTime.setText("反应时间:" + DateUtil.timeToAdviserTimeString(info.statusTime));
+        }
+
+        holder.btnTrial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.dealTrialListener(info);
+            }
+        });
     }
 
     @Override
@@ -55,6 +85,10 @@ public class TrialManagementAdapter extends RecyclerView.Adapter<TrialManagement
 
     public void setData(List<TrialListBean> data) {
         this.data = data;
+    }
+
+    public interface DealTrialListener {
+        void dealTrialListener(TrialListBean info);
     }
 
     class TrialHolder extends RecyclerView.ViewHolder {

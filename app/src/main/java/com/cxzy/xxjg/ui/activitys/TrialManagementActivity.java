@@ -15,8 +15,10 @@ import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
 import com.cxzy.xxjg.bean.SchoolCanteenBean;
 import com.cxzy.xxjg.bean.TrialBean;
+import com.cxzy.xxjg.bean.TrialListBean;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
+import com.cxzy.xxjg.dialog.DealTrialDialog;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.ui.adapter.TrialManagementAdapter;
@@ -26,6 +28,8 @@ import com.cxzy.xxjg.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,7 +37,7 @@ import butterknife.OnClick;
 /**
  * 试吃管理
  */
-public class TrialManagementActivity extends BaseActivity<TrialManagementPresenterImpl> implements DatePickerDialog.OnDateSetListener, SelectCanteenDialog.SelectCanteenItemListener {
+public class TrialManagementActivity extends BaseActivity<TrialManagementPresenterImpl> implements DatePickerDialog.OnDateSetListener, SelectCanteenDialog.SelectCanteenItemListener, TrialManagementAdapter.DealTrialListener, DealTrialDialog.SubmitDealTrialListener {
 
     @BindView(R.id.rv_trial_management)
     RecyclerView rvTrial ;
@@ -84,7 +88,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
         mPresenter.getTrialList(page , canteenId , createDateStart , createDateEnd , pageSize);
 
         rvTrial.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new TrialManagementAdapter(mContext);
+        mAdapter = new TrialManagementAdapter(mContext , this);
         rvTrial.setAdapter(mAdapter);
     }
 
@@ -95,9 +99,11 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
 
     @Override
     public void refreshView(Object mData) {
-        TrialBean bean = (TrialBean) mData;
-        mAdapter.setData(bean.list);
-        mAdapter.notifyDataSetChanged();
+        if (mData != null) {
+            TrialBean bean = (TrialBean) mData;
+            mAdapter.setData(bean.list);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -156,5 +162,23 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
         this.canteenId = canteenId ;
         tvCanteenShow.setText(canteenName);
         mPresenter.getTrialList(page , canteenId , createDateStart , createDateEnd , pageSize);
+    }
+
+    @Override
+    public void dealTrialListener(TrialListBean info) {
+        DealTrialDialog dialog = new DealTrialDialog(this ,info , this);
+        dialog.show();
+    }
+
+    @Override
+    public void submitTrialListener(String intervalTime,String status , String statusTime, String remarks , TrialListBean info) {
+        Map<String , Object> param = new HashMap<>();
+        param.put("canteenId", canteenId);
+        param.put("id", info.id);
+        param.put("statusTime", statusTime);
+        param.put("internalTime", intervalTime);
+        param.put("status", status);
+        param.put("remarks", remarks);
+        mPresenter.dealTrialItem(param);
     }
 }

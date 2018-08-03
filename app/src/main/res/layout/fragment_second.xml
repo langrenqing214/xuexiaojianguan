@@ -2,7 +2,7 @@
     android:id="@+id/dl_my_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_style_color">
+    android:background="@color/main_toobar_color">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,7 +47,7 @@
         <LinearLayout
             android:id="@+id/ll_my_canteen"
             android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_marginLeft="20dp"
@@ -63,13 +63,14 @@
                 >
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:background="@drawable/icon_my_canteen"
                     />
 
                 <TextView
                     style="@style/main_text_style"
+                    android:layout_marginTop="5dp"
                     android:text="我的食堂"
                     />
 
@@ -129,7 +130,7 @@
                     <android.support.v7.widget.CardView
                         android:id="@+id/cv_listorical_warning"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1">
@@ -142,12 +143,13 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:background="@drawable/icon_listorical_warning" />
 
                             <TextView
                                 style="@style/main_text_style"
+                                android:layout_marginTop="5dp"
                                 android:text="历史警告" />
 
                         </LinearLayout>
@@ -157,7 +159,7 @@
                     <android.support.v7.widget.CardView
                         android:id="@+id/cv_regulatory_information"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1">
@@ -170,12 +172,13 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:background="@drawable/icon_regulatory_information" />
 
                             <TextView
                                 style="@style/main_text_style"
+                                android:layout_marginTop="5dp"
                                 android:text="监管信息" />
 
                         </LinearLayout>
@@ -193,7 +196,7 @@
                     <android.support.v7.widget.CardView
                         android:id="@+id/cv_video"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1">
@@ -206,12 +209,13 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:background="@drawable/icon_video" />
 
                             <TextView
                                 style="@style/main_text_style"
+                                android:layout_marginTop="5dp"
                                 android:text="视频" />
 
                         </LinearLayout>
@@ -221,7 +225,7 @@
                     <android.support.v7.widget.CardView
                         android:id="@+id/cv_menu"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1">
@@ -234,12 +238,13 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:background="@drawable/icon_my_menu" />
 
                             <TextView
                                 style="@style/main_text_style"
+                                android:layout_marginTop="5dp"
                                 android:text="菜谱" />
 
                         </LinearLayout>
@@ -257,7 +262,7 @@
                     <android.support.v7.widget.CardView
                         android:id="@+id/cv_purchase"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1">
@@ -270,12 +275,13 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:background="@drawable/icon_purchase" />
 
                             <TextView
                                 style="@style/main_text_style"
+                                android:layout_marginTop="5dp"
                                 android:text="采购" />
 
                         </LinearLayout>
@@ -285,7 +291,7 @@
                     <android.support.v7.widget.CardView
                         android:id="@+id/cv_health_examination"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1">
@@ -298,12 +304,13 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:background="@drawable/icon_health_examination" />
 
                             <TextView
                                 style="@style/main_text_style"
+                                android:layout_marginTop="5dp"
                                 android:text="卫生检查" />
 
                         </LinearLayout>
@@ -321,7 +328,7 @@
                     <android.support.v7.widget.CardView
                         android:id="@+id/cv_retention_manage"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
@@ -335,12 +342,13 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:background="@drawable/icon_retention_manage" />
 
                             <TextView
                                 style="@style/main_text_style"
+                                android:layout_marginTop="5dp"
                                 android:text="留样管理" />
 
                         </LinearLayout>
@@ -350,7 +358,7 @@
                     <android.support.v7.widget.CardView
                         android:id="@+id/cv_trial_management"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1">
@@ -363,12 +371,13 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:background="@drawable/icon_trial_management" />
 
                             <TextView
                                 style="@style/main_text_style"
+                                android:layout_marginTop="5dp"
                                 android:text="试吃管理" />
 
                         </LinearLayout>

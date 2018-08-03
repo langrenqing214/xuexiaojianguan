@@ -1,10 +1,12 @@
 package com.cxzy.xxjg.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by demo on 2018/7/30.
  */
 
-public class TrialListBean {
+public class TrialListBean implements Serializable {
     public String canteenId ;// 食堂ID ,
     public String createDate ;//
     public String createUserId ;//
@@ -18,7 +20,7 @@ public class TrialListBean {
     public String internalTime ;// 间隔时间 ,
     public String remarks ;//
     public String searchKeys ;//
-    public int status ;// 试吃反应 ,
+    public String status ;// 试吃反应 ,
     public String statusTime ;// 反应时间 ,
     public String updateDate ;//
     public String updateUserId ;//

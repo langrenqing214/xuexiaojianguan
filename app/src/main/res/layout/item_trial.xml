@@ -13,6 +13,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:text="周一"
+        android:visibility="gone"
         android:textColor="@color/text_gray_color"
         android:textSize="12dp" />
 
@@ -36,7 +37,6 @@
             android:id="@+id/tv_food_name"
             style="@style/main_text_style"
             android:layout_toRightOf="@id/iv_food"
-            android:text="土豆烧牛肉"
             android:textSize="14dp" />
 
         <TextView
@@ -57,7 +57,6 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/iv_food"
-            android:text="还未出结果，间隔时间未到案发时发生发的萨芬"
             android:textColor="@color/text_gray_color"
             android:textSize="12dp" />
 

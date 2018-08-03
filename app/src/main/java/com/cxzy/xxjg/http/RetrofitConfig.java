@@ -52,9 +52,6 @@ public class RetrofitConfig {
                 Log.e(TAG, "no network");
             }
             Response originalResponse = chain.proceed(request);
-            Log.e("haha" , SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "app_token" , "").toString());
-            Headers headers = request.headers();
-            Log.e("haha" , "header == " + headers.toString());
             if (NetUtil.isNetworkAvailable(MyApp.appComponent.getContext())) {
                 //有网的时候读接口上的@Headers里的配置，你可以在这里进行统一的设置
                 String cacheControl = request.cacheControl().toString();
@@ -63,7 +60,7 @@ public class RetrofitConfig {
                         .build();
             } else {
                 return originalResponse.newBuilder()
-                        .addHeader("Cache-Control", "public, " + CACHE_CONTROL_CACHE)
+//                        .addHeader("Cache-Control", "public, " + CACHE_CONTROL_CACHE)
                         .removeHeader("Pragma")
                         .build();
             }

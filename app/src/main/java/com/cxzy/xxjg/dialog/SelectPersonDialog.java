@@ -28,6 +28,7 @@ public class SelectPersonDialog extends Dialog {
     private SelectPersonAdapter mApapter;
     private SelectPersonClickLister clickLister ;
     private List<PersonsBean> data = new ArrayList<>();
+    private List<PersonsBean> needReturn = new ArrayList<>();
     private Button btnoK;
     private int type ; // 0通过  1未通过
     private PersonsBean bean = new PersonsBean();
@@ -56,17 +57,21 @@ public class SelectPersonDialog extends Dialog {
                     }else {
                         data.get(i).personState = "ERROR" ;
                     }
+                    needReturn.add(data.get(i));
                 }else {
                     data.get(i).personState = "";
+                    needReturn.remove(data.get(i));
                 }
                 bean = data.get(i);
+                mApapter.notifyDataSetChanged();
             }
         });
 
         btnoK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickLister.selectItemPerson(bean);
+                clickLister.selectItemPerson(needReturn);
+                dismiss();
             }
         });
     }
@@ -82,6 +87,6 @@ public class SelectPersonDialog extends Dialog {
     }
 
     public interface SelectPersonClickLister{
-        void selectItemPerson(PersonsBean info);
+        void selectItemPerson(List<PersonsBean> infoList);
     }
 }
