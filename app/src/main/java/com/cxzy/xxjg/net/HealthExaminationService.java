@@ -29,8 +29,8 @@ public interface HealthExaminationService {
 
     //提交晨检
     @FormUrlEncoded
-    @GET("api/check/saveMorningCheck")
-    Observable<BaseBean<Object>> saveMorningCheck(@QueryMap() Map<String , Object> param);
+    @POST("api/check/saveMorningCheck")
+    Observable<BaseBean<Object>> saveMorningCheck(@FieldMap() Map<String , Object> param);
 
     //提交环境检查
     @GET("api/check/saveEnvCheck")
