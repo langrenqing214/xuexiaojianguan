@@ -32,8 +32,8 @@ public class HealthExaminationApi {
         return mService.getHealthCheck(canteenId);
     }
 
-    public Observable<BaseBean<Object>> saveMorningCheck(List<PersonsBean> persons , List<File> files){
-        return mService.saveMorningCheck(persons , files);
+    public Observable<BaseBean<Object>> saveMorningCheck(Map<String , Object> param){
+        return mService.saveMorningCheck(param);
     }
 
     public Observable<BaseBean<Object>> saveEnvCheck( String canteenId ,String state){

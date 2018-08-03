@@ -30,8 +30,8 @@ public class HealthExaminationPresenterImpl extends BasePresenter<IHealthExamina
     }
 
     @Override
-    public void saveMorningCheck(List<PersonsBean> persons , List<File> files) {
-        invoke(api.saveMorningCheck(persons , files));
+    public void saveMorningCheck(Map<String , Object> param) {
+        invoke(api.saveMorningCheck(param));
     }
 
     @Override

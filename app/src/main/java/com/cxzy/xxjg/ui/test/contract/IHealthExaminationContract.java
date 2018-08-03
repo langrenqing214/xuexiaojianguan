@@ -21,7 +21,7 @@ public interface IHealthExaminationContract {
 
     interface Presenter extends BaseContract.BasePresenter<View> {
         void getHealthCheck(String canteenId);
-        void saveMorningCheck(List<PersonsBean> persons , List<File> files);
+        void saveMorningCheck(Map<String , Object> param);
         void saveEnvCheck( String canteenId ,String state);
     }
 
