@@ -1,5 +1,11 @@
 package com.cxzy.xxjg.ui.activitys;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.annotation.IdRes;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -20,9 +26,12 @@ import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectPersonDialog;
+import com.cxzy.xxjg.net.Constants;
 import com.cxzy.xxjg.ui.adapter.CheckItemsAdapter;
 import com.cxzy.xxjg.ui.adapter.PersonLabelAdapter;
 import com.cxzy.xxjg.ui.test.presenter.HealthExaminationPresenterImpl;
+import com.cxzy.xxjg.utils.ScreenUtils;
+import com.cxzy.xxjg.utils.ToastUtil;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
@@ -77,6 +86,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     private List<PersonsBean> allList = new ArrayList<>();
     private String typeId = "";
     private String envState = "";
+    private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE = 1;
 
 
     @Override
@@ -97,11 +107,11 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
         setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
         dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
         canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id;
+        mPresenter.getHealthCheck(canteenId);
         String canteenName = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name;
         tvTitle.setText(canteenName);
         rgCheck.setOnCheckedChangeListener(this);
         rgEnvCheck.setOnCheckedChangeListener(this);
-        mPresenter.getHealthCheck(canteenId);
         mAdapter = new CheckItemsAdapter(this, itemList);
         lvCheckItems.setAdapter(mAdapter);
     }
@@ -113,10 +123,12 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
 
     @Override
     public void refreshView(Object mData) {
-        bean = (HealthExaminationBean) mData;
         rgCheck.check(R.id.rb_morning_check);
-        personBean.clear();
-        personBean.addAll(bean.persons);
+        if (mData != null) {
+            bean = (HealthExaminationBean) mData;
+            personBean.clear();
+            personBean.addAll(bean.persons);
+        }
     }
 
     @Override
@@ -124,7 +136,8 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
 
     }
 
-    @OnClick({R.id.back_btn_id, R.id.ll_select_canteen, R.id.btn_add_through_person, R.id.btn_save_morningcheck, R.id.btn_add_no_through_person, R.id.btn_save_environmental_check})
+    @OnClick({R.id.back_btn_id, R.id.ll_select_canteen, R.id.btn_add_through_person, R.id.btn_save_morningcheck, R.id.btn_add_no_through_person, R.id.btn_save_environmental_check ,
+                R.id.tv_positive_pic , R.id.tv_opposite_pic , R.id.tv_positive_pic_one , R.id.tv_opposite_pic_one})
     @Override
     public void onViewClicked(View view) {
         super.onViewClicked(view);
@@ -149,14 +162,18 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 }
                 Map<String, Object> param = new HashMap<>();
                 param.put("persons", personList);
-                param.put("files", fileList);
-                param.put("canteenId", canteenId);
-                param.put("typeId", typeId);
+//                param.put("files", fileList);
+//                param.put("canteenId", canteenId);
+//                param.put("typeId", typeId);
 
                 mPresenter.saveMorningCheck(param);
                 break;
             case R.id.btn_save_environmental_check://提交环境检查
-                mPresenter.saveEnvCheck(canteenId , envState);
+                Map<String , Object> envParam = new HashMap<>();
+                envParam.put("canteenId" ,canteenId);
+                envParam.put("state" , envState);
+                envParam.put("typeId" , typeId);
+                mPresenter.saveEnvCheck(envParam);
                 break;
             case R.id.btn_add_through_person://添加检查通过
                 SelectPersonDialog dialog = new SelectPersonDialog(this, 0, personBean, new SelectPersonDialog.SelectPersonClickLister() {
@@ -201,13 +218,67 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                         rvNoThroughPerson.setLayoutManager(manager);
                         PersonLabelAdapter adapter = new PersonLabelAdapter(noThroughPerson, HealthExaminationActivity.this);
                         rvNoThroughPerson.setAdapter(adapter);
-//                        adapter.notifyDataSetChanged();
                     }
                 });
                 dialog1.show();
                 break;
+            case R.id.tv_positive_pic ://正面照片
+                if (!hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE) || !hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            MY_PERMISSIONS_READ_EXTERNAL_STORAGE);
+                } else {
+                    ScreenUtils.initScreen(this);
+                    Intent intent = new Intent(mContext, PhotoWallActivity.class);
+                    intent.putExtra("isRadio", true);
+                    startActivityForResult(intent, Constants.FLAG_CHOOSE_IMG);
+                }
+                break;
+            case  R.id.tv_opposite_pic ://反面
+
+                break;
+            case R.id.tv_positive_pic_one ://正面照片2
+
+                break;
+            case R.id.tv_opposite_pic_one ://反面
+
+                break;
         }
 
+    }
+
+    private boolean canMakeSmores() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+    }
+
+    private boolean hasPermission(String permission) {
+        if (canMakeSmores()) {
+            return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults) {
+        switch (permsRequestCode) {
+            case MY_PERMISSIONS_READ_EXTERNAL_STORAGE:
+                if (grantResults == null || grantResults.length == 0) {
+                    return;
+                }
+                boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                if (cameraAccepted) {
+                    //授权成功之后，调用系统相机进行拍照操作等
+                    ScreenUtils.initScreen(this);
+                    Intent picintent = new Intent(mContext, PhotoWallActivity.class);
+                    startActivityForResult(picintent, Constants.FLAG_CHOOSE_IMG);
+                } else {
+                    //用户授权拒绝之后，友情提示一下就可以了
+                    if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE) || !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        ToastUtil.showShort(mContext, "权限已拒绝请到设置页面手动开启");
+                    }
+                }
+                break;
+        }
     }
 
     @Override
@@ -221,16 +292,19 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
         switch (i){
             case R.id.rb_morning_check ://晨检
-                llMorningCheck.setVisibility(View.VISIBLE);
-                llEnvironmentalCheck.setVisibility(View.GONE);
-                tvCheckName.setText(bean.types.get(0).typeName);
-                tvCheckDes.setText(bean.types.get(0).typeDesc);
-                itemList.clear();
-                itemList.addAll(bean.types.get(0).items);
-                mAdapter.notifyDataSetChanged();
-                typeId = bean.types.get(0).typeId;
+                try {
+                    llMorningCheck.setVisibility(View.VISIBLE);
+                    llEnvironmentalCheck.setVisibility(View.GONE);
+                    tvCheckName.setText(bean.types.get(0).typeName);
+                    tvCheckDes.setText(bean.types.get(0).typeDesc);
+                    itemList.clear();
+                    itemList.addAll(bean.types.get(0).items);
+                    mAdapter.notifyDataSetChanged();
+                    typeId = bean.types.get(0).typeId;
+                }catch (Exception e){}
                 break;
             case R.id.rb_environmental_check ://环境检查
+                try {
                 llMorningCheck.setVisibility(View.GONE);
                 llEnvironmentalCheck.setVisibility(View.VISIBLE);
                 tvCheckName.setText(bean.types.get(1).typeName);
@@ -239,6 +313,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 itemList.addAll(bean.types.get(1).items);
                 mAdapter.notifyDataSetChanged();
                 typeId = bean.types.get(1).typeId;
+                }catch (Exception e){}
                 break;
             case R.id.rb_normal ://正常
                 envState = "NORMAL";
@@ -247,24 +322,11 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 envState = "ERROR";
                 break;
         }
-       /* if (i == R.id.rb_morning_check) {//晨检
-            llMorningCheck.setVisibility(View.VISIBLE);
-            llEnvironmentalCheck.setVisibility(View.GONE);
-            tvCheckName.setText(bean.types.get(0).typeName);
-            tvCheckDes.setText(bean.types.get(0).typeDesc);
-            itemList.clear();
-            itemList.addAll(bean.types.get(0).items);
-            mAdapter.notifyDataSetChanged();
-            typeId = bean.types.get(0).typeId;
-        } else {//环境卫生
-            llMorningCheck.setVisibility(View.GONE);
-            llEnvironmentalCheck.setVisibility(View.VISIBLE);
-            tvCheckName.setText(bean.types.get(1).typeName);
-            tvCheckDes.setText(bean.types.get(1).typeDesc);
-            itemList.clear();
-            itemList.addAll(bean.types.get(1).items);
-            mAdapter.notifyDataSetChanged();
-            typeId = bean.types.get(1).typeId;
-        }*/
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }

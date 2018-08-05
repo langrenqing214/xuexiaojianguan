@@ -22,7 +22,7 @@ public interface IHealthExaminationContract {
     interface Presenter extends BaseContract.BasePresenter<View> {
         void getHealthCheck(String canteenId);
         void saveMorningCheck(Map<String , Object> param);
-        void saveEnvCheck( String canteenId ,String state);
+        void saveEnvCheck(Map<String , Object> param);
     }
 
     interface Model {

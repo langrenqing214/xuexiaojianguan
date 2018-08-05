@@ -192,11 +192,42 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
                 param.put("purchasePerson" , purchaser);
                 param.put("manufactureDate" , manufactureDate);
                 param.put("qualityGuaranteeDate" , shelfLife);
-                param.put("qualityGuaranteeEndDate" , suppliers);
+                param.put("qualityGuaranteeEndDate" , shelfLifeEnd);
+                param.put("suppliers" , suppliers);
+                param.put("flag" , 1);
                 param.put("files" , fileList);
                 mPresenter.savePurchase(param);
                 break;
             case R.id.btn_warehousing_and_out_treasury ://入库并出库
+                String foodName1= etFoodName.getText().toString().trim();
+                String foodStyle1 = etFoodStyle.getText().toString().trim();
+                String foodPrice1 = etFoodPrice.getText().toString().trim();
+                String foodWeight1 = etFoodWeight.getText().toString().trim();
+                String purchaser1 = etPurchaser.getText().toString().trim();
+                String manufactureDate1 = etManufactureDate.getText().toString().trim();
+                String shelfLife1 = etShelfLife.getText().toString().trim();
+                String shelfLifeEnd1 = etShelfLifeEnd.getText().toString().trim();
+                String suppliers1 = etSuppliers.getText().toString().trim();
+
+                List<File> fileList1 = new ArrayList<>();
+                for (String str :picList) {
+                    File folder = new File(str);
+                    fileList1.add(folder);
+                }
+
+                Map<String , Object> param1 = new HashMap<>();
+                param1.put("name" , foodName1);
+                param1.put("type" , foodStyle1);
+                param1.put("price" , foodPrice1);
+                param1.put("weight" , foodWeight1);
+                param1.put("purchasePerson" , purchaser1);
+                param1.put("manufactureDate" , manufactureDate1);
+                param1.put("qualityGuaranteeDate" , shelfLife1);
+                param1.put("qualityGuaranteeEndDate" , shelfLifeEnd1);
+                param1.put("suppliers" , suppliers1);
+                param1.put("flag" , 2);
+                param1.put("files" , fileList1);
+                mPresenter.savePurchase(param1);
                 break;
         }
     }

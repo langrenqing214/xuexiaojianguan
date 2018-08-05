@@ -5,6 +5,8 @@ import com.cxzy.xxjg.presenter.BasePresenter;
 import com.cxzy.xxjg.ui.test.contract.IWarningContract;
 import com.cxzy.xxjg.ui.test.model.WarningModelImpl;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 /**
@@ -21,7 +23,12 @@ public class WarningPresenterImpl extends BasePresenter<IWarningContract.View> i
     }
 
     @Override
-    public void getWarningList(String canteenId, String createDateStart, String createDateEnd, int pageNumber, int pageSize) {
-        invoke(api.getWarningList(canteenId , createDateStart , createDateEnd , pageNumber , pageSize));
+    public void getWarningList(String level , String canteenId, String createDateStart, String createDateEnd, int pageNumber, int pageSize) {
+        invoke(api.getWarningList(level , canteenId , createDateStart , createDateEnd , pageNumber , pageSize));
+    }
+
+    @Override
+    public void dealWarning(Map<String, Object> param) {
+        invoke(api.dealWarning(param));
     }
 }

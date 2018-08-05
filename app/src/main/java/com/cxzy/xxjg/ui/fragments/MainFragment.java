@@ -154,16 +154,19 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
             case R.id.tv_alarm ://警告
                 Intent alarmIntent = new Intent(mContext , ListoricalWarningActivity.class);
                 alarmIntent.putExtra("canteenList" , bean.canteenList);
+                alarmIntent.putExtra("level" , "ALARM");
                 startActivity(alarmIntent);
                 break;
             case R.id.tv_warning ://告警
                 Intent warningIntent1 = new Intent(mContext , ListoricalWarningActivity.class);
                 warningIntent1.putExtra("canteenList" , bean.canteenList);
+                warningIntent1.putExtra("level" , "WARN");
                 startActivity(warningIntent1);
                 break;
             case R.id.tv_deal ://已处理
                 Intent dealIntent = new Intent(mContext , ListoricalWarningActivity.class);
                 dealIntent.putExtra("canteenList" , bean.canteenList);
+                dealIntent.putExtra("level" , "COMPLETE");
                 startActivity(dealIntent);
                 break;
         }

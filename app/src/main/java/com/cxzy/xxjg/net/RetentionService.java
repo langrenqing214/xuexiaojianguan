@@ -13,7 +13,7 @@ import retrofit2.http.Query;
  */
 
 public interface RetentionService {
-    @GET("foodReserved/list")
+    @GET("api/foodReserved/list")
     Observable<BaseBean<RetentionBean>> getRetentionList(@Query("canteenId") String canteenId ,
                                                          @Query("eatTimeStart") String eatTimeStart ,
                                                          @Query("eatTimeEnd") String eatTimeEnd ,

@@ -35,7 +35,7 @@ public class HealthExaminationPresenterImpl extends BasePresenter<IHealthExamina
     }
 
     @Override
-    public void saveEnvCheck(String canteenId, String state) {
-        invoke(api.saveEnvCheck(canteenId , state));
+    public void saveEnvCheck(Map<String , Object> param) {
+        invoke(api.saveEnvCheck(param));
     }
 }

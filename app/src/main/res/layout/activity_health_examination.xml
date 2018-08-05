@@ -48,12 +48,12 @@
             android:id="@+id/ll_select_canteen"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:gravity="center"
             android:layout_centerInParent="true"
             android:background="@drawable/btn_white_box"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:orientation="horizontal">
+            android:paddingRight="10dp">
 
             <TextView
                 android:id="@+id/main_title_id"
@@ -67,8 +67,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/icon_down"
-                />
+                android:background="@drawable/icon_down" />
 
         </LinearLayout>
 
@@ -155,10 +154,10 @@
                 android:id="@+id/lv_check_items"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:background="@color/white90"
                 android:paddingLeft="22dp"
                 android:paddingRight="20dp"
-                android:scrollbars="none"
-                android:background="@color/white90"></ListView>
+                android:scrollbars="none"></ListView>
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -166,8 +165,8 @@
 
                 <include layout="@layout/layout_morning_check" />
 
-                <include
-                    layout="@layout/layout_environmental_check"/>
+                <include layout="@layout/layout_environmental_check"
+                    android:visibility="gone"/>
 
             </FrameLayout>
 

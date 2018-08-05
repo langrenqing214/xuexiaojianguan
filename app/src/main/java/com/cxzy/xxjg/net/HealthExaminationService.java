@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -33,8 +34,7 @@ public interface HealthExaminationService {
     Observable<BaseBean<Object>> saveMorningCheck(@FieldMap() Map<String , Object> param);
 
     //提交环境检查
-    @GET("api/check/saveEnvCheck")
-    Observable<BaseBean<Object>> saveEnvCheck(@Query("canteenId") String canteenId ,
-                                              @Query("state") String state);
+    @POST("api/check/saveEnvCheck")
+    Observable<BaseBean<Object>> saveEnvCheck(@Body Map<String , Object> param);
 
 }
