@@ -11,15 +11,20 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
+import com.cxzy.xxjg.bean.SchoolCanteenBean;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
+import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.net.Constants;
 import com.cxzy.xxjg.ui.adapter.PurchaseAdapter;
 import com.cxzy.xxjg.ui.test.contract.IPurchaseActivityContract;
 import com.cxzy.xxjg.ui.test.presenter.PurchaseActivityPresenterImpl;
+import com.cxzy.xxjg.utils.NetUtil;
 import com.cxzy.xxjg.utils.ScreenUtils;
 import com.cxzy.xxjg.utils.ToastUtil;
 
@@ -35,7 +40,7 @@ import butterknife.OnClick;
 /**
  * 食材采购
  */
-public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl> implements IPurchaseActivityContract.View, PurchaseAdapter.RecyclerViewItemClickListener {
+public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl> implements IPurchaseActivityContract.View, PurchaseAdapter.RecyclerViewItemClickListener, SelectCanteenDialog.SelectCanteenItemListener {
 
     @BindView(R.id.rv_add_pic)
     RecyclerView rvAddPic;
@@ -57,10 +62,14 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
     EditText etShelfLifeEnd ;
     @BindView(R.id.et_suppliers)
     EditText etSuppliers ;
+    @BindView(R.id.main_title_id)
+    TextView tvTitle ;
 
     private List<String> picList = new ArrayList<>();
     private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE = 1;
     private PurchaseAdapter mAdapter;
+    private ArrayList<SchoolCanteenBean> dataList;
+    private String canteenId;
 
     @Override
     public int getContentLayout() {
@@ -78,6 +87,11 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
+        dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
+        canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id;
+        String canteenName = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name;
+        tvTitle.setText(canteenName);
+
         rvAddPic.setLayoutManager(new GridLayoutManager(this, 3));
         mAdapter = new PurchaseAdapter(picList);
         rvAddPic.setAdapter(mAdapter);
@@ -92,6 +106,11 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
     @Override
     public void refreshView(Object mData) {
         ToastUtil.showShort(this , "入库成功");
+    }
+
+    @Override
+    public void refreshFaild() {
+
     }
 
     @Override
@@ -160,12 +179,18 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
         mAdapter.notifyDataSetChanged();
     }
 
-    @OnClick({R.id.back_btn_id , R.id.btn_warehousing ,R.id.btn_warehousing_and_out_treasury})
+    @OnClick({R.id.back_btn_id , R.id.btn_warehousing ,R.id.btn_warehousing_and_out_treasury , R.id.ll_select_canteen})
     @Override
     public void onViewClicked(View view) {
+
         super.onViewClicked(view);
         switch (view.getId()){
             case R.id.back_btn_id ://返回
+                finish();
+                break;
+            case R.id.ll_select_canteen://选择食堂
+                SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this, dataList, this);
+                canteenDialog.show();
                 break;
             case R.id.btn_warehousing ://出库
                 String foodName = etFoodName.getText().toString().trim();
@@ -195,6 +220,7 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
                 param.put("qualityGuaranteeEndDate" , shelfLifeEnd);
                 param.put("suppliers" , suppliers);
                 param.put("flag" , 1);
+                param.put("canteenId" , canteenId);
                 param.put("files" , fileList);
                 mPresenter.savePurchase(param);
                 break;
@@ -226,9 +252,16 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
                 param1.put("qualityGuaranteeEndDate" , shelfLifeEnd1);
                 param1.put("suppliers" , suppliers1);
                 param1.put("flag" , 2);
+                param1.put("canteenId" , canteenId);
                 param1.put("files" , fileList1);
                 mPresenter.savePurchase(param1);
                 break;
         }
+    }
+
+    @Override
+    public void selectCanteenItem(int positon, String canteenName, String canteenId) {
+        this.canteenId = canteenId;
+        tvTitle.setText(canteenName);
     }
 }

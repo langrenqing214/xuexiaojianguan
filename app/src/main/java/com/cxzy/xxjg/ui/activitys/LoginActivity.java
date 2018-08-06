@@ -15,7 +15,9 @@ import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.ui.test.contract.ILoginActivityContract;
 import com.cxzy.xxjg.ui.test.presenter.LoginActivityPresenterImpl;
+import com.cxzy.xxjg.utils.NetUtil;
 import com.cxzy.xxjg.utils.StatusBarUtil;
+import com.cxzy.xxjg.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -59,12 +61,18 @@ public class LoginActivity extends BaseActivity<LoginActivityPresenterImpl> impl
     }
 
     @Override
+    public void refreshFaild() {
+
+    }
+
+    @Override
     public void onRetry() {
 
     }
 
     @OnClick(R.id.btn_login)
     public void onViewClicked(View view){
+
         switch (view.getId()){
             case R.id.btn_login :
                 mPresenter.toLogin(etUserName.getText().toString().trim() , etPassWord.getText().toString().trim());

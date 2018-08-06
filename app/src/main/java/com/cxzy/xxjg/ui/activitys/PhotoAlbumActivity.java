@@ -120,6 +120,11 @@ public class PhotoAlbumActivity extends BaseActivity {
     }
 
     @Override
+    public void refreshFaild() {
+
+    }
+
+    @Override
     public void onRetry() {
 
     }

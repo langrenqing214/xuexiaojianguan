@@ -7,7 +7,7 @@ import com.cxzy.xxjg.net.AddRetentionApi;
 import com.cxzy.xxjg.net.AddRetentionService;
 import com.cxzy.xxjg.net.AddTrialApi;
 import com.cxzy.xxjg.net.AddTrialService;
-import com.cxzy.xxjg.net.ApiConstants;
+import com.cxzy.xxjg.http.ApiConstants;
 import com.cxzy.xxjg.net.HealthExaminationApi;
 import com.cxzy.xxjg.net.HealthExaminationService;
 import com.cxzy.xxjg.net.LoginApi;
@@ -21,6 +21,8 @@ import com.cxzy.xxjg.net.PurchaseApi;
 import com.cxzy.xxjg.net.PurchaseService;
 import com.cxzy.xxjg.net.RetentionApi;
 import com.cxzy.xxjg.net.RetentionService;
+import com.cxzy.xxjg.net.ScanResultApi;
+import com.cxzy.xxjg.net.ScanResultService;
 import com.cxzy.xxjg.net.TrialManagementApi;
 import com.cxzy.xxjg.net.TrialManagementService;
 import com.cxzy.xxjg.net.WarningApi;
@@ -242,5 +244,20 @@ public class HttpModule {
         return HealthExaminationApi.getInstance(retrofitBuilder
                 .baseUrl(ApiConstants.sIFengApi)
                 .build().create(HealthExaminationService.class));
+    }
+
+    //扫描结果
+    @Provides
+    ScanResultApi provideNetScanResult(OkHttpClient.Builder builder) {
+        builder.addInterceptor(RetrofitConfig.sQueryParameterInterceptor);
+
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(builder.build());
+
+        return ScanResultApi.getInstance(retrofitBuilder
+                .baseUrl(ApiConstants.sIFengApi)
+                .build().create(ScanResultService.class));
     }
 }

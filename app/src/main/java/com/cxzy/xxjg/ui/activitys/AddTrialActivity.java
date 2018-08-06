@@ -2,6 +2,7 @@ package com.cxzy.xxjg.ui.activitys;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
@@ -26,6 +28,7 @@ import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.net.Constants;
 import com.cxzy.xxjg.ui.test.presenter.AddTrialPresenterImpl;
 import com.cxzy.xxjg.utils.DateUtil;
+import com.cxzy.xxjg.utils.NetUtil;
 import com.cxzy.xxjg.utils.ScreenUtils;
 import com.cxzy.xxjg.utils.ToastUtil;
 
@@ -41,7 +44,7 @@ import butterknife.OnClick;
 /**
  * 添加试吃
  */
-public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener {
+public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     @BindView(R.id.tv_select_canteen)
     TextView tvSelectCanteen;
@@ -96,6 +99,11 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
     }
 
     @Override
+    public void refreshFaild() {
+
+    }
+
+    @Override
     public void onRetry() {
 
     }
@@ -103,6 +111,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
     @OnClick({R.id.back_btn_id, R.id.btn_add_trial, R.id.tv_select_canteen, R.id.tv_trial_time, R.id.iv_add_trial_pic})
     @Override
     public void onViewClicked(View view) {
+
         super.onViewClicked(view);
         switch (view.getId()) {
             case R.id.back_btn_id://返回
@@ -203,5 +212,16 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
         String data = DateUtil.date2MMddWeek(startcal.getTime());
         createDateStart = DateUtil.date2NYR(startcal.getTime());
         tvTrialTime.setText(data);
+        TimePickerDialog dialog = new TimePickerDialog(AddTrialActivity.this , TimePicker.AUTOFILL_TYPE_LIST,this , 8 , 00 , true);
+        dialog.show();
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+        Calendar startcal = Calendar.getInstance();
+        startcal.set(Calendar.HOUR,hour);
+        startcal.set(Calendar.MINUTE,minute);
+        createDateStart = createDateStart + " " + new java.text.SimpleDateFormat("HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
+
     }
 }

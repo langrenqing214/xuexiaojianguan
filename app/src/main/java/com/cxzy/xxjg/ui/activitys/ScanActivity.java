@@ -12,7 +12,9 @@ import android.view.View;
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
 import com.cxzy.xxjg.di.component.AppComponent;
+import com.cxzy.xxjg.utils.NetUtil;
 import com.cxzy.xxjg.utils.StatusBarUtil;
+import com.cxzy.xxjg.utils.ToastUtil;
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
@@ -84,6 +86,11 @@ public class ScanActivity extends BaseActivity {
 
     @Override
     public void refreshView(Object mData) {
+
+    }
+
+    @Override
+    public void refreshFaild() {
 
     }
 

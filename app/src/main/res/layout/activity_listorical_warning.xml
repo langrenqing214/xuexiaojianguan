@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context="com.cxzy.xxjg.ui.activitys.ListoricalWarningActivity">
 
     <RelativeLayout
@@ -38,13 +38,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="返回"
+                android:textColor="@android:color/white"
                 android:textSize="14dp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
-            <TextView
+        <TextView
             android:id="@+id/main_title_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,11 +56,28 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/layout_communal_select"/>
+    <include layout="@layout/layout_communal_select" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_warning"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_warning"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        app:srlEnableOverScrollDrag="false"
+        app:srlEnableAutoLoadMore="false"
+        app:srlEnableOverScrollBounce="false">
+
+        <com.cxzy.xxjg.wideget.SimpleMultiStateView
+            android:id="@+id/SimpleMultiStateView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_warning"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.cxzy.xxjg.wideget.SimpleMultiStateView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 
 </LinearLayout>

@@ -88,6 +88,11 @@ public class MainActivity extends BaseActivity<MainActivityPresenterImpl> {
     }
 
     @Override
+    public void refreshFaild() {
+
+    }
+
+    @Override
     public void onRetry() {
 
     }

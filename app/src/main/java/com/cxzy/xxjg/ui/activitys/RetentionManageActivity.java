@@ -2,6 +2,7 @@ package com.cxzy.xxjg.ui.activitys;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,11 @@ import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.ui.adapter.RetentionManageAdapter;
 import com.cxzy.xxjg.ui.test.presenter.RetentionPresenterImpl;
 import com.cxzy.xxjg.utils.DateUtil;
+import com.cxzy.xxjg.utils.NetUtil;
+import com.cxzy.xxjg.utils.ToastUtil;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,7 +40,7 @@ import butterknife.OnClick;
 /**
  * 留样管理
  */
-public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener {
+public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, OnRefreshLoadMoreListener {
 
     @BindView(R.id.rv_retention)
     RecyclerView rvRetention;
@@ -46,6 +52,8 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
     LinearLayout llTimeSelect;
     @BindView(R.id.tv_time_show)
     TextView tvTimeShow;
+    @BindView(R.id.srl_retention)
+    SmartRefreshLayout srlRetention ;
     private String canteenId;
     private ArrayList<SchoolCanteenBean> dataList;
     private RetentionManageAdapter mAdapter;
@@ -81,6 +89,10 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
         dateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
         createDateEnd = DateUtil.date2NYR(Calendar.getInstance().getTime());
         tvTimeShow.setText(dateStart + "-" + dateEnd);
+
+        srlRetention.setOnRefreshLoadMoreListener(this);
+        srlRetention.setEnableLoadMore(false);
+
         mPresenter.getRetentionList(canteenId, createDateStart , createDateEnd , page, pageSize);
         rvRetention.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new RetentionManageAdapter(this);
@@ -94,9 +106,23 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
 
     @Override
     public void refreshView(Object mData) {
-        RetentionBean bean = (RetentionBean) mData;
-        mAdapter.setData(bean.list);
+        if (mData != null) {
+            RetentionBean bean = (RetentionBean) mData;
+            if (bean.list != null && bean.list.size() == pageSize){
+                srlRetention.setEnableLoadMore(true);;//启用加载;
+            }else {
+                srlRetention.setEnableLoadMore(false);
+            }
+        }
         mAdapter.notifyDataSetChanged();
+        srlRetention.finishRefresh();//结束刷新
+        srlRetention.finishLoadMore();//结束加载
+    }
+
+    @Override
+    public void refreshFaild() {
+        srlRetention.finishRefresh(false);//结束刷新（刷新失败）
+        srlRetention.finishLoadMore(false);//结束加载（加载失败）
     }
 
     @Override
@@ -107,6 +133,7 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
     @OnClick({R.id.back_btn_id, R.id.ll_add_retention, R.id.ll_time_select, R.id.ll_canteen_select})
     @Override
     public void onViewClicked(View view) {
+
         switch (view.getId()) {
             case R.id.back_btn_id://返回
                 finish();
@@ -156,5 +183,17 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
             }
         });
         timeDialog.show();
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        page ++ ;
+        mPresenter.getRetentionList(canteenId , createDateStart , createDateEnd , page , pageSize);
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        page = 1 ;
+        mPresenter.getRetentionList(canteenId , createDateStart , createDateEnd , page , pageSize);
     }
 }

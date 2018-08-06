@@ -1,9 +1,10 @@
 package com.cxzy.xxjg.ui.activitys;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -22,6 +23,11 @@ import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.ui.adapter.WarningAdapter;
 import com.cxzy.xxjg.ui.test.presenter.WarningPresenterImpl;
 import com.cxzy.xxjg.utils.DateUtil;
+import com.cxzy.xxjg.utils.NetUtil;
+import com.cxzy.xxjg.utils.ToastUtil;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,7 +40,7 @@ import butterknife.OnClick;
 /**
  * 历史警告
  */
-public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl> implements DatePickerDialog.OnDateSetListener, SelectCanteenDialog.SelectCanteenItemListener, WarningAdapter.DealItemClickListener {
+public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl> implements DatePickerDialog.OnDateSetListener, SelectCanteenDialog.SelectCanteenItemListener, WarningAdapter.DealItemClickListener, OnRefreshLoadMoreListener {
 
     @BindView(R.id.ll_canteen_select)
     LinearLayout llCanteenSelect;
@@ -46,6 +52,8 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     TextView tvTimeShow;
     @BindView(R.id.rv_warning)
     RecyclerView rvWarning ;
+    @BindView(R.id.srl_warning)
+    SmartRefreshLayout srlWarning ;
     private WarningAdapter mAdapter;
     private ArrayList<SchoolCanteenBean> dataList;
     private String canteenId;
@@ -83,7 +91,11 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
         tvCanteenShow.setText(dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name);
         canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id;
         tvTimeShow.setText(createDateStart + "-" + createDateEnd);
+
         mPresenter.getWarningList(level , canteenId , createDateStart , createDateEnd , page , pageSize);
+        //刷新
+        srlWarning.setOnRefreshLoadMoreListener(this);
+        srlWarning.setEnableLoadMore(false);
 
         rvWarning.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new WarningAdapter(this);
@@ -100,8 +112,21 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
         if(mData != null) {
             WarningBean bean = (WarningBean) mData;
             mAdapter.setData(bean.list);
+            if (bean.list != null && bean.list.size() == pageSize){
+                srlWarning.setEnableLoadMore(true);;//启用加载;
+            }else {
+                srlWarning.setEnableLoadMore(false);
+            }
             mAdapter.notifyDataSetChanged();
+            srlWarning.finishRefresh();//结束刷新
+            srlWarning.finishLoadMore();//结束加载
         }
+    }
+
+    @Override
+    public void refreshFaild() {
+        srlWarning.finishRefresh(false);//结束刷新（刷新失败）
+        srlWarning.finishLoadMore(false);//结束加载（加载失败）
     }
 
     @Override
@@ -111,6 +136,7 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
 
     @OnClick({R.id.back_btn_id , R.id.ll_canteen_select , R.id.ll_time_select})
     public void onViewClicked(View v){
+
         switch (v.getId()){
             case R.id.back_btn_id ://返回
                 finish();
@@ -163,5 +189,17 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
         param.put("id" , "1");
         param.put("dealUserName" , "xiaolong");
         mPresenter.dealWarning(param);
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        page ++ ;
+        mPresenter.getWarningList(level , canteenId , createDateStart , createDateEnd , page , pageSize);
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        page = 1 ;
+        mPresenter.getWarningList(level , canteenId , createDateStart , createDateEnd , page , pageSize);
     }
 }

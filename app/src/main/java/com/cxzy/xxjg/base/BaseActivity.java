@@ -19,6 +19,7 @@ import com.cxzy.xxjg.LifeSubscription;
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.app.MyApp;
 import com.cxzy.xxjg.utils.DialogHelper;
+import com.cxzy.xxjg.utils.NetUtil;
 import com.cxzy.xxjg.utils.StatusBarUtil;
 import com.cxzy.xxjg.utils.ToastUtil;
 import com.cxzy.xxjg.wideget.MultiStateView;

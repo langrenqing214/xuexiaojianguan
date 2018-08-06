@@ -1,6 +1,7 @@
 package com.cxzy.xxjg.ui.activitys;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -8,9 +9,11 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioGroup;
@@ -29,7 +32,10 @@ import com.cxzy.xxjg.dialog.SelectPersonDialog;
 import com.cxzy.xxjg.net.Constants;
 import com.cxzy.xxjg.ui.adapter.CheckItemsAdapter;
 import com.cxzy.xxjg.ui.adapter.PersonLabelAdapter;
+import com.cxzy.xxjg.ui.adapter.PurchaseAdapter;
+import com.cxzy.xxjg.ui.test.contract.IHealthExaminationContract;
 import com.cxzy.xxjg.ui.test.presenter.HealthExaminationPresenterImpl;
+import com.cxzy.xxjg.utils.NetUtil;
 import com.cxzy.xxjg.utils.ScreenUtils;
 import com.cxzy.xxjg.utils.ToastUtil;
 import com.google.android.flexbox.AlignItems;
@@ -51,7 +57,7 @@ import butterknife.OnClick;
 /**
  * 卫生检查
  */
-public class HealthExaminationActivity extends BaseActivity<HealthExaminationPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, RadioGroup.OnCheckedChangeListener {
+public class HealthExaminationActivity extends BaseActivity<HealthExaminationPresenterImpl> implements IHealthExaminationContract.View , SelectCanteenDialog.SelectCanteenItemListener, RadioGroup.OnCheckedChangeListener, PurchaseAdapter.RecyclerViewItemClickListener {
 
     @BindView(R.id.rg_check)
     RadioGroup rgCheck;
@@ -65,8 +71,6 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     RecyclerView rvThroughPerson;
     @BindView(R.id.rv_no_through_person)
     RecyclerView rvNoThroughPerson;
-    @BindView(R.id.tv_positive_pic)
-    TextView tvPositivePic;
     @BindView(R.id.main_title_id)
     TextView tvTitle;
     @BindView(R.id.tv_check_name)
@@ -75,6 +79,8 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     LinearLayout llEnvironmentalCheck;
     @BindView(R.id.rg_env_check)
     RadioGroup rgEnvCheck ;
+    @BindView(R.id.rv_add_pic)
+    RecyclerView rvAddPic;
     private String canteenId;
     private ArrayList<SchoolCanteenBean> dataList = new ArrayList<>();
     private HealthExaminationBean bean = new HealthExaminationBean();
@@ -87,6 +93,8 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     private String typeId = "";
     private String envState = "";
     private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE = 1;
+    private PurchaseAdapter picAdapter;
+    private List<String> picList = new ArrayList<>();
 
 
     @Override
@@ -114,6 +122,10 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
         rgEnvCheck.setOnCheckedChangeListener(this);
         mAdapter = new CheckItemsAdapter(this, itemList);
         lvCheckItems.setAdapter(mAdapter);
+        rvAddPic.setLayoutManager(new GridLayoutManager(this, 3));
+        picAdapter = new PurchaseAdapter(picList);
+        rvAddPic.setAdapter(picAdapter);
+        picAdapter.setItemClickListener(this);
     }
 
     @Override
@@ -132,14 +144,19 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     }
 
     @Override
+    public void refreshFaild() {
+
+    }
+
+    @Override
     public void onRetry() {
 
     }
 
-    @OnClick({R.id.back_btn_id, R.id.ll_select_canteen, R.id.btn_add_through_person, R.id.btn_save_morningcheck, R.id.btn_add_no_through_person, R.id.btn_save_environmental_check ,
-                R.id.tv_positive_pic , R.id.tv_opposite_pic , R.id.tv_positive_pic_one , R.id.tv_opposite_pic_one})
+    @OnClick({R.id.back_btn_id, R.id.ll_select_canteen, R.id.btn_add_through_person, R.id.btn_save_morningcheck, R.id.btn_add_no_through_person, R.id.btn_save_environmental_check ,})
     @Override
     public void onViewClicked(View view) {
+
         super.onViewClicked(view);
         switch (view.getId()) {
             case R.id.back_btn_id://返回
@@ -150,9 +167,11 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 canteenDialog.show();
                 break;
             case R.id.btn_save_morningcheck://提交晨检
-                File file = new File("F:\\myLearnMvp\\xuexiaojianguan\\app\\src\\main\\res\\drawable-xhdpi\\camera.png");
                 List<File> fileList = new ArrayList<>();
-                fileList.add(file);
+                for (String str : picList){
+                    File folder = new File(str);
+                    fileList.add(folder);
+                }
                 List<String> personList = new ArrayList<>();
                 allList.clear();
                 allList.addAll(throughPerson);
@@ -162,9 +181,9 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 }
                 Map<String, Object> param = new HashMap<>();
                 param.put("persons", personList);
-//                param.put("files", fileList);
-//                param.put("canteenId", canteenId);
-//                param.put("typeId", typeId);
+                param.put("files", fileList);
+                param.put("canteenId", canteenId);
+                param.put("typeId", typeId);
 
                 mPresenter.saveMorningCheck(param);
                 break;
@@ -222,27 +241,6 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 });
                 dialog1.show();
                 break;
-            case R.id.tv_positive_pic ://正面照片
-                if (!hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE) || !hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            MY_PERMISSIONS_READ_EXTERNAL_STORAGE);
-                } else {
-                    ScreenUtils.initScreen(this);
-                    Intent intent = new Intent(mContext, PhotoWallActivity.class);
-                    intent.putExtra("isRadio", true);
-                    startActivityForResult(intent, Constants.FLAG_CHOOSE_IMG);
-                }
-                break;
-            case  R.id.tv_opposite_pic ://反面
-
-                break;
-            case R.id.tv_positive_pic_one ://正面照片2
-
-                break;
-            case R.id.tv_opposite_pic_one ://反面
-
-                break;
         }
 
     }
@@ -270,10 +268,11 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                     //授权成功之后，调用系统相机进行拍照操作等
                     ScreenUtils.initScreen(this);
                     Intent picintent = new Intent(mContext, PhotoWallActivity.class);
+                    picintent.putExtra("number", 4);
                     startActivityForResult(picintent, Constants.FLAG_CHOOSE_IMG);
                 } else {
                     //用户授权拒绝之后，友情提示一下就可以了
-                    if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE) || !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE) || !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
                         ToastUtil.showShort(mContext, "权限已拒绝请到设置页面手动开启");
                     }
                 }
@@ -327,6 +326,28 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            picList = mPresenter.dealPicResult(requestCode , resultCode , data);
+        }
+    }
 
+    @Override
+    public void onItemClick(int position) {
+        if (!hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE) || !hasPermission(Manifest.permission.CAMERA)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE , Manifest.permission.CAMERA},
+                    MY_PERMISSIONS_READ_EXTERNAL_STORAGE);
+        } else {
+            ScreenUtils.initScreen(this);
+            Intent intent = new Intent(mContext, PhotoWallActivity.class);
+            intent.putExtra("number", 4);
+            startActivityForResult(intent, Constants.FLAG_CHOOSE_IMG);
+        }
+    }
+
+    @Override
+    public void refreshPicAdapter() {
+        picAdapter.setDatas(picList);
+        picAdapter.notifyDataSetChanged();
     }
 }

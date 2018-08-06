@@ -15,11 +15,12 @@ public class SplashActivityActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String token = (String) SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "app_token" , "");
-        if (TextUtils.isEmpty(token)){
+        startActivity(new Intent(this , MainActivity.class));
+        /*if (TextUtils.isEmpty(token)){
             startActivity(new Intent(this , LoginActivity.class));
         }else {
             startActivity(new Intent(this , MainActivity.class));
-        }
+        }*/
         finish();
     }
 }

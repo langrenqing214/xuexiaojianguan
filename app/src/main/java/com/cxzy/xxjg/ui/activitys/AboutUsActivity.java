@@ -1,31 +1,31 @@
 package com.cxzy.xxjg.ui.activitys;
 
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
 import com.cxzy.xxjg.di.component.AppComponent;
-import com.cxzy.xxjg.ui.adapter.MyCanteenAdapter;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
- * 我的食堂
+ * 关于我们
  */
-public class MyCanteenActivity extends BaseActivity {
+public class AboutUsActivity extends BaseActivity {
 
-    @BindView(R.id.rv_my_canteen)
-    RecyclerView rvMyCanteen ;
+    @BindView(R.id.vserion)
+    TextView tvVsersion ;
+
+    private String localVersion;
 
     @Override
     public int getContentLayout() {
-        return R.layout.activity_my_canteen;
+        return R.layout.activity_about_us;
     }
 
     @Override
@@ -35,15 +35,13 @@ public class MyCanteenActivity extends BaseActivity {
 
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
-        setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
-        rvMyCanteen.setLayoutManager(new LinearLayoutManager(this));
-        MyCanteenAdapter mAdapter = new MyCanteenAdapter();
-        rvMyCanteen.setAdapter(mAdapter);
+        setStatusBarColor(ContextCompat.getColor(mContext , R.color.main_style_color));
+        localVersion = getIntent().getStringExtra("localVersion");
     }
 
     @Override
     public void initData() {
-
+        tvVsersion.setText("v" + localVersion);
     }
 
     @Override
@@ -59,5 +57,15 @@ public class MyCanteenActivity extends BaseActivity {
     @Override
     public void onRetry() {
 
+    }
+
+    @OnClick
+    @Override
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.back_btn_id ://返回
+                finish();
+                break;
+        }
     }
 }

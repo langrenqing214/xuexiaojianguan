@@ -638,7 +638,7 @@ public class StatusBarUtil {
      * @param context context
      * @return 状态栏高度
      */
-    public static int getStatusBarHeight(Context context) {
+    private static int getStatusBarHeight(Context context) {
         // 获得状态栏高度
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         return context.getResources().getDimensionPixelSize(resourceId);
@@ -663,15 +663,6 @@ public class StatusBarUtil {
         green = (int) (green * a + 0.5);
         blue = (int) (blue * a + 0.5);
         return 0xff << 24 | red << 16 | green << 8 | blue;
-    }
-
-    /**
-     * 获取当前手机系统版本号
-     *
-     * @return  系统版本号
-     */
-    public static String getSystemVersion() {
-        return android.os.Build.VERSION.RELEASE;
     }
 
 }
