@@ -14,6 +14,6 @@ import retrofit2.http.POST;
  */
 
 public interface AddRetentionService {
-    @POST("foodReserved/save")
+    @POST("api/foodReserved/save")
     Observable<BaseBean<Object>> saveRetention(@Body Map<String , Object> param);
 }

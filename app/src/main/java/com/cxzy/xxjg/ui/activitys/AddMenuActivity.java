@@ -124,7 +124,7 @@ public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implemen
                 param.put("breakfast" , etBreakfast.getText().toString().trim());
                 param.put("dinner" , etLunch.getText().toString().trim());
                 param.put("lunch" , etDinner.getText().toString().trim());
-                param.put("releaseTime" , date);
+                param.put("releaseTime" , releaseTime);
                 param.put("canteenId" , canteenId);
                 mPresenter.saveMenu(param);
                 break;
@@ -137,7 +137,7 @@ public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implemen
         startcal.set(Calendar.YEAR,year);
         startcal.set(Calendar.MONTH,month);
         startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-        date = startcal.getTimeInMillis() + "";
+        releaseTime = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));;
         String date1 = DateUtil.date2yyyyMMddWeek(startcal.getTime());
         tvTime.setText(date1);
     }

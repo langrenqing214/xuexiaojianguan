@@ -21,6 +21,12 @@ import java.util.List;
 public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningHolder> {
 
     private List<WarningItemBean> data = new ArrayList<>();
+    private DealItemClickListener mListener ;
+
+    public WarningAdapter(DealItemClickListener mListener){
+        this.mListener = mListener ;
+    }
+
 
     @Override
     public WarningHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -29,7 +35,7 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
     }
 
     @Override
-    public void onBindViewHolder(WarningHolder holder, int position) {
+    public void onBindViewHolder(WarningHolder holder, final int position) {
         WarningItemBean info = data.get(position);
         switch (info.level){
             case "ALARM" ://警告
@@ -45,6 +51,12 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
         holder.tvStateDes.setText(info.configDesc);
         holder.tvCheckTime.setText(DateUtil.date2NYRSF(DateUtil.string2Date(info.dealDate == null ? "" : info.dealDate , "yyyy-MM-dd")));
         holder.tvAbnormalTerm.setText(info.remarks);
+        holder.stateShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.dealItemClickListener(position);
+            }
+        });
     }
 
     @Override
@@ -54,6 +66,10 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
 
     public void setData(List<WarningItemBean> list) {
         this.data = list ;
+    }
+
+    public interface DealItemClickListener{
+        void dealItemClickListener(int position);
     }
 
     class WarningHolder extends RecyclerView.ViewHolder{

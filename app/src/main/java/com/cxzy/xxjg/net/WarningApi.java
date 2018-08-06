@@ -3,6 +3,8 @@ package com.cxzy.xxjg.net;
 import com.cxzy.xxjg.bean.BaseBean;
 import com.cxzy.xxjg.bean.WarningBean;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
 
 /**
@@ -21,7 +23,11 @@ public class WarningApi {
         }
         return instance ;
     }
-    public Observable<BaseBean<WarningBean>> getWarningList(String canteenId ,String createDateStart ,String createDateEnd ,int pageNumber ,int pageSize){
-        return mService.getWarningList(canteenId , createDateStart , createDateEnd , pageNumber , pageSize);
+    public Observable<BaseBean<WarningBean>> getWarningList(String level , String canteenId ,String createDateStart ,String createDateEnd ,int pageNumber ,int pageSize){
+        return mService.getWarningList(level , canteenId , createDateStart , createDateEnd , pageNumber , pageSize);
+    }
+
+    public Observable<BaseBean<Object>> dealWarning(Map<String , Object> param){
+        return mService.dealWarning(param);
     }
 }

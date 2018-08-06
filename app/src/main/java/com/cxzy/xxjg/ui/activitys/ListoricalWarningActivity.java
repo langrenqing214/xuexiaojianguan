@@ -25,6 +25,8 @@ import com.cxzy.xxjg.utils.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -32,7 +34,7 @@ import butterknife.OnClick;
 /**
  * 历史警告
  */
-public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl> implements DatePickerDialog.OnDateSetListener, SelectCanteenDialog.SelectCanteenItemListener {
+public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl> implements DatePickerDialog.OnDateSetListener, SelectCanteenDialog.SelectCanteenItemListener, WarningAdapter.DealItemClickListener {
 
     @BindView(R.id.ll_canteen_select)
     LinearLayout llCanteenSelect;
@@ -54,6 +56,7 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     private String timeStr = "";
     private String dateStart = "";
     private String dateEnd = "";
+    private String level;
 
     @Override
     public int getContentLayout() {
@@ -76,13 +79,14 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
         dateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
         createDateEnd = DateUtil.date2NYR(Calendar.getInstance().getTime());
         dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
+        level = getIntent().getStringExtra("level");
         tvCanteenShow.setText(dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name);
         canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id;
         tvTimeShow.setText(createDateStart + "-" + createDateEnd);
-        mPresenter.getWarningList(canteenId , createDateStart , createDateEnd , page , pageSize);
+        mPresenter.getWarningList(level , canteenId , createDateStart , createDateEnd , page , pageSize);
 
         rvWarning.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new WarningAdapter();
+        mAdapter = new WarningAdapter(this);
         rvWarning.setAdapter(mAdapter);
     }
 
@@ -93,9 +97,11 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
 
     @Override
     public void refreshView(Object mData) {
-        WarningBean bean = (WarningBean) mData;
-        mAdapter.setData(bean.list);
-        mAdapter.notifyDataSetChanged();
+        if(mData != null) {
+            WarningBean bean = (WarningBean) mData;
+            mAdapter.setData(bean.list);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -103,9 +109,12 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
 
     }
 
-    @OnClick({R.id.ll_canteen_select , R.id.ll_time_select})
+    @OnClick({R.id.back_btn_id , R.id.ll_canteen_select , R.id.ll_time_select})
     public void onViewClicked(View v){
         switch (v.getId()){
+            case R.id.back_btn_id ://返回
+                finish();
+                break;
             case R.id.ll_canteen_select ://食堂选择
                 SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this ,dataList , this);
                 canteenDialog.show();
@@ -135,7 +144,7 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
                 dateEnd = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
                 createDateEnd = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
                 tvTimeShow.setText(createDateStart + "-" + createDateEnd);
-                mPresenter.getWarningList(canteenId , createDateStart , createDateEnd , page , pageSize);
+                mPresenter.getWarningList(level , canteenId , createDateStart , createDateEnd , page , pageSize);
             }
         });
         timeDialog.show();
@@ -145,6 +154,14 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     public void selectCanteenItem(int positon, String canteenName, String canteenId) {
         this.canteenId = canteenId ;
         tvCanteenShow.setText(canteenName);
-        mPresenter.getWarningList(canteenId , createDateStart , createDateEnd , page , pageSize);
+        mPresenter.getWarningList(level , canteenId , createDateStart , createDateEnd , page , pageSize);
+    }
+
+    @Override
+    public void dealItemClickListener(int position) {
+        Map<String , Object> param = new HashMap<>();
+        param.put("id" , "1");
+        param.put("dealUserName" , "xiaolong");
+        mPresenter.dealWarning(param);
     }
 }

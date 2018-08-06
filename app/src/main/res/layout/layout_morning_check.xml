@@ -132,6 +132,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_opposite_pic"
             android:layout_width="128dp"
             android:layout_height="match_parent"
             android:background="@color/A6"
@@ -153,6 +154,7 @@
         >
 
         <TextView
+            android:id="@+id/tv_positive_pic_one"
             android:layout_width="128dp"
             android:layout_height="match_parent"
             android:background="@color/A6"
@@ -163,6 +165,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_opposite_pic_one"
             android:layout_width="128dp"
             android:layout_height="match_parent"
             android:background="@color/A6"
