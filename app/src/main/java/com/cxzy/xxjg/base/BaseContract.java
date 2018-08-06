@@ -32,6 +32,9 @@ public interface BaseContract {
         //获取数据成功调用该方法。
         void refreshView(Object mData);
 
+        //获取数据失败
+        void refreshFaild();
+
         //重试
         void onRetry();
 

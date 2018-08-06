@@ -14,6 +14,7 @@ import com.cxzy.xxjg.net.MainFragmentApi;
 import com.cxzy.xxjg.net.MenuApi;
 import com.cxzy.xxjg.net.PurchaseApi;
 import com.cxzy.xxjg.net.RetentionApi;
+import com.cxzy.xxjg.net.ScanResultApi;
 import com.cxzy.xxjg.net.TrialManagementApi;
 import com.cxzy.xxjg.net.WarningApi;
 import com.cxzy.xxjg.net.testApi;
@@ -39,5 +40,6 @@ public interface AppComponent {
     WarningApi getWarningApi();
     AddTrialApi getAddTrialApi();
     HealthExaminationApi getHealthApi();
+    ScanResultApi getScanResultApi();
 }
 

@@ -73,9 +73,18 @@
 
     <include layout="@layout/layout_communal_select" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_trial_management"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_trial"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        app:srlEnableAutoLoadMore="false"
+        app:srlEnableOverScrollBounce="false"
+        app:srlEnableOverScrollDrag="false">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_trial_management"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

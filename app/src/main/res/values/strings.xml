@@ -157,4 +157,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="load">下拉刷新</string>
+    <string name="wisdommob_str_profile_hanzi">君华高科 版权所有</string>
+    <string name="wisdommob_str_profile_english">Copyright © 2015. All Right Reserved</string>
 </resources>

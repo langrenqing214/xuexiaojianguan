@@ -1,12 +1,14 @@
 package com.cxzy.xxjg.ui.activitys;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
@@ -16,6 +18,7 @@ import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.ui.test.presenter.AddRetentionPresenterImpl;
+import com.cxzy.xxjg.utils.NetUtil;
 import com.cxzy.xxjg.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -29,7 +32,7 @@ import butterknife.OnClick;
 /**
  * 添加留样
  */
-public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener {
+public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     @BindView(R.id.tv_select_canteen)
     TextView tvSelectCanteen;
@@ -78,6 +81,11 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
     }
 
     @Override
+    public void refreshFaild() {
+
+    }
+
+    @Override
     public void onRetry() {
 
     }
@@ -85,6 +93,7 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
     @OnClick({R.id.back_btn_id, R.id.btn_add_retention, R.id.tv_select_canteen, R.id.tv_select_expiry_time, R.id.tv_add_retention_date})
     @Override
     public void onViewClicked(View view) {
+
         super.onViewClicked(view);
         switch (view.getId()) {
             case R.id.back_btn_id://返回
@@ -126,16 +135,32 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
         startcal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         if (clickType == 1) {
             expiryTime = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
-            tvExpiryTime.setText(expiryTime);
+//            tvExpiryTime.setText(expiryTime);
         }else {
             retentionDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
-            tvRetentionDate.setText(retentionDate);
+//            tvRetentionDate.setText(retentionDate);
         }
+        TimePickerDialog dialog = new TimePickerDialog(AddRetentionActivity.this , TimePicker.AUTOFILL_TYPE_LIST,this , 8 , 00 , true);
+        dialog.show();
     }
 
     @Override
     public void selectCanteenItem(int positon, String canteenName, String canteenId) {
         this.canteenId = canteenId ;
         tvSelectCanteen.setText(canteenName);
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+        Calendar startcal = Calendar.getInstance();
+        startcal.set(Calendar.HOUR,hour);
+        startcal.set(Calendar.MINUTE,minute);
+        if (clickType == 1) {
+            expiryTime = expiryTime + " " + new java.text.SimpleDateFormat("HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
+            tvExpiryTime.setText(expiryTime);
+        }else {
+            retentionDate = retentionDate + " " + new java.text.SimpleDateFormat("HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
+            tvRetentionDate.setText(retentionDate);
+        }
     }
 }

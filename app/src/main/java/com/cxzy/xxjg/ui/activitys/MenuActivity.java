@@ -1,6 +1,7 @@
 package com.cxzy.xxjg.ui.activitys;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,9 @@ import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.ui.adapter.MenuAdapter;
 import com.cxzy.xxjg.ui.test.presenter.MenuActivityPresenterImpl;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 
@@ -29,12 +33,14 @@ import butterknife.OnClick;
 /**
  * 菜谱
  */
-public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, MenuAdapter.EditMenuClickListener {
+public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, MenuAdapter.EditMenuClickListener, OnRefreshLoadMoreListener {
 
     @BindView(R.id.rv_canteen_menu)
     RecyclerView rvMenu;
     @BindView(R.id.main_title_id)
     TextView tvTitle;
+    @BindView(R.id.srl_menu)
+    SmartRefreshLayout srlMenu ;
 
     private MenuAdapter menuAdapter;
     private ArrayList<SchoolCanteenBean> dataList;
@@ -65,6 +71,10 @@ public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implem
         tvTitle.setText(canteenName);
         canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id ;
         mPresenter.getMenuList(canteenId, page, pageSize);
+
+        srlMenu.setOnRefreshLoadMoreListener(this);
+        srlMenu.setEnableLoadMore(false);
+
         rvMenu.setLayoutManager(new LinearLayoutManager(this));
         menuAdapter = new MenuAdapter(this , this);
         rvMenu.setAdapter(menuAdapter);
@@ -77,9 +87,25 @@ public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implem
 
     @Override
     public void refreshView(Object mData) {
-        bean = (MenuBean) mData;
-        menuAdapter.setData(bean.list);
-        menuAdapter.notifyDataSetChanged();
+        if (mData != null) {
+            bean = (MenuBean) mData;
+            menuAdapter.setData(bean.list);
+            if (bean.list != null && bean.list.size() == pageSize) {
+                srlMenu.setEnableLoadMore(true);
+                ;//启用加载;
+            } else {
+                srlMenu.setEnableLoadMore(false);
+            }
+            menuAdapter.notifyDataSetChanged();
+        }
+        srlMenu.finishRefresh();//结束刷新
+        srlMenu.finishLoadMore();//结束加载
+    }
+
+    @Override
+    public void refreshFaild() {
+        srlMenu.finishRefresh(false);//结束刷新（刷新失败）
+        srlMenu.finishLoadMore(false);//结束加载（加载失败）
     }
 
     @Override
@@ -134,5 +160,17 @@ public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implem
         intent.putExtra("releaseTime" , bean.list.get(position).releaseTime);
         intent.putExtra("type" , 1);
         startActivityForResult(intent , 1);
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        page ++ ;
+        mPresenter.getMenuList(canteenId , page , pageSize);
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        page = 1 ;
+        mPresenter.getMenuList(canteenId , page , pageSize);
     }
 }

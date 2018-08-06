@@ -32,11 +32,13 @@ public class HttpUtils {
                             mView.refreshView(t.data);
                         }else {
                             ToastUtil.showShort(MyApp.appComponent.getContext() , t.message);
+                            mView.refreshFaild();
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        mView.refreshFaild();
                         ToastUtil.showShort(MyApp.appComponent.getContext() , e.getMessage());
                     }
 

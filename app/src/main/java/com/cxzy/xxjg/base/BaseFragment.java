@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.app.MyApp;
 import com.cxzy.xxjg.utils.DialogHelper;
+import com.cxzy.xxjg.utils.NetUtil;
 import com.cxzy.xxjg.utils.ToastUtil;
 import com.cxzy.xxjg.wideget.MultiStateView;
 import com.cxzy.xxjg.wideget.SimpleMultiStateView;
@@ -182,5 +183,9 @@ public abstract class BaseFragment <T1 extends BaseContract.BasePresenter> exten
     @Override
     public <T> LifecycleTransformer<T> bindToLife() {
         return this.<T>bindToLifecycle();
+    }
+
+    public void onViewClicked(View view){
+
     }
 }

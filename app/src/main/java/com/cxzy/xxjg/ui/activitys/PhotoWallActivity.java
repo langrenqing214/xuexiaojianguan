@@ -172,6 +172,11 @@ public class PhotoWallActivity extends BaseActivity implements PhotoWallAdapter.
     }
 
     @Override
+    public void refreshFaild() {
+
+    }
+
+    @Override
     public void onRetry() {
 
     }

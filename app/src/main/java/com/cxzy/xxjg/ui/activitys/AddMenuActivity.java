@@ -1,6 +1,8 @@
 package com.cxzy.xxjg.ui.activitys;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
@@ -18,6 +21,7 @@ import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.ui.test.presenter.AddMenuPresenterImpl;
 import com.cxzy.xxjg.utils.DateUtil;
+import com.cxzy.xxjg.utils.NetUtil;
 import com.cxzy.xxjg.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -31,7 +35,7 @@ import butterknife.OnClick;
 /**
  * 添加菜谱
  */
-public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implements DatePickerDialog.OnDateSetListener, SelectCanteenDialog.SelectCanteenItemListener {
+public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implements DatePickerDialog.OnDateSetListener, SelectCanteenDialog.SelectCanteenItemListener, TimePickerDialog.OnTimeSetListener {
 
     @BindView(R.id.tv_select_canteen)
     TextView tvCanteen ;
@@ -99,6 +103,11 @@ public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implemen
     }
 
     @Override
+    public void refreshFaild() {
+
+    }
+
+    @Override
     public void onRetry() {
 
     }
@@ -137,14 +146,25 @@ public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implemen
         startcal.set(Calendar.YEAR,year);
         startcal.set(Calendar.MONTH,month);
         startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+        TimePickerDialog dialog = new TimePickerDialog(AddMenuActivity.this , TimePicker.AUTOFILL_TYPE_LIST,this , 8 , 00 , true);
+        dialog.show();
         releaseTime = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));;
-        String date1 = DateUtil.date2yyyyMMddWeek(startcal.getTime());
-        tvTime.setText(date1);
+//        String date1 = DateUtil.date2yyyyMMddWeek(startcal.getTime());
+//        tvTime.setText(date1);
     }
 
     @Override
     public void selectCanteenItem(int positon, String canteenName, String canteenId) {
         this.canteenId = canteenId;
         tvCanteen.setText(canteenName);
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+        Calendar startcal = Calendar.getInstance();
+        startcal.set(Calendar.HOUR,hour);
+        startcal.set(Calendar.MINUTE,minute);
+        releaseTime = releaseTime + " " + new java.text.SimpleDateFormat("HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
+        tvTime.setText(releaseTime);
     }
 }
