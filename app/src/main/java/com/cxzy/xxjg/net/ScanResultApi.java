@@ -1,6 +1,9 @@
 package com.cxzy.xxjg.net;
 
+import com.cxzy.xxjg.base.ScanResultBean;
 import com.cxzy.xxjg.bean.BaseBean;
+
+import java.util.Map;
 
 import io.reactivex.Observable;
 
@@ -22,7 +25,19 @@ public class ScanResultApi {
         return instance ;
     }
 
-    public Observable<BaseBean<Object>> getScanResult(String url){
-        return mService.getScanResult(url);
+    public Observable<BaseBean<ScanResultBean>> getScanResult(String url , String barCode){
+        return mService.getScanResult(url , barCode);
+    }
+
+    public Observable<BaseBean<Object>> dealOutStock(Map<String , Object> param){
+        return mService.dealOutStock(param);
+    }
+
+    public Observable<BaseBean<Object>> dealSave(Map<String , Object> param){
+        return mService.dealSave(param);
+    }
+
+    public Observable<BaseBean<Object>> dealSavedSave(Map<String , Object> param){
+        return mService.dealSavedSave(param);
     }
 }

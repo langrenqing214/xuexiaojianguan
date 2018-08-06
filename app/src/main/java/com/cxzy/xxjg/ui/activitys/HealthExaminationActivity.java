@@ -176,11 +176,11 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 allList.clear();
                 allList.addAll(throughPerson);
                 allList.addAll(noThroughPerson);
-                for (PersonsBean bean : allList) {
+                /*for (PersonsBean bean : allList) {
                     personList.add(new Gson().toJson(bean));
-                }
+                }*/
                 Map<String, Object> param = new HashMap<>();
-                param.put("persons", personList);
+                param.put("persons", new Gson().toJson(allList));
                 param.put("files", fileList);
                 param.put("canteenId", canteenId);
                 param.put("typeId", typeId);

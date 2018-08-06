@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.ScanResultBean;
+import com.cxzy.xxjg.bean.ResultItemBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,9 @@ import java.util.List;
 public class ScanResultAdapter extends BaseAdapter {
 
     private Context mContext ;
-    private List<ScanResultBean> data = new ArrayList<>();
+    private List<ResultItemBean> data = new ArrayList<>();
 
-    public ScanResultAdapter(Context mContext , List<ScanResultBean> data){
+    public ScanResultAdapter(Context mContext , List<ResultItemBean> data){
         this.mContext = mContext ;
         this.data = data ;
     }
@@ -34,7 +35,7 @@ public class ScanResultAdapter extends BaseAdapter {
     }
 
     @Override
-    public ScanResultBean getItem(int i) {
+    public ResultItemBean getItem(int i) {
         return data.get(i);
     }
 
@@ -56,9 +57,9 @@ public class ScanResultAdapter extends BaseAdapter {
             holder = (ScanResultHolder) convertView.getTag();
         }
 
-        ScanResultBean info = getItem(position);
+        ResultItemBean info = getItem(position);
         holder.tvValue.setText(info.value);
-        holder.tvKey.setText(info.key);
+        holder.tvKey.setText(info.name + ":");
 
         return convertView;
     }

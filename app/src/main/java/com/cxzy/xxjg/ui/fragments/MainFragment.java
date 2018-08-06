@@ -34,6 +34,7 @@ import com.cxzy.xxjg.ui.activitys.PurchaseActivity;
 import com.cxzy.xxjg.ui.activitys.RegulatoryInformationActivity;
 import com.cxzy.xxjg.ui.activitys.RetentionManageActivity;
 import com.cxzy.xxjg.ui.activitys.ScanActivity;
+import com.cxzy.xxjg.ui.activitys.ScanResultActivity;
 import com.cxzy.xxjg.ui.activitys.SplashActivityActivity;
 import com.cxzy.xxjg.ui.activitys.TrialManagementActivity;
 import com.cxzy.xxjg.ui.activitys.VideoActivity;
@@ -202,18 +203,34 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         String result = mPresenter.getZxingResult(requestCode, resultCode, data);
-        if (TextUtils.isEmpty(result)) {
+        String url = "" ;
+        if (!TextUtils.isEmpty(result)) {
             ToastUtil.showShort(MyApp.appComponent.getContext(), result);
             String str = result.substring(0, 1);
             switch (str) {
-                case "0"://
-
+                case "1"://采购
+                    url = "api/scan/purchase";
+                    Intent intent1 = new Intent(mContext , ScanResultActivity.class);
+                    intent1.putExtra("url" , url);
+                    intent1.putExtra("type" , 1);
+                    intent1.putExtra("barCode" , result);
+                    startActivity(intent1);
                     break;
-                case "1"://
-
+                case "2"://留样
+                    url = "api/scan/reserved";
+                    Intent intent2 = new Intent(mContext , ScanResultActivity.class);
+                    intent2.putExtra("url" , url);
+                    intent2.putExtra("type" , 2);
+                    intent2.putExtra("barCode" , result);
+                    startActivity(intent2);
                     break;
-                case "2"://
-
+                case "3"://存放
+                    url = "api/scan/saved";
+                    Intent intent3 = new Intent(mContext , ScanResultActivity.class);
+                    intent3.putExtra("url" , url);
+                    intent3.putExtra("type" , 3);
+                    intent3.putExtra("barCode" , result);
+                    startActivity(intent3);
                     break;
                 default:
                     ToastUtil.showShort(mContext, "扫描条码有误");
