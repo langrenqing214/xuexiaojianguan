@@ -108,6 +108,7 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
     public void refreshView(Object mData) {
         if (mData != null) {
             RetentionBean bean = (RetentionBean) mData;
+            mAdapter.setData(bean.list);
             if (bean.list != null && bean.list.size() == pageSize){
                 srlRetention.setEnableLoadMore(true);;//启用加载;
             }else {

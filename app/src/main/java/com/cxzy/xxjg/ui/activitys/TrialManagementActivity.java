@@ -114,8 +114,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
             TrialBean bean = (TrialBean) mData;
             mAdapter.setData(bean.list);
             if (bean.list != null && bean.list.size() == pageSize) {
-                srlTrial.setEnableLoadMore(true);
-                ;//启用加载;
+                srlTrial.setEnableLoadMore(true);//启用加载;
             } else {
                 srlTrial.setEnableLoadMore(false);
             }

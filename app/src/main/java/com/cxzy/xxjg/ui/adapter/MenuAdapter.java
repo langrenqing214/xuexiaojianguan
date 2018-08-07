@@ -55,7 +55,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
         Long releaseTime =  TextUtils.isEmpty(info.releaseTime) ? 0 : Long.valueOf(info.releaseTime);
         if (localTime - releaseTime > 3*24*60*60*1000){
             holder.ivTimeShow.setBackgroundResource(R.drawable.ico_time_gray);
-            holder.llEditMenu.setVisibility(View.GONE);
+            holder.llEditMenu.setVisibility(View.INVISIBLE);
         }else {
             holder.ivTimeShow.setBackgroundResource(R.drawable.ico_time);
             holder.llEditMenu.setVisibility(View.VISIBLE);

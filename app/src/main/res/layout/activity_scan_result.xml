@@ -49,7 +49,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="历史警告"
             android:textColor="@android:color/white"
             android:textSize="14dp"
             android:textStyle="bold" />
@@ -72,6 +71,8 @@
         android:layout_marginTop="20dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:background="@drawable/btn_green_box"
         />
 

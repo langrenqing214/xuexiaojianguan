@@ -25,6 +25,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import java.io.File;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackManager;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by demo on 2018/6/25.
@@ -58,6 +59,8 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        JPushInterface.setDebugMode(false);//测试版为true
+        JPushInterface.init(this);     		// 初始化 JPush
         Utils.init(this);//一个utils库的初始化 https://github.com/Blankj/AndroidUtilCode/blob/master/README-CN.md
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))

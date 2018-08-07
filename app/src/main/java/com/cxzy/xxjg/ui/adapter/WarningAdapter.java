@@ -23,8 +23,9 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
     private List<WarningItemBean> data = new ArrayList<>();
     private DealItemClickListener mListener ;
 
-    public WarningAdapter(DealItemClickListener mListener){
+    public WarningAdapter(DealItemClickListener mListener, List<WarningItemBean> itemList){
         this.mListener = mListener ;
+        this.data = itemList ;
     }
 
 

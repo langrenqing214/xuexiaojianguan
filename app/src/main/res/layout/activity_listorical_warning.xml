@@ -66,16 +66,12 @@
         app:srlEnableAutoLoadMore="false"
         app:srlEnableOverScrollBounce="false">
 
-        <com.cxzy.xxjg.wideget.SimpleMultiStateView
-            android:id="@+id/SimpleMultiStateView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_warning"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </com.cxzy.xxjg.wideget.SimpleMultiStateView>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

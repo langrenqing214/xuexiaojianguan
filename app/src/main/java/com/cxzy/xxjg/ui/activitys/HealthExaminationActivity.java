@@ -135,12 +135,13 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
 
     @Override
     public void refreshView(Object mData) {
-        rgCheck.check(R.id.rb_morning_check);
         if (mData != null) {
             bean = (HealthExaminationBean) mData;
             personBean.clear();
             personBean.addAll(bean.persons);
         }
+        rgCheck.check(R.id.rb_morning_check);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

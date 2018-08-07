@@ -4,6 +4,7 @@ import com.cxzy.xxjg.MainActivity;
 import com.cxzy.xxjg.ui.activitys.AddMenuActivity;
 import com.cxzy.xxjg.ui.activitys.AddRetentionActivity;
 import com.cxzy.xxjg.ui.activitys.AddTrialActivity;
+import com.cxzy.xxjg.ui.activitys.ChangePasswordActivity;
 import com.cxzy.xxjg.ui.activitys.HealthExaminationActivity;
 import com.cxzy.xxjg.ui.activitys.ListoricalWarningActivity;
 import com.cxzy.xxjg.ui.activitys.LoginActivity;
@@ -12,6 +13,7 @@ import com.cxzy.xxjg.ui.activitys.PurchaseActivity;
 import com.cxzy.xxjg.ui.activitys.RetentionManageActivity;
 import com.cxzy.xxjg.ui.activitys.ScanResultActivity;
 import com.cxzy.xxjg.ui.activitys.TrialManagementActivity;
+import com.cxzy.xxjg.ui.activitys.VideoActivity;
 import com.cxzy.xxjg.ui.fragments.MainFragment;
 
 import dagger.Component;
@@ -34,4 +36,6 @@ public interface HttpComponent {
     void inject(AddTrialActivity addTrialActivity);
     void inject(HealthExaminationActivity examinationActivity);
     void inject(ScanResultActivity scanResultActivity);
+    void inject(VideoActivity videoActivity);
+    void inject(ChangePasswordActivity changePasswordActivity);
 }

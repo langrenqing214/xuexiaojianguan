@@ -25,6 +25,7 @@ import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectTimeDialog;
+import com.cxzy.xxjg.dialog.SelectTrialReactionDialog;
 import com.cxzy.xxjg.net.Constants;
 import com.cxzy.xxjg.ui.test.presenter.AddTrialPresenterImpl;
 import com.cxzy.xxjg.utils.DateUtil;
@@ -36,6 +37,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -44,7 +46,7 @@ import butterknife.OnClick;
 /**
  * 添加试吃
  */
-public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, SelectTrialReactionDialog.SelectTrialListener {
 
     @BindView(R.id.tv_select_canteen)
     TextView tvSelectCanteen;
@@ -68,6 +70,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
     private String canteenName = "";
     private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE = 1;
     private File file;
+    private String trialState = "";//试吃反应
 
     @Override
     public int getContentLayout() {
@@ -108,7 +111,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
 
     }
 
-    @OnClick({R.id.back_btn_id, R.id.btn_add_trial, R.id.tv_select_canteen, R.id.tv_trial_time, R.id.iv_add_trial_pic})
+    @OnClick({R.id.back_btn_id, R.id.btn_add_trial, R.id.tv_select_canteen, R.id.tv_trial_time, R.id.iv_add_trial_pic, R.id.tv_select_trial_reaction})
     @Override
     public void onViewClicked(View view) {
 
@@ -137,6 +140,13 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
                     startActivityForResult(intent, Constants.FLAG_CHOOSE_IMG);
                 }
                 break;
+            case R.id.tv_select_trial_reaction://选择试吃反应
+                List<String> trialList = new ArrayList<>();
+                trialList.add("正常");
+                trialList.add("异常");
+                SelectTrialReactionDialog dialog = new SelectTrialReactionDialog(this , trialList , this);
+                dialog.show();
+                break;
             case R.id.btn_add_trial://添加试吃
                 String foodName = etFoodName.getText().toString().trim();
                 String trialPerson = etTrialPerson.getText().toString().trim();
@@ -148,7 +158,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
                 param.put("eatPerson", trialPerson);
                 param.put("eatTime", createDateStart);
                 param.put("internalTime", timeInterval);
-                param.put("status", "NORMAL");
+                param.put("status", trialState);
                 param.put("remarks", trialDes);
                 param.put("eatImage", file);
                 mPresenter.saveTrial(param);
@@ -212,16 +222,26 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
         String data = DateUtil.date2MMddWeek(startcal.getTime());
         createDateStart = DateUtil.date2NYR(startcal.getTime());
         tvTrialTime.setText(data);
-        TimePickerDialog dialog = new TimePickerDialog(AddTrialActivity.this , TimePicker.AUTOFILL_TYPE_LIST,this , 8 , 00 , true);
+        TimePickerDialog dialog = new TimePickerDialog(AddTrialActivity.this, TimePicker.AUTOFILL_TYPE_LIST, this, 8, 00, true);
         dialog.show();
     }
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
         Calendar startcal = Calendar.getInstance();
-        startcal.set(Calendar.HOUR,hour);
-        startcal.set(Calendar.MINUTE,minute);
+        startcal.set(Calendar.HOUR, hour);
+        startcal.set(Calendar.MINUTE, minute);
         createDateStart = createDateStart + " " + new java.text.SimpleDateFormat("HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
 
+    }
+
+    @Override
+    public void selectTrialItem(int positon, String trial) {
+        if ("正常".equals(trial)){
+            trialState = "NORMAL";
+        }else {
+            trialState = "ERROR";
+        }
+        tvSelectTrialReaction.setText(trial);
     }
 }

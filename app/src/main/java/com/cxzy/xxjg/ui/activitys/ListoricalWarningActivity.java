@@ -16,6 +16,7 @@ import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
 import com.cxzy.xxjg.bean.SchoolCanteenBean;
 import com.cxzy.xxjg.bean.WarningBean;
+import com.cxzy.xxjg.bean.WarningItemBean;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
@@ -32,6 +33,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -65,6 +67,7 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     private String dateStart = "";
     private String dateEnd = "";
     private String level;
+    private List<WarningItemBean> itemList = new ArrayList<>();
 
     @Override
     public int getContentLayout() {
@@ -98,7 +101,7 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
         srlWarning.setEnableLoadMore(false);
 
         rvWarning.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new WarningAdapter(this);
+        mAdapter = new WarningAdapter(this , itemList);
         rvWarning.setAdapter(mAdapter);
     }
 
@@ -111,7 +114,11 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     public void refreshView(Object mData) {
         if(mData != null) {
             WarningBean bean = (WarningBean) mData;
-            mAdapter.setData(bean.list);
+            if (page == 1){
+                itemList.clear();
+            }
+            itemList.addAll(bean.list);
+            mAdapter.setData(itemList);
             if (bean.list != null && bean.list.size() == pageSize){
                 srlWarning.setEnableLoadMore(true);;//启用加载;
             }else {

@@ -8,6 +8,8 @@ import com.cxzy.xxjg.net.AddRetentionService;
 import com.cxzy.xxjg.net.AddTrialApi;
 import com.cxzy.xxjg.net.AddTrialService;
 import com.cxzy.xxjg.http.ApiConstants;
+import com.cxzy.xxjg.net.ChangePwdApi;
+import com.cxzy.xxjg.net.ChangePwdService;
 import com.cxzy.xxjg.net.HealthExaminationApi;
 import com.cxzy.xxjg.net.HealthExaminationService;
 import com.cxzy.xxjg.net.LoginApi;
@@ -25,6 +27,8 @@ import com.cxzy.xxjg.net.ScanResultApi;
 import com.cxzy.xxjg.net.ScanResultService;
 import com.cxzy.xxjg.net.TrialManagementApi;
 import com.cxzy.xxjg.net.TrialManagementService;
+import com.cxzy.xxjg.net.VideoApi;
+import com.cxzy.xxjg.net.VideoService;
 import com.cxzy.xxjg.net.WarningApi;
 import com.cxzy.xxjg.net.WarningService;
 import com.cxzy.xxjg.net.testApi;
@@ -259,5 +263,35 @@ public class HttpModule {
         return ScanResultApi.getInstance(retrofitBuilder
                 .baseUrl(ApiConstants.sIFengApi)
                 .build().create(ScanResultService.class));
+    }
+
+    //视频
+    @Provides
+    VideoApi provideNetVideo(OkHttpClient.Builder builder) {
+        builder.addInterceptor(RetrofitConfig.sQueryParameterInterceptor);
+
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(builder.build());
+
+        return VideoApi.getInstance(retrofitBuilder
+                .baseUrl(ApiConstants.sIFengApi)
+                .build().create(VideoService.class));
+    }
+
+    //修改密码
+    @Provides
+    ChangePwdApi provideNetChangePwd(OkHttpClient.Builder builder) {
+        builder.addInterceptor(RetrofitConfig.sQueryParameterInterceptor);
+
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(builder.build());
+
+        return ChangePwdApi.getInstance(retrofitBuilder
+                .baseUrl(ApiConstants.sIFengApi)
+                .build().create(ChangePwdService.class));
     }
 }

@@ -25,6 +25,7 @@ import com.cxzy.xxjg.bean.MainFragmentBean;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.ui.activitys.AboutUsActivity;
+import com.cxzy.xxjg.ui.activitys.ChangePasswordActivity;
 import com.cxzy.xxjg.ui.activitys.HealthExaminationActivity;
 import com.cxzy.xxjg.ui.activitys.ListoricalWarningActivity;
 import com.cxzy.xxjg.ui.activitys.LoginActivity;
@@ -37,6 +38,7 @@ import com.cxzy.xxjg.ui.activitys.ScanActivity;
 import com.cxzy.xxjg.ui.activitys.ScanResultActivity;
 import com.cxzy.xxjg.ui.activitys.SplashActivityActivity;
 import com.cxzy.xxjg.ui.activitys.TrialManagementActivity;
+import com.cxzy.xxjg.ui.activitys.UserProtocolActivity;
 import com.cxzy.xxjg.ui.activitys.VideoActivity;
 import com.cxzy.xxjg.ui.test.contract.IMainFragmentContract;
 import com.cxzy.xxjg.ui.test.presenter.MainFragmentContractPresenterImpl;
@@ -114,7 +116,8 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
 
     @OnClick({R.id.button_test, R.id.iv_to_zxing, R.id.cv_listorical_warning, R.id.cv_regulatory_information, R.id.cv_video, R.id.cv_menu,
             R.id.cv_purchase, R.id.cv_health_examination, R.id.cv_retention_manage, R.id.cv_trial_management, R.id.ll_my_canteen,
-            R.id.ll_exit_login, R.id.tv_alarm, R.id.tv_warning, R.id.tv_deal, R.id.ll_about_us})
+            R.id.ll_exit_login, R.id.tv_alarm, R.id.tv_warning, R.id.tv_deal, R.id.ll_about_us , R.id.ll_user_protocol ,
+            R.id.ll_change_password})
     public void onViewClicked(View view) {
         super.onViewClicked(view);
         switch (view.getId()) {
@@ -141,7 +144,9 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
                 startActivity(new Intent(mContext, RegulatoryInformationActivity.class));
                 break;
             case R.id.cv_video://视频
-                startActivity(new Intent(mContext, VideoActivity.class));
+                Intent videoIntent = new Intent(mContext, VideoActivity.class);
+                videoIntent.putExtra("canteenList", bean.canteenList);
+                startActivity(videoIntent);
                 break;
             case R.id.cv_menu://菜谱
                 Intent menuIntent = new Intent(mContext, MenuActivity.class);
@@ -196,6 +201,12 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
                 Intent aboutIntent = new Intent(mContext, AboutUsActivity.class);
                 aboutIntent.putExtra("localVersion", localVersion);
                 startActivity(aboutIntent);
+                break;
+            case R.id.ll_user_protocol ://用户协议
+                startActivity(new Intent(mContext , UserProtocolActivity.class));
+                break;
+            case R.id.ll_change_password ://修改密码
+                startActivity(new Intent(mContext , ChangePasswordActivity.class));
                 break;
         }
     }

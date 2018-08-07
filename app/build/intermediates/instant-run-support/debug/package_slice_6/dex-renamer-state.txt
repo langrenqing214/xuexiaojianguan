@@ -1,4 +1,0 @@
-#Thu Aug 02 23:13:20 CST 2018
-base.0=/Users/tianwei/Desktop/xuexiaojianguan/app/build/intermediates/transforms/dexMerger/debug/6
-path.0=classes.dex
-renamed.0=classes.dex

@@ -54,6 +54,7 @@
         android:layout_marginTop="10dp" />
 
     <LinearLayout
+        android:id="@+id/ll_change_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -100,6 +101,7 @@
         android:visibility="gone"/>
 
     <LinearLayout
+        android:id="@+id/ll_user_protocol"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
