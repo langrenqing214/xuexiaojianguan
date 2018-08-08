@@ -22,4 +22,5 @@
     <color name="bg_blue">#0076ff</color>
     <color name="white90">#f2f2f2</color>
     <color name="A6">#AAAAAA</color>
+    <color name="controller_bg">#80000000</color>
 </resources>

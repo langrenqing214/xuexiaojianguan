@@ -1,11 +1,11 @@
 package com.cxzy.xxjg.ui.activitys;
 
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.TextView;
@@ -19,21 +19,25 @@ import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectPosintionDialog;
+import com.cxzy.xxjg.ui.test.contract.IVideoContract;
 import com.cxzy.xxjg.ui.test.presenter.VideoPresenterImpl;
+import com.cxzy.xxjg.wideget.videoview.MyVideoViewController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 /**
  * 视频
  */
-public class VideoActivity extends BaseActivity<VideoPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, SelectPosintionDialog.SelectCanteenPositionListener {
+public class VideoActivity extends BaseActivity<VideoPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, SelectPosintionDialog.SelectCanteenPositionListener , IVideoContract.View {
 
-    @BindView(R.id.vv_video)
-    VideoView mVideoView;
+    @BindView(R.id.videoplayer)
+    JCVideoPlayerStandard mVideoView;
     @BindView(R.id.ll_canteen_select)
     LinearLayout llCanteenSelect;
     @BindView(R.id.tv_canteen_show)
@@ -42,6 +46,10 @@ public class VideoActivity extends BaseActivity<VideoPresenterImpl> implements S
     LinearLayout llTimeSelect;
     @BindView(R.id.tv_time_show)
     TextView tvTimeShow;
+//    @BindView(R.id.fl_vodeo)
+//    FrameLayout flVideo ;
+//    @BindView(R.id.mv_video)
+//    MyVideoViewController myVideo ;
     private String canteenId;
     private ArrayList<SchoolCanteenBean> dataList = new ArrayList<>();
     private String videoUrl = "";
@@ -68,16 +76,15 @@ public class VideoActivity extends BaseActivity<VideoPresenterImpl> implements S
         canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id;
         String canteenName = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name;
         tvCanteenShow.setText(canteenName);
+        mVideoView.thumbImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        mVideoView.backButton.setVisibility(View.GONE);
+        mVideoView.titleTextView.setVisibility(View.GONE);
+        mVideoView.tinyBackImageView.setVisibility(View.GONE);
         mPresenter.getVideoList(canteenId);
     }
 
     @Override
     public void initData() {
-        setupVideo();
-//        mVideoView.setVideoURI(Uri.parse("http://cache.utovr.com/201508270528174780.m3u8"));
-
-        // 开始播放视频
-//        mVideoView.start();
     }
 
     @Override
@@ -87,8 +94,11 @@ public class VideoActivity extends BaseActivity<VideoPresenterImpl> implements S
                 beanList = (List<VideoBean>) mData;
                 tvTimeShow.setText(beanList.get(0).position);
                 videoUrl = beanList.get(0).videoUrl ;
-                stopPlaybackVideo();
-                setupVideo();
+//                mVideoView.setVideoPath(videoUrl);
+//                myVideo.setVideoUrl(this , videoUrl);
+                mVideoView.setUp(videoUrl
+                        , JCVideoPlayerStandard.SCREEN_LAYOUT_LIST, "");
+                mVideoView.onClick(mVideoView.thumbImageView);
             }
         }catch (Exception e){}
 
@@ -124,7 +134,21 @@ public class VideoActivity extends BaseActivity<VideoPresenterImpl> implements S
         }
     }
 
-    private void setupVideo() {
+    @Override
+    public void onBackPressedSupport() {
+        if (JCVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressedSupport();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
+    }
+
+    /*private void setupVideo() {
         //设置视频控制器
         mVideoView.setMediaController(new MediaController(this));
 
@@ -188,7 +212,7 @@ public class VideoActivity extends BaseActivity<VideoPresenterImpl> implements S
             e.printStackTrace();
         }
     }
-
+*/
     @Override
     public void selectCanteenItem(int positon, String canteenName, String canteenId) {
         this.canteenId = canteenId ;
@@ -200,7 +224,7 @@ public class VideoActivity extends BaseActivity<VideoPresenterImpl> implements S
     public void selectCanteenPositionItem(int positon, String canteenPosition, String videoUrl) {
         this.videoUrl = videoUrl ;
         tvTimeShow.setText(canteenPosition);
-        setupVideo();
-        setupVideo();
+//        setupVideo();
+//        setupVideo();
     }
 }

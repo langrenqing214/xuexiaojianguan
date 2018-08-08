@@ -12,6 +12,7 @@ import com.cxzy.xxjg.ui.test.BaseView;
 public interface IVideoContract {
 
     interface View extends BaseContract.BaseView {
+
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {

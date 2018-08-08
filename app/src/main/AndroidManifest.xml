@@ -218,7 +218,8 @@
         <activity
             android:name=".ui.activitys.VideoActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Transparent"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/AppTheme.NoBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activitys.MenuActivity"
