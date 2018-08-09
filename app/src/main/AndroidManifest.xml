@@ -217,10 +217,9 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activitys.VideoActivity"
-            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:theme="@style/AppTheme.NoBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".ui.activitys.MenuActivity"
             android:screenOrientation="portrait"

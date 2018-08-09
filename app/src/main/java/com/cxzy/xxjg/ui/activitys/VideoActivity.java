@@ -21,15 +21,14 @@ import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectPosintionDialog;
 import com.cxzy.xxjg.ui.test.contract.IVideoContract;
 import com.cxzy.xxjg.ui.test.presenter.VideoPresenterImpl;
-import com.cxzy.xxjg.wideget.videoview.MyVideoViewController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
+import cn.jzvd.JZVideoPlayer;
+import cn.jzvd.JZVideoPlayerStandard;
 
 /**
  * 视频
@@ -37,7 +36,7 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 public class VideoActivity extends BaseActivity<VideoPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, SelectPosintionDialog.SelectCanteenPositionListener , IVideoContract.View {
 
     @BindView(R.id.videoplayer)
-    JCVideoPlayerStandard mVideoView;
+    JZVideoPlayerStandard mVideoView;
     @BindView(R.id.ll_canteen_select)
     LinearLayout llCanteenSelect;
     @BindView(R.id.tv_canteen_show)
@@ -71,20 +70,25 @@ public class VideoActivity extends BaseActivity<VideoPresenterImpl> implements S
 
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
-        setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
+//        setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
         dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
         canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id;
         String canteenName = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name;
         tvCanteenShow.setText(canteenName);
-        mVideoView.thumbImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        mVideoView.backButton.setVisibility(View.GONE);
-        mVideoView.titleTextView.setVisibility(View.GONE);
-        mVideoView.tinyBackImageView.setVisibility(View.GONE);
+//        mVideoView.thumbImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//        mVideoView.backButton.setVisibility(View.GONE);
+//        mVideoView.titleTextView.setVisibility(View.GONE);
+//        mVideoView.tinyBackImageView.setVisibility(View.GONE);
         mPresenter.getVideoList(canteenId);
     }
 
     @Override
     public void initData() {
+    }
+
+    @Override
+    public boolean isSupportSwipeBack() {
+        return true;
     }
 
     @Override
@@ -96,8 +100,7 @@ public class VideoActivity extends BaseActivity<VideoPresenterImpl> implements S
                 videoUrl = beanList.get(0).videoUrl ;
 //                mVideoView.setVideoPath(videoUrl);
 //                myVideo.setVideoUrl(this , videoUrl);
-                mVideoView.setUp(videoUrl
-                        , JCVideoPlayerStandard.SCREEN_LAYOUT_LIST, "");
+                mVideoView.setUp(videoUrl , JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, "");
                 mVideoView.onClick(mVideoView.thumbImageView);
             }
         }catch (Exception e){}
@@ -136,7 +139,7 @@ public class VideoActivity extends BaseActivity<VideoPresenterImpl> implements S
 
     @Override
     public void onBackPressedSupport() {
-        if (JCVideoPlayer.backPress()) {
+        if (JZVideoPlayer.backPress()) {
             return;
         }
         super.onBackPressedSupport();
@@ -145,7 +148,7 @@ public class VideoActivity extends BaseActivity<VideoPresenterImpl> implements S
     @Override
     protected void onPause() {
         super.onPause();
-        JCVideoPlayer.releaseAllVideos();
+        JZVideoPlayer.releaseAllVideos();
     }
 
     /*private void setupVideo() {

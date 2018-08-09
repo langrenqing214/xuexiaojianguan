@@ -216,7 +216,6 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
         String result = mPresenter.getZxingResult(requestCode, resultCode, data);
         String url = "" ;
         if (!TextUtils.isEmpty(result)) {
-            ToastUtil.showShort(MyApp.appComponent.getContext(), result);
             String str = result.substring(0, 1);
             switch (str) {
                 case "1"://采购
@@ -254,15 +253,16 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
 
     @Override
     public void refreshView(Object mData) {
-        bean = (MainFragmentBean) mData;
-        tvAlarm.setText(bean.alarmTotal);
-        tvWarning.setText(bean.warnTotal);
-        tvDeal.setText(bean.dealTotal);
+        if (mData != null) {
+            bean = (MainFragmentBean) mData;
+            tvAlarm.setText(bean.alarmTotal);
+            tvWarning.setText(bean.warnTotal);
+            tvDeal.setText(bean.dealTotal);
+        }
     }
 
     @Override
     public void refreshFaild() {
-
     }
 
     protected void exitdialog() {

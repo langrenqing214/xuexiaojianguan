@@ -1,5 +1,7 @@
 package com.cxzy.xxjg.base;
 
+import android.content.Context;
+
 import com.cxzy.xxjg.utils.ToastUtil;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
@@ -37,6 +39,8 @@ public interface BaseContract {
 
         //重试
         void onRetry();
+
+        Context getDialogContext();
 
         /**
          * 绑定生命周期

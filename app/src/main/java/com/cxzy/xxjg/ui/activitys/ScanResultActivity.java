@@ -49,6 +49,7 @@ public class ScanResultActivity extends BaseActivity<ScanResultPresenterImpl> im
     private String barCode;
     private ScanResultBean bean;
     private int type = 0;//1:采购，2:留样，3:存放
+    private int putType = 0 ;//0 进页面接口访问 1 不为进页面接口访问
 
     @Override
     public int getContentLayout() {
@@ -107,8 +108,10 @@ public class ScanResultActivity extends BaseActivity<ScanResultPresenterImpl> im
             }
         } catch (Exception e) {
         }
-        ToastUtil.showShort(this , "提交成功");
-        finish();
+        if (putType == 1) {
+            ToastUtil.showShort(this, "提交成功");
+            finish();
+        }
     }
 
     @Override
@@ -130,6 +133,7 @@ public class ScanResultActivity extends BaseActivity<ScanResultPresenterImpl> im
                 finish();
                 break;
             case R.id.btn_scan_result://扫描处理
+                putType = 1 ;
                 Map<String, Object> param = new HashMap<>();
                 for (ResultItemBean info : bean.hiddenList) {
                     param.put(info.key, info.value);

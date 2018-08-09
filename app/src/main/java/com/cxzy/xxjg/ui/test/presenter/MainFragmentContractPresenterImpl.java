@@ -44,29 +44,5 @@ public class MainFragmentContractPresenterImpl extends BasePresenter<IMainFragme
     @Override
     public void getUserInfo() {
         invoke(api.getUserInfo());
-        /*api.getUserInfo()
-                .compose(RxSchedulers.<Object>applySchedulers())
-                .compose(mView.<Object>bindToLife())
-                .subscribe(new Observer<Object>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Object o) {
-                        mView.getUserInfo(o);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("haha" , e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });*/
     }
 }

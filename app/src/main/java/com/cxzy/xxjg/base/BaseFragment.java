@@ -2,6 +2,7 @@ package com.cxzy.xxjg.base;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.app.MyApp;
+import com.cxzy.xxjg.ui.activitys.LoginActivity;
 import com.cxzy.xxjg.utils.DialogHelper;
 import com.cxzy.xxjg.utils.NetUtil;
 import com.cxzy.xxjg.utils.ToastUtil;
@@ -102,6 +104,16 @@ public abstract class BaseFragment <T1 extends BaseContract.BasePresenter> exten
 
     }
 
+    @Override
+    public Context getDialogContext() {
+        return getContext();
+    }
+
+    @Override
+    public void refreshFaild() {
+        startActivity(new Intent(mContext , LoginActivity.class));
+        getActivity().finish();
+    }
 
     protected void showLoadingDialog() {
         if (mLoadingDialog != null)

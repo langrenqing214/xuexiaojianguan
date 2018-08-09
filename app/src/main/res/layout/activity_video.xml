@@ -58,19 +58,9 @@
 
     <include layout="@layout/layout_communal_select" />
 
-    <!--<FrameLayout
-        android:id="@+id/fl_vodeo"
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
-
-        <VideoView
-            android:id="@+id/vv_video"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>-->
-
-    <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+    <cn.jzvd.JZVideoPlayerStandard
         android:id="@+id/videoplayer"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="200dp"
+        android:background="@color/white"/>
 </LinearLayout>

@@ -112,6 +112,11 @@ public abstract class BaseActivity<T1 extends BaseContract.BasePresenter> extend
                 });
     }
 
+    @Override
+    public Context getDialogContext() {
+        return this;
+    }
+
     /**
      * 初始化滑动返回。在 super.onCreate(savedInstanceState) 之前调用该方法
      */
@@ -205,6 +210,7 @@ public abstract class BaseActivity<T1 extends BaseContract.BasePresenter> extend
 
     @Override
     public void showLoading() {
+        showLoadingDialog();
         if (mSimpleMultiStateView != null) {
             mSimpleMultiStateView.showLoadingView();
         }
@@ -212,6 +218,7 @@ public abstract class BaseActivity<T1 extends BaseContract.BasePresenter> extend
 
     @Override
     public void showSuccess() {
+        hideLoadingDialog();
         if (mSimpleMultiStateView != null) {
             mSimpleMultiStateView.showContent();
         }
@@ -219,6 +226,7 @@ public abstract class BaseActivity<T1 extends BaseContract.BasePresenter> extend
 
     @Override
     public void showFaild() {
+        hideLoadingDialog();
         if (mSimpleMultiStateView != null) {
             mSimpleMultiStateView.showErrorView();
         }
