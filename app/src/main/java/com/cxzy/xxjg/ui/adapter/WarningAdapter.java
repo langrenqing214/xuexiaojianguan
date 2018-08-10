@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
@@ -37,7 +38,7 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
 
     @Override
     public void onBindViewHolder(WarningHolder holder, final int position) {
-        WarningItemBean info = data.get(position);
+        final WarningItemBean info = data.get(position);
         switch (info.level){
             case "ALARM" ://警告
                 holder.stateShow.setBackgroundResource(R.drawable.circle_red);
@@ -49,13 +50,20 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
                 holder.stateShow.setBackgroundResource(R.drawable.circle_green);
                 break;
         }
+
+        if ("DEAL_END".equals(info.dealState)){//已处理
+            holder.btnDealWarning.setVisibility(View.GONE);
+        }else {//未处理
+            holder.btnDealWarning.setVisibility(View.VISIBLE);
+        }
+
         holder.tvStateDes.setText(info.configDesc);
         holder.tvCheckTime.setText(DateUtil.date2NYRSF(DateUtil.string2Date(info.dealDate == null ? "" : info.dealDate , "yyyy-MM-dd")));
         holder.tvAbnormalTerm.setText(info.remarks);
-        holder.stateShow.setOnClickListener(new View.OnClickListener() {
+        holder.btnDealWarning.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.dealItemClickListener(position);
+                mListener.dealItemClickListener(position , info);
             }
         });
     }
@@ -70,7 +78,7 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
     }
 
     public interface DealItemClickListener{
-        void dealItemClickListener(int position);
+        void dealItemClickListener(int position , WarningItemBean info);
     }
 
     class WarningHolder extends RecyclerView.ViewHolder{
@@ -79,6 +87,7 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
         TextView tvStateDes ;
         TextView tvCheckTime ;
         TextView tvAbnormalTerm ;
+        Button btnDealWarning ;
 
         public WarningHolder(View itemView) {
             super(itemView);
@@ -86,7 +95,7 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
             tvStateDes = itemView.findViewById(R.id.tv_state_des);
             tvCheckTime = itemView.findViewById(R.id.tv_check_time);
             tvAbnormalTerm = itemView.findViewById(R.id.tv_abnormal_term);
-
+            btnDealWarning = itemView.findViewById(R.id.btn_deal_warning);
         }
     }
 

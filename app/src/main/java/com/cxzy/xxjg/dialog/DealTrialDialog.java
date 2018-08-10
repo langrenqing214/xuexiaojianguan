@@ -106,6 +106,12 @@ public class DealTrialDialog extends Dialog implements View.OnClickListener, Dat
             case R.id.btn_deal_trial: //正提交
                 String intervalTime = etIntervalTime.getText().toString().trim();
                 String remarks = etRemarks.getText().toString().trim();
+
+                if (TextUtils.isEmpty(status)){
+                    ToastUtil.showShort(mContext , "请选择是否正常");
+                    return;
+                }
+
                 if (TextUtils.isEmpty(intervalTime)){
                     ToastUtil.showShort(mContext , "请输入间隔时间");
                     return;

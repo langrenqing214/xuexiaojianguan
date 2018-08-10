@@ -80,6 +80,7 @@ public class PhotoWallActivity extends BaseActivity implements PhotoWallAdapter.
     Button confirmBtn;
     @BindView(R.id.photo_wall_ok)
     Button okBtn;
+    private int maxNumber;
 
     @Override
     public int getContentLayout() {
@@ -108,9 +109,10 @@ public class PhotoWallActivity extends BaseActivity implements PhotoWallAdapter.
     @Override
     public void initData() {
         number = getIntent().getIntExtra("number", 0);
+        maxNumber = getIntent().getIntExtra("maxNumber", 5);
         isRadio = getIntent().getBooleanExtra("isRadio", false);
         if (isRadio) {
-            number = 8;
+            number = 0;
         }
 
 
@@ -132,7 +134,7 @@ public class PhotoWallActivity extends BaseActivity implements PhotoWallAdapter.
                 picList.add(p);
             }
         }
-        adapter = new PhotoWallAdapter(this, picList, number, this);
+        adapter = new PhotoWallAdapter(this, picList, number,maxNumber , this);
         mPhotoWall.setAdapter(adapter);
 
         //选择照片取消

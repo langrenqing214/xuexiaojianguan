@@ -1,5 +1,6 @@
 package com.cxzy.xxjg.ui.activitys;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -78,6 +79,8 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
     @Override
     public void refreshView(Object mData) {
         ToastUtil.showShort(this , "添加成功");
+        setResult(Activity.RESULT_OK);
+        finish();
     }
 
     @Override

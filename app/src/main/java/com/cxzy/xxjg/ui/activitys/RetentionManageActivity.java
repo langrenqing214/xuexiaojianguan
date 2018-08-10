@@ -1,5 +1,6 @@
 package com.cxzy.xxjg.ui.activitys;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
@@ -20,6 +22,7 @@ import com.cxzy.xxjg.bean.RetentionItemBean;
 import com.cxzy.xxjg.bean.SchoolCanteenBean;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
+import com.cxzy.xxjg.dialog.ScanResultDialog;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.ui.adapter.RetentionManageAdapter;
@@ -33,6 +36,9 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -40,7 +46,7 @@ import butterknife.OnClick;
 /**
  * 留样管理
  */
-public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, OnRefreshLoadMoreListener {
+public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, OnRefreshLoadMoreListener, RetentionManageAdapter.DealRetentionListener, ScanResultDialog.ScanResultListener {
 
     @BindView(R.id.rv_retention)
     RecyclerView rvRetention;
@@ -63,6 +69,9 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
     private String createDateEnd = "" ;
     private String dateStart = "";
     private String dateEnd = "";
+    private RetentionItemBean info ;
+    private int clickType = 0 ;//0 为未处理  1为处理
+    private List<RetentionItemBean> beanList = new ArrayList<>();
 
     @Override
     public int getContentLayout() {
@@ -92,10 +101,10 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
 
         srlRetention.setOnRefreshLoadMoreListener(this);
         srlRetention.setEnableLoadMore(false);
-
+        page = 0 ;
         mPresenter.getRetentionList(canteenId, createDateStart , createDateEnd , page, pageSize);
         rvRetention.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new RetentionManageAdapter(this);
+        mAdapter = new RetentionManageAdapter(this , this);
         rvRetention.setAdapter(mAdapter);
     }
 
@@ -108,12 +117,20 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
     public void refreshView(Object mData) {
         if (mData != null) {
             RetentionBean bean = (RetentionBean) mData;
-            mAdapter.setData(bean.list);
-            if (bean.list != null && bean.list.size() == pageSize){
-                srlRetention.setEnableLoadMore(true);;//启用加载;
+            if (page == 0){
+                beanList.clear();
+            }
+            beanList.addAll(bean.list);
+            mAdapter.setData(beanList);
+            if (beanList != null && beanList.size() < bean.total){
+                srlRetention.setEnableLoadMore(true);//启用加载;
             }else {
                 srlRetention.setEnableLoadMore(false);
             }
+        }
+
+        if (clickType == 1){
+            srlRetention.autoRefresh();
         }
         mAdapter.notifyDataSetChanged();
         srlRetention.finishRefresh();//结束刷新
@@ -142,7 +159,7 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
             case R.id.ll_add_retention://添加留样
                 Intent intent = new Intent(mContext, AddRetentionActivity.class);
                 intent.putExtra("canteenList", dataList);
-                startActivity(intent);
+                startActivityForResult(intent , 1);
                 break;
             case R.id.ll_canteen_select://选择食堂
                 SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this, dataList, this);
@@ -156,8 +173,17 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == 1){
+            srlRetention.autoRefresh();
+        }
+    }
+
+    @Override
     public void selectCanteenItem(int positon, String canteenName, String canteenId) {
         this.canteenId = canteenId ;
+        page = 0 ;
         tvCanteenShow.setText(canteenName);
         mPresenter.getRetentionList(canteenId , createDateStart , createDateEnd , page , pageSize);
     }
@@ -180,6 +206,7 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
                 dateEnd = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
                 createDateEnd = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
                 tvTimeShow.setText(createDateStart + "-" + createDateEnd);
+                page = 0 ;
                 mPresenter.getRetentionList(canteenId , createDateStart , createDateEnd , page , pageSize);
             }
         });
@@ -194,7 +221,34 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        page = 1 ;
+        page = 0 ;
         mPresenter.getRetentionList(canteenId , createDateStart , createDateEnd , page , pageSize);
+    }
+
+    //处理
+    @Override
+    public void dealRetentionListener(int position, RetentionItemBean info) {
+        this.info = info ;
+        ScanResultDialog dialog = new ScanResultDialog(this , 2 , this);
+        dialog.show();
+    }
+
+    //填写处理人
+    @Override
+    public void scanResult(String person, String num) {
+        if (TextUtils.isEmpty(person)){
+            ToastUtil.showShort(this , "处理人不能为空");
+            return;
+        }
+        clickType = 1 ;
+        Map<String, Object> param = new HashMap<>();
+        param.put("canteenId" , canteenId);
+        param.put("foodName" , info.foodName);
+        param.put("reservedTimeStr" , DateUtil.date2NYRSF(DateUtil.string2Date(info.reservedTime == null ? "" : info.reservedTime , "yyyy-MM-dd")));
+        param.put("expiryTimeStr" , DateUtil.date2NYRSF(DateUtil.string2Date(info.expiryTime == null ? "" : info.expiryTime , "yyyy-MM-dd")));
+        param.put("reservedPerson" , info.reservedPerson);
+        param.put("id" , info.id);
+        param.put("dealPerson " , person);
+        mPresenter.dealRetention(param);
     }
 }

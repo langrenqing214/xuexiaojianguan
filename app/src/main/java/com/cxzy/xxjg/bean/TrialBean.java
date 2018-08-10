@@ -16,7 +16,7 @@ public class TrialBean {
     public String orderBy;// null,
     public String startRow;// 1,
     public String endRow;// 1,
-    public String total;// 1,
+    public int total;// 1,
     public String pages;// 1,
     public List<TrialListBean> list = new ArrayList<>();
     public String firstPage;// 1,

@@ -29,8 +29,8 @@ import javax.inject.Inject;
  */
 public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivityContract.View> implements IPurchaseActivityContract.Presenter {
 
-    private List<String> pictureList = new ArrayList<String>();//图片地址集合
-    private List<String> originalPicList = new ArrayList<String>();//图片原始地址
+    private List<String> pictureList = new ArrayList<String>(5);//图片地址集合
+    private List<String> originalPicList = new ArrayList<String>(5);//图片原始地址
     private String picName;//图片名字
     private PurchaseApi api ;
 

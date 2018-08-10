@@ -82,8 +82,21 @@
         <TextView
             android:id="@+id/tv_abnormal_term"
             style="@style/main_text_style"
+            android:layout_weight="1"
             android:textSize="14dp"
             android:layout_marginRight="22dp"
+            />
+
+        <Button
+            android:id="@+id/btn_deal_warning"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_green_box"
+            android:text="处理"
+            android:textColor="@color/white"
+            android:textSize="12dp"
             />
 
     </LinearLayout>

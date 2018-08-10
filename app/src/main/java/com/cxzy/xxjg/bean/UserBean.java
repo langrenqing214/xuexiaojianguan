@@ -6,5 +6,5 @@ package com.cxzy.xxjg.bean;
  */
 
 public class UserBean {
-
+    public String loginName ;
 }

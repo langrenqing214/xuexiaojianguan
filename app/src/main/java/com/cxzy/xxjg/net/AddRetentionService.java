@@ -1,6 +1,7 @@
 package com.cxzy.xxjg.net;
 
 import com.cxzy.xxjg.bean.BaseBean;
+import com.cxzy.xxjg.bean.RetentionBean;
 
 import java.util.Map;
 
@@ -15,5 +16,5 @@ import retrofit2.http.POST;
 
 public interface AddRetentionService {
     @POST("api/foodReserved/save")
-    Observable<BaseBean<Object>> saveRetention(@Body Map<String , Object> param);
+    Observable<BaseBean<RetentionBean>> saveRetention(@Body Map<String , Object> param);
 }

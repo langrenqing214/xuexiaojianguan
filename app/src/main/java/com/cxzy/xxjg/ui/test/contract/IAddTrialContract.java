@@ -21,6 +21,7 @@ import retrofit2.http.Body;
 public interface IAddTrialContract {
 
     interface View extends BaseContract.BaseView {
+        void getPicFile(File file);
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {

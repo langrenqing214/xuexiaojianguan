@@ -1,6 +1,7 @@
 package com.cxzy.xxjg.net;
 
 import com.cxzy.xxjg.bean.BaseBean;
+import com.cxzy.xxjg.bean.RetentionBean;
 
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class AddRetentionApi {
         return instance ;
     }
 
-    public Observable<BaseBean<Object>> saveRetention(Map<String , Object> param){
+    public Observable<BaseBean<RetentionBean>> saveRetention(Map<String , Object> param){
         return mService.saveRetention(param);
     }
 

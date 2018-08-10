@@ -70,6 +70,7 @@ public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implem
         canteenName = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name ;
         tvTitle.setText(canteenName);
         canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id ;
+        page = 0 ;
         mPresenter.getMenuList(canteenId, page, pageSize);
 
         srlMenu.setOnRefreshLoadMoreListener(this);
@@ -139,12 +140,14 @@ public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implem
         this.canteenId = canteenId;
         this.canteenName = canteenName ;
         tvTitle.setText(canteenName);
+        page = 0 ;
         mPresenter.getMenuList(canteenId , page , pageSize);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        page = 0 ;
         mPresenter.getMenuList(canteenId , page , pageSize);
     }
 
@@ -170,7 +173,7 @@ public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implem
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        page = 1 ;
+        page = 0 ;
         mPresenter.getMenuList(canteenId , page , pageSize);
     }
 }

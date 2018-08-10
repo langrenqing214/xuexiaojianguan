@@ -28,8 +28,11 @@ public class RetentionManageAdapter extends RecyclerView.Adapter<RetentionManage
     private List<RetentionItemBean> data = new ArrayList<>();
     private Context mContext ;
 
-    public RetentionManageAdapter(Context mContext){
+    private DealRetentionListener mListener ;
+
+    public RetentionManageAdapter(Context mContext , DealRetentionListener mListener){
         this.mContext = mContext ;
+        this.mListener = mListener ;
     }
 
 
@@ -40,8 +43,8 @@ public class RetentionManageAdapter extends RecyclerView.Adapter<RetentionManage
     }
 
     @Override
-    public void onBindViewHolder(RetentionHolder holder, int position) {
-        RetentionItemBean info = data.get(position);
+    public void onBindViewHolder(RetentionHolder holder, final int position) {
+        final RetentionItemBean info = data.get(position);
 //        holder.tvDate.setText(DateUtil.date2Week(DateUtil.string2Date(info.statusTime == null ? "" : info.statusTime , "yyyy-MM-dd HH:mm")));
         holder.tvFoodName.setText(info.foodName);
         holder.tvRetentionTime.setText("留样时间:" + DateUtil.timeToSeckillTimeString(info.reservedTime == null ? "" : info.reservedTime ));
@@ -53,7 +56,7 @@ public class RetentionManageAdapter extends RecyclerView.Adapter<RetentionManage
             holder.tvFoodState.setTextColor(ContextCompat.getColor(mContext , R.color.green_text));
             holder.tvExpiryTime.setText("到期时间:" + DateUtil.timeToSeckillTimeString(info.expiryTime == null ? "" : info.expiryTime ));
             holder.tvExpiryTime.setTextColor(ContextCompat.getColor(mContext , R.color.green_text));
-        }else if (statusTime - expiryTime < 0){
+        }else{
             holder.tvFoodState.setText("已过期");
             holder.tvFoodState.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
             holder.tvExpiryTime.setText("到期时间:" + DateUtil.timeToSeckillTimeString(info.expiryTime == null ? "" : info.expiryTime));
@@ -61,15 +64,26 @@ public class RetentionManageAdapter extends RecyclerView.Adapter<RetentionManage
             holder.tvHandleState.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
         }
 
-        if (info.status == 0){//未处理
+        if ("DESTROY".equals(info.status)){//已销样
+            holder.tvHandleState.setText("处理人:" + info.dealPerson);
+            holder.tvHandleState.setTextColor(ContextCompat.getColor(mContext , R.color.text_gray_color));
+            holder.btnIsHandle.setVisibility(View.GONE);
+        }else {
             holder.tvHandleState.setText("未处理");
             holder.tvHandleState.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
             holder.btnIsHandle.setVisibility(View.VISIBLE);
-        }else {
-            holder.tvHandleState.setText("留样人:" + info.reservedPerson);
-            holder.tvHandleState.setTextColor(ContextCompat.getColor(mContext , R.color.text_gray_color));
-            holder.btnIsHandle.setVisibility(View.GONE);
         }
+
+        holder.btnIsHandle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.dealRetentionListener(position , info);
+            }
+        });
+    }
+
+    public interface DealRetentionListener {
+        void dealRetentionListener(int position , RetentionItemBean info);
     }
 
     @Override
@@ -78,7 +92,7 @@ public class RetentionManageAdapter extends RecyclerView.Adapter<RetentionManage
     }
 
     public void setData(List<RetentionItemBean> list) {
-        this.data.clear();
+//        this.data.clear();
         this.data = list ;
     }
 

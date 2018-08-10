@@ -23,7 +23,7 @@ public class RetentionItemBean implements Serializable {
     public String reservedPerson ;// 留样人 ,
     public String reservedTime ;// 留样时间 ,
     public String searchKeys ;//
-    public int status ;// 状态 ,
+    public String status ;// 状态 ,（正常：NORMAL，已销样：DESTROY）
     public String statusTime ;// 状态时间 ,
     public String updateDate ;//
     public String updateUserId ;//

@@ -10,5 +10,6 @@ import java.util.List;
  */
 
 public class RetentionBean implements Serializable {
+    public int total ;
     public List<RetentionItemBean> list = new ArrayList<>();
 }

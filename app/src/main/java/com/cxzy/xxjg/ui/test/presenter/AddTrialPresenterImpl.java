@@ -149,6 +149,7 @@ public class AddTrialPresenterImpl extends BasePresenter<IAddTrialContract.View>
             try {
                 newBitmap = BitmapUtil.getBitmapByPath(picUrl, BitmapUtil.getOptions(picUrl) , MyApp.width , MyApp.height);
                 ivPic.setImageBitmap(newBitmap);
+                mView.getPicFile(new File(picUrl));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

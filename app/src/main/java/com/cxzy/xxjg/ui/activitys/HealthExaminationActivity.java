@@ -77,10 +77,16 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     TextView tvCheckName;
     @BindView(R.id.ll_environmental_check)
     LinearLayout llEnvironmentalCheck;
-    @BindView(R.id.rg_env_check)
-    RadioGroup rgEnvCheck ;
     @BindView(R.id.rv_add_pic)
     RecyclerView rvAddPic;
+    @BindView(R.id.ll_nomor)
+    LinearLayout llNomor ;
+    @BindView(R.id.iv_normal)
+    ImageView ivNormal ;
+    @BindView(R.id.ll_error)
+    LinearLayout llError ;
+    @BindView(R.id.iv_error)
+    ImageView ivError ;
     private String canteenId;
     private ArrayList<SchoolCanteenBean> dataList = new ArrayList<>();
     private HealthExaminationBean bean = new HealthExaminationBean();
@@ -118,19 +124,17 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
         mPresenter.getHealthCheck(canteenId);
         String canteenName = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name;
         tvTitle.setText(canteenName);
-        rgCheck.setOnCheckedChangeListener(this);
-        rgEnvCheck.setOnCheckedChangeListener(this);
         mAdapter = new CheckItemsAdapter(this, itemList);
         lvCheckItems.setAdapter(mAdapter);
         rvAddPic.setLayoutManager(new GridLayoutManager(this, 3));
-        picAdapter = new PurchaseAdapter(picList);
+        picAdapter = new PurchaseAdapter(this , picList);
         rvAddPic.setAdapter(picAdapter);
-        picAdapter.setItemClickListener(this);
     }
 
     @Override
     public void initData() {
-
+        rgCheck.setOnCheckedChangeListener(this);
+        picAdapter.setItemClickListener(this);
     }
 
     @Override
@@ -154,7 +158,8 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
 
     }
 
-    @OnClick({R.id.back_btn_id, R.id.ll_select_canteen, R.id.btn_add_through_person, R.id.btn_save_morningcheck, R.id.btn_add_no_through_person, R.id.btn_save_environmental_check ,})
+    @OnClick({R.id.back_btn_id, R.id.ll_select_canteen, R.id.btn_add_through_person, R.id.btn_save_morningcheck, R.id.btn_add_no_through_person,
+            R.id.btn_save_environmental_check ,R.id.ll_nomor , R.id.ll_error})
     @Override
     public void onViewClicked(View view) {
 
@@ -242,6 +247,16 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 });
                 dialog1.show();
                 break;
+            case R.id.ll_nomor ://正常
+                ivNormal.setBackgroundResource(R.drawable.icon_normal);
+                ivError.setBackgroundResource(R.drawable.icon_circle);
+                envState = "NORMAL";
+                break;
+            case R.id.ll_error ://异常
+                ivNormal.setBackgroundResource(R.drawable.icon_circle);
+                ivError.setBackgroundResource(R.drawable.icon_error);
+                envState = "ERROR";
+                break;
         }
 
     }
@@ -269,7 +284,8 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                     //授权成功之后，调用系统相机进行拍照操作等
                     ScreenUtils.initScreen(this);
                     Intent picintent = new Intent(mContext, PhotoWallActivity.class);
-                    picintent.putExtra("number", 4);
+                    picintent.putExtra("number", picList.size());
+                    picintent.putExtra("maxNumber", 5);
                     startActivityForResult(picintent, Constants.FLAG_CHOOSE_IMG);
                 } else {
                     //用户授权拒绝之后，友情提示一下就可以了
@@ -315,12 +331,6 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 typeId = bean.types.get(1).typeId;
                 }catch (Exception e){}
                 break;
-            case R.id.rb_normal ://正常
-                envState = "NORMAL";
-                break;
-            case R.id.rb_error ://不正常
-                envState = "ERROR";
-                break;
         }
     }
 
@@ -341,7 +351,8 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
         } else {
             ScreenUtils.initScreen(this);
             Intent intent = new Intent(mContext, PhotoWallActivity.class);
-            intent.putExtra("number", 4);
+            intent.putExtra("number", picList.size());
+            intent.putExtra("maxNumber", 5);
             startActivityForResult(intent, Constants.FLAG_CHOOSE_IMG);
         }
     }

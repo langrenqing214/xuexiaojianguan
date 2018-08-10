@@ -1,9 +1,12 @@
 package com.cxzy.xxjg.ui.test.presenter;
 
+import com.cxzy.xxjg.net.AddRetentionApi;
 import com.cxzy.xxjg.net.RetentionApi;
 import com.cxzy.xxjg.presenter.BasePresenter;
 import com.cxzy.xxjg.ui.test.contract.IRetentionContract;
 import com.cxzy.xxjg.ui.test.model.RetentionModelImpl;
+
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,8 +23,16 @@ public class RetentionPresenterImpl extends BasePresenter<IRetentionContract.Vie
         this.api = api ;
     }
 
+    //请求列表
     @Override
     public void getRetentionList(String canteenId, String eatTimeStart , String eatTimeEnd , int pageNumber, int pageSize) {
         invoke(api.getRetentionList(canteenId , eatTimeStart , eatTimeEnd , pageNumber , pageSize));
     }
+
+    //处理
+    @Override
+    public void dealRetention(Map<String, Object> param) {
+        invoke(api.saveRetention(param));
+    }
+
 }

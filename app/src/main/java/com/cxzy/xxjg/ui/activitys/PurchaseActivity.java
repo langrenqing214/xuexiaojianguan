@@ -65,7 +65,7 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
     @BindView(R.id.main_title_id)
     TextView tvTitle ;
 
-    private List<String> picList = new ArrayList<>();
+    private List<String> picList = new ArrayList<>(5);
     private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE = 1;
     private PurchaseAdapter mAdapter;
     private ArrayList<SchoolCanteenBean> dataList;
@@ -93,7 +93,7 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
         tvTitle.setText(canteenName);
 
         rvAddPic.setLayoutManager(new GridLayoutManager(this, 3));
-        mAdapter = new PurchaseAdapter(picList);
+        mAdapter = new PurchaseAdapter(this , picList);
         rvAddPic.setAdapter(mAdapter);
         mAdapter.setItemClickListener(this);
     }
@@ -127,7 +127,8 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
         } else {
             ScreenUtils.initScreen(this);
             Intent intent = new Intent(mContext, PhotoWallActivity.class);
-//            intent.putExtra("number", picList.size());
+            intent.putExtra("number", picList.size());
+            intent.putExtra("maxNumber", 5);
             startActivityForResult(intent, Constants.FLAG_CHOOSE_IMG);
         }
     }
@@ -155,7 +156,8 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
                     //授权成功之后，调用系统相机进行拍照操作等
                     ScreenUtils.initScreen(this);
                     Intent picintent = new Intent(mContext, PhotoWallActivity.class);
-//                    picintent.putExtra("number", picList.size());
+                    picintent.putExtra("number", picList.size());
+                    picintent.putExtra("maxNumber", 5);
                     startActivityForResult(picintent, Constants.FLAG_CHOOSE_IMG);
                 } else {
                     //用户授权拒绝之后，友情提示一下就可以了
@@ -235,7 +237,7 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
                 String shelfLifeEnd1 = etShelfLifeEnd.getText().toString().trim();
                 String suppliers1 = etSuppliers.getText().toString().trim();
 
-                List<File> fileList1 = new ArrayList<>();
+                List<File> fileList1 = new ArrayList<>(5);
                 for (String str :picList) {
                     File folder = new File(str);
                     fileList1.add(folder);

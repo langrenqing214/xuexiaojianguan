@@ -1,6 +1,7 @@
 package com.cxzy.xxjg.ui.activitys;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.dialog.SelectTrialReactionDialog;
 import com.cxzy.xxjg.net.Constants;
+import com.cxzy.xxjg.ui.test.contract.IAddTrialContract;
 import com.cxzy.xxjg.ui.test.presenter.AddTrialPresenterImpl;
 import com.cxzy.xxjg.utils.DateUtil;
 import com.cxzy.xxjg.utils.NetUtil;
@@ -46,7 +48,7 @@ import butterknife.OnClick;
 /**
  * 添加试吃
  */
-public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implements SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, SelectTrialReactionDialog.SelectTrialListener {
+public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implements IAddTrialContract.View , SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, SelectTrialReactionDialog.SelectTrialListener {
 
     @BindView(R.id.tv_select_canteen)
     TextView tvSelectCanteen;
@@ -99,6 +101,8 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
     @Override
     public void refreshView(Object mData) {
         ToastUtil.showShort(this, "添加试吃成功");
+        setResult(Activity.RESULT_OK);
+        finish();
     }
 
     @Override
@@ -137,6 +141,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
                     ScreenUtils.initScreen(this);
                     Intent intent = new Intent(mContext, PhotoWallActivity.class);
                     intent.putExtra("isRadio", true);
+                    intent.putExtra("maxNumber", 1);
                     startActivityForResult(intent, Constants.FLAG_CHOOSE_IMG);
                 }
                 break;
@@ -243,5 +248,10 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
             trialState = "ERROR";
         }
         tvSelectTrialReaction.setText(trial);
+    }
+
+    @Override
+    public void getPicFile(File file) {
+        this.file = file ;
     }
 }

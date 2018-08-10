@@ -3,6 +3,8 @@ package com.cxzy.xxjg.net;
 import com.cxzy.xxjg.bean.BaseBean;
 import com.cxzy.xxjg.bean.RetentionBean;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
 
 /**
@@ -26,5 +28,10 @@ public class RetentionApi {
 
     public Observable<BaseBean<RetentionBean>> getRetentionList(String canteenId, String eatTimeStart , String eatTimeEnd , int pageNumber, int pageSize){
         return mService.getRetentionList(canteenId , eatTimeStart , eatTimeEnd , pageNumber , pageSize);
+    }
+
+    //处理
+    public Observable<BaseBean<RetentionBean>> saveRetention(Map<String , Object> param){
+        return mService.saveRetention(param);
     }
 }

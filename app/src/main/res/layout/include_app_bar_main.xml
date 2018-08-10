@@ -23,7 +23,7 @@
             android:id="@+id/iv_user_head"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/colorAccent" />
+            android:background="@drawable/icon_user_heard" />
 
         <TextView
             android:id="@+id/tv_user_name"
@@ -32,7 +32,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/iv_user_head"
-            android:text="张XX"
+            android:layout_centerVertical="true"
             android:textColor="@color/main_text_color"
             android:textSize="12dp" />
 
@@ -44,6 +44,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/iv_user_head"
             android:text="张XX"
+            android:visibility="gone"
             android:textColor="@color/main_text_color"
             android:textSize="12dp" />
 

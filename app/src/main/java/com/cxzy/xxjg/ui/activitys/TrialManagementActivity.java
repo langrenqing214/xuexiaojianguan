@@ -1,5 +1,6 @@
 package com.cxzy.xxjg.ui.activitys;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -34,6 +35,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -66,6 +68,8 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
     private String createDateEnd = "";
     private String dateStart = "";
     private String dateEnd = "";
+    private List<TrialListBean> beanList = new ArrayList<>();
+    private int clickType = 0 ;//1 点击试吃跟进
 
     @Override
     public int getContentLayout() {
@@ -96,6 +100,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
         srlTrial.setOnRefreshLoadMoreListener(this);
         srlTrial.setEnableLoadMore(false);
 
+        page = 0 ;
         mPresenter.getTrialList(page, canteenId, createDateStart, createDateEnd, pageSize);
 
         rvTrial.setLayoutManager(new LinearLayoutManager(this));
@@ -112,8 +117,12 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
     public void refreshView(Object mData) {
         if (mData != null) {
             TrialBean bean = (TrialBean) mData;
-            mAdapter.setData(bean.list);
-            if (bean.list != null && bean.list.size() == pageSize) {
+            if (page == 0){
+                beanList.clear();
+            }
+            beanList.addAll(bean.list);
+            mAdapter.setData(beanList);
+            if (beanList != null && beanList.size() < bean.total) {
                 srlTrial.setEnableLoadMore(true);//启用加载;
             } else {
                 srlTrial.setEnableLoadMore(false);
@@ -122,6 +131,9 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
         mAdapter.notifyDataSetChanged();
         srlTrial.finishRefresh();//结束刷新
         srlTrial.finishLoadMore();//结束加载
+        if (clickType == 1){
+            srlTrial.autoRefresh();
+        }
     }
 
     @Override
@@ -145,7 +157,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
             case R.id.ll_add_trial://添加试吃
                 Intent intent = new Intent(mContext, AddTrialActivity.class);
                 intent.putExtra("canteenList", canteenList);
-                startActivity(intent);
+                startActivityForResult(intent , 1);
                 break;
             case R.id.ll_canteen_select://选择食堂
                 SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this, canteenList, this);
@@ -155,6 +167,14 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
                 SelectTimeDialog timeDialog = new SelectTimeDialog(this, this);
                 timeDialog.show();
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == 1){
+            srlTrial.autoRefresh();
         }
     }
 
@@ -176,6 +196,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
                 dateEnd = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
                 createDateEnd = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
                 tvTimeShow.setText(createDateStart + "-" + createDateEnd);
+                page = 0 ;
                 mPresenter.getTrialList(page, canteenId, createDateStart, createDateEnd, pageSize);
             }
         });
@@ -186,6 +207,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
     public void selectCanteenItem(int positon, String canteenName, String canteenId) {
         this.canteenId = canteenId;
         tvCanteenShow.setText(canteenName);
+        page = 0 ;
         mPresenter.getTrialList(page, canteenId, createDateStart, createDateEnd, pageSize);
     }
 
@@ -197,6 +219,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
 
     @Override
     public void submitTrialListener(String intervalTime, String status, String statusTime, String remarks, TrialListBean info) {
+        clickType = 1 ;
         Map<String, Object> param = new HashMap<>();
         param.put("canteenId", canteenId);
         param.put("id", info.id);
@@ -215,7 +238,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        page = 1 ;
+        page = 0 ;
         mPresenter.getTrialList(page, canteenId, createDateStart, createDateEnd, pageSize);
     }
 }

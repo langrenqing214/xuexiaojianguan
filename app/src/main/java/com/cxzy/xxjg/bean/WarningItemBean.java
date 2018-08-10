@@ -16,7 +16,7 @@ public class WarningItemBean implements Serializable {
     public String createDateStart ;// 告警时间开始 ,
     public String createUserId ;//
     public String dealDate ;// 处置时间 ,
-    public String dealState ;// 处置状态 ,
+    public String dealState ;// 处置状态 , （未处理：DEAL_NOT，已处理：DEAL_END）
     public String dealUserId ;// 处置人 ,
     public String dealUserName ;// 处置人姓名 ,
     public String id ;//

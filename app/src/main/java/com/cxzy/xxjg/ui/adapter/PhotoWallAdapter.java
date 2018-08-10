@@ -39,13 +39,15 @@ public class PhotoWallAdapter extends BaseAdapter {
     private SparseBooleanArray selectionMap;
 
     private int number;
+    private int maxNumber ;
 
     private boolean isType = true;//标记
 
-    public PhotoWallAdapter(Context context, ArrayList<PicBean> imagePathList, int number, OnCameraListener listener) {
+    public PhotoWallAdapter(Context context, ArrayList<PicBean> imagePathList, int number,int maxNumber , OnCameraListener listener) {
         this.context = context;
         this.imagePathList = imagePathList;
         this.number = number;
+        this.maxNumber = maxNumber ;
         this.listener = listener;
         loader = new SDCardImageLoader(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight());
         selectionMap = new SparseBooleanArray();
@@ -165,7 +167,7 @@ public class PhotoWallAdapter extends BaseAdapter {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         //图片最多选10张
                         if (isType) {
-                            if (number >= 9 && isChecked) {
+                            if (number >= maxNumber && isChecked) {
                                 imageViewHolder.checkBox.setChecked(false);
 //                                Toast.makeText(context, "最多只能选择10张图片", Toast.LENGTH_LONG).show();
                                 Toast.makeText(context, "不能选择更多的图片了", Toast.LENGTH_LONG).show();

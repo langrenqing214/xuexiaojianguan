@@ -66,6 +66,8 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
     TextView tvWarning;
     @BindView(R.id.tv_deal)
     TextView tvDeal;
+    @BindView(R.id.tv_user_name)
+    TextView tvUserName ;
 
     // 本地apk版本
     private String localVersion;
@@ -253,12 +255,16 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
 
     @Override
     public void refreshView(Object mData) {
-        if (mData != null) {
-            bean = (MainFragmentBean) mData;
-            tvAlarm.setText(bean.alarmTotal);
-            tvWarning.setText(bean.warnTotal);
-            tvDeal.setText(bean.dealTotal);
-        }
+        try {
+            if (mData != null) {
+                bean = (MainFragmentBean) mData;
+                tvAlarm.setText(bean.alarmTotal);
+                tvWarning.setText(bean.warnTotal);
+                tvDeal.setText(bean.dealTotal);
+                tvUserName.setText(bean.user.loginName);
+            }
+        }catch (Exception e){}
+
     }
 
     @Override

@@ -10,5 +10,6 @@ import java.util.List;
  */
 
 public class WarningBean implements Serializable {
+    public int total ;
     public List<WarningItemBean> list = new ArrayList<>();
 }

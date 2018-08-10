@@ -1,5 +1,6 @@
 package com.cxzy.xxjg.ui.adapter;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.app.MyApp;
 import com.cxzy.xxjg.utils.BitmapUtil;
+import com.cxzy.xxjg.utils.ToastUtil;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -24,16 +26,20 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private final int ADD_PIC = 0;//添加图标
     private final int SHOW_PIC = 1;//展示图片
-    private List<String> datas = new ArrayList<>();
+    private List<String> datas = new ArrayList<>(5);
     private RecyclerViewItemClickListener mClickListener ;
+    private Context mContext ;
 
-    public PurchaseAdapter(List<String> datas){
+
+    public PurchaseAdapter(Context mContext , List<String> datas){
         this.datas = datas ;
+        this.mContext = mContext ;
     }
 
     public void setDatas(List<String> datas){
         this.datas = datas ;
     }
+
 
     @Override
     public int getItemViewType(int position) {
@@ -57,13 +63,17 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof PurchaseHolder){
             PurchaseHolder purchaseHolder = (PurchaseHolder) holder;
             purchaseHolder.llAddPic.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mClickListener.onItemClick(position);
+                    if (datas.size() >= 5){
+                        ToastUtil.showShort(mContext , "不能再添加图片了");
+                    }else {
+                        mClickListener.onItemClick(position);
+                    }
                 }
             });
         }else {

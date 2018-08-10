@@ -12,6 +12,6 @@ public class MainFragmentBean implements Serializable {
     public String alarmTotal ;// 告警总数 ,
     public ArrayList<SchoolCanteenBean> canteenList ;// 所属食堂 ,
     public String dealTotal ;// 处理总数 ,
-    public UserBean user ;// 用户信息 ,
+    public UserBean user = new UserBean() ;// 用户信息 ,
     public String warnTotal ;// 预警总数
 }
