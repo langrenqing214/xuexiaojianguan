@@ -193,6 +193,7 @@
         <activity
             android:name=".ui.activitys.ScanActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
@@ -269,6 +270,7 @@
         <activity
             android:name=".ui.activitys.ScanResultActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity

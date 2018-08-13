@@ -29,11 +29,13 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private List<String> datas = new ArrayList<>(5);
     private RecyclerViewItemClickListener mClickListener ;
     private Context mContext ;
+    private int maxNum ;
 
 
-    public PurchaseAdapter(Context mContext , List<String> datas){
+    public PurchaseAdapter(Context mContext , List<String> datas , int maxNum){
         this.datas = datas ;
         this.mContext = mContext ;
+        this.maxNum = maxNum ;
     }
 
     public void setDatas(List<String> datas){
@@ -69,7 +71,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             purchaseHolder.llAddPic.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (datas.size() >= 5){
+                    if (datas.size() >= maxNum){
                         ToastUtil.showShort(mContext , "不能再添加图片了");
                     }else {
                         mClickListener.onItemClick(position);

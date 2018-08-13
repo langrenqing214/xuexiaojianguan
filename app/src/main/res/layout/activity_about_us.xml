@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="关于"
+            android:text="关于我们"
             android:textColor="@android:color/white"
             android:textSize="14dp"
             android:textStyle="bold" />
@@ -92,6 +92,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:text="@string/wisdommob_str_profile_english"
+        android:visibility="gone"
         android:textColor="@color/text_gray_color" />
 
     <TextView
@@ -101,6 +102,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         android:text="@string/wisdommob_str_profile_hanzi"
+        android:layout_alignParentBottom="true"
         android:textColor="@color/text_gray_color" />
 
 </RelativeLayout>

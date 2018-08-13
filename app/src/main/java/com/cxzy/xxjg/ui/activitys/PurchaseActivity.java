@@ -1,6 +1,7 @@
 package com.cxzy.xxjg.ui.activitys;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -10,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import com.cxzy.xxjg.bean.SchoolCanteenBean;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
+import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.net.Constants;
 import com.cxzy.xxjg.ui.adapter.PurchaseAdapter;
 import com.cxzy.xxjg.ui.test.contract.IPurchaseActivityContract;
@@ -30,6 +33,7 @@ import com.cxzy.xxjg.utils.ToastUtil;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,36 +44,40 @@ import butterknife.OnClick;
 /**
  * 食材采购
  */
-public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl> implements IPurchaseActivityContract.View, PurchaseAdapter.RecyclerViewItemClickListener, SelectCanteenDialog.SelectCanteenItemListener {
+public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl> implements IPurchaseActivityContract.View, PurchaseAdapter.RecyclerViewItemClickListener, SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener {
 
     @BindView(R.id.rv_add_pic)
     RecyclerView rvAddPic;
     @BindView(R.id.et_food_name)
-    EditText etFoodName ;
+    EditText etFoodName;
     @BindView(R.id.et_food_style)
-    EditText etFoodStyle ;
+    EditText etFoodStyle;
     @BindView(R.id.et_food_price)
-    EditText etFoodPrice ;
+    EditText etFoodPrice;
     @BindView(R.id.et_food_weight)
-    EditText etFoodWeight ;
+    EditText etFoodWeight;
     @BindView(R.id.et_purchaser)
-    EditText etPurchaser ;
+    EditText etPurchaser;
     @BindView(R.id.et_manufacture_date)
-    EditText etManufactureDate ;
+    TextView etManufactureDate;
     @BindView(R.id.et_shelf_life)
-    EditText etShelfLife ;
+    EditText etShelfLife;
     @BindView(R.id.et_shelf_life_end)
-    EditText etShelfLifeEnd ;
+    TextView etShelfLifeEnd;
     @BindView(R.id.et_suppliers)
-    EditText etSuppliers ;
+    EditText etSuppliers;
     @BindView(R.id.main_title_id)
-    TextView tvTitle ;
+    TextView tvTitle;
 
     private List<String> picList = new ArrayList<>(5);
     private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE = 1;
     private PurchaseAdapter mAdapter;
     private ArrayList<SchoolCanteenBean> dataList;
     private String canteenId;
+
+    private int clickType = 0 ; //0 生产日期 1 保质到期
+    private String manufactureDate;
+    private String shelfLifeEnd;
 
     @Override
     public int getContentLayout() {
@@ -93,7 +101,7 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
         tvTitle.setText(canteenName);
 
         rvAddPic.setLayoutManager(new GridLayoutManager(this, 3));
-        mAdapter = new PurchaseAdapter(this , picList);
+        mAdapter = new PurchaseAdapter(this, picList , 5);
         rvAddPic.setAdapter(mAdapter);
         mAdapter.setItemClickListener(this);
     }
@@ -105,7 +113,8 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
 
     @Override
     public void refreshView(Object mData) {
-        ToastUtil.showShort(this , "入库成功");
+        ToastUtil.showShort(this, "入库成功");
+        finish();
     }
 
     @Override
@@ -122,7 +131,7 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
     public void onItemClick(int position) {
         if (!hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE) || !hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE , Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_READ_EXTERNAL_STORAGE);
         } else {
             ScreenUtils.initScreen(this);
@@ -181,82 +190,61 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
         mAdapter.notifyDataSetChanged();
     }
 
-    @OnClick({R.id.back_btn_id , R.id.btn_warehousing ,R.id.btn_warehousing_and_out_treasury , R.id.ll_select_canteen})
+    @OnClick({R.id.back_btn_id, R.id.btn_warehousing, R.id.btn_warehousing_and_out_treasury, R.id.ll_select_canteen,
+            R.id.et_manufacture_date, R.id.et_shelf_life_end})
     @Override
     public void onViewClicked(View view) {
 
         super.onViewClicked(view);
-        switch (view.getId()){
-            case R.id.back_btn_id ://返回
+        switch (view.getId()) {
+            case R.id.back_btn_id://返回
                 finish();
                 break;
             case R.id.ll_select_canteen://选择食堂
                 SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this, dataList, this);
                 canteenDialog.show();
                 break;
-            case R.id.btn_warehousing ://出库
+            case R.id.btn_warehousing://出库
                 String foodName = etFoodName.getText().toString().trim();
                 String foodStyle = etFoodStyle.getText().toString().trim();
                 String foodPrice = etFoodPrice.getText().toString().trim();
                 String foodWeight = etFoodWeight.getText().toString().trim();
                 String purchaser = etPurchaser.getText().toString().trim();
-                String manufactureDate = etManufactureDate.getText().toString().trim();
                 String shelfLife = etShelfLife.getText().toString().trim();
-                String shelfLifeEnd = etShelfLifeEnd.getText().toString().trim();
                 String suppliers = etSuppliers.getText().toString().trim();
 
-                List<File> fileList = new ArrayList<>();
-                for (String str :picList) {
-                    File folder = new File(str);
-                    fileList.add(folder);
-                }
+                Map<String, Object> param = mPresenter.checkInfo(foodName, foodStyle, foodPrice, foodWeight, purchaser, manufactureDate, shelfLifeEnd,
+                        suppliers, 1, canteenId, picList);
 
-                Map<String , Object> param = new HashMap<>();
-                param.put("name" , foodName);
-                param.put("type" , foodStyle);
-                param.put("price" , foodPrice);
-                param.put("weight" , foodWeight);
-                param.put("purchasePerson" , purchaser);
-                param.put("manufactureDate" , manufactureDate);
-                param.put("qualityGuaranteeDate" , shelfLife);
-                param.put("qualityGuaranteeEndDate" , shelfLifeEnd);
-                param.put("suppliers" , suppliers);
-                param.put("flag" , 1);
-                param.put("canteenId" , canteenId);
-                param.put("files" , fileList);
-                mPresenter.savePurchase(param);
+                if (param != null) {
+                    mPresenter.savePurchase(param);
+                }
                 break;
-            case R.id.btn_warehousing_and_out_treasury ://入库并出库
-                String foodName1= etFoodName.getText().toString().trim();
+            case R.id.btn_warehousing_and_out_treasury://入库并出库
+                String foodName1 = etFoodName.getText().toString().trim();
                 String foodStyle1 = etFoodStyle.getText().toString().trim();
                 String foodPrice1 = etFoodPrice.getText().toString().trim();
                 String foodWeight1 = etFoodWeight.getText().toString().trim();
                 String purchaser1 = etPurchaser.getText().toString().trim();
-                String manufactureDate1 = etManufactureDate.getText().toString().trim();
                 String shelfLife1 = etShelfLife.getText().toString().trim();
-                String shelfLifeEnd1 = etShelfLifeEnd.getText().toString().trim();
                 String suppliers1 = etSuppliers.getText().toString().trim();
 
-                List<File> fileList1 = new ArrayList<>(5);
-                for (String str :picList) {
-                    File folder = new File(str);
-                    fileList1.add(folder);
-                }
+                Map<String, Object> param1 = mPresenter.checkInfo(foodName1, foodStyle1, foodPrice1, foodWeight1, purchaser1, manufactureDate, shelfLifeEnd,
+                        suppliers1, 2, canteenId, picList);
 
-                Map<String , Object> param1 = new HashMap<>();
-                param1.put("name" , foodName1);
-                param1.put("type" , foodStyle1);
-                param1.put("price" , foodPrice1);
-                param1.put("weight" , foodWeight1);
-                param1.put("purchasePerson" , purchaser1);
-                param1.put("manufactureDate" , manufactureDate1);
-                param1.put("qualityGuaranteeDate" , shelfLife1);
-                param1.put("qualityGuaranteeEndDate" , shelfLifeEnd1);
-                param1.put("suppliers" , suppliers1);
-                param1.put("flag" , 2);
-                param1.put("canteenId" , canteenId);
-                param1.put("files" , fileList1);
-                mPresenter.savePurchase(param1);
+                if (param1 != null) {
+                    mPresenter.savePurchase(param1);
+                }
+                break;
+            case R.id.et_manufacture_date://选择生产日期
+                clickType = 0 ;
+                SelectTimeDialog dialog = new SelectTimeDialog(this, this);
+                dialog.show();
+                break;
+            case R.id.et_shelf_life_end://选择保质到期
+                clickType = 1 ;
+                SelectTimeDialog dialog1 = new SelectTimeDialog(this, this);
+                dialog1.show();
                 break;
         }
     }
@@ -265,5 +253,22 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
     public void selectCanteenItem(int positon, String canteenName, String canteenId) {
         this.canteenId = canteenId;
         tvTitle.setText(canteenName);
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+        Calendar startcal = Calendar.getInstance();
+        startcal.set(Calendar.YEAR,year);
+        startcal.set(Calendar.MONTH,month);
+        startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+        if (clickType == 0){//生产日期
+            String nyTime = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+            manufactureDate = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
+            etManufactureDate.setText(nyTime);
+        }else {//保质到期
+            String nyTime = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
+            shelfLifeEnd = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
+            etShelfLifeEnd.setText(nyTime);
+        }
     }
 }

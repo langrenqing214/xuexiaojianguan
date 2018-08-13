@@ -67,7 +67,7 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
     @BindView(R.id.tv_deal)
     TextView tvDeal;
     @BindView(R.id.tv_user_name)
-    TextView tvUserName ;
+    TextView tvUserName;
 
     // 本地apk版本
     private String localVersion;
@@ -118,7 +118,7 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
 
     @OnClick({R.id.button_test, R.id.iv_to_zxing, R.id.cv_listorical_warning, R.id.cv_regulatory_information, R.id.cv_video, R.id.cv_menu,
             R.id.cv_purchase, R.id.cv_health_examination, R.id.cv_retention_manage, R.id.cv_trial_management, R.id.ll_my_canteen,
-            R.id.ll_exit_login, R.id.tv_alarm, R.id.tv_warning, R.id.tv_deal, R.id.ll_about_us , R.id.ll_user_protocol ,
+            R.id.ll_exit_login, R.id.tv_alarm, R.id.tv_warning, R.id.tv_deal, R.id.ll_about_us, R.id.ll_user_protocol,
             R.id.ll_change_password})
     public void onViewClicked(View view) {
         super.onViewClicked(view);
@@ -204,11 +204,11 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
                 aboutIntent.putExtra("localVersion", localVersion);
                 startActivity(aboutIntent);
                 break;
-            case R.id.ll_user_protocol ://用户协议
-                startActivity(new Intent(mContext , UserProtocolActivity.class));
+            case R.id.ll_user_protocol://用户协议
+                startActivity(new Intent(mContext, UserProtocolActivity.class));
                 break;
-            case R.id.ll_change_password ://修改密码
-                startActivity(new Intent(mContext , ChangePasswordActivity.class));
+            case R.id.ll_change_password://修改密码
+                startActivity(new Intent(mContext, ChangePasswordActivity.class));
                 break;
         }
     }
@@ -216,32 +216,32 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         String result = mPresenter.getZxingResult(requestCode, resultCode, data);
-        String url = "" ;
+        String url = "";
         if (!TextUtils.isEmpty(result)) {
             String str = result.substring(0, 1);
             switch (str) {
                 case "1"://采购
                     url = "api/scan/purchase";
-                    Intent intent1 = new Intent(mContext , ScanResultActivity.class);
-                    intent1.putExtra("url" , url);
-                    intent1.putExtra("type" , 1);
-                    intent1.putExtra("barCode" , result);
+                    Intent intent1 = new Intent(mContext, ScanResultActivity.class);
+                    intent1.putExtra("url", url);
+                    intent1.putExtra("type", 1);
+                    intent1.putExtra("barCode", result);
                     startActivity(intent1);
                     break;
                 case "2"://留样
                     url = "api/scan/reserved";
-                    Intent intent2 = new Intent(mContext , ScanResultActivity.class);
-                    intent2.putExtra("url" , url);
-                    intent2.putExtra("type" , 2);
-                    intent2.putExtra("barCode" , result);
+                    Intent intent2 = new Intent(mContext, ScanResultActivity.class);
+                    intent2.putExtra("url", url);
+                    intent2.putExtra("type", 2);
+                    intent2.putExtra("barCode", result);
                     startActivity(intent2);
                     break;
                 case "3"://存放
                     url = "api/scan/saved";
-                    Intent intent3 = new Intent(mContext , ScanResultActivity.class);
-                    intent3.putExtra("url" , url);
-                    intent3.putExtra("type" , 3);
-                    intent3.putExtra("barCode" , result);
+                    Intent intent3 = new Intent(mContext, ScanResultActivity.class);
+                    intent3.putExtra("url", url);
+                    intent3.putExtra("type", 3);
+                    intent3.putExtra("barCode", result);
                     startActivity(intent3);
                     break;
                 default:
@@ -263,7 +263,8 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
                 tvDeal.setText(bean.dealTotal);
                 tvUserName.setText(bean.user.loginName);
             }
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
 
     }
 

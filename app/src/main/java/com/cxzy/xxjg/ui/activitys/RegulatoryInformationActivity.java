@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
@@ -19,8 +21,8 @@ import butterknife.BindView;
  */
 public class RegulatoryInformationActivity extends BaseActivity {
 
-    @BindView(R.id.rv_regulatory_information)
-    RecyclerView mRecyclerView ;
+    @BindView(R.id.wv_regulatory)
+    WebView mWebView;
 
     @Override
     public int getContentLayout() {
@@ -35,14 +37,22 @@ public class RegulatoryInformationActivity extends BaseActivity {
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        RegulatoryInformationAdapter mAdapter = new RegulatoryInformationAdapter();
-        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void initData() {
-
+//        String url = "http://47.95.252.122:8080/wisdom/#/app/notice";
+        String url = "https://www.baidu.com/";
+// 设置WebView属性，能够执行Javascript脚本
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+        mWebView.loadUrl(url);
     }
 
     @Override

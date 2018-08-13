@@ -31,7 +31,7 @@ public class MainFragmentContractPresenterImpl extends BasePresenter<IMainFragme
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
         if(intentResult != null) {
             if(intentResult.getContents() == null) {
-                ToastUtil.showShort(MyApp.appComponent.getContext() , "内容为空");
+//                ToastUtil.showShort(MyApp.appComponent.getContext() , "内容为空");
             } else {
 //                T.showShort(MyApp.appComponent.getContext() , "扫描成功");
                 // ScanResult 为 获取到的字符串

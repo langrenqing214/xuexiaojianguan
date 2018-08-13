@@ -205,7 +205,7 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
                 startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
                 dateEnd = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
                 createDateEnd = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
-                tvTimeShow.setText(createDateStart + "-" + createDateEnd);
+                tvTimeShow.setText(dateStart + "-" + dateEnd);
                 page = 0 ;
                 mPresenter.getRetentionList(canteenId , createDateStart , createDateEnd , page , pageSize);
             }
@@ -244,8 +244,8 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
         Map<String, Object> param = new HashMap<>();
         param.put("canteenId" , canteenId);
         param.put("foodName" , info.foodName);
-        param.put("reservedTimeStr" , DateUtil.date2NYRSF(DateUtil.string2Date(info.reservedTime == null ? "" : info.reservedTime , "yyyy-MM-dd")));
-        param.put("expiryTimeStr" , DateUtil.date2NYRSF(DateUtil.string2Date(info.expiryTime == null ? "" : info.expiryTime , "yyyy-MM-dd")));
+        param.put("reservedTimeStr" , DateUtil.date2NYRSF(DateUtil.string2Date(info.reservedTime == null ? "" : info.reservedTime , "yyyy-MM-dd HH:mm:ss")));
+        param.put("expiryTimeStr" , DateUtil.date2NYRSF(DateUtil.string2Date(info.expiryTime == null ? "" : info.expiryTime , "yyyy-MM-dd HH:mm:ss")));
         param.put("reservedPerson" , info.reservedPerson);
         param.put("id" , info.id);
         param.put("dealPerson " , person);

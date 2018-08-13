@@ -90,13 +90,13 @@ public class DealTrialDialog extends Dialog implements View.OnClickListener, Dat
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_select_normal: //正常
-                ivError.setVisibility(View.INVISIBLE);
-                ivNormal.setVisibility(View.VISIBLE);
+                ivError.setBackgroundResource(R.drawable.icon_circle);
+                ivNormal.setBackgroundResource(R.drawable.icon_normal);
                 status = "NORMAL";
                 break;
             case R.id.ll_select_error: //异常
-                ivError.setVisibility(View.VISIBLE);
-                ivNormal.setVisibility(View.INVISIBLE);
+                ivNormal.setBackgroundResource(R.drawable.icon_circle);
+                ivError.setBackgroundResource(R.drawable.icon_error);
                 status = "ERROR";
                 break;
             case R.id.tv_status_time: //选择时间

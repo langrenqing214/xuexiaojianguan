@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -101,6 +102,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE = 1;
     private PurchaseAdapter picAdapter;
     private List<String> picList = new ArrayList<>();
+    private int clickType ; //1为提交
 
 
     @Override
@@ -127,7 +129,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
         mAdapter = new CheckItemsAdapter(this, itemList);
         lvCheckItems.setAdapter(mAdapter);
         rvAddPic.setLayoutManager(new GridLayoutManager(this, 3));
-        picAdapter = new PurchaseAdapter(this , picList);
+        picAdapter = new PurchaseAdapter(this , picList , 4);
         rvAddPic.setAdapter(picAdapter);
     }
 
@@ -139,13 +141,20 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
 
     @Override
     public void refreshView(Object mData) {
-        if (mData != null) {
-            bean = (HealthExaminationBean) mData;
-            personBean.clear();
-            personBean.addAll(bean.persons);
+        try {
+            if (mData != null) {
+                bean = (HealthExaminationBean) mData;
+                personBean.clear();
+                personBean.addAll(bean.persons);
+            }
+            rgCheck.check(R.id.rb_morning_check);
+            mAdapter.notifyDataSetChanged();
+        }catch (Exception e){}
+
+        if (clickType == 1){
+            ToastUtil.showShort(this , "提交成功");
+            finish();
         }
-        rgCheck.check(R.id.rb_morning_check);
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -182,9 +191,14 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 allList.clear();
                 allList.addAll(throughPerson);
                 allList.addAll(noThroughPerson);
-                /*for (PersonsBean bean : allList) {
-                    personList.add(new Gson().toJson(bean));
-                }*/
+                if (allList == null || allList.size() == 0){
+                    ToastUtil.showShort(this , "请对人员进行筛选");
+                    return;
+                }
+                if (fileList == null || fileList.size() == 0){
+                    ToastUtil.showShort(this , "拍照不能为空");
+                    return;
+                }
                 Map<String, Object> param = new HashMap<>();
                 param.put("persons", new Gson().toJson(allList));
                 param.put("files", fileList);
@@ -192,13 +206,19 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 param.put("typeId", typeId);
 
                 mPresenter.saveMorningCheck(param);
+                clickType = 1 ;
                 break;
             case R.id.btn_save_environmental_check://提交环境检查
+                if (TextUtils.isEmpty(envState)){
+                    ToastUtil.showShort(this , "请选择是否正常");
+                    return;
+                }
                 Map<String , Object> envParam = new HashMap<>();
                 envParam.put("canteenId" ,canteenId);
                 envParam.put("state" , envState);
                 envParam.put("typeId" , typeId);
                 mPresenter.saveEnvCheck(envParam);
+                clickType = 1 ;
                 break;
             case R.id.btn_add_through_person://添加检查通过
                 SelectPersonDialog dialog = new SelectPersonDialog(this, 0, personBean, new SelectPersonDialog.SelectPersonClickLister() {
@@ -285,7 +305,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                     ScreenUtils.initScreen(this);
                     Intent picintent = new Intent(mContext, PhotoWallActivity.class);
                     picintent.putExtra("number", picList.size());
-                    picintent.putExtra("maxNumber", 5);
+                    picintent.putExtra("maxNumber", 4);
                     startActivityForResult(picintent, Constants.FLAG_CHOOSE_IMG);
                 } else {
                     //用户授权拒绝之后，友情提示一下就可以了
@@ -352,7 +372,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
             ScreenUtils.initScreen(this);
             Intent intent = new Intent(mContext, PhotoWallActivity.class);
             intent.putExtra("number", picList.size());
-            intent.putExtra("maxNumber", 5);
+            intent.putExtra("maxNumber", 4);
             startActivityForResult(intent, Constants.FLAG_CHOOSE_IMG);
         }
     }

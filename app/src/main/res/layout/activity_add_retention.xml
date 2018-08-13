@@ -157,7 +157,7 @@
 
         <TextView
             style="@style/main_text_style"
-            android:text="留样人　:"
+            android:text="　留样人:"
             android:textSize="14dp"
             />
 

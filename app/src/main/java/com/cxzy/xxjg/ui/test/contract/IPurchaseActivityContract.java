@@ -22,5 +22,7 @@ public interface IPurchaseActivityContract {
     interface Presenter extends BaseContract.BasePresenter<View> {
        List<String> dealPicResult(Activity activity , int requestCode, int resultCode, Intent data);
        void savePurchase(Map<String , Object> param);
+        Map<String , Object> checkInfo(String name , String type , String price , String weight , String purchasePerson  , String qualityGuaranteeDate ,
+                      String qualityGuaranteeEndDate , String suppliers , int flag , String canteenId , List<String> picList);
     }
 }

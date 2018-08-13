@@ -94,7 +94,7 @@
                     style="@style/main_text_style"
                     android:layout_marginLeft="17dp"
                     android:layout_marginRight="17dp"
-                    android:text="名称:　　" />
+                    android:text="　　名称:" />
 
                 <EditText
                     android:id="@+id/et_food_name"
@@ -148,7 +148,7 @@
                     style="@style/main_text_style"
                     android:layout_marginLeft="17dp"
                     android:layout_marginRight="17dp"
-                    android:text="价格:　　" />
+                    android:text="　　价格:" />
 
                 <EditText
                     android:id="@+id/et_food_price"
@@ -156,7 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:hint="请输入价格"
+                    android:hint="请输入价格(元)"
                     android:textSize="14dp" />
 
             </LinearLayout>
@@ -175,7 +175,7 @@
                     style="@style/main_text_style"
                     android:layout_marginLeft="17dp"
                     android:layout_marginRight="17dp"
-                    android:text="重量:　　" />
+                    android:text="　　重量:" />
 
                 <EditText
                     android:id="@+id/et_food_weight"
@@ -183,7 +183,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:hint="请输入重量"
+                    android:hint="请输入重量(KG)"
                     android:textSize="14dp" />
 
             </LinearLayout>
@@ -202,7 +202,7 @@
                     style="@style/main_text_style"
                     android:layout_marginLeft="17dp"
                     android:layout_marginRight="17dp"
-                    android:text="采购人:　" />
+                    android:text="　采购人:" />
 
                 <EditText
                     android:id="@+id/et_purchaser"
@@ -231,13 +231,14 @@
                     android:layout_marginRight="17dp"
                     android:text="生产日期:" />
 
-                <EditText
+                <TextView
                     android:id="@+id/et_manufacture_date"
                     style="@style/main_text_style"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:hint="请输入生产日期"
+                    android:gravity="center_vertical"
+                    android:hint="请选择生产日期"
                     android:textSize="14dp" />
 
             </LinearLayout>
@@ -250,6 +251,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:gravity="center_vertical"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <TextView
@@ -271,7 +273,8 @@
 
             <View
                 style="@style/main_line_style"
-                android:layout_marginLeft="17dp" />
+                android:layout_marginLeft="17dp"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -285,13 +288,14 @@
                     android:layout_marginRight="17dp"
                     android:text="保质到期:" />
 
-                <EditText
+                <TextView
                     android:id="@+id/et_shelf_life_end"
                     style="@style/main_text_style"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:hint="请输入保质到期"
+                    android:gravity="center_vertical"
+                    android:hint="请选择保质到期"
                     android:textSize="14dp" />
 
             </LinearLayout>
@@ -310,7 +314,7 @@
                     style="@style/main_text_style"
                     android:layout_marginLeft="17dp"
                     android:layout_marginRight="17dp"
-                    android:text="供应商:　" />
+                    android:text="　供应商:" />
 
                 <EditText
                     android:id="@+id/et_suppliers"

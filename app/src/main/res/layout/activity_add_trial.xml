@@ -75,7 +75,7 @@
 
                 <TextView
                     style="@style/main_text_style"
-                    android:text="选择食堂　:"
+                    android:text="　选择食堂:"
                     android:textSize="14dp" />
 
                 <TextView
@@ -102,7 +102,7 @@
 
                 <TextView
                     style="@style/main_text_style"
-                    android:text="食品名称　:"
+                    android:text="　食品名称:"
                     android:textSize="14dp" />
 
                 <EditText
@@ -129,7 +129,7 @@
 
                 <TextView
                     style="@style/main_text_style"
-                    android:text="试吃人　　:"
+                    android:text="　　试吃人:"
                     android:textSize="14dp" />
 
                 <EditText
@@ -156,7 +156,7 @@
 
                 <TextView
                     style="@style/main_text_style"
-                    android:text="试吃时间　:"
+                    android:text="　试吃时间:"
                     android:textSize="14dp" />
 
                 <TextView
@@ -183,7 +183,7 @@
 
                 <TextView
                     style="@style/main_text_style"
-                    android:text="间隔时间　:"
+                    android:text="　间隔时间:"
                     android:textSize="14dp" />
 
                 <EditText
@@ -238,7 +238,7 @@
                 <TextView
                     style="@style/main_text_style"
                     android:layout_height="match_parent"
-                    android:text="试吃描述　:"
+                    android:text="　试吃描述:"
                     android:textSize="14dp" />
 
                 <EditText
@@ -266,7 +266,7 @@
                 <TextView
                     style="@style/main_text_style"
                     android:layout_height="match_parent"
-                    android:text="拍照　　　:"
+                    android:text="　　　拍照:"
                     android:textSize="14dp" />
 
                 <ImageView

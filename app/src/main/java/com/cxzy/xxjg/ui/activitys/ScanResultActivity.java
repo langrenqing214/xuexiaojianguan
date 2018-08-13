@@ -1,5 +1,6 @@
 package com.cxzy.xxjg.ui.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -19,6 +20,7 @@ import com.cxzy.xxjg.ui.adapter.ScanResultAdapter;
 import com.cxzy.xxjg.ui.test.contract.IScanResultContract;
 import com.cxzy.xxjg.ui.test.presenter.ScanResultPresenterImpl;
 import com.cxzy.xxjg.utils.ToastUtil;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -110,7 +112,16 @@ public class ScanResultActivity extends BaseActivity<ScanResultPresenterImpl> im
         }
         if (putType == 1) {
             ToastUtil.showShort(this, "提交成功");
-            finish();
+            new IntentIntegrator(this)
+                    .setOrientationLocked(false)
+                    .setCaptureActivity(ScanActivity.class) // 设置自定义的activity是ScanActivity
+                    .setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES)// 扫码的类型,可选：一维码，二维码，一/二维码
+                    .setPrompt("请对准二维码")// 设置提示语
+                    .setCameraId(0)// 选择摄像头,可使用前置或者后置
+                    .setBeepEnabled(true)// 是否开启声音,扫完码之后会"哔"的一声
+                    .setBarcodeImageEnabled(false)// 扫完码之后生成二维码的图片
+                    .initiateScan();// 初始化扫码
+//            finish();
         }
     }
 
@@ -188,5 +199,45 @@ public class ScanResultActivity extends BaseActivity<ScanResultPresenterImpl> im
             return;
         }
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String result = mPresenter.getZxingResult(requestCode, resultCode, data , this);
+        String url = "" ;
+        if (!TextUtils.isEmpty(result)) {
+            String str = result.substring(0, 1);
+            switch (str) {
+                case "1"://采购
+                    url = "api/scan/purchase";
+                    Intent intent1 = new Intent(mContext , ScanResultActivity.class);
+                    intent1.putExtra("url" , url);
+                    intent1.putExtra("type" , 1);
+                    intent1.putExtra("barCode" , result);
+                    startActivity(intent1);
+                    break;
+                case "2"://留样
+                    url = "api/scan/reserved";
+                    Intent intent2 = new Intent(mContext , ScanResultActivity.class);
+                    intent2.putExtra("url" , url);
+                    intent2.putExtra("type" , 2);
+                    intent2.putExtra("barCode" , result);
+                    startActivity(intent2);
+                    break;
+                case "3"://存放
+                    url = "api/scan/saved";
+                    Intent intent3 = new Intent(mContext , ScanResultActivity.class);
+                    intent3.putExtra("url" , url);
+                    intent3.putExtra("type" , 3);
+                    intent3.putExtra("barCode" , result);
+                    startActivity(intent3);
+                    break;
+                default:
+                    ToastUtil.showShort(mContext, "扫描条码有误");
+                    break;
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

@@ -17,6 +17,7 @@ import com.cxzy.xxjg.utils.ImageLoaderUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,7 +54,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 
         Long localTime = Calendar.getInstance().getTimeInMillis();
         Long releaseTime =  TextUtils.isEmpty(info.releaseTime) ? 0 : Long.valueOf(info.releaseTime);
-        if (localTime - releaseTime > 3*24*60*60*1000){
+        if (localTime - releaseTime > 1*24*60*60*1000){
             holder.ivTimeShow.setBackgroundResource(R.drawable.ico_time_gray);
             holder.llEditMenu.setVisibility(View.INVISIBLE);
         }else {
@@ -63,7 +64,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
         holder.tvMorningMenu.setText(info.breakfast);
         holder.tvNoonMenu.setText(info.lunch);
         holder.tvNightMenu.setText(info.dinner);
-        holder.tvMenuTime.setText(DateUtil.date2yyyyMMddWeek(DateUtil.string2Date(info.releaseTime == null ? "" : info.releaseTime , "yyyy-MM-dd")));
+        String date = DateUtil.timeToAdviserTimeString(info.releaseTime == null ? "" : info.releaseTime );
+        holder.tvMenuTime.setText(DateUtil.date2yyyyMMddWeek(DateUtil.string2Date(date , "yyyy-MM-dd HH:mm")));
 
         holder.llEditMenu.setOnClickListener(new View.OnClickListener() {
             @Override

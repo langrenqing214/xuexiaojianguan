@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -35,7 +36,7 @@ import butterknife.OnClick;
 /**
  * 添加菜谱
  */
-public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implements DatePickerDialog.OnDateSetListener, SelectCanteenDialog.SelectCanteenItemListener, TimePickerDialog.OnTimeSetListener {
+public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implements DatePickerDialog.OnDateSetListener, SelectCanteenDialog.SelectCanteenItemListener {
 
     @BindView(R.id.tv_select_canteen)
     TextView tvCanteen ;
@@ -83,7 +84,7 @@ public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implemen
         releaseTime = getIntent().getStringExtra("releaseTime" );
         if (type == 1){
             tvCanteen.setText(canteenName);
-            tvTime.setText(DateUtil.date2yyyyMMddWeek(DateUtil.string2Date(releaseTime == null ? "" : releaseTime , "yyyy-MM-dd")));
+            tvTime.setText(DateUtil.timeToDataTimeString(releaseTime == null ? "" : releaseTime ));
             etBreakfast.setText(breakfast);
             etLunch.setText(lunch);
             etDinner.setText(dinner);
@@ -129,6 +130,14 @@ public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implemen
                 timeDialog.show();
                 break;
             case R.id.btn_add_menu ://提交
+                if (TextUtils.isEmpty(canteenId)){
+                    ToastUtil.showShort(this , "请选择食堂");
+                    return;
+                }
+                if (TextUtils.isEmpty(releaseTime)){
+                    ToastUtil.showShort(this , "请选择时间");
+                    return;
+                }
                 Map<String , Object> param = new HashMap<>();
                 param.put("breakfast" , etBreakfast.getText().toString().trim());
                 param.put("dinner" , etLunch.getText().toString().trim());
@@ -146,25 +155,15 @@ public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implemen
         startcal.set(Calendar.YEAR,year);
         startcal.set(Calendar.MONTH,month);
         startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-        TimePickerDialog dialog = new TimePickerDialog(AddMenuActivity.this , TimePicker.AUTOFILL_TYPE_LIST,this , 8 , 00 , true);
-        dialog.show();
-        releaseTime = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));;
-//        String date1 = DateUtil.date2yyyyMMddWeek(startcal.getTime());
-//        tvTime.setText(date1);
+//        TimePickerDialog dialog = new TimePickerDialog(AddMenuActivity.this , TimePicker.AUTOFILL_TYPE_LIST,this , 8 , 00 , true);
+//        dialog.show();
+        releaseTime = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
+        tvTime.setText(releaseTime);
     }
 
     @Override
     public void selectCanteenItem(int positon, String canteenName, String canteenId) {
         this.canteenId = canteenId;
         tvCanteen.setText(canteenName);
-    }
-
-    @Override
-    public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-        Calendar startcal = Calendar.getInstance();
-        startcal.set(Calendar.HOUR,hour);
-        startcal.set(Calendar.MINUTE,minute);
-        releaseTime = releaseTime + " " + new java.text.SimpleDateFormat("HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
-        tvTime.setText(releaseTime);
     }
 }

@@ -42,8 +42,7 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginLeft="5dp"
-                android:visibility="gone"
-                android:background="@drawable/icon_normal" />
+                android:background="@drawable/icon_circle" />
         </LinearLayout>
 
         <LinearLayout
@@ -69,8 +68,7 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginLeft="5dp"
-                android:visibility="gone"
-                android:background="@drawable/icon_error" />
+                android:background="@drawable/icon_circle" />
         </LinearLayout>
     </LinearLayout>
 

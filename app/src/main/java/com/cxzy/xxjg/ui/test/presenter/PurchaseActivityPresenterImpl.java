@@ -14,10 +14,12 @@ import com.cxzy.xxjg.presenter.BasePresenter;
 import com.cxzy.xxjg.ui.test.contract.IPurchaseActivityContract;
 import com.cxzy.xxjg.utils.BitmapUtil;
 import com.cxzy.xxjg.utils.ScreenUtils;
+import com.cxzy.xxjg.utils.ToastUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,13 +53,16 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
                             pictureList.add(camera);
                             checkPic();
                             originalPicList.add(camera);
-                            mView.refreshPicAdapter();
-                            return new ArrayList<>();
+//                            mView.refreshPicAdapter();
+                            Message message = handler.obtainMessage();
+                            message.what = 1;
+                            message.sendToTarget();
+                            return pictureList;
                         }
 
                         int code = data.getIntExtra("code", -1);
                         if (code != 100) {
-                            return new ArrayList<>();
+                            return pictureList;
                         }
 
                         final ArrayList<String> paths = data.getStringArrayListExtra("paths");
@@ -109,7 +114,7 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
                         BitmapUtil.saveMyBitmap(bm, string, string, ScreenUtils.getScreenW(), ScreenUtils.getScreenH());
 
                         pictureList.add(string);
-                        mView.refreshPicAdapter();
+//                        mView.refreshPicAdapter();
 
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -126,6 +131,81 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
     @Override
     public void savePurchase(Map<String, Object> param) {
         invoke(api.savePurchase(param));
+    }
+
+    @Override
+    public Map<String, Object> checkInfo(String name, String type, String price, String weight, String purchasePerson,
+                                         String qualityGuaranteeDate, String qualityGuaranteeEndDate,
+                                         String suppliers, int flag, String canteenId, List<String> picList) {
+        if (TextUtils.isEmpty(name)){
+            ToastUtil.showShort(MyApp.appComponent.getContext() , "请输入食材名称");
+            return null;
+        }
+
+        if (TextUtils.isEmpty(type)){
+            ToastUtil.showShort(MyApp.appComponent.getContext() , "请选择食材类别");
+            return null;
+        }
+
+        if (TextUtils.isEmpty(price)){
+            ToastUtil.showShort(MyApp.appComponent.getContext() , "请输入食材价格");
+            return null ;
+        }
+
+        if (TextUtils.isEmpty(weight)){
+            ToastUtil.showShort(MyApp.appComponent.getContext() , "请输入食材重量");
+            return null ;
+        }
+
+        if (TextUtils.isEmpty(purchasePerson)){
+            ToastUtil.showShort(MyApp.appComponent.getContext() , "请输入采购人");
+            return null ;
+        }
+
+        if (TextUtils.isEmpty(qualityGuaranteeDate)){
+            ToastUtil.showShort(MyApp.appComponent.getContext() , "请选择生产日期");
+            return null ;
+        }
+
+        if (TextUtils.isEmpty(qualityGuaranteeEndDate)){
+            ToastUtil.showShort(MyApp.appComponent.getContext() , "请选择保质到期");
+            return null ;
+        }
+
+        if (TextUtils.isEmpty(suppliers)){
+            ToastUtil.showShort(MyApp.appComponent.getContext() , "请输入供应商");
+            return null ;
+        }
+
+        if (TextUtils.isEmpty(canteenId)){
+            ToastUtil.showShort(MyApp.appComponent.getContext() , "请选择食堂");
+            return null ;
+        }
+
+        if (picList != null && picList.size() != 0){
+            ToastUtil.showShort(MyApp.appComponent.getContext() , "图片不能为空");
+            return null ;
+        }
+
+        List<File> fileList = new ArrayList<>();
+        for (String str :picList) {
+            File folder = new File(str);
+            fileList.add(folder);
+        }
+
+        Map<String , Object> param = new HashMap<>();
+        param.put("name" , name);
+        param.put("type" , type);
+        param.put("price" , price);
+        param.put("weight" , weight);
+        param.put("purchasePerson" , purchasePerson);
+        param.put("qualityGuaranteeDate" , qualityGuaranteeDate);
+        param.put("qualityGuaranteeEndDate" , qualityGuaranteeEndDate);
+        param.put("suppliers" , suppliers);
+        param.put("flag" , flag);
+        param.put("canteenId" , canteenId);
+        param.put("files" , fileList);
+        return param;
     }
 
     /**
