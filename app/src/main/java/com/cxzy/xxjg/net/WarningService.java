@@ -22,7 +22,7 @@ public interface WarningService {
                                                      @Query("canteenId") String canteenId,
                                                      @Query("createDateStart") String createDateStart,
                                                      @Query("createDateEnd") String createDateEnd,
-                                                     @Query("pageNum") int pageNumber,
+                                                     @Query("pageNum") int pageNum,
                                                      @Query("pageSize") int pageSize);
     @POST("api/alarm/deal")
     Observable<BaseBean<Object>> dealWarning(@Body Map<String , Object> param);

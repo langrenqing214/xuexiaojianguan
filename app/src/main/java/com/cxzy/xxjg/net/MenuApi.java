@@ -24,7 +24,7 @@ public class MenuApi {
         return instance ;
     }
 
-    public Observable<BaseBean<MenuBean>> getMenuList(String canteenId ,int pageNumber ,int pageSize){
-        return mService.getMenuList(canteenId , pageNumber , pageSize);
+    public Observable<BaseBean<MenuBean>> getMenuList(String canteenId ,int pageNum ,int pageSize){
+        return mService.getMenuList(canteenId , pageNum , pageSize);
     }
 }

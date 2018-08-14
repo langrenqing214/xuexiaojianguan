@@ -208,7 +208,9 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
                 startActivity(new Intent(mContext, UserProtocolActivity.class));
                 break;
             case R.id.ll_change_password://修改密码
-                startActivity(new Intent(mContext, ChangePasswordActivity.class));
+                Intent changeIntent = new Intent(mContext, ChangePasswordActivity.class);
+                changeIntent.putExtra("id" , bean.user.id);
+                startActivity(changeIntent);
                 break;
         }
     }

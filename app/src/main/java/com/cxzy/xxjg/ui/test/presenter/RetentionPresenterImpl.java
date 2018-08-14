@@ -25,8 +25,8 @@ public class RetentionPresenterImpl extends BasePresenter<IRetentionContract.Vie
 
     //请求列表
     @Override
-    public void getRetentionList(String canteenId, String eatTimeStart , String eatTimeEnd , int pageNumber, int pageSize) {
-        invoke(api.getRetentionList(canteenId , eatTimeStart , eatTimeEnd , pageNumber , pageSize));
+    public void getRetentionList(String canteenId, String eatTimeStart , String eatTimeEnd , int pageNum, int pageSize) {
+        invoke(api.getRetentionList(canteenId , eatTimeStart , eatTimeEnd , pageNum , pageSize));
     }
 
     //处理

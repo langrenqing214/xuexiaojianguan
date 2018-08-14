@@ -11,6 +11,10 @@ import com.cxzy.xxjg.base.BaseActivity;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.ui.test.presenter.ChangePasswordPresenterImpl;
+import com.cxzy.xxjg.utils.ToastUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -26,6 +30,7 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordPresenter
     EditText etNewPwd ;
     @BindView(R.id.et_again_pwd)
     EditText etAgainPwd ;
+    private String userId;
 
     @Override
     public int getContentLayout() {
@@ -43,6 +48,7 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordPresenter
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext , R.color.main_style_color));
+        userId = getIntent().getStringExtra("id");
     }
 
     @Override
@@ -52,7 +58,8 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordPresenter
 
     @Override
     public void refreshView(Object mData) {
-
+//        ToastUtil.show(mContext , "成功");
+        ToastUtil.showShort(mContext , "成功");
     }
 
     @Override
@@ -74,7 +81,11 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordPresenter
                 finish();
                 break;
             case R.id.btn_change_pwd ://修改密码
-
+                Map<String  , Object> param = new HashMap<>();
+                param.put("oldPassword" , etOldPwd.getText().toString().trim());
+                param.put("newPassword" , etNewPwd.getText().toString().trim());
+                param.put("id" , userId);
+                mPresenter.changePwd(param);
                 break;
         }
     }

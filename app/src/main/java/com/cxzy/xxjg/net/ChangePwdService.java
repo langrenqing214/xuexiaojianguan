@@ -2,7 +2,10 @@ package com.cxzy.xxjg.net;
 
 import com.cxzy.xxjg.bean.BaseBean;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 /**
@@ -11,6 +14,6 @@ import retrofit2.http.POST;
  */
 
 public interface ChangePwdService {
-    @POST("")
-    Observable<BaseBean<Object>> changePwd();
+    @POST("sys/user/resetPassword")
+    Observable<BaseBean<Object>> changePwd(@Body Map<String  , Object> param);
 }

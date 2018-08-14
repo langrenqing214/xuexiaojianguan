@@ -21,7 +21,7 @@ public interface RetentionService {
     Observable<BaseBean<RetentionBean>> getRetentionList(@Query("canteenId") String canteenId ,
                                                          @Query("reservedTimeStart") String eatTimeStart ,
                                                          @Query("reservedTimeEnd") String eatTimeEnd ,
-                                                         @Query("pageNumber") int pageNumber ,
+                                                         @Query("pageNum") int pageNum ,
                                                          @Query("pageSize") int pageSize);
 
     //处理
