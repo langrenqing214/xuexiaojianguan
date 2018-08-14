@@ -15,11 +15,11 @@ import java.lang.Override;
 public class AddRetentionActivity_ViewBinding extends BaseActivity_ViewBinding {
   private AddRetentionActivity target;
 
-  private View view2131296727;
+  private View view2131296732;
 
-  private View view2131296687;
+  private View view2131296692;
 
-  private View view2131296729;
+  private View view2131296734;
 
   private View view2131296306;
 
@@ -39,7 +39,7 @@ public class AddRetentionActivity_ViewBinding extends BaseActivity_ViewBinding {
     View view;
     view = Utils.findRequiredView(source, R.id.tv_select_canteen, "field 'tvSelectCanteen' and method 'onViewClicked'");
     target.tvSelectCanteen = Utils.castView(view, R.id.tv_select_canteen, "field 'tvSelectCanteen'", TextView.class);
-    view2131296727 = view;
+    view2131296732 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -49,7 +49,7 @@ public class AddRetentionActivity_ViewBinding extends BaseActivity_ViewBinding {
     target.etFoodName = Utils.findRequiredViewAsType(source, R.id.et_put_food_name, "field 'etFoodName'", EditText.class);
     view = Utils.findRequiredView(source, R.id.tv_add_retention_date, "field 'tvRetentionDate' and method 'onViewClicked'");
     target.tvRetentionDate = Utils.castView(view, R.id.tv_add_retention_date, "field 'tvRetentionDate'", TextView.class);
-    view2131296687 = view;
+    view2131296692 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -59,7 +59,7 @@ public class AddRetentionActivity_ViewBinding extends BaseActivity_ViewBinding {
     target.tvRetentionPerson = Utils.findRequiredViewAsType(source, R.id.tv_add_retention_person, "field 'tvRetentionPerson'", EditText.class);
     view = Utils.findRequiredView(source, R.id.tv_select_expiry_time, "field 'tvExpiryTime' and method 'onViewClicked'");
     target.tvExpiryTime = Utils.castView(view, R.id.tv_select_expiry_time, "field 'tvExpiryTime'", TextView.class);
-    view2131296729 = view;
+    view2131296734 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -96,12 +96,12 @@ public class AddRetentionActivity_ViewBinding extends BaseActivity_ViewBinding {
     target.tvRetentionPerson = null;
     target.tvExpiryTime = null;
 
-    view2131296727.setOnClickListener(null);
-    view2131296727 = null;
-    view2131296687.setOnClickListener(null);
-    view2131296687 = null;
-    view2131296729.setOnClickListener(null);
-    view2131296729 = null;
+    view2131296732.setOnClickListener(null);
+    view2131296732 = null;
+    view2131296692.setOnClickListener(null);
+    view2131296692 = null;
+    view2131296734.setOnClickListener(null);
+    view2131296734 = null;
     view2131296306.setOnClickListener(null);
     view2131296306 = null;
     view2131296332.setOnClickListener(null);

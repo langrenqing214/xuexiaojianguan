@@ -10,9 +10,11 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.cxzy.xxjg.R;
+import com.cxzy.xxjg.app.MyApp;
 import com.cxzy.xxjg.base.BaseActivity;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.ui.adapter.RegulatoryInformationAdapter;
+import com.cxzy.xxjg.utils.SharedPreferencesUtils;
 
 import butterknife.BindView;
 
@@ -41,8 +43,8 @@ public class RegulatoryInformationActivity extends BaseActivity {
 
     @Override
     public void initData() {
-//        String url = "http://47.95.252.122:8080/wisdom/#/app/notice";
-        String url = "https://www.baidu.com/";
+        String url = "http://47.95.252.122:8080/wisdom/#/app/notice" + "?Authorization=Bearer%" + SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "app_token" , "");
+//        String url = "https://www.baidu.com/";
 // 设置WebView属性，能够执行Javascript脚本
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebViewClient(new WebViewClient() {

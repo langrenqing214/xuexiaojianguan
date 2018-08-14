@@ -434,19 +434,19 @@ ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidMan
 	android:name
 		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:184:25-66
 activity#com.cxzy.xxjg.ui.activitys.LoginActivity
-ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:189:9-192:47
+ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:189:9-192:59
 	android:screenOrientation
 		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:191:13-49
 	android:theme
-		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:192:13-44
+		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:192:13-56
 	android:name
 		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:190:13-55
 activity#com.cxzy.xxjg.ui.activitys.ScanActivity
 ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:193:9-198:63
 	android:screenOrientation
-		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:195:13-49
+		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:196:13-49
 	android:launchMode
-		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:196:13-44
+		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:195:13-44
 	android:windowSoftInputMode
 		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:198:13-60
 	android:theme
@@ -598,9 +598,9 @@ ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidMan
 activity#com.cxzy.xxjg.ui.activitys.ScanResultActivity
 ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:270:9-275:63
 	android:screenOrientation
-		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:272:13-49
+		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:273:13-49
 	android:launchMode
-		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:273:13-44
+		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:272:13-44
 	android:windowSoftInputMode
 		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:275:13-60
 	android:theme
@@ -622,7 +622,7 @@ ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidMan
 	android:name
 		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:281:19-68
 activity#com.cxzy.xxjg.ui.activitys.ChangePasswordActivity
-ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:282:9-82
+ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:282:9-73
 	android:name
 		ADDED from F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\src\main\AndroidManifest.xml:282:19-70
 uses-sdk

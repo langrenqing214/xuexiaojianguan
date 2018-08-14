@@ -20,12 +20,12 @@
         "source": "C:\\Users\\demo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\8eb51b2c8f1d48284aa5c52ad7ee731f\\res\\drawable-ldrtl-hdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_launcher.png.flat",
-        "source": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\src\\main\\res\\drawable-ldpi\\ic_launcher.png"
-    },
-    {
         "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_launcher_background.png.flat",
         "source": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_launcher.png.flat",
+        "source": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\src\\main\\res\\drawable-ldpi\\ic_launcher.png"
     },
     {
         "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_menu_hardkey_panel_mtrl_mult.9.png.flat",
@@ -60,16 +60,16 @@
         "source": "C:\\Users\\demo\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\d8be03214c261e9e6dc022c5542deb15\\res\\animator-v21\\design_appbar_state_list_animator.xml"
     },
     {
-        "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_list_selector_background_transition_holo_light.xml.flat",
-        "source": "C:\\Users\\demo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\8eb51b2c8f1d48284aa5c52ad7ee731f\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
+        "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_btn_check_material.xml.flat",
+        "source": "C:\\Users\\demo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\8eb51b2c8f1d48284aa5c52ad7ee731f\\res\\drawable\\abc_btn_check_material.xml"
     },
     {
         "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\layout_dialog_scan_rasult.xml.flat",
         "source": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\src\\main\\res\\layout\\dialog_scan_rasult.xml"
     },
     {
-        "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_btn_check_material.xml.flat",
-        "source": "C:\\Users\\demo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\8eb51b2c8f1d48284aa5c52ad7ee731f\\res\\drawable\\abc_btn_check_material.xml"
+        "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_list_selector_background_transition_holo_light.xml.flat",
+        "source": "C:\\Users\\demo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\8eb51b2c8f1d48284aa5c52ad7ee731f\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
     },
     {
         "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_launcher_background.png.flat",
@@ -112,24 +112,24 @@
         "source": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\src\\main\\res\\layout\\item_person_label.xml"
     },
     {
-        "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\layout_customer_notitfication_layout_one.xml.flat",
-        "source": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\src\\main\\res\\layout\\customer_notitfication_layout_one.xml"
-    },
-    {
         "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_action_bar_title_item.xml.flat",
         "source": "C:\\Users\\demo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\8eb51b2c8f1d48284aa5c52ad7ee731f\\res\\layout\\abc_action_bar_title_item.xml"
     },
     {
-        "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_icon_check.png.flat",
-        "source": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\src\\main\\res\\drawable-xhdpi\\icon_check.png"
+        "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\layout_customer_notitfication_layout_one.xml.flat",
+        "source": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\src\\main\\res\\layout\\customer_notitfication_layout_one.xml"
+    },
+    {
+        "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\layout_photo_wall_item_one.xml.flat",
+        "source": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\src\\main\\res\\layout\\photo_wall_item_one.xml"
     },
     {
         "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_tint_edittext.xml.flat",
         "source": "C:\\Users\\demo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\8eb51b2c8f1d48284aa5c52ad7ee731f\\res\\color\\abc_tint_edittext.xml"
     },
     {
-        "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\layout_photo_wall_item_one.xml.flat",
-        "source": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\src\\main\\res\\layout\\photo_wall_item_one.xml"
+        "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_icon_check.png.flat",
+        "source": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\src\\main\\res\\drawable-xhdpi\\icon_check.png"
     },
     {
         "merged": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_jz_clarity_popwindow_bg.9.png.flat",

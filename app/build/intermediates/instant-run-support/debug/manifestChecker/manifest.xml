@@ -216,7 +216,7 @@
         <activity
             android:name="com.cxzy.xxjg.ui.activitys.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name="com.cxzy.xxjg.ui.activitys.ScanActivity"
             android:launchMode="singleTask"

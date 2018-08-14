@@ -16,17 +16,17 @@ import java.lang.Override;
 public class PurchaseActivity_ViewBinding extends BaseActivity_ViewBinding {
   private PurchaseActivity target;
 
-  private View view2131296422;
+  private View view2131296425;
 
-  private View view2131296430;
+  private View view2131296435;
 
   private View view2131296306;
 
-  private View view2131296347;
-
   private View view2131296348;
 
-  private View view2131296513;
+  private View view2131296349;
+
+  private View view2131296518;
 
   @UiThread
   public PurchaseActivity_ViewBinding(PurchaseActivity target) {
@@ -48,7 +48,7 @@ public class PurchaseActivity_ViewBinding extends BaseActivity_ViewBinding {
     target.etPurchaser = Utils.findRequiredViewAsType(source, R.id.et_purchaser, "field 'etPurchaser'", EditText.class);
     view = Utils.findRequiredView(source, R.id.et_manufacture_date, "field 'etManufactureDate' and method 'onViewClicked'");
     target.etManufactureDate = Utils.castView(view, R.id.et_manufacture_date, "field 'etManufactureDate'", TextView.class);
-    view2131296422 = view;
+    view2131296425 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -58,7 +58,7 @@ public class PurchaseActivity_ViewBinding extends BaseActivity_ViewBinding {
     target.etShelfLife = Utils.findRequiredViewAsType(source, R.id.et_shelf_life, "field 'etShelfLife'", EditText.class);
     view = Utils.findRequiredView(source, R.id.et_shelf_life_end, "field 'etShelfLifeEnd' and method 'onViewClicked'");
     target.etShelfLifeEnd = Utils.castView(view, R.id.et_shelf_life_end, "field 'etShelfLifeEnd'", TextView.class);
-    view2131296430 = view;
+    view2131296435 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -76,14 +76,6 @@ public class PurchaseActivity_ViewBinding extends BaseActivity_ViewBinding {
       }
     });
     view = Utils.findRequiredView(source, R.id.btn_warehousing, "method 'onViewClicked'");
-    view2131296347 = view;
-    view.setOnClickListener(new DebouncingOnClickListener() {
-      @Override
-      public void doClick(View p0) {
-        target.onViewClicked(p0);
-      }
-    });
-    view = Utils.findRequiredView(source, R.id.btn_warehousing_and_out_treasury, "method 'onViewClicked'");
     view2131296348 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
@@ -91,8 +83,16 @@ public class PurchaseActivity_ViewBinding extends BaseActivity_ViewBinding {
         target.onViewClicked(p0);
       }
     });
+    view = Utils.findRequiredView(source, R.id.btn_warehousing_and_out_treasury, "method 'onViewClicked'");
+    view2131296349 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.onViewClicked(p0);
+      }
+    });
     view = Utils.findRequiredView(source, R.id.ll_select_canteen, "method 'onViewClicked'");
-    view2131296513 = view;
+    view2131296518 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -119,18 +119,18 @@ public class PurchaseActivity_ViewBinding extends BaseActivity_ViewBinding {
     target.etSuppliers = null;
     target.tvTitle = null;
 
-    view2131296422.setOnClickListener(null);
-    view2131296422 = null;
-    view2131296430.setOnClickListener(null);
-    view2131296430 = null;
+    view2131296425.setOnClickListener(null);
+    view2131296425 = null;
+    view2131296435.setOnClickListener(null);
+    view2131296435 = null;
     view2131296306.setOnClickListener(null);
     view2131296306 = null;
-    view2131296347.setOnClickListener(null);
-    view2131296347 = null;
     view2131296348.setOnClickListener(null);
     view2131296348 = null;
-    view2131296513.setOnClickListener(null);
-    view2131296513 = null;
+    view2131296349.setOnClickListener(null);
+    view2131296349 = null;
+    view2131296518.setOnClickListener(null);
+    view2131296518 = null;
 
     super.unbind();
   }

@@ -2,13 +2,16 @@ package com.cxzy.xxjg.http.util;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.cxzy.xxjg.app.MyApp;
 import com.cxzy.xxjg.base.BaseContract;
 import com.cxzy.xxjg.bean.BaseBean;
 import com.cxzy.xxjg.http.RxSchedulers;
+import com.cxzy.xxjg.ui.activitys.LoginActivity;
 import com.cxzy.xxjg.utils.DialogHelper;
+import com.cxzy.xxjg.utils.SharedPreferencesUtils;
 import com.cxzy.xxjg.utils.ToastUtil;
 
 import io.reactivex.Observable;
@@ -50,11 +53,14 @@ public class HttpUtils{
 
                     @Override
                     public void onError(Throwable e) {
+                        ToastUtil.showShort(MyApp.appComponent.getContext() , "登录过期，请重新登录");
+                        mContext.startActivity(new Intent(mContext , LoginActivity.class));
+                        SharedPreferencesUtils.setParam(MyApp.appComponent.getContext() , "app_token" , "");
                         mView.refreshFaild();
                         if (mDialog != null){
                             mDialog.dismiss();
                         }
-                        ToastUtil.showShort(MyApp.appComponent.getContext() , e.getMessage());
+
                     }
 
                     @Override

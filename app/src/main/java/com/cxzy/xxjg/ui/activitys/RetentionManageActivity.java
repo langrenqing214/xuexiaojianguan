@@ -244,8 +244,8 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
         Map<String, Object> param = new HashMap<>();
         param.put("canteenId" , canteenId);
         param.put("foodName" , info.foodName);
-        param.put("reservedTimeStr" , DateUtil.date2NYRSF(DateUtil.string2Date(info.reservedTime == null ? "" : info.reservedTime , "yyyy-MM-dd HH:mm:ss")));
-        param.put("expiryTimeStr" , DateUtil.date2NYRSF(DateUtil.string2Date(info.expiryTime == null ? "" : info.expiryTime , "yyyy-MM-dd HH:mm:ss")));
+        param.put("reservedTimeStr" , DateUtil.timeToMsgDetailTimeString(info.reservedTime == null ? "" : info.reservedTime ));
+        param.put("expiryTimeStr" , DateUtil.timeToMsgDetailTimeString(info.expiryTime == null ? "" : info.expiryTime ));
         param.put("reservedPerson" , info.reservedPerson);
         param.put("id" , info.id);
         param.put("dealPerson " , person);

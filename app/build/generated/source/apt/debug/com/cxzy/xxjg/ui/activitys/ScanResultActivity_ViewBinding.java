@@ -16,7 +16,7 @@ import java.lang.Override;
 public class ScanResultActivity_ViewBinding extends BaseActivity_ViewBinding {
   private ScanResultActivity target;
 
-  private View view2131296345;
+  private View view2131296346;
 
   private View view2131296306;
 
@@ -36,7 +36,7 @@ public class ScanResultActivity_ViewBinding extends BaseActivity_ViewBinding {
     target.tvTitle = Utils.findRequiredViewAsType(source, R.id.main_title_id, "field 'tvTitle'", TextView.class);
     view = Utils.findRequiredView(source, R.id.btn_scan_result, "field 'btnScanResult' and method 'onViewClicked'");
     target.btnScanResult = Utils.castView(view, R.id.btn_scan_result, "field 'btnScanResult'", Button.class);
-    view2131296345 = view;
+    view2131296346 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -63,8 +63,8 @@ public class ScanResultActivity_ViewBinding extends BaseActivity_ViewBinding {
     target.tvTitle = null;
     target.btnScanResult = null;
 
-    view2131296345.setOnClickListener(null);
-    view2131296345 = null;
+    view2131296346.setOnClickListener(null);
+    view2131296346 = null;
     view2131296306.setOnClickListener(null);
     view2131296306 = null;
 

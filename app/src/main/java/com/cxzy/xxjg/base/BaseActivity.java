@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.cxzy.xxjg.LifeSubscription;
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.app.MyApp;
+import com.cxzy.xxjg.ui.activitys.LoginActivity;
 import com.cxzy.xxjg.utils.DialogHelper;
 import com.cxzy.xxjg.utils.NetUtil;
 import com.cxzy.xxjg.utils.StatusBarUtil;
@@ -76,6 +77,9 @@ public abstract class BaseActivity<T1 extends BaseContract.BasePresenter> extend
         initStateView();
         initData();
         mLoadingDialog = DialogHelper.getLoadingDialog(this);
+        synchronized (mActivities) {
+            mActivities.add(this);
+        }
     }
 
     @Override
@@ -294,5 +298,18 @@ public abstract class BaseActivity<T1 extends BaseContract.BasePresenter> extend
 
     public void onViewClicked(View view){
 
+    }
+
+    public void killAll() {
+        // 复制了一份mActivities 集合Å
+        List<AppCompatActivity> copy;
+        synchronized (mActivities) {
+            copy = new LinkedList<>(mActivities);
+        }
+        for (AppCompatActivity activity : copy) {
+            activity.finish();
+        }
+        // 杀死当前的进程
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 }

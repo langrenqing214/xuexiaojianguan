@@ -17,13 +17,13 @@ import java.lang.Override;
 public class TrialManagementActivity_ViewBinding extends BaseActivity_ViewBinding {
   private TrialManagementActivity target;
 
-  private View view2131296502;
+  private View view2131296507;
 
-  private View view2131296516;
+  private View view2131296521;
 
   private View view2131296306;
 
-  private View view2131296500;
+  private View view2131296505;
 
   @UiThread
   public TrialManagementActivity_ViewBinding(TrialManagementActivity target) {
@@ -40,7 +40,7 @@ public class TrialManagementActivity_ViewBinding extends BaseActivity_ViewBindin
     target.rvTrial = Utils.findRequiredViewAsType(source, R.id.rv_trial_management, "field 'rvTrial'", RecyclerView.class);
     view = Utils.findRequiredView(source, R.id.ll_canteen_select, "field 'llCanteenSelect' and method 'onViewClicked'");
     target.llCanteenSelect = Utils.castView(view, R.id.ll_canteen_select, "field 'llCanteenSelect'", LinearLayout.class);
-    view2131296502 = view;
+    view2131296507 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -50,7 +50,7 @@ public class TrialManagementActivity_ViewBinding extends BaseActivity_ViewBindin
     target.tvCanteenShow = Utils.findRequiredViewAsType(source, R.id.tv_canteen_show, "field 'tvCanteenShow'", TextView.class);
     view = Utils.findRequiredView(source, R.id.ll_time_select, "field 'llTimeSelect' and method 'onViewClicked'");
     target.llTimeSelect = Utils.castView(view, R.id.ll_time_select, "field 'llTimeSelect'", LinearLayout.class);
-    view2131296516 = view;
+    view2131296521 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -68,7 +68,7 @@ public class TrialManagementActivity_ViewBinding extends BaseActivity_ViewBindin
       }
     });
     view = Utils.findRequiredView(source, R.id.ll_add_trial, "method 'onViewClicked'");
-    view2131296500 = view;
+    view2131296505 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -90,14 +90,14 @@ public class TrialManagementActivity_ViewBinding extends BaseActivity_ViewBindin
     target.tvTimeShow = null;
     target.srlTrial = null;
 
-    view2131296502.setOnClickListener(null);
-    view2131296502 = null;
-    view2131296516.setOnClickListener(null);
-    view2131296516 = null;
+    view2131296507.setOnClickListener(null);
+    view2131296507 = null;
+    view2131296521.setOnClickListener(null);
+    view2131296521 = null;
     view2131296306.setOnClickListener(null);
     view2131296306 = null;
-    view2131296500.setOnClickListener(null);
-    view2131296500 = null;
+    view2131296505.setOnClickListener(null);
+    view2131296505 = null;
 
     super.unbind();
   }

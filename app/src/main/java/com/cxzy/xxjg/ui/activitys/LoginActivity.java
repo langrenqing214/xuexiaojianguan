@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.cxzy.xxjg.MainActivity;
 import com.cxzy.xxjg.R;
+import com.cxzy.xxjg.app.MyApp;
 import com.cxzy.xxjg.base.BaseActivity;
 import com.cxzy.xxjg.bean.LoginBean;
 import com.cxzy.xxjg.di.component.AppComponent;
@@ -16,6 +17,7 @@ import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.ui.test.contract.ILoginActivityContract;
 import com.cxzy.xxjg.ui.test.presenter.LoginActivityPresenterImpl;
 import com.cxzy.xxjg.utils.NetUtil;
+import com.cxzy.xxjg.utils.SharedPreferencesUtils;
 import com.cxzy.xxjg.utils.StatusBarUtil;
 import com.cxzy.xxjg.utils.ToastUtil;
 
@@ -32,6 +34,8 @@ public class LoginActivity extends BaseActivity<LoginActivityPresenterImpl> impl
     EditText etUserName ;
     @BindView(R.id.et_password)
     EditText etPassWord ;
+    @BindView(R.id.et_main_url)
+    EditText etMainUrl ;
 
     @Override
     public int getContentLayout() {
@@ -53,7 +57,8 @@ public class LoginActivity extends BaseActivity<LoginActivityPresenterImpl> impl
 
     @Override
     public void initData() {
-
+        String mainUrl = (String) SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "main_url" , "http://47.95.252.122:8080");
+        etMainUrl.setText(mainUrl);
     }
 
     @Override
@@ -75,6 +80,7 @@ public class LoginActivity extends BaseActivity<LoginActivityPresenterImpl> impl
 
         switch (view.getId()){
             case R.id.btn_login :
+                SharedPreferencesUtils.setParam(this , "main_url" , etMainUrl.getText().toString().trim() + "/wisdom/");
                 mPresenter.toLogin(etUserName.getText().toString().trim() , etPassWord.getText().toString().trim());
                 break;
         }

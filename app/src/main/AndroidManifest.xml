@@ -189,11 +189,11 @@
         <activity
             android:name=".ui.activitys.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.Transparent" />
         <activity
             android:name=".ui.activitys.ScanActivity"
-            android:screenOrientation="portrait"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
@@ -269,8 +269,8 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.activitys.ScanResultActivity"
-            android:screenOrientation="portrait"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
@@ -279,7 +279,7 @@
             android:theme="@style/AppTheme.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".ui.activitys.UserProtocolActivity" />
-        <activity android:name=".ui.activitys.ChangePasswordActivity"></activity>
+        <activity android:name=".ui.activitys.ChangePasswordActivity" />
     </application>
 
 </manifest>

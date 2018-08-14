@@ -19,21 +19,21 @@ import java.lang.Override;
 public class HealthExaminationActivity_ViewBinding extends BaseActivity_ViewBinding {
   private HealthExaminationActivity target;
 
-  private View view2131296511;
+  private View view2131296516;
 
-  private View view2131296507;
+  private View view2131296512;
 
   private View view2131296306;
 
-  private View view2131296513;
+  private View view2131296518;
 
   private View view2131296333;
 
-  private View view2131296343;
+  private View view2131296344;
 
   private View view2131296331;
 
-  private View view2131296342;
+  private View view2131296343;
 
   @UiThread
   public HealthExaminationActivity_ViewBinding(HealthExaminationActivity target) {
@@ -60,7 +60,7 @@ public class HealthExaminationActivity_ViewBinding extends BaseActivity_ViewBind
     target.rvAddPic = Utils.findRequiredViewAsType(source, R.id.rv_add_pic, "field 'rvAddPic'", RecyclerView.class);
     view = Utils.findRequiredView(source, R.id.ll_nomor, "field 'llNomor' and method 'onViewClicked'");
     target.llNomor = Utils.castView(view, R.id.ll_nomor, "field 'llNomor'", LinearLayout.class);
-    view2131296511 = view;
+    view2131296516 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -70,7 +70,7 @@ public class HealthExaminationActivity_ViewBinding extends BaseActivity_ViewBind
     target.ivNormal = Utils.findRequiredViewAsType(source, R.id.iv_normal, "field 'ivNormal'", ImageView.class);
     view = Utils.findRequiredView(source, R.id.ll_error, "field 'llError' and method 'onViewClicked'");
     target.llError = Utils.castView(view, R.id.ll_error, "field 'llError'", LinearLayout.class);
-    view2131296507 = view;
+    view2131296512 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -87,7 +87,7 @@ public class HealthExaminationActivity_ViewBinding extends BaseActivity_ViewBind
       }
     });
     view = Utils.findRequiredView(source, R.id.ll_select_canteen, "method 'onViewClicked'");
-    view2131296513 = view;
+    view2131296518 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -103,7 +103,7 @@ public class HealthExaminationActivity_ViewBinding extends BaseActivity_ViewBind
       }
     });
     view = Utils.findRequiredView(source, R.id.btn_save_morningcheck, "method 'onViewClicked'");
-    view2131296343 = view;
+    view2131296344 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -119,7 +119,7 @@ public class HealthExaminationActivity_ViewBinding extends BaseActivity_ViewBind
       }
     });
     view = Utils.findRequiredView(source, R.id.btn_save_environmental_check, "method 'onViewClicked'");
-    view2131296342 = view;
+    view2131296343 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -149,22 +149,22 @@ public class HealthExaminationActivity_ViewBinding extends BaseActivity_ViewBind
     target.llError = null;
     target.ivError = null;
 
-    view2131296511.setOnClickListener(null);
-    view2131296511 = null;
-    view2131296507.setOnClickListener(null);
-    view2131296507 = null;
+    view2131296516.setOnClickListener(null);
+    view2131296516 = null;
+    view2131296512.setOnClickListener(null);
+    view2131296512 = null;
     view2131296306.setOnClickListener(null);
     view2131296306 = null;
-    view2131296513.setOnClickListener(null);
-    view2131296513 = null;
+    view2131296518.setOnClickListener(null);
+    view2131296518 = null;
     view2131296333.setOnClickListener(null);
     view2131296333 = null;
-    view2131296343.setOnClickListener(null);
-    view2131296343 = null;
+    view2131296344.setOnClickListener(null);
+    view2131296344 = null;
     view2131296331.setOnClickListener(null);
     view2131296331 = null;
-    view2131296342.setOnClickListener(null);
-    view2131296342 = null;
+    view2131296343.setOnClickListener(null);
+    view2131296343 = null;
 
     super.unbind();
   }

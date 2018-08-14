@@ -14,7 +14,7 @@ import java.lang.Override;
 public class LoginActivity_ViewBinding extends BaseActivity_ViewBinding {
   private LoginActivity target;
 
-  private View view2131296340;
+  private View view2131296341;
 
   @UiThread
   public LoginActivity_ViewBinding(LoginActivity target) {
@@ -30,8 +30,9 @@ public class LoginActivity_ViewBinding extends BaseActivity_ViewBinding {
     View view;
     target.etUserName = Utils.findRequiredViewAsType(source, R.id.et_username, "field 'etUserName'", EditText.class);
     target.etPassWord = Utils.findRequiredViewAsType(source, R.id.et_password, "field 'etPassWord'", EditText.class);
+    target.etMainUrl = Utils.findRequiredViewAsType(source, R.id.et_main_url, "field 'etMainUrl'", EditText.class);
     view = Utils.findRequiredView(source, R.id.btn_login, "method 'onViewClicked'");
-    view2131296340 = view;
+    view2131296341 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -48,9 +49,10 @@ public class LoginActivity_ViewBinding extends BaseActivity_ViewBinding {
 
     target.etUserName = null;
     target.etPassWord = null;
+    target.etMainUrl = null;
 
-    view2131296340.setOnClickListener(null);
-    view2131296340 = null;
+    view2131296341.setOnClickListener(null);
+    view2131296341 = null;
 
     super.unbind();
   }
