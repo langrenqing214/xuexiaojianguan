@@ -2,6 +2,8 @@ package com.cxzy.xxjg.net;
 
 import com.cxzy.xxjg.bean.BaseBean;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
 
 /**
@@ -23,7 +25,7 @@ public class ChangePwdApi {
         return instance ;
     }
 
-    public Observable<BaseBean<Object>> changePwd(){
-        return mService.changePwd();
+    public Observable<BaseBean<Object>> changePwd(Map<String  , Object> param){
+        return mService.changePwd(param);
     }
 }

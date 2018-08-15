@@ -23,8 +23,8 @@ public class WarningPresenterImpl extends BasePresenter<IWarningContract.View> i
     }
 
     @Override
-    public void getWarningList(String level , String canteenId, String createDateStart, String createDateEnd, int pageNumber, int pageSize) {
-        invoke(api.getWarningList(level , canteenId , createDateStart , createDateEnd , pageNumber , pageSize));
+    public void getWarningList(String level , String canteenId, String createDateStart, String createDateEnd, int pageNum, int pageSize) {
+        invoke(api.getWarningList(level , canteenId , createDateStart , createDateEnd , pageNum , pageSize));
     }
 
     @Override

@@ -25,8 +25,8 @@ public class TrialManagementPresenterImpl extends BasePresenter<ITrialManagement
     }
 
     @Override
-    public void getTrialList(int pageNumber , String canteenId , String eatTimeStart, String eatTimeEnd, int pageSize) {
-        invoke(api.getTrialList(pageNumber , canteenId , eatTimeStart , eatTimeEnd , pageSize));
+    public void getTrialList(int pageNum , String canteenId , String eatTimeStart, String eatTimeEnd, int pageSize) {
+        invoke(api.getTrialList(pageNum , canteenId , eatTimeStart , eatTimeEnd , pageSize));
     }
 
     //跟进

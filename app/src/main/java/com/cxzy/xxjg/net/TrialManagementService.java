@@ -13,7 +13,7 @@ import retrofit2.http.Query;
 
 public interface TrialManagementService {
     @GET("api/foodEat/list")
-    Observable<BaseBean<TrialBean>> getTrialList(@Query("pageNumber") int pageNumber ,
+    Observable<BaseBean<TrialBean>> getTrialList(@Query("pageNum") int pageNum ,
                                                  @Query("canteenId") String canteenId ,
                                                  @Query("eatTimeStart") String eatTimeStart,
                                                  @Query("eatTimeEnd") String eatTimeEnd,

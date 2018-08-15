@@ -23,8 +23,8 @@ public class WarningApi {
         }
         return instance ;
     }
-    public Observable<BaseBean<WarningBean>> getWarningList(String level , String canteenId ,String createDateStart ,String createDateEnd ,int pageNumber ,int pageSize){
-        return mService.getWarningList(level , canteenId , createDateStart , createDateEnd , pageNumber , pageSize);
+    public Observable<BaseBean<WarningBean>> getWarningList(String level , String canteenId ,String createDateStart ,String createDateEnd ,int pageNum ,int pageSize){
+        return mService.getWarningList(level , canteenId , createDateStart , createDateEnd , pageNum , pageSize);
     }
 
     public Observable<BaseBean<Object>> dealWarning(Map<String , Object> param){

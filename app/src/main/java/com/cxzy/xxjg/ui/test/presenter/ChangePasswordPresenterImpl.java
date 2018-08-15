@@ -5,6 +5,8 @@ import com.cxzy.xxjg.presenter.BasePresenter;
 import com.cxzy.xxjg.ui.test.contract.IChangePasswordContract;
 import com.cxzy.xxjg.ui.test.model.ChangePasswordModelImpl;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 /**
@@ -19,7 +21,7 @@ public class ChangePasswordPresenterImpl extends BasePresenter<IChangePasswordCo
     }
 
     @Override
-    public void changePwd() {
-        invoke(api.changePwd());
+    public void changePwd(Map<String  , Object> param) {
+        invoke(api.changePwd(param));
     }
 }

@@ -14,7 +14,7 @@ public interface ITrialManagementContract {
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {
-        void getTrialList(int pageNumber , String canteenId , String eatTimeStart, String eatTimeEnd, int pageSize);
+        void getTrialList(int pageNum , String canteenId , String eatTimeStart, String eatTimeEnd, int pageSize);
         void dealTrialItem(Map<String , Object> param);
     }
 

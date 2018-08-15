@@ -91,7 +91,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:background="@drawable/btn_green_box"
-            android:text="处理"
+            android:text="销样"
             android:textColor="@color/white"
             android:textSize="12dp"
             />

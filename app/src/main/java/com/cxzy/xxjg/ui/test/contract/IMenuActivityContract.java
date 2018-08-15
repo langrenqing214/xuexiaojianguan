@@ -13,7 +13,7 @@ public interface IMenuActivityContract {
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {
-        void getMenuList(String canteenId ,int pageNumber ,int pageSize);
+        void getMenuList(String canteenId ,int pageNum ,int pageSize);
     }
 
     interface Model {

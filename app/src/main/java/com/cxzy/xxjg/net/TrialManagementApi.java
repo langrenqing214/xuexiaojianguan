@@ -25,8 +25,8 @@ public class TrialManagementApi {
         return intance ;
     }
 
-    public Observable<BaseBean<TrialBean>> getTrialList(int pageNumber , String canteenId , String eatTimeStart, String eatTimeEnd, int pageSize){
-        return mService.getTrialList(pageNumber , canteenId , eatTimeStart , eatTimeEnd , pageSize);
+    public Observable<BaseBean<TrialBean>> getTrialList(int pageNum , String canteenId , String eatTimeStart, String eatTimeEnd, int pageSize){
+        return mService.getTrialList(pageNum , canteenId , eatTimeStart , eatTimeEnd , pageSize);
     }
 
 }

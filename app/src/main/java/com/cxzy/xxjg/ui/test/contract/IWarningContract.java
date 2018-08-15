@@ -16,7 +16,7 @@ public interface IWarningContract {
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {
-        void getWarningList(String level , String canteenId ,String createDateStart ,String createDateEnd ,int pageNumber ,int pageSize);
+        void getWarningList(String level , String canteenId ,String createDateStart ,String createDateEnd ,int pageNum ,int pageSize);
         void dealWarning(Map<String , Object> param);
     }
 

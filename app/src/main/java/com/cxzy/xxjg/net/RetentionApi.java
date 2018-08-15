@@ -26,8 +26,8 @@ public class RetentionApi {
         return instance;
     }
 
-    public Observable<BaseBean<RetentionBean>> getRetentionList(String canteenId, String eatTimeStart , String eatTimeEnd , int pageNumber, int pageSize){
-        return mService.getRetentionList(canteenId , eatTimeStart , eatTimeEnd , pageNumber , pageSize);
+    public Observable<BaseBean<RetentionBean>> getRetentionList(String canteenId, String eatTimeStart , String eatTimeEnd , int pageNum, int pageSize){
+        return mService.getRetentionList(canteenId , eatTimeStart , eatTimeEnd , pageNum , pageSize);
     }
 
     //处理

@@ -16,6 +16,6 @@ import retrofit2.http.Query;
 public interface MenuService {
     @GET("api/foodRecipes/list")
     Observable<BaseBean<MenuBean>> getMenuList(@Query("canteenId") String canteenId ,
-                                               @Query("pageNumber") int pageNumber ,
+                                               @Query("pageNum") int pageNum ,
                                                @Query("pageSize") int pageSize);
 }
