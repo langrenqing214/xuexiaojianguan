@@ -17,9 +17,9 @@ import java.lang.Override;
 public class ListoricalWarningActivity_ViewBinding extends BaseActivity_ViewBinding {
   private ListoricalWarningActivity target;
 
-  private View view2131296507;
+  private View view2131296511;
 
-  private View view2131296521;
+  private View view2131296525;
 
   private View view2131296306;
 
@@ -38,7 +38,7 @@ public class ListoricalWarningActivity_ViewBinding extends BaseActivity_ViewBind
     View view;
     view = Utils.findRequiredView(source, R.id.ll_canteen_select, "field 'llCanteenSelect' and method 'onViewClicked'");
     target.llCanteenSelect = Utils.castView(view, R.id.ll_canteen_select, "field 'llCanteenSelect'", LinearLayout.class);
-    view2131296507 = view;
+    view2131296511 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -48,7 +48,7 @@ public class ListoricalWarningActivity_ViewBinding extends BaseActivity_ViewBind
     target.tvCanteenShow = Utils.findRequiredViewAsType(source, R.id.tv_canteen_show, "field 'tvCanteenShow'", TextView.class);
     view = Utils.findRequiredView(source, R.id.ll_time_select, "field 'llTimeSelect' and method 'onViewClicked'");
     target.llTimeSelect = Utils.castView(view, R.id.ll_time_select, "field 'llTimeSelect'", LinearLayout.class);
-    view2131296521 = view;
+    view2131296525 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -81,10 +81,10 @@ public class ListoricalWarningActivity_ViewBinding extends BaseActivity_ViewBind
     target.rvWarning = null;
     target.srlWarning = null;
 
-    view2131296507.setOnClickListener(null);
-    view2131296507 = null;
-    view2131296521.setOnClickListener(null);
-    view2131296521 = null;
+    view2131296511.setOnClickListener(null);
+    view2131296511 = null;
+    view2131296525.setOnClickListener(null);
+    view2131296525 = null;
     view2131296306.setOnClickListener(null);
     view2131296306 = null;
 

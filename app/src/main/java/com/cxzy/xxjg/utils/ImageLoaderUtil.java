@@ -9,6 +9,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.ImageViewTarget;
+import com.cxzy.xxjg.R;
 
 /**
  * desc: .
@@ -28,6 +29,7 @@ public class ImageLoaderUtil {
         Glide.with(context).load(url)
                 .apply(new RequestOptions()
                         .centerCrop()
+                        .error(R.drawable.camera)
                         .diskCacheStrategy(DiskCacheStrategy.ALL))
                 .transition(new DrawableTransitionOptions().crossFade(800))
                 .into(imageView);

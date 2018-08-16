@@ -18,9 +18,9 @@ public class MenuActivity_ViewBinding extends BaseActivity_ViewBinding {
 
   private View view2131296306;
 
-  private View view2131296518;
+  private View view2131296522;
 
-  private View view2131296502;
+  private View view2131296506;
 
   @UiThread
   public MenuActivity_ViewBinding(MenuActivity target) {
@@ -46,7 +46,7 @@ public class MenuActivity_ViewBinding extends BaseActivity_ViewBinding {
       }
     });
     view = Utils.findRequiredView(source, R.id.ll_select_canteen, "method 'onViewClicked'");
-    view2131296518 = view;
+    view2131296522 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -54,7 +54,7 @@ public class MenuActivity_ViewBinding extends BaseActivity_ViewBinding {
       }
     });
     view = Utils.findRequiredView(source, R.id.ll_add_menu, "method 'onViewClicked'");
-    view2131296502 = view;
+    view2131296506 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -75,10 +75,10 @@ public class MenuActivity_ViewBinding extends BaseActivity_ViewBinding {
 
     view2131296306.setOnClickListener(null);
     view2131296306 = null;
-    view2131296518.setOnClickListener(null);
-    view2131296518 = null;
-    view2131296502.setOnClickListener(null);
-    view2131296502 = null;
+    view2131296522.setOnClickListener(null);
+    view2131296522 = null;
+    view2131296506.setOnClickListener(null);
+    view2131296506 = null;
 
     super.unbind();
   }

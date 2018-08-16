@@ -8,21 +8,21 @@ import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.bean.PurchaseBean;
-import com.cxzy.xxjg.bean.SchoolCanteenBean;
+import com.cxzy.xxjg.bean.ResultItemBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 选择供应商
+ * 选择食材类别
  * Created by demo on 2018/7/30.
  */
 
-public class SelectSupplierAdapter extends BaseAdapter {
+public class SelectFoodStyleAdapter extends BaseAdapter {
 
-    private List<PurchaseBean> canteenList = new ArrayList<>();
+    private ArrayList<ResultItemBean> canteenList = new ArrayList<>();
 
-    public SelectSupplierAdapter(List<PurchaseBean> canteenList) {
+    public SelectFoodStyleAdapter(ArrayList<ResultItemBean> canteenList) {
         this.canteenList = canteenList ;
     }
 
@@ -32,7 +32,7 @@ public class SelectSupplierAdapter extends BaseAdapter {
     }
 
     @Override
-    public PurchaseBean getItem(int i) {
+    public ResultItemBean getItem(int i) {
         return canteenList.get(i);
     }
 
@@ -53,7 +53,7 @@ public class SelectSupplierAdapter extends BaseAdapter {
             holder = (CanteenHolder) convertView.getTag();
         }
 
-        PurchaseBean info = getItem(position);
+        ResultItemBean info = getItem(position);
         holder.tvCanteen.setText(info.name);
 
         return convertView;

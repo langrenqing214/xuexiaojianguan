@@ -20,11 +20,13 @@ import android.widget.TimePicker;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
+import com.cxzy.xxjg.bean.ResultItemBean;
 import com.cxzy.xxjg.bean.SchoolCanteenBean;
 import com.cxzy.xxjg.bean.TrialListBean;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
+import com.cxzy.xxjg.dialog.SelectFoodStyleDialog;
 import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.dialog.SelectTrialReactionDialog;
 import com.cxzy.xxjg.net.Constants;
@@ -48,7 +50,7 @@ import butterknife.OnClick;
 /**
  * 添加试吃
  */
-public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implements IAddTrialContract.View , SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, SelectTrialReactionDialog.SelectTrialListener {
+public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implements IAddTrialContract.View , SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, SelectTrialReactionDialog.SelectTrialListener, SelectFoodStyleDialog.SelectFoodStyleListener {
 
     @BindView(R.id.tv_select_canteen)
     TextView tvSelectCanteen;
@@ -59,20 +61,26 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
     @BindView(R.id.tv_trial_time)
     TextView tvTrialTime;
     @BindView(R.id.et_trial_time_interval)
-    EditText etTimeInterval;
+    TextView etTimeInterval;
     @BindView(R.id.tv_select_trial_reaction)
     TextView tvSelectTrialReaction;
     @BindView(R.id.et_trial_des)
     EditText etTrialDes;
     @BindView(R.id.iv_add_trial_pic)
     ImageView ivAddTrialPic;
+    @BindView(R.id.tv_reaction_time)
+    TextView tvReactionTime ;
     private ArrayList<SchoolCanteenBean> dataList;
     private String createDateStart = "";
     private String canteenId = "";
-    private String canteenName = "";
+    private String canteenName ;
     private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE = 1;
     private File file;
     private String trialState = "";//试吃反应
+    private ArrayList<ResultItemBean> timeList;
+    private String timeId;
+    private int timeType = 0 ; //0为试吃时间 1为反应时间
+    private String reactionTime;
 
     @Override
     public int getContentLayout() {
@@ -91,6 +99,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
         dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
+        timeList = (ArrayList<ResultItemBean>) getIntent().getSerializableExtra("REACTION_INTERVAL");
     }
 
     @Override
@@ -115,7 +124,8 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
 
     }
 
-    @OnClick({R.id.back_btn_id, R.id.btn_add_trial, R.id.tv_select_canteen, R.id.tv_trial_time, R.id.iv_add_trial_pic, R.id.tv_select_trial_reaction})
+    @OnClick({R.id.back_btn_id, R.id.btn_add_trial, R.id.tv_select_canteen, R.id.tv_trial_time, R.id.iv_add_trial_pic, R.id.tv_select_trial_reaction ,
+            R.id.et_trial_time_interval , R.id.tv_reaction_time})
     @Override
     public void onViewClicked(View view) {
 
@@ -128,7 +138,13 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
                 SelectCanteenDialog canteenDialog = new SelectCanteenDialog(this, dataList, this);
                 canteenDialog.show();
                 break;
+            case R.id.tv_reaction_time ://选择反应时间
+                timeType = 1 ;
+                SelectTimeDialog reactionTimeDialog = new SelectTimeDialog(this, this);
+                reactionTimeDialog.show();
+                break;
             case R.id.tv_trial_time://选择时间
+                timeType = 0 ;
                 SelectTimeDialog timeDialog = new SelectTimeDialog(this, this);
                 timeDialog.show();
                 break;
@@ -147,6 +163,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
                 break;
             case R.id.tv_select_trial_reaction://选择试吃反应
                 List<String> trialList = new ArrayList<>();
+                trialList.add("未出结果");
                 trialList.add("正常");
                 trialList.add("异常");
                 SelectTrialReactionDialog dialog = new SelectTrialReactionDialog(this , trialList , this);
@@ -162,11 +179,16 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
                 param.put("foodName", foodName);
                 param.put("eatPerson", trialPerson);
                 param.put("eatTime", createDateStart);
-                param.put("internalTime", timeInterval);
+                param.put("internalTime", timeId);
                 param.put("status", trialState);
                 param.put("remarks", trialDes);
+                param.put("statusTime", reactionTime);
                 param.put("eatImage", file);
                 mPresenter.saveTrial(param);
+                break;
+            case R.id.et_trial_time_interval ://选择间隔时间
+                SelectFoodStyleDialog styleDialog = new SelectFoodStyleDialog(this , timeList , this);
+                styleDialog.show();
                 break;
         }
     }
@@ -224,9 +246,11 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
         startcal.set(Calendar.YEAR, year);
         startcal.set(Calendar.MONTH, month);
         startcal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String data = DateUtil.date2MMddWeek(startcal.getTime());
-        createDateStart = DateUtil.date2NYR(startcal.getTime());
-        tvTrialTime.setText(data);
+        if (timeType == 0) {
+            createDateStart = DateUtil.date2NYR(startcal.getTime());
+        }else {
+            reactionTime = DateUtil.date2NYR(startcal.getTime());
+        }
         TimePickerDialog dialog = new TimePickerDialog(AddTrialActivity.this, TimePicker.AUTOFILL_TYPE_LIST, this, 8, 00, true);
         dialog.show();
     }
@@ -236,16 +260,23 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
         Calendar startcal = Calendar.getInstance();
         startcal.set(Calendar.HOUR, hour);
         startcal.set(Calendar.MINUTE, minute);
-        createDateStart = createDateStart + " " + new java.text.SimpleDateFormat("HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
-
+        if (timeType == 0) {
+            createDateStart = createDateStart + " " + new java.text.SimpleDateFormat("HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
+            tvTrialTime.setText(createDateStart);
+        }else {
+            reactionTime = reactionTime + " " + new java.text.SimpleDateFormat("HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
+            tvReactionTime.setText(reactionTime);
+        }
     }
 
     @Override
     public void selectTrialItem(int positon, String trial) {
         if ("正常".equals(trial)){
             trialState = "NORMAL";
-        }else {
+        }else if ("异常".equals(trial)){
             trialState = "ERROR";
+        }else {
+            trialState = "INIT" ;
         }
         tvSelectTrialReaction.setText(trial);
     }
@@ -253,5 +284,11 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
     @Override
     public void getPicFile(File file) {
         this.file = file ;
+    }
+
+    @Override
+    public void selectFoodStyleItem(int positon, ResultItemBean info) {
+        etTimeInterval.setText(info.name);
+        timeId = info.key;
     }
 }

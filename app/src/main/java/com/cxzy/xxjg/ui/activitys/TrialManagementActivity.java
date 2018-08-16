@@ -88,11 +88,16 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
         canteenList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
+    }
+
+    @Override
+    public void initData() {
         canteenId = canteenList == null || canteenList.size() == 0 ? "" : canteenList.get(0).id;
         canteenName = canteenList == null || canteenList.size() == 0 ? "" : canteenList.get(0).name;
         tvCanteenShow.setText(canteenName);
-        dateStart = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
-        createDateStart = DateUtil.date2NYR(Calendar.getInstance().getTime());
+        Long str = Calendar.getInstance().getTimeInMillis() - 7 * 24 * 60 * 60 * 1000 ;
+        dateStart = DateUtil.timeToDataTime(str.toString());
+        createDateStart = DateUtil.timeToAdviserTimeString(str.toString());
         dateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
         createDateEnd = DateUtil.date2NYR(Calendar.getInstance().getTime());
         tvTimeShow.setText(dateStart + "-" + dateEnd);
@@ -106,11 +111,6 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
         rvTrial.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new TrialManagementAdapter(mContext, this);
         rvTrial.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void initData() {
-
     }
 
     @Override
@@ -157,6 +157,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
             case R.id.ll_add_trial://添加试吃
                 Intent intent = new Intent(mContext, AddTrialActivity.class);
                 intent.putExtra("canteenList", canteenList);
+                intent.putExtra("REACTION_INTERVAL", getIntent().getSerializableExtra("REACTION_INTERVAL"));
                 startActivityForResult(intent , 1);
                 break;
             case R.id.ll_canteen_select://选择食堂

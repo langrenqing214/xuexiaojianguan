@@ -11,27 +11,27 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.cxzy.xxjg.R;
-import com.cxzy.xxjg.bean.SchoolCanteenBean;
-import com.cxzy.xxjg.ui.adapter.SelectCanteenAdapter;
+import com.cxzy.xxjg.bean.PurchaseBean;
+import com.cxzy.xxjg.ui.adapter.SelectSupplierAdapter;
 import com.cxzy.xxjg.ui.adapter.SelectTrialAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 选择试吃反应
+ * 选择供应商
  * Created by demo on 2018/7/30.
  */
 
-public class SelectTrialReactionDialog extends Dialog {
+public class SelectSupplierDialog extends Dialog {
     ListView lvSelectCanteen ;
 
     private Window window = null;
-    private SelectTrialListener itemListener ;
+    private SelectSupplierListener itemListener ;
     private Context mContext ;
-    private List<String> canteenList = new ArrayList<>();
+    private List<PurchaseBean> canteenList = new ArrayList<>();
 
-    public SelectTrialReactionDialog(@NonNull Context context , List<String> canteenList , SelectTrialListener itemListener) {
+    public SelectSupplierDialog(@NonNull Context context , List<PurchaseBean> canteenList , SelectSupplierListener itemListener) {
         super(context, R.style.select_canteen_dialog);
         this.itemListener = itemListener ;
         this.mContext = context ;
@@ -43,12 +43,12 @@ public class SelectTrialReactionDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_canteen_dialog);
         lvSelectCanteen = findViewById(R.id.lv_select_canteen);
-        SelectTrialAdapter mAdapter = new SelectTrialAdapter(canteenList);
+        SelectSupplierAdapter mAdapter = new SelectSupplierAdapter(canteenList);
         lvSelectCanteen.setAdapter(mAdapter);
         lvSelectCanteen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                itemListener.selectTrialItem(i , canteenList.get(i));
+                itemListener.selectSupplierItem(i , canteenList.get(i));
                 dismiss();
             }
         });
@@ -81,7 +81,7 @@ public class SelectTrialReactionDialog extends Dialog {
         window.setAttributes(wl);
     }
 
-    public interface SelectTrialListener{
-        void selectTrialItem(int positon, String trial);
+    public interface SelectSupplierListener{
+        void selectSupplierItem(int positon, PurchaseBean info);
     }
 }

@@ -2,6 +2,7 @@ package com.cxzy.xxjg.ui.test.contract;
 
 import com.cxzy.xxjg.base.BaseContract;
 
+import java.io.File;
 import java.util.Map;
 
 /**

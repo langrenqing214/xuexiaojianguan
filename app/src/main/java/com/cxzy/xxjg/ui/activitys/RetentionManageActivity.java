@@ -90,11 +90,16 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
         dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
+    }
+
+    @Override
+    public void initData() {
         canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id;
         String canteenName = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name ;
         tvCanteenShow.setText(canteenName);
-        dateStart = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
-        createDateStart = DateUtil.date2NYR(Calendar.getInstance().getTime());
+        Long str = Calendar.getInstance().getTimeInMillis() - 7 * 24 * 60 * 60 * 1000 ;
+        dateStart = DateUtil.timeToDataTime(str.toString());
+        createDateStart = DateUtil.timeToAdviserTimeString(str.toString());
         dateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
         createDateEnd = DateUtil.date2NYR(Calendar.getInstance().getTime());
         tvTimeShow.setText(dateStart + "-" + dateEnd);
@@ -106,11 +111,6 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
         rvRetention.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new RetentionManageAdapter(this , this);
         rvRetention.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void initData() {
-
     }
 
     @Override

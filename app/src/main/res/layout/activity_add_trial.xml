@@ -186,14 +186,14 @@
                     android:text="　间隔时间:"
                     android:textSize="14dp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/et_trial_time_interval"
                     android:layout_width="200dp"
                     android:layout_height="27dp"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/bg_white_gray_line_box"
                     android:gravity="center_vertical"
-                    android:hint="请输入间隔时间(分钟)"
+                    android:hint="请选择间隔时间"
                     android:paddingLeft="5dp"
                     android:textColor="@color/text_gray_color"
                     android:textSize="14dp" />
@@ -221,6 +221,33 @@
                     android:background="@drawable/bg_white_gray_line_box"
                     android:gravity="center_vertical"
                     android:hint="请选择试吃反应"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/text_gray_color"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="40dp">
+
+                <TextView
+                    style="@style/main_text_style"
+                    android:text="　反应时间:"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/tv_reaction_time"
+                    android:layout_width="200dp"
+                    android:layout_height="27dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/bg_white_gray_line_box"
+                    android:gravity="center_vertical"
+                    android:hint="请选择试吃时间"
                     android:paddingLeft="5dp"
                     android:textColor="@color/text_gray_color"
                     android:textSize="14dp" />

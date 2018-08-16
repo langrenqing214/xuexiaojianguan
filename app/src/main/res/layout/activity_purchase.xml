@@ -123,13 +123,14 @@
                     android:layout_marginRight="17dp"
                     android:text="食材类别:" />
 
-                <EditText
+                <TextView
                     android:id="@+id/et_food_style"
                     style="@style/main_text_style"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:hint="请输入食材类别"
+                    android:gravity="center_vertical"
+                    android:hint="请选择食材类别"
                     android:textSize="14dp" />
 
             </LinearLayout>
@@ -316,13 +317,14 @@
                     android:layout_marginRight="17dp"
                     android:text="　供应商:" />
 
-                <EditText
+                <TextView
                     android:id="@+id/et_suppliers"
                     style="@style/main_text_style"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:hint="请输入供应商"
+                    android:gravity="center_vertical"
+                    android:hint="请选择供应商"
                     android:textSize="14dp" />
 
             </LinearLayout>

@@ -15,9 +15,9 @@ import java.lang.Override;
 public class AddMenuActivity_ViewBinding extends BaseActivity_ViewBinding {
   private AddMenuActivity target;
 
-  private View view2131296732;
+  private View view2131296738;
 
-  private View view2131296735;
+  private View view2131296741;
 
   private View view2131296330;
 
@@ -37,7 +37,7 @@ public class AddMenuActivity_ViewBinding extends BaseActivity_ViewBinding {
     View view;
     view = Utils.findRequiredView(source, R.id.tv_select_canteen, "field 'tvCanteen' and method 'onViewClicked'");
     target.tvCanteen = Utils.castView(view, R.id.tv_select_canteen, "field 'tvCanteen'", TextView.class);
-    view2131296732 = view;
+    view2131296738 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -46,7 +46,7 @@ public class AddMenuActivity_ViewBinding extends BaseActivity_ViewBinding {
     });
     view = Utils.findRequiredView(source, R.id.tv_select_time, "field 'tvTime' and method 'onViewClicked'");
     target.tvTime = Utils.castView(view, R.id.tv_select_time, "field 'tvTime'", TextView.class);
-    view2131296735 = view;
+    view2131296741 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -86,10 +86,10 @@ public class AddMenuActivity_ViewBinding extends BaseActivity_ViewBinding {
     target.etLunch = null;
     target.etDinner = null;
 
-    view2131296732.setOnClickListener(null);
-    view2131296732 = null;
-    view2131296735.setOnClickListener(null);
-    view2131296735 = null;
+    view2131296738.setOnClickListener(null);
+    view2131296738 = null;
+    view2131296741.setOnClickListener(null);
+    view2131296741 = null;
     view2131296330.setOnClickListener(null);
     view2131296330 = null;
     view2131296306.setOnClickListener(null);

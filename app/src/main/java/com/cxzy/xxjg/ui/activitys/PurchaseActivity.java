@@ -18,10 +18,14 @@ import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.base.BaseActivity;
+import com.cxzy.xxjg.bean.PurchaseBean;
+import com.cxzy.xxjg.bean.ResultItemBean;
 import com.cxzy.xxjg.bean.SchoolCanteenBean;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
+import com.cxzy.xxjg.dialog.SelectFoodStyleDialog;
+import com.cxzy.xxjg.dialog.SelectSupplierDialog;
 import com.cxzy.xxjg.dialog.SelectTimeDialog;
 import com.cxzy.xxjg.net.Constants;
 import com.cxzy.xxjg.ui.adapter.PurchaseAdapter;
@@ -44,14 +48,14 @@ import butterknife.OnClick;
 /**
  * 食材采购
  */
-public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl> implements IPurchaseActivityContract.View, PurchaseAdapter.RecyclerViewItemClickListener, SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener {
+public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl> implements IPurchaseActivityContract.View, PurchaseAdapter.RecyclerViewItemClickListener, SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, SelectSupplierDialog.SelectSupplierListener, SelectFoodStyleDialog.SelectFoodStyleListener {
 
     @BindView(R.id.rv_add_pic)
     RecyclerView rvAddPic;
     @BindView(R.id.et_food_name)
     EditText etFoodName;
     @BindView(R.id.et_food_style)
-    EditText etFoodStyle;
+    TextView etFoodStyle;
     @BindView(R.id.et_food_price)
     EditText etFoodPrice;
     @BindView(R.id.et_food_weight)
@@ -65,7 +69,7 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
     @BindView(R.id.et_shelf_life_end)
     TextView etShelfLifeEnd;
     @BindView(R.id.et_suppliers)
-    EditText etSuppliers;
+    TextView etSuppliers;
     @BindView(R.id.main_title_id)
     TextView tvTitle;
 
@@ -75,9 +79,13 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
     private ArrayList<SchoolCanteenBean> dataList;
     private String canteenId;
 
-    private int clickType = 0 ; //0 生产日期 1 保质到期
+    private int clickType = -1 ; //-1 为供应商 0 生产日期 1 保质到期
     private String manufactureDate;
     private String shelfLifeEnd;
+    private List<PurchaseBean> listData;
+    private String supplierId;
+    private ArrayList<ResultItemBean> foodStyleList;
+    private String foodStyleId;
 
     @Override
     public int getContentLayout() {
@@ -96,9 +104,13 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext, R.color.main_style_color));
         dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
+        foodStyleList = (ArrayList<ResultItemBean>) getIntent().getSerializableExtra("food_style");
         canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id;
         String canteenName = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name;
         tvTitle.setText(canteenName);
+
+        clickType = -1 ;
+        mPresenter.getSupplierList();
 
         rvAddPic.setLayoutManager(new GridLayoutManager(this, 3));
         mAdapter = new PurchaseAdapter(this, picList , 5);
@@ -113,8 +125,15 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
 
     @Override
     public void refreshView(Object mData) {
-        ToastUtil.showShort(this, "入库成功");
-        finish();
+        try {
+            if (clickType == -1){
+                listData = (List<PurchaseBean>) mData;
+            }else {
+                ToastUtil.showShort(this, "入库成功");
+                finish();
+            }
+        }catch (Exception e){}
+
     }
 
     @Override
@@ -191,7 +210,7 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
     }
 
     @OnClick({R.id.back_btn_id, R.id.btn_warehousing, R.id.btn_warehousing_and_out_treasury, R.id.ll_select_canteen,
-            R.id.et_manufacture_date, R.id.et_shelf_life_end})
+            R.id.et_manufacture_date, R.id.et_shelf_life_end , R.id.et_suppliers , R.id.et_food_style})
     @Override
     public void onViewClicked(View view) {
 
@@ -213,8 +232,8 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
                 String shelfLife = etShelfLife.getText().toString().trim();
                 String suppliers = etSuppliers.getText().toString().trim();
 
-                Map<String, Object> param = mPresenter.checkInfo(foodName, foodStyle, foodPrice, foodWeight, purchaser, manufactureDate, shelfLifeEnd,
-                        suppliers, 1, canteenId, picList);
+                Map<String, Object> param = mPresenter.checkInfo(foodName, foodStyleId, foodPrice, foodWeight, purchaser, manufactureDate, shelfLifeEnd,
+                        supplierId, 1, canteenId, picList);
 
                 if (param != null) {
                     mPresenter.savePurchase(param);
@@ -229,8 +248,8 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
                 String shelfLife1 = etShelfLife.getText().toString().trim();
                 String suppliers1 = etSuppliers.getText().toString().trim();
 
-                Map<String, Object> param1 = mPresenter.checkInfo(foodName1, foodStyle1, foodPrice1, foodWeight1, purchaser1, manufactureDate, shelfLifeEnd,
-                        suppliers1, 2, canteenId, picList);
+                Map<String, Object> param1 = mPresenter.checkInfo(foodName1, foodStyleId, foodPrice1, foodWeight1, purchaser1, manufactureDate, shelfLifeEnd,
+                        supplierId, 2, canteenId, picList);
 
                 if (param1 != null) {
                     mPresenter.savePurchase(param1);
@@ -245,6 +264,14 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
                 clickType = 1 ;
                 SelectTimeDialog dialog1 = new SelectTimeDialog(this, this);
                 dialog1.show();
+                break;
+            case R.id.et_suppliers ://选择供应商
+                SelectSupplierDialog supplierDialog = new SelectSupplierDialog(this , listData , this);
+                supplierDialog.show();
+                break;
+            case R.id.et_food_style ://选择食材类别
+                SelectFoodStyleDialog foodStyleDialog = new SelectFoodStyleDialog(this , foodStyleList , this);
+                foodStyleDialog.show();
                 break;
         }
     }
@@ -270,5 +297,17 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
             shelfLifeEnd = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
             etShelfLifeEnd.setText(nyTime);
         }
+    }
+
+    @Override
+    public void selectSupplierItem(int positon, PurchaseBean info) {
+        etSuppliers.setText(info.name);
+        supplierId = info.id;
+    }
+
+    @Override
+    public void selectFoodStyleItem(int positon, ResultItemBean info) {
+        etFoodStyle.setText(info.name);
+        foodStyleId = info.key;
     }
 }

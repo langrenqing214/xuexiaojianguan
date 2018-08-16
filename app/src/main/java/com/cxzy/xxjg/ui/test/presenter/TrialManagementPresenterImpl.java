@@ -32,6 +32,6 @@ public class TrialManagementPresenterImpl extends BasePresenter<ITrialManagement
     //跟进
     @Override
     public void dealTrialItem(Map<String, Object> param) {
-        invoke(trialApi.saveTrial(param));
+//        invoke(trialApi.saveTrial(param));
     }
 }

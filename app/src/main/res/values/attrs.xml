@@ -56,4 +56,9 @@
         <attr name="load_more_complete_to_default_scrolling_duration" format="integer" />
         <attr name="default_to_loading_more_scrolling_duration" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
 </resources>

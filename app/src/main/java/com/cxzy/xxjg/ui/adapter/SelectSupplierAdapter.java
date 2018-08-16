@@ -7,19 +7,22 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.cxzy.xxjg.R;
+import com.cxzy.xxjg.bean.PurchaseBean;
 import com.cxzy.xxjg.bean.SchoolCanteenBean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
+ * 选择供应商
  * Created by demo on 2018/7/30.
  */
 
-public class SelectCanteenAdapter extends BaseAdapter {
+public class SelectSupplierAdapter extends BaseAdapter {
 
-    private ArrayList<SchoolCanteenBean> canteenList = new ArrayList<>();
+    private List<PurchaseBean> canteenList = new ArrayList<>();
 
-    public SelectCanteenAdapter(ArrayList<SchoolCanteenBean> canteenList) {
+    public SelectSupplierAdapter(List<PurchaseBean> canteenList) {
         this.canteenList = canteenList ;
     }
 
@@ -29,7 +32,7 @@ public class SelectCanteenAdapter extends BaseAdapter {
     }
 
     @Override
-    public SchoolCanteenBean getItem(int i) {
+    public PurchaseBean getItem(int i) {
         return canteenList.get(i);
     }
 
@@ -50,7 +53,7 @@ public class SelectCanteenAdapter extends BaseAdapter {
             holder = (CanteenHolder) convertView.getTag();
         }
 
-        SchoolCanteenBean info = getItem(position);
+        PurchaseBean info = getItem(position);
         holder.tvCanteen.setText(info.name);
 
         return convertView;

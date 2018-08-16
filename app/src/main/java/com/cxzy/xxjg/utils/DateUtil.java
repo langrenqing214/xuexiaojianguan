@@ -253,7 +253,7 @@ public class DateUtil {
     public static String timeToDataTime(String time) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(Long.valueOf(time));
-        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return sDateFormat.format(calendar.getTime());
 
     }

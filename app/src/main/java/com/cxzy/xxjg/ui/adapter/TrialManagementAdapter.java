@@ -15,6 +15,7 @@ import com.blankj.utilcode.utils.ImageUtils;
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.app.MyApp;
 import com.cxzy.xxjg.bean.TrialListBean;
+import com.cxzy.xxjg.http.ApiConstants;
 import com.cxzy.xxjg.utils.BitmapUtil;
 import com.cxzy.xxjg.utils.DateUtil;
 import com.cxzy.xxjg.utils.ImageLoaderUtil;
@@ -50,8 +51,9 @@ public class TrialManagementAdapter extends RecyclerView.Adapter<TrialManagement
         holder.tvTrialPerson.setText("试吃人:" + info.eatPerson);
         holder.tvTrialTime.setText("试吃时间:" + DateUtil.timeToAdviserTimeString(info.eatTime));
         holder.tvTrialDes.setText(info.remarks);
-        ImageLoaderUtil.LoadImage(mContext , info.eatImage == null ? "" : info.eatImage , holder.ivFood);
-        if (TextUtils.isEmpty(info.status)){//未出结果
+        String str = info.eatImage == null ? "" : ApiConstants.sIFengApi + info.eatImage.substring(1);
+        ImageLoaderUtil.LoadImage(mContext , str , holder.ivFood);
+        if ("INIT".equals(info.status)){//未出结果
             holder.tvTrialState.setText("未出结果");
             holder.tvTrialState.setTextColor(ContextCompat.getColor(mContext , R.color.green_text));
             holder.tvReactionTime.setVisibility(View.GONE);

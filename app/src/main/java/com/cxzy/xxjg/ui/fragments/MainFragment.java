@@ -45,6 +45,7 @@ import com.cxzy.xxjg.ui.test.presenter.MainFragmentContractPresenterImpl;
 import com.cxzy.xxjg.utils.NetUtil;
 import com.cxzy.xxjg.utils.SharedPreferencesUtils;
 import com.cxzy.xxjg.utils.ToastUtil;
+import com.cxzy.xxjg.wideget.CircleImageView;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 import butterknife.BindView;
@@ -68,6 +69,12 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
     TextView tvDeal;
     @BindView(R.id.tv_user_name)
     TextView tvUserName;
+    @BindView(R.id.civ_alarm)
+    CircleImageView civAlarm ;
+    @BindView(R.id.civ_warning)
+    CircleImageView civWarning ;
+    @BindView(R.id.civ_deal)
+    CircleImageView civDeal ;
 
     // 本地apk版本
     private String localVersion;
@@ -140,6 +147,7 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
             case R.id.cv_listorical_warning://历史警告
                 Intent warningIntent = new Intent(mContext, ListoricalWarningActivity.class);
                 warningIntent.putExtra("canteenList", bean.canteenList);
+                warningIntent.putExtra("type", 0);
                 startActivity(warningIntent);
                 break;
             case R.id.cv_regulatory_information://监管信息
@@ -156,9 +164,13 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
                 startActivity(menuIntent);
                 break;
             case R.id.cv_purchase://采购
-                Intent purchaseIntent = new Intent(mContext, PurchaseActivity.class);
-                purchaseIntent.putExtra("canteenList", bean.canteenList);
-                startActivity(purchaseIntent);
+                try {
+                    Intent purchaseIntent = new Intent(mContext, PurchaseActivity.class);
+                    purchaseIntent.putExtra("canteenList", bean.canteenList);
+                    purchaseIntent.putExtra("food_style", bean.dictMap.FOOD_TYPE);
+                    startActivity(purchaseIntent);
+                }catch (Exception e){}
+
                 break;
             case R.id.cv_health_examination://卫生检查
                 Intent healthIntent = new Intent(mContext, HealthExaminationActivity.class);
@@ -171,9 +183,12 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
                 startActivity(retentionIntent);
                 break;
             case R.id.cv_trial_management://试吃管理
-                Intent trialIntent = new Intent(mContext, TrialManagementActivity.class);
-                trialIntent.putExtra("canteenList", bean.canteenList);
-                startActivity(trialIntent);
+                try {
+                    Intent trialIntent = new Intent(mContext, TrialManagementActivity.class);
+                    trialIntent.putExtra("canteenList", bean.canteenList);
+                    trialIntent.putExtra("REACTION_INTERVAL", bean.dictMap.REACTION_INTERVAL);
+                    startActivity(trialIntent);
+                }catch (Exception e){}
                 break;
             case R.id.ll_my_canteen://我的食堂
 //                startActivity(new Intent(mContext , MyCanteenActivity.class));
@@ -185,18 +200,21 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
                 Intent alarmIntent = new Intent(mContext, ListoricalWarningActivity.class);
                 alarmIntent.putExtra("canteenList", bean.canteenList);
                 alarmIntent.putExtra("level", "ALARM");
+                alarmIntent.putExtra("type", 1);
                 startActivity(alarmIntent);
                 break;
             case R.id.tv_warning://告警
                 Intent warningIntent1 = new Intent(mContext, ListoricalWarningActivity.class);
                 warningIntent1.putExtra("canteenList", bean.canteenList);
                 warningIntent1.putExtra("level", "WARN");
+                warningIntent1.putExtra("type", 1);
                 startActivity(warningIntent1);
                 break;
             case R.id.tv_deal://已处理
                 Intent dealIntent = new Intent(mContext, ListoricalWarningActivity.class);
                 dealIntent.putExtra("canteenList", bean.canteenList);
                 dealIntent.putExtra("level", "COMPLETE");
+                dealIntent.putExtra("type", 1);
                 startActivity(dealIntent);
                 break;
             case R.id.ll_about_us://关于

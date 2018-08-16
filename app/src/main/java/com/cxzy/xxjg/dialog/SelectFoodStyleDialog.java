@@ -12,26 +12,27 @@ import android.widget.ListView;
 
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.bean.PurchaseBean;
+import com.cxzy.xxjg.bean.ResultItemBean;
+import com.cxzy.xxjg.ui.adapter.SelectFoodStyleAdapter;
 import com.cxzy.xxjg.ui.adapter.SelectSupplierAdapter;
-import com.cxzy.xxjg.ui.adapter.SelectTrialAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 选择供应商
+ * 选择食材类别
  * Created by demo on 2018/7/30.
  */
 
-public class SelectSupplierDialog extends Dialog {
+public class SelectFoodStyleDialog extends Dialog {
     ListView lvSelectCanteen ;
 
     private Window window = null;
-    private SelectSupplierListener itemListener ;
+    private SelectFoodStyleListener itemListener ;
     private Context mContext ;
-    private List<PurchaseBean> canteenList = new ArrayList<>();
+    private ArrayList<ResultItemBean> canteenList = new ArrayList<>();
 
-    public SelectSupplierDialog(@NonNull Context context , List<PurchaseBean> canteenList , SelectSupplierListener itemListener) {
+    public SelectFoodStyleDialog(@NonNull Context context , ArrayList<ResultItemBean> canteenList , SelectFoodStyleListener itemListener) {
         super(context, R.style.select_canteen_dialog);
         this.itemListener = itemListener ;
         this.mContext = context ;
@@ -43,12 +44,12 @@ public class SelectSupplierDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_canteen_dialog);
         lvSelectCanteen = findViewById(R.id.lv_select_canteen);
-        SelectSupplierAdapter mAdapter = new SelectSupplierAdapter(canteenList);
+        SelectFoodStyleAdapter mAdapter = new SelectFoodStyleAdapter(canteenList);
         lvSelectCanteen.setAdapter(mAdapter);
         lvSelectCanteen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                itemListener.selectSupplierItem(i , canteenList.get(i));
+                itemListener.selectFoodStyleItem(i , canteenList.get(i));
                 dismiss();
             }
         });
@@ -81,7 +82,7 @@ public class SelectSupplierDialog extends Dialog {
         window.setAttributes(wl);
     }
 
-    public interface SelectSupplierListener{
-        void selectSupplierItem(int positon, PurchaseBean info);
+    public interface SelectFoodStyleListener{
+        void selectFoodStyleItem(int positon, ResultItemBean info);
     }
 }

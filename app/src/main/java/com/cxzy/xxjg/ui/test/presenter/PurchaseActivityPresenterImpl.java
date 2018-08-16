@@ -42,6 +42,11 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
     }
 
     @Override
+    public void getSupplierList() {
+        invoke(api.getSupplierList());
+    }
+
+    @Override
     public List<String> dealPicResult(Activity activity , int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case Constants.FLAG_CHOOSE_IMG:// 直接从相册获取
@@ -173,7 +178,7 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
         }
 
         if (TextUtils.isEmpty(suppliers)){
-            ToastUtil.showShort(MyApp.appComponent.getContext() , "请输入供应商");
+            ToastUtil.showShort(MyApp.appComponent.getContext() , "请选择供应商");
             return null ;
         }
 
@@ -201,7 +206,7 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
         param.put("purchasePerson" , purchasePerson);
         param.put("qualityGuaranteeDate" , qualityGuaranteeDate);
         param.put("qualityGuaranteeEndDate" , qualityGuaranteeEndDate);
-        param.put("suppliers" , suppliers);
+        param.put("supplierId" , suppliers);
         param.put("flag" , flag);
         param.put("canteenId" , canteenId);
         param.put("files" , fileList);

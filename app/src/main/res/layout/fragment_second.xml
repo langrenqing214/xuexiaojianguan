@@ -1,4 +1,5 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dl_my_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -48,66 +49,98 @@
             android:id="@+id/ll_my_canteen"
             android:layout_width="200dp"
             android:layout_height="70dp"
-            android:orientation="horizontal"
-            android:gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="40dp"
             android:background="@color/main_tab_color"
-            >
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:gravity="center"
-                >
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:background="@drawable/icon_my_canteen"
-                    />
+                    android:background="@drawable/icon_my_canteen" />
 
                 <TextView
                     style="@style/main_text_style"
                     android:layout_marginTop="5dp"
-                    android:text="我的食堂"
-                    />
+                    android:text="我的食堂" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_alarm"
+            <RelativeLayout
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:textColor="@color/white"
-                android:background="@drawable/circle_red"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:textSize="14dp"
-                />
+                android:layout_marginLeft="10dp">
 
-            <TextView
-                android:id="@+id/tv_warning"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:textColor="@color/text_gray_color"
-                android:background="@drawable/circle_orange"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:textSize="14dp"
-                />
+                <com.cxzy.xxjg.wideget.CircleImageView
+                    android:id="@+id/civ_alarm"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    app:border_color="@color/red_text"
+                    app:border_width="10dp" />
 
-            <TextView
-                android:id="@+id/tv_deal"
+                <TextView
+                    android:id="@+id/tv_alarm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="13dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:textColor="@color/text_gray_color"
-                android:background="@drawable/circle_green"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:textSize="14dp"
-                />
+                android:layout_marginLeft="10dp">
+
+                <com.cxzy.xxjg.wideget.CircleImageView
+                    android:id="@+id/civ_warning"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    app:border_color="@color/red_text"
+                    app:border_width="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_warning"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:textColor="@color/text_gray_color"
+                    android:textSize="14dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp">
+
+                <com.cxzy.xxjg.wideget.CircleImageView
+                    android:id="@+id/civ_deal"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    app:border_color="@color/red_text"
+                    app:border_width="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_deal"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:textColor="@color/text_gray_color"
+                    android:textSize="14dp" />
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -138,8 +171,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:background="@color/main_tab_color"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
@@ -167,8 +200,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:background="@color/main_tab_color"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
@@ -204,8 +237,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:background="@color/main_tab_color"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
@@ -233,8 +266,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:background="@color/main_tab_color"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
@@ -270,8 +303,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:background="@color/main_tab_color"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
@@ -299,8 +332,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:background="@color/main_tab_color"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
@@ -331,14 +364,13 @@
                         android:layout_height="70dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:layout_weight="1"
-                        >
+                        android:layout_weight="1">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:background="@color/main_tab_color"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
@@ -366,8 +398,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:background="@color/main_tab_color"
+                            android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView

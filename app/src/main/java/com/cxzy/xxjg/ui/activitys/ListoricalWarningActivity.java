@@ -20,6 +20,7 @@ import com.cxzy.xxjg.bean.WarningBean;
 import com.cxzy.xxjg.bean.WarningItemBean;
 import com.cxzy.xxjg.di.component.AppComponent;
 import com.cxzy.xxjg.di.component.DaggerHttpComponent;
+import com.cxzy.xxjg.dialog.DealWarningDialog;
 import com.cxzy.xxjg.dialog.ScanResultDialog;
 import com.cxzy.xxjg.dialog.SelectCanteenDialog;
 import com.cxzy.xxjg.dialog.SelectTimeDialog;
@@ -44,7 +45,7 @@ import butterknife.OnClick;
 /**
  * 历史警告
  */
-public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl> implements DatePickerDialog.OnDateSetListener, SelectCanteenDialog.SelectCanteenItemListener, WarningAdapter.DealItemClickListener, OnRefreshLoadMoreListener, ScanResultDialog.ScanResultListener {
+public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl> implements DatePickerDialog.OnDateSetListener, SelectCanteenDialog.SelectCanteenItemListener, WarningAdapter.DealItemClickListener, OnRefreshLoadMoreListener, DealWarningDialog.DealWarningListener {
 
     @BindView(R.id.ll_canteen_select)
     LinearLayout llCanteenSelect;
@@ -72,6 +73,7 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     private List<WarningItemBean> itemList = new ArrayList<>();
     private WarningItemBean info ;
     private int clickType = 0 ;//1位处理后返回数据
+    private int type; //0 历史警告点进来  1 为食堂那几个点点进来
 
     @Override
     public int getContentLayout() {
@@ -89,15 +91,28 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext , R.color.main_style_color));
-        dateStart = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
-        createDateStart = DateUtil.date2NYR(Calendar.getInstance().getTime());
-        dateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
-        createDateEnd = DateUtil.date2NYR(Calendar.getInstance().getTime());
         dataList = (ArrayList<SchoolCanteenBean>) getIntent().getSerializableExtra("canteenList");
         level = getIntent().getStringExtra("level");
+        type = getIntent().getIntExtra("type" , 0);
+    }
+
+    @Override
+    public void initData() {
+        if (type == 0) {
+            Long str = Calendar.getInstance().getTimeInMillis() - 7 * 24 * 60 * 60 * 1000 ;
+            dateStart = DateUtil.timeToDataTime(str.toString());
+            createDateStart = DateUtil.timeToAdviserTimeString(str.toString());
+            dateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
+            createDateEnd = DateUtil.date2NYR(Calendar.getInstance().getTime());
+        }else {
+            dateStart = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
+            createDateStart = DateUtil.date2NYR(Calendar.getInstance().getTime());
+            dateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
+            createDateEnd = DateUtil.date2NYR(Calendar.getInstance().getTime());
+        }
         tvCanteenShow.setText(dataList == null || dataList.size() == 0 ? "" : dataList.get(0).name);
         canteenId = dataList == null || dataList.size() == 0 ? "" : dataList.get(0).id;
-        tvTimeShow.setText(createDateStart + "-" + createDateEnd);
+        tvTimeShow.setText(dateStart + "-" + dateEnd);
 
         mPresenter.getWarningList(level , canteenId , createDateStart , createDateEnd , page , pageSize);
         //刷新
@@ -107,11 +122,6 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
         rvWarning.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new WarningAdapter(this , itemList);
         rvWarning.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void initData() {
-
     }
 
     @Override
@@ -203,9 +213,8 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     @Override
     public void dealItemClickListener(int position , WarningItemBean info) {
         this.info = info ;
-        ScanResultDialog dialog = new ScanResultDialog(this , 2 , this);
+        DealWarningDialog dialog = new DealWarningDialog(this , this);
         dialog.show();
-
     }
 
     @Override
@@ -221,14 +230,13 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     }
 
     @Override
-    public void scanResult(String person, String num) {
-        if (TextUtils.isEmpty(person)){
-            ToastUtil.showShort(this , "处理人不能为空");
-            return;
-        }
+    public void dealWarning(String person, String trialState, String dealDes, String dealStep) {
         clickType = 1 ;
         Map<String , Object> param = new HashMap<>();
         param.put("id" , info.id);
+        param.put("dealConclusion" , trialState);
+        param.put("dealConclusionMemo" , dealDes);
+        param.put("dealMeasures " , dealStep);
         param.put("dealUserName" , person);
         mPresenter.dealWarning(param);
     }

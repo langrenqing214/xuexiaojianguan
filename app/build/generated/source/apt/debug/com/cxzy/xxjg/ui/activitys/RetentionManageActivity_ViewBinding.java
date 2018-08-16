@@ -17,13 +17,13 @@ import java.lang.Override;
 public class RetentionManageActivity_ViewBinding extends BaseActivity_ViewBinding {
   private RetentionManageActivity target;
 
-  private View view2131296507;
+  private View view2131296511;
 
-  private View view2131296521;
+  private View view2131296525;
 
   private View view2131296306;
 
-  private View view2131296504;
+  private View view2131296508;
 
   @UiThread
   public RetentionManageActivity_ViewBinding(RetentionManageActivity target) {
@@ -40,7 +40,7 @@ public class RetentionManageActivity_ViewBinding extends BaseActivity_ViewBindin
     target.rvRetention = Utils.findRequiredViewAsType(source, R.id.rv_retention, "field 'rvRetention'", RecyclerView.class);
     view = Utils.findRequiredView(source, R.id.ll_canteen_select, "field 'llCanteenSelect' and method 'onViewClicked'");
     target.llCanteenSelect = Utils.castView(view, R.id.ll_canteen_select, "field 'llCanteenSelect'", LinearLayout.class);
-    view2131296507 = view;
+    view2131296511 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -50,7 +50,7 @@ public class RetentionManageActivity_ViewBinding extends BaseActivity_ViewBindin
     target.tvCanteenShow = Utils.findRequiredViewAsType(source, R.id.tv_canteen_show, "field 'tvCanteenShow'", TextView.class);
     view = Utils.findRequiredView(source, R.id.ll_time_select, "field 'llTimeSelect' and method 'onViewClicked'");
     target.llTimeSelect = Utils.castView(view, R.id.ll_time_select, "field 'llTimeSelect'", LinearLayout.class);
-    view2131296521 = view;
+    view2131296525 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -68,7 +68,7 @@ public class RetentionManageActivity_ViewBinding extends BaseActivity_ViewBindin
       }
     });
     view = Utils.findRequiredView(source, R.id.ll_add_retention, "method 'onViewClicked'");
-    view2131296504 = view;
+    view2131296508 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -90,14 +90,14 @@ public class RetentionManageActivity_ViewBinding extends BaseActivity_ViewBindin
     target.tvTimeShow = null;
     target.srlRetention = null;
 
-    view2131296507.setOnClickListener(null);
-    view2131296507 = null;
-    view2131296521.setOnClickListener(null);
-    view2131296521 = null;
+    view2131296511.setOnClickListener(null);
+    view2131296511 = null;
+    view2131296525.setOnClickListener(null);
+    view2131296525 = null;
     view2131296306.setOnClickListener(null);
     view2131296306 = null;
-    view2131296504.setOnClickListener(null);
-    view2131296504 = null;
+    view2131296508.setOnClickListener(null);
+    view2131296508 = null;
 
     super.unbind();
   }

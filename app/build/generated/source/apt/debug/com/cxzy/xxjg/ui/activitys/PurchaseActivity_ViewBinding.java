@@ -16,9 +16,13 @@ import java.lang.Override;
 public class PurchaseActivity_ViewBinding extends BaseActivity_ViewBinding {
   private PurchaseActivity target;
 
-  private View view2131296425;
+  private View view2131296424;
 
-  private View view2131296435;
+  private View view2131296429;
+
+  private View view2131296439;
+
+  private View view2131296440;
 
   private View view2131296306;
 
@@ -26,7 +30,7 @@ public class PurchaseActivity_ViewBinding extends BaseActivity_ViewBinding {
 
   private View view2131296349;
 
-  private View view2131296518;
+  private View view2131296522;
 
   @UiThread
   public PurchaseActivity_ViewBinding(PurchaseActivity target) {
@@ -42,13 +46,21 @@ public class PurchaseActivity_ViewBinding extends BaseActivity_ViewBinding {
     View view;
     target.rvAddPic = Utils.findRequiredViewAsType(source, R.id.rv_add_pic, "field 'rvAddPic'", RecyclerView.class);
     target.etFoodName = Utils.findRequiredViewAsType(source, R.id.et_food_name, "field 'etFoodName'", EditText.class);
-    target.etFoodStyle = Utils.findRequiredViewAsType(source, R.id.et_food_style, "field 'etFoodStyle'", EditText.class);
+    view = Utils.findRequiredView(source, R.id.et_food_style, "field 'etFoodStyle' and method 'onViewClicked'");
+    target.etFoodStyle = Utils.castView(view, R.id.et_food_style, "field 'etFoodStyle'", TextView.class);
+    view2131296424 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.onViewClicked(p0);
+      }
+    });
     target.etFoodPrice = Utils.findRequiredViewAsType(source, R.id.et_food_price, "field 'etFoodPrice'", EditText.class);
     target.etFoodWeight = Utils.findRequiredViewAsType(source, R.id.et_food_weight, "field 'etFoodWeight'", EditText.class);
     target.etPurchaser = Utils.findRequiredViewAsType(source, R.id.et_purchaser, "field 'etPurchaser'", EditText.class);
     view = Utils.findRequiredView(source, R.id.et_manufacture_date, "field 'etManufactureDate' and method 'onViewClicked'");
     target.etManufactureDate = Utils.castView(view, R.id.et_manufacture_date, "field 'etManufactureDate'", TextView.class);
-    view2131296425 = view;
+    view2131296429 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -58,14 +70,22 @@ public class PurchaseActivity_ViewBinding extends BaseActivity_ViewBinding {
     target.etShelfLife = Utils.findRequiredViewAsType(source, R.id.et_shelf_life, "field 'etShelfLife'", EditText.class);
     view = Utils.findRequiredView(source, R.id.et_shelf_life_end, "field 'etShelfLifeEnd' and method 'onViewClicked'");
     target.etShelfLifeEnd = Utils.castView(view, R.id.et_shelf_life_end, "field 'etShelfLifeEnd'", TextView.class);
-    view2131296435 = view;
+    view2131296439 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.onViewClicked(p0);
       }
     });
-    target.etSuppliers = Utils.findRequiredViewAsType(source, R.id.et_suppliers, "field 'etSuppliers'", EditText.class);
+    view = Utils.findRequiredView(source, R.id.et_suppliers, "field 'etSuppliers' and method 'onViewClicked'");
+    target.etSuppliers = Utils.castView(view, R.id.et_suppliers, "field 'etSuppliers'", TextView.class);
+    view2131296440 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.onViewClicked(p0);
+      }
+    });
     target.tvTitle = Utils.findRequiredViewAsType(source, R.id.main_title_id, "field 'tvTitle'", TextView.class);
     view = Utils.findRequiredView(source, R.id.back_btn_id, "method 'onViewClicked'");
     view2131296306 = view;
@@ -92,7 +112,7 @@ public class PurchaseActivity_ViewBinding extends BaseActivity_ViewBinding {
       }
     });
     view = Utils.findRequiredView(source, R.id.ll_select_canteen, "method 'onViewClicked'");
-    view2131296518 = view;
+    view2131296522 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -119,18 +139,22 @@ public class PurchaseActivity_ViewBinding extends BaseActivity_ViewBinding {
     target.etSuppliers = null;
     target.tvTitle = null;
 
-    view2131296425.setOnClickListener(null);
-    view2131296425 = null;
-    view2131296435.setOnClickListener(null);
-    view2131296435 = null;
+    view2131296424.setOnClickListener(null);
+    view2131296424 = null;
+    view2131296429.setOnClickListener(null);
+    view2131296429 = null;
+    view2131296439.setOnClickListener(null);
+    view2131296439 = null;
+    view2131296440.setOnClickListener(null);
+    view2131296440 = null;
     view2131296306.setOnClickListener(null);
     view2131296306 = null;
     view2131296348.setOnClickListener(null);
     view2131296348 = null;
     view2131296349.setOnClickListener(null);
     view2131296349 = null;
-    view2131296518.setOnClickListener(null);
-    view2131296518 = null;
+    view2131296522.setOnClickListener(null);
+    view2131296522 = null;
 
     super.unbind();
   }
