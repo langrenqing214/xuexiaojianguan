@@ -46,6 +46,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * 添加试吃
@@ -174,16 +176,17 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
                 String trialPerson = etTrialPerson.getText().toString().trim();
                 String timeInterval = etTimeInterval.getText().toString().trim();
                 String trialDes = etTrialDes.getText().toString().trim();
-                Map<String, Object> param = new HashMap<>();
-                param.put("canteenId", canteenId);
-                param.put("foodName", foodName);
-                param.put("eatPerson", trialPerson);
-                param.put("eatTime", createDateStart);
-                param.put("internalTime", timeId);
-                param.put("status", trialState);
-                param.put("remarks", trialDes);
-                param.put("statusTime", reactionTime);
-                param.put("eatImage", file);
+                Map<String , RequestBody> param = new HashMap<>();
+                param.put("canteenId", RequestBody.create(MediaType.parse("form-data"),canteenId));
+                param.put("foodName", RequestBody.create(MediaType.parse("form-data"),foodName));
+                param.put("eatPerson", RequestBody.create(MediaType.parse("form-data"),trialPerson));
+                param.put("eatTime", RequestBody.create(MediaType.parse("form-data"),createDateStart));
+                param.put("internalTime", RequestBody.create(MediaType.parse("form-data"),timeId));
+                param.put("status", RequestBody.create(MediaType.parse("form-data"),trialState));
+                param.put("remarks", RequestBody.create(MediaType.parse("form-data"),trialDes));
+                param.put("statusTime", RequestBody.create(MediaType.parse("form-data"),reactionTime));
+//                param.put("eatImage", file);
+                param.put("eatImage\"; filename=\"" + file.getName() , RequestBody.create(MediaType.parse("form-data"), file) );
                 mPresenter.saveTrial(param);
                 break;
             case R.id.et_trial_time_interval ://选择间隔时间

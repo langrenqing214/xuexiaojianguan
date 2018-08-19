@@ -225,7 +225,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
         param.put("canteenId", canteenId);
         param.put("id", info.id);
         param.put("statusTime", statusTime);
-        param.put("internalTime", intervalTime);
+//        param.put("internalTime", intervalTime);
         param.put("status", status);
         param.put("remarks", remarks);
         mPresenter.dealTrialItem(param);

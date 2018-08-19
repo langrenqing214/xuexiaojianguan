@@ -76,15 +76,15 @@
         android:id="@+id/et_interval_time"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:gravity="center_vertical"
-        android:hint="请输入间隔时间"
-        android:textSize="15dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_white_gray_line_box"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_white_gray_line_box"
+        android:gravity="center_vertical"
+        android:hint="请输入间隔时间"
         android:maxLines="1"
-        />
+        android:visibility="gone"
+        android:textSize="15dp" />
 
     <TextView
         android:id="@+id/tv_status_time"

@@ -54,6 +54,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * 卫生检查
@@ -199,11 +201,16 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                     ToastUtil.showShort(this , "拍照不能为空");
                     return;
                 }
-                Map<String, Object> param = new HashMap<>();
-                param.put("persons", new Gson().toJson(allList));
-                param.put("files", fileList);
-                param.put("canteenId", canteenId);
-                param.put("typeId", typeId);
+                Map<String, RequestBody> param = new HashMap<>();
+                param.put("persons", RequestBody.create(MediaType.parse("form-data"),new Gson().toJson(allList)));
+//                param.put("files", fileList);
+                if(fileList != null && !fileList.isEmpty()) {
+                    for (File file:fileList){
+                        param.put("files\";filename=\""+file.getName(), RequestBody.create(MediaType.parse("form-data"), file));
+                    }
+                }
+                param.put("canteenId", RequestBody.create(MediaType.parse("form-data"),canteenId));
+                param.put("typeId", RequestBody.create(MediaType.parse("form-data"),typeId));
 
                 mPresenter.saveMorningCheck(param);
                 clickType = 1 ;

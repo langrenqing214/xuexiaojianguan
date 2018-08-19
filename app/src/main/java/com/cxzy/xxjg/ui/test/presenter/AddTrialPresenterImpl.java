@@ -48,7 +48,7 @@ public class AddTrialPresenterImpl extends BasePresenter<IAddTrialContract.View>
     }
 
     @Override
-    public void saveTrial(Map<String, Object> param) {
+    public void saveTrial(Map<String , RequestBody> param) {
         invoke(api.saveTrial(param));
     }
 

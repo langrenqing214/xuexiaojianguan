@@ -8,6 +8,9 @@ import com.cxzy.xxjg.base.BaseContract;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+
 /**
  * 食材采购
  * Author: demo
@@ -24,9 +27,9 @@ public interface IPurchaseActivityContract {
 
         List<String> dealPicResult(Activity activity, int requestCode, int resultCode, Intent data);
 
-        void savePurchase(Map<String, Object> param);
+        void savePurchase(Map<String, RequestBody> param);
 
-        Map<String, Object> checkInfo(String name, String type, String price, String weight, String purchasePerson, String qualityGuaranteeDate,
+        Map<String , RequestBody> checkInfo(String name, String type, String price, String weight, String purchasePerson, String qualityGuaranteeDate,
                                       String qualityGuaranteeEndDate, String suppliers, int flag, String canteenId, List<String> picList);
     }
 }

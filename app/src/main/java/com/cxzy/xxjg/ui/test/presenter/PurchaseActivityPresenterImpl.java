@@ -25,6 +25,9 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+
 /**
  * Author: demo
  * Created on 2018/7/19
@@ -134,14 +137,14 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
     }
 
     @Override
-    public void savePurchase(Map<String, Object> param) {
+    public void savePurchase(Map<String, RequestBody> param) {
         invoke(api.savePurchase(param));
     }
 
     @Override
-    public Map<String, Object> checkInfo(String name, String type, String price, String weight, String purchasePerson,
-                                         String qualityGuaranteeDate, String qualityGuaranteeEndDate,
-                                         String suppliers, int flag, String canteenId, List<String> picList) {
+    public Map<String , RequestBody> checkInfo(String name, String type, String price, String weight, String purchasePerson,
+                                              String qualityGuaranteeDate, String qualityGuaranteeEndDate,
+                                              String suppliers, int flag, String canteenId, List<String> picList) {
         if (TextUtils.isEmpty(name)){
             ToastUtil.showShort(MyApp.appComponent.getContext() , "请输入食材名称");
             return null;
@@ -187,7 +190,7 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
             return null ;
         }
 
-        if (picList != null && picList.size() != 0){
+        if (picList == null || picList.size() == 0){
             ToastUtil.showShort(MyApp.appComponent.getContext() , "图片不能为空");
             return null ;
         }
@@ -198,18 +201,23 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
             fileList.add(folder);
         }
 
-        Map<String , Object> param = new HashMap<>();
-        param.put("name" , name);
-        param.put("type" , type);
-        param.put("price" , price);
-        param.put("weight" , weight);
-        param.put("purchasePerson" , purchasePerson);
-        param.put("qualityGuaranteeDate" , qualityGuaranteeDate);
-        param.put("qualityGuaranteeEndDate" , qualityGuaranteeEndDate);
-        param.put("supplierId" , suppliers);
-        param.put("flag" , flag);
-        param.put("canteenId" , canteenId);
-        param.put("files" , fileList);
+        Map<String , RequestBody> param = new HashMap<>();
+        param.put("name" , RequestBody.create(MediaType.parse("form-data"),name));
+        param.put("type" , RequestBody.create(MediaType.parse("form-data"),type));
+        param.put("price" , RequestBody.create(MediaType.parse("form-data"),price));
+        param.put("weight" , RequestBody.create(MediaType.parse("form-data"),weight));
+        param.put("purchasePerson" , RequestBody.create(MediaType.parse("form-data"),purchasePerson));
+        param.put("qualityGuaranteeDate" , RequestBody.create(MediaType.parse("form-data"),qualityGuaranteeDate));
+        param.put("qualityGuaranteeEndDate" , RequestBody.create(MediaType.parse("form-data"),qualityGuaranteeEndDate));
+        param.put("supplierId" , RequestBody.create(MediaType.parse("form-data"),suppliers));
+        param.put("flag" , RequestBody.create(MediaType.parse("form-data"),flag + ""));
+        param.put("canteenId" , RequestBody.create(MediaType.parse("form-data"),canteenId));
+//        param.put("files" , fileList);
+        if(fileList != null && !fileList.isEmpty()) {
+            for (File file:fileList){
+                param.put("files\";filename=\""+file.getName(), RequestBody.create(MediaType.parse("form-data"), file));
+            }
+        }
         return param;
     }
 

@@ -44,6 +44,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 /**
  * 食材采购
@@ -232,7 +234,7 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
                 String shelfLife = etShelfLife.getText().toString().trim();
                 String suppliers = etSuppliers.getText().toString().trim();
 
-                Map<String, Object> param = mPresenter.checkInfo(foodName, foodStyleId, foodPrice, foodWeight, purchaser, manufactureDate, shelfLifeEnd,
+                Map<String , RequestBody> param = mPresenter.checkInfo(foodName, foodStyleId, foodPrice, foodWeight, purchaser, manufactureDate, shelfLifeEnd,
                         supplierId, 1, canteenId, picList);
 
                 if (param != null) {
@@ -248,7 +250,7 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
                 String shelfLife1 = etShelfLife.getText().toString().trim();
                 String suppliers1 = etSuppliers.getText().toString().trim();
 
-                Map<String, Object> param1 = mPresenter.checkInfo(foodName1, foodStyleId, foodPrice1, foodWeight1, purchaser1, manufactureDate, shelfLifeEnd,
+                Map<String, RequestBody> param1 = mPresenter.checkInfo(foodName1, foodStyleId, foodPrice1, foodWeight1, purchaser1, manufactureDate, shelfLifeEnd,
                         supplierId, 2, canteenId, picList);
 
                 if (param1 != null) {

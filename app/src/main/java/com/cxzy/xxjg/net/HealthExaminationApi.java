@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 
 /**
  * Created by demo on 2018/8/2.
@@ -32,7 +33,7 @@ public class HealthExaminationApi {
         return mService.getHealthCheck(canteenId);
     }
 
-    public Observable<BaseBean<Object>> saveMorningCheck(Map<String , Object> param){
+    public Observable<BaseBean<Object>> saveMorningCheck(Map<String , RequestBody> param){
         return mService.saveMorningCheck(param);
     }
 

@@ -22,7 +22,7 @@ import retrofit2.http.QueryMap;
  */
 
 public interface AddTrialService {
-    @FormUrlEncoded
+    @Multipart
     @POST("api/foodEat/save")
-    Observable<BaseBean<Object>> saveTrial(@FieldMap Map<String , Object> param );
+    Observable<BaseBean<Object>> saveTrial(@PartMap Map<String , RequestBody> param );
 }

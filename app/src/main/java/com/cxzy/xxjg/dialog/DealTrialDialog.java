@@ -112,10 +112,10 @@ public class DealTrialDialog extends Dialog implements View.OnClickListener, Dat
                     return;
                 }
 
-                if (TextUtils.isEmpty(intervalTime)){
-                    ToastUtil.showShort(mContext , "请输入间隔时间");
-                    return;
-                }
+//                if (TextUtils.isEmpty(intervalTime)){
+//                    ToastUtil.showShort(mContext , "请输入间隔时间");
+//                    return;
+//                }
                 if (TextUtils.isEmpty(remarks)){
                     ToastUtil.showShort(mContext , "请输入试吃反应");
                     return;
