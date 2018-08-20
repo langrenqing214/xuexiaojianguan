@@ -9,12 +9,15 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -29,9 +32,9 @@ public interface HealthExaminationService {
     Observable<BaseBean<HealthExaminationBean>> getHealthCheck(@Query("canteenId") String canteenId);
 
     //提交晨检
-    @FormUrlEncoded
+    @Multipart
     @POST("api/check/saveMorningCheck")
-    Observable<BaseBean<Object>> saveMorningCheck(@FieldMap() Map<String , Object> param);
+    Observable<BaseBean<Object>> saveMorningCheck(@PartMap Map<String , RequestBody> param);
 
     //提交环境检查
     @POST("api/check/saveEnvCheck")

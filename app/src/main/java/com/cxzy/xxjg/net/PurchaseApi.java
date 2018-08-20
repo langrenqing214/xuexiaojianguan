@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 /**
  * Created by demo on 2018/7/31.
@@ -31,7 +33,7 @@ public class PurchaseApi {
         return mService.getSupplierList();
     }
 
-    public Observable<BaseBean<Object>> savePurchase(Map<String , Object> param){
+    public Observable<BaseBean<Object>> savePurchase(Map<String , RequestBody> param){
         return mService.savePurchase(param);
     }
 }

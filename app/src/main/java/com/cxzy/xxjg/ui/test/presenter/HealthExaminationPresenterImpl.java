@@ -27,6 +27,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import okhttp3.RequestBody;
+
 /**
  * Author: demo
  * Created on 2018/8/2
@@ -48,7 +50,7 @@ public class HealthExaminationPresenterImpl extends BasePresenter<IHealthExamina
     }
 
     @Override
-    public void saveMorningCheck(Map<String, Object> param) {
+    public void saveMorningCheck(Map<String, RequestBody> param) {
         invoke(api.saveMorningCheck(param));
     }
 

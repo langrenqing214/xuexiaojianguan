@@ -13,6 +13,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.RequestBody;
+
 /**
  * 卫生检查
  * Author: demo
@@ -26,7 +28,7 @@ public interface IHealthExaminationContract {
 
     interface Presenter extends BaseContract.BasePresenter<View> {
         void getHealthCheck(String canteenId);
-        void saveMorningCheck(Map<String , Object> param);
+        void saveMorningCheck(Map<String , RequestBody> param);
         void saveEnvCheck(Map<String , Object> param);
         List<String> dealPicResult(int requestCode, int resultCode, Intent data);
     }

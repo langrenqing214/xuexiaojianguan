@@ -25,7 +25,7 @@ public interface IAddTrialContract {
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {
-        void saveTrial(Map<String , Object> param);
+        void saveTrial(Map<String , RequestBody> param);
         File getPicUrl(int requestCode, int resultCode, Intent data , ImageView ivPic);
     }
 

@@ -25,7 +25,7 @@ public class AddTrialApi {
         return instance ;
     }
 
-    public Observable<BaseBean<Object>> saveTrial(Map<String , Object> param ){
+    public Observable<BaseBean<Object>> saveTrial(Map<String , RequestBody> param ){
         return mService.saveTrial(param);
     }
 
