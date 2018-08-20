@@ -3,6 +3,7 @@ package com.cxzy.xxjg.ui.activitys;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -57,8 +58,8 @@ public class LoginActivity extends BaseActivity<LoginActivityPresenterImpl> impl
 
     @Override
     public void initData() {
-        String mainUrl = (String) SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "main_url" , "http://47.95.252.122:8080");
-        etMainUrl.setText(mainUrl);
+        String mainUrl = (String) SharedPreferencesUtils.getParam(this , "main_url" , "http://47.95.252.122:8080/wisdom/");
+        etMainUrl.setText(TextUtils.isEmpty(mainUrl) ? "http://47.95.252.122:8080/wisdom/" : mainUrl);
     }
 
     @Override
@@ -66,8 +67,10 @@ public class LoginActivity extends BaseActivity<LoginActivityPresenterImpl> impl
     }
 
     @Override
-    public void refreshFaild() {
-
+    public void refreshFaild(String faildCode) {
+        if ("401".equals(faildCode)){
+            finish();
+        }
     }
 
     @Override
@@ -80,7 +83,8 @@ public class LoginActivity extends BaseActivity<LoginActivityPresenterImpl> impl
 
         switch (view.getId()){
             case R.id.btn_login :
-                SharedPreferencesUtils.setParam(this , "main_url" , etMainUrl.getText().toString().trim() + "/wisdom/");
+                String url = etMainUrl.getText().toString().trim() ;
+                SharedPreferencesUtils.setParam(this , "main_url" , TextUtils.isEmpty(url)? "http://47.95.252.122:8080/wisdom/" : url);
                 mPresenter.toLogin(etUserName.getText().toString().trim() , etPassWord.getText().toString().trim());
                 break;
         }

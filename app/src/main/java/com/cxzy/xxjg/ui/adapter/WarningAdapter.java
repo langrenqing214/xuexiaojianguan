@@ -1,5 +1,7 @@
 package com.cxzy.xxjg.ui.adapter;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import com.cxzy.xxjg.R;
 import com.cxzy.xxjg.bean.WarningItemBean;
 import com.cxzy.xxjg.utils.DateUtil;
+import com.cxzy.xxjg.wideget.CircleImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +39,7 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
         return new WarningHolder(view);
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public void onBindViewHolder(WarningHolder holder, final int position) {
         final WarningItemBean info = data.get(position);
@@ -50,6 +54,8 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
                 holder.stateShow.setBackgroundResource(R.drawable.circle_green);
                 break;
         }
+
+        holder.stateShow.setImageResource(Color.parseColor(info.levelColor.trim()));
 
         if ("DEAL_END".equals(info.dealState)){//已处理
             holder.btnDealWarning.setVisibility(View.GONE);
@@ -83,7 +89,7 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
 
     class WarningHolder extends RecyclerView.ViewHolder{
 
-        View stateShow ;
+        CircleImageView stateShow ;
         TextView tvStateDes ;
         TextView tvCheckTime ;
         TextView tvAbnormalTerm ;
@@ -91,7 +97,7 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
 
         public WarningHolder(View itemView) {
             super(itemView);
-            stateShow = itemView.findViewById(R.id.view_state_show);
+            stateShow = itemView.findViewById(R.id.civ_deal);
             tvStateDes = itemView.findViewById(R.id.tv_state_des);
             tvCheckTime = itemView.findViewById(R.id.tv_check_time);
             tvAbnormalTerm = itemView.findViewById(R.id.tv_abnormal_term);

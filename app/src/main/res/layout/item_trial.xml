@@ -30,7 +30,6 @@
             android:layout_height="59dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:background="@color/green_text"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -67,7 +66,6 @@
             android:layout_below="@id/tv_trial_des"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/iv_food"
-            android:text="试吃人:张楚师"
             android:textColor="@color/text_gray_color"
             android:textSize="12dp" />
 
@@ -86,7 +84,6 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="试吃时间:2018-6-7 10:30"
             android:textColor="@color/text_gray_color"
             android:textSize="12dp" />
 

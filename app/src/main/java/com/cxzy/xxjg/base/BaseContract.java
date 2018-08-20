@@ -35,7 +35,7 @@ public interface BaseContract {
         void refreshView(Object mData);
 
         //获取数据失败
-        void refreshFaild();
+        void refreshFaild(String faildCode);
 
         //重试
         void onRetry();

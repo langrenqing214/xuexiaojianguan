@@ -104,9 +104,12 @@ public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implem
     }
 
     @Override
-    public void refreshFaild() {
+    public void refreshFaild(String faildCode) {
         srlMenu.finishRefresh(false);//结束刷新（刷新失败）
         srlMenu.finishLoadMore(false);//结束加载（加载失败）
+        if ("401".equals(faildCode)){
+            finish();
+        }
     }
 
     @Override

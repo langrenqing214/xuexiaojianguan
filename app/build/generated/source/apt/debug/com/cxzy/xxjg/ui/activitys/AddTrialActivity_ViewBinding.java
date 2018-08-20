@@ -16,17 +16,17 @@ import java.lang.Override;
 public class AddTrialActivity_ViewBinding extends BaseActivity_ViewBinding {
   private AddTrialActivity target;
 
-  private View view2131296738;
+  private View view2131296740;
 
-  private View view2131296753;
+  private View view2131296755;
 
   private View view2131296444;
 
-  private View view2131296742;
+  private View view2131296744;
 
   private View view2131296481;
 
-  private View view2131296727;
+  private View view2131296729;
 
   private View view2131296306;
 
@@ -46,7 +46,7 @@ public class AddTrialActivity_ViewBinding extends BaseActivity_ViewBinding {
     View view;
     view = Utils.findRequiredView(source, R.id.tv_select_canteen, "field 'tvSelectCanteen' and method 'onViewClicked'");
     target.tvSelectCanteen = Utils.castView(view, R.id.tv_select_canteen, "field 'tvSelectCanteen'", TextView.class);
-    view2131296738 = view;
+    view2131296740 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -57,7 +57,7 @@ public class AddTrialActivity_ViewBinding extends BaseActivity_ViewBinding {
     target.etTrialPerson = Utils.findRequiredViewAsType(source, R.id.et_trial_person, "field 'etTrialPerson'", EditText.class);
     view = Utils.findRequiredView(source, R.id.tv_trial_time, "field 'tvTrialTime' and method 'onViewClicked'");
     target.tvTrialTime = Utils.castView(view, R.id.tv_trial_time, "field 'tvTrialTime'", TextView.class);
-    view2131296753 = view;
+    view2131296755 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -75,7 +75,7 @@ public class AddTrialActivity_ViewBinding extends BaseActivity_ViewBinding {
     });
     view = Utils.findRequiredView(source, R.id.tv_select_trial_reaction, "field 'tvSelectTrialReaction' and method 'onViewClicked'");
     target.tvSelectTrialReaction = Utils.castView(view, R.id.tv_select_trial_reaction, "field 'tvSelectTrialReaction'", TextView.class);
-    view2131296742 = view;
+    view2131296744 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -94,7 +94,7 @@ public class AddTrialActivity_ViewBinding extends BaseActivity_ViewBinding {
     });
     view = Utils.findRequiredView(source, R.id.tv_reaction_time, "field 'tvReactionTime' and method 'onViewClicked'");
     target.tvReactionTime = Utils.castView(view, R.id.tv_reaction_time, "field 'tvReactionTime'", TextView.class);
-    view2131296727 = view;
+    view2131296729 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -135,18 +135,18 @@ public class AddTrialActivity_ViewBinding extends BaseActivity_ViewBinding {
     target.ivAddTrialPic = null;
     target.tvReactionTime = null;
 
-    view2131296738.setOnClickListener(null);
-    view2131296738 = null;
-    view2131296753.setOnClickListener(null);
-    view2131296753 = null;
+    view2131296740.setOnClickListener(null);
+    view2131296740 = null;
+    view2131296755.setOnClickListener(null);
+    view2131296755 = null;
     view2131296444.setOnClickListener(null);
     view2131296444 = null;
-    view2131296742.setOnClickListener(null);
-    view2131296742 = null;
+    view2131296744.setOnClickListener(null);
+    view2131296744 = null;
     view2131296481.setOnClickListener(null);
     view2131296481 = null;
-    view2131296727.setOnClickListener(null);
-    view2131296727 = null;
+    view2131296729.setOnClickListener(null);
+    view2131296729 = null;
     view2131296306.setOnClickListener(null);
     view2131296306 = null;
     view2131296334.setOnClickListener(null);

@@ -12,8 +12,7 @@
         android:layout_marginStart="22dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="通告标题" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/btn_is_read"
@@ -23,7 +22,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/btn_green_box"
-        android:text="Button"
         android:textSize="15dp"
         android:textColor="@color/main_text_color"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,8 +38,7 @@
         android:textColor="@color/text_gray_color"
         android:textSize="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_regulatory_title"
-        android:text="发布时间:" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_regulatory_title" />
 
     <TextView
         android:id="@+id/textView6"
@@ -52,8 +49,7 @@
         android:textColor="@color/text_gray_color"
         android:textSize="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        android:text="发布部门:" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"/>
 
     <TextView
         android:id="@+id/tv_release_department"

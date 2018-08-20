@@ -109,12 +109,6 @@ public abstract class BaseFragment <T1 extends BaseContract.BasePresenter> exten
         return getContext();
     }
 
-    @Override
-    public void refreshFaild() {
-        startActivity(new Intent(mContext , LoginActivity.class));
-        getActivity().finish();
-    }
-
     protected void showLoadingDialog() {
         if (mLoadingDialog != null)
             mLoadingDialog.show();

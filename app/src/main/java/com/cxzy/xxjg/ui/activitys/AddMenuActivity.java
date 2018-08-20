@@ -104,8 +104,10 @@ public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implemen
     }
 
     @Override
-    public void refreshFaild() {
-
+    public void refreshFaild(String faildCode) {
+        if ("401".equals(faildCode)){
+            finish();
+        }
     }
 
     @Override

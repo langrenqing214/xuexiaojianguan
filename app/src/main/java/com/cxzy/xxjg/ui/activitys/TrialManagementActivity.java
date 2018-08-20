@@ -137,9 +137,12 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
     }
 
     @Override
-    public void refreshFaild() {
+    public void refreshFaild(String faildCode) {
         srlTrial.finishRefresh(false);//结束刷新（刷新失败）
         srlTrial.finishLoadMore(false);//结束加载（加载失败）
+        if ("401".equals(faildCode)){
+            finish();
+        }
     }
 
     @Override

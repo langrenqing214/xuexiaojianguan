@@ -19,8 +19,14 @@ public class AboutUsActivity extends BaseActivity {
 
     @BindView(R.id.vserion)
     TextView tvVsersion ;
+    @BindView(R.id.tv_app_name)
+    TextView tvAppName ;
+    @BindView(R.id.tv_app_sub_name)
+    TextView tvAppSubName ;
 
     private String localVersion;
+    private String appName;
+    private String appSubName;
 
     @Override
     public int getContentLayout() {
@@ -36,11 +42,15 @@ public class AboutUsActivity extends BaseActivity {
     public void bindView(View view, Bundle savedInstanceState) {
         setStatusBarColor(ContextCompat.getColor(mContext , R.color.main_style_color));
         localVersion = getIntent().getStringExtra("localVersion");
+        appName = getIntent().getStringExtra("appName");
+        appSubName = getIntent().getStringExtra("appSubName");
     }
 
     @Override
     public void initData() {
         tvVsersion.setText("v" + localVersion);
+        tvAppName.setText(appName);
+        tvAppSubName.setText("(" + appSubName + ")");
     }
 
     @Override
@@ -49,8 +59,10 @@ public class AboutUsActivity extends BaseActivity {
     }
 
     @Override
-    public void refreshFaild() {
-
+    public void refreshFaild(String faildCode) {
+        if ("401".equals(faildCode)){
+            finish();
+        }
     }
 
     @Override

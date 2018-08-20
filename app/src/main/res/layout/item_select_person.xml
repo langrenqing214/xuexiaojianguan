@@ -4,6 +4,7 @@
     android:layout_height="40dp"
     android:background="@color/white"
     android:gravity="center"
+    android:paddingRight="30dp"
     android:orientation="horizontal">
 
     <TextView
@@ -13,14 +14,16 @@
         android:textColor="@color/text_gray_color"
         android:textSize="15dp"
         android:layout_marginLeft="20dp"
+        android:paddingLeft="30dp"
         />
 
     <ImageView
         android:id="@+id/iv_is_check"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:background="@drawable/icon_check"
         android:layout_marginRight="20dp"
+        android:visibility="gone"
         />
 
 </LinearLayout>

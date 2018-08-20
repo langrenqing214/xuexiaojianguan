@@ -10,6 +10,7 @@ import com.cxzy.xxjg.base.BaseContract;
 import com.cxzy.xxjg.bean.BaseBean;
 import com.cxzy.xxjg.http.RxSchedulers;
 import com.cxzy.xxjg.ui.activitys.LoginActivity;
+import com.cxzy.xxjg.utils.ConstantsUtil;
 import com.cxzy.xxjg.utils.DialogHelper;
 import com.cxzy.xxjg.utils.SharedPreferencesUtils;
 import com.cxzy.xxjg.utils.ToastUtil;
@@ -44,7 +45,7 @@ public class HttpUtils{
                             mView.refreshView(t.data);
                         }else {
                             ToastUtil.showShort(MyApp.appComponent.getContext() , t.message);
-                            mView.refreshFaild();
+                            mView.refreshFaild("");
                         }
                         if (mDialog != null){
                             mDialog.dismiss();
@@ -53,10 +54,16 @@ public class HttpUtils{
 
                     @Override
                     public void onError(Throwable e) {
-                        ToastUtil.showShort(MyApp.appComponent.getContext() , "登录过期，请重新登录");
-                        mContext.startActivity(new Intent(mContext , LoginActivity.class));
-                        SharedPreferencesUtils.setParam(MyApp.appComponent.getContext() , "app_token" , "");
-                        mView.refreshFaild();
+                        if (e.getMessage().contains("401")){
+                            ToastUtil.showShort(MyApp.appComponent.getContext() , "登录过期，请重新登录");
+                            mContext.startActivity(new Intent(mContext , LoginActivity.class));
+                            Intent intent = new Intent();
+                            intent.setAction(ConstantsUtil.AUTH_LOGIN_STATUS_SUCCESS);
+                            mContext.sendBroadcast(intent);
+                            SharedPreferencesUtils.setParam(MyApp.appComponent.getContext() , "app_token" , "");
+                            SharedPreferencesUtils.setParam(MyApp.appComponent.getContext() , "main_url" , "");
+                        }
+                        mView.refreshFaild("401");
                         if (mDialog != null){
                             mDialog.dismiss();
                         }

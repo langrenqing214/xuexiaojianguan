@@ -30,7 +30,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="left"
-            android:text="第一食堂"
             android:textColor="@color/text_gray_color"
             android:textSize="15dp"
             android:layout_marginLeft="15dp"

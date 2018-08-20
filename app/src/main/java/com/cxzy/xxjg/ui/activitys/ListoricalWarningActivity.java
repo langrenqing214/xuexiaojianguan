@@ -149,9 +149,12 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     }
 
     @Override
-    public void refreshFaild() {
+    public void refreshFaild(String faildCode) {
         srlWarning.finishRefresh(false);//结束刷新（刷新失败）
         srlWarning.finishLoadMore(false);//结束加载（加载失败）
+        if ("401".equals(faildCode)){
+            finish();
+        }
     }
 
     @Override

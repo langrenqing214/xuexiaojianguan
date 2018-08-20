@@ -278,8 +278,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.activitys.UserProtocolActivity" />
-        <activity android:name=".ui.activitys.ChangePasswordActivity" />
+        <activity android:name=".ui.activitys.UserProtocolActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".ui.activitys.ChangePasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
     </application>
 
 </manifest>

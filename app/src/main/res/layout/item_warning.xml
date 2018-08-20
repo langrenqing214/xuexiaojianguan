@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -27,11 +28,13 @@
         android:paddingLeft="22dp"
         android:paddingTop="10dp">
 
-        <View
-            android:id="@+id/view_state_show"
+        <com.cxzy.xxjg.wideget.CircleImageView
+            android:id="@+id/civ_deal"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            />
+            android:layout_centerInParent="true"
+            app:border_color="@color/red_text"
+            app:border_width="15dp" />
 
         <TextView
             android:id="@+id/tv_state_des"

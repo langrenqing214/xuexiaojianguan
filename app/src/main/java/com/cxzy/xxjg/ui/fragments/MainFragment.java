@@ -2,8 +2,11 @@ package com.cxzy.xxjg.ui.fragments;
 
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -42,6 +45,7 @@ import com.cxzy.xxjg.ui.activitys.UserProtocolActivity;
 import com.cxzy.xxjg.ui.activitys.VideoActivity;
 import com.cxzy.xxjg.ui.test.contract.IMainFragmentContract;
 import com.cxzy.xxjg.ui.test.presenter.MainFragmentContractPresenterImpl;
+import com.cxzy.xxjg.utils.ConstantsUtil;
 import com.cxzy.xxjg.utils.NetUtil;
 import com.cxzy.xxjg.utils.SharedPreferencesUtils;
 import com.cxzy.xxjg.utils.ToastUtil;
@@ -108,6 +112,7 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
 
     @Override
     public void bindView(View view, Bundle savedInstanceState) {
+        initReceiver();
         mPresenter.getUserInfo();
     }
 
@@ -220,6 +225,8 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
             case R.id.ll_about_us://关于
                 Intent aboutIntent = new Intent(mContext, AboutUsActivity.class);
                 aboutIntent.putExtra("localVersion", localVersion);
+                aboutIntent.putExtra("appName", bean.appName);
+                aboutIntent.putExtra("appSubName", bean.appSubName);
                 startActivity(aboutIntent);
                 break;
             case R.id.ll_user_protocol://用户协议
@@ -289,8 +296,12 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
     }
 
     @Override
-    public void refreshFaild() {
+    public void refreshFaild(String faildCode) {
+        if ("401".equals(faildCode)){
+            getActivity().finish();
+        }
     }
+
 
     protected void exitdialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
@@ -315,6 +326,44 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
         builder.create().show();
     }
 
+    /**
+     * 初始化 刷新 广播
+     */
+    private void initReceiver() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ConstantsUtil.AUTH_LOGIN_STATUS_SUCCESS);
+        filter.setPriority(Integer.MAX_VALUE);
+        mContext.registerReceiver(refreshDataReceiver, filter);
+    }
+
+    /**
+     * 删除 刷新 广播
+     */
+    private void deleteReceiver() {
+        if (refreshDataReceiver != null) {
+            mContext.unregisterReceiver(refreshDataReceiver);
+        }
+    }
+
+    /**
+     * 刷新的广播
+     */
+    private BroadcastReceiver refreshDataReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(ConstantsUtil.AUTH_LOGIN_STATUS_SUCCESS)) {
+                getActivity().finish();
+            }
+        }
+
+    };
+
+    @Override
+    public void onDestroy() {
+        deleteReceiver();
+        super.onDestroy();
+    }
 
     /*@Override
     public void getUserInfo(Object bean) {

@@ -1,4 +1,4 @@
-#Thu Aug 16 13:44:04 CST 2018
-base.0=F\:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\4
+#Mon Aug 20 11:09:14 CST 2018
+base.0=F\:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\22
 path.0=classes.dex
 renamed.0=classes.dex

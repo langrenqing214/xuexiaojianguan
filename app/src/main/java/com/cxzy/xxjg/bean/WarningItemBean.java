@@ -25,5 +25,5 @@ public class WarningItemBean implements Serializable {
     public String searchKeys ;//
     public String updateDate ;//
     public String updateUserId ;//
-    public String levelcolor ;//颜色值
+    public String levelColor ;//颜色值
 }

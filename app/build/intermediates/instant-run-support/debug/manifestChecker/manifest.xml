@@ -305,8 +305,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Transparent"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name="com.cxzy.xxjg.ui.activitys.UserProtocolActivity" />
-        <activity android:name="com.cxzy.xxjg.ui.activitys.ChangePasswordActivity" />
+        <activity
+            android:name="com.cxzy.xxjg.ui.activitys.UserProtocolActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.cxzy.xxjg.ui.activitys.ChangePasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Transparent"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <meta-data
             android:name="android.support.VERSION"

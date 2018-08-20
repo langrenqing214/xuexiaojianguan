@@ -1,5 +1,7 @@
 package com.cxzy.xxjg.http;
 
+import android.text.TextUtils;
+
 import com.cxzy.xxjg.app.MyApp;
 import com.cxzy.xxjg.utils.SharedPreferencesUtils;
 
@@ -8,8 +10,9 @@ import com.cxzy.xxjg.utils.SharedPreferencesUtils;
  */
 
 public class ApiConstants {
+    public static final String url = (String) SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "main_url" , "http://47.95.252.122:8080/wisdom/");
 //    public static final String sIFengApi = "http://47.95.252.122:8080/wisdom/";
-//    public static final String sIFengApi =  SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "main_url" , "http://47.95.252.122:8080") + "/wisdom/";
-    public static final String sIFengApi = "http://xmh.s1.natapp.cc/wisdom/";
+    public static final String sIFengApi = TextUtils.isEmpty(url) ? "http://47.95.252.122:8080/wisdom/" : url;
+//    public static final String sIFengApi = "http://xmh.s1.natapp.cc/wisdom/";
 //    public static final String sIFengApi = "http://192.168.8.133:8080/wisdom/";
 }
