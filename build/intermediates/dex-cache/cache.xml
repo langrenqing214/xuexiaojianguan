@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\b2ca6f41122f35244d9d898e4af643bf\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\24.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\bga-swipebacklayout-1.1.0.aar\0ca4e5903fd64028235f120569214913\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="eef02e87d7959ee5d28e0aa6c63b277e9cd22e65">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.2.0\41e67dba73c3347e4503761642c39d0e06ca1f2\retrofit-2.2.0.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="041e67dba73c3347e4503761642c39d0e06ca1f2">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.google.zxing\core\3.2.1\2287494d4f5f9f3a9a2bb6980e3f32053721b315\core-3.2.1.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="2287494d4f5f9f3a9a2bb6980e3f32053721b315">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\17.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\libs\jcore-android-1.2.3.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="e3732fb5b90c48c17b8f457e01e50d74574b1a78">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\a13692e6abd5c1f3e3098bf17bcc6d66\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="508f50705b4fde51a16259f29c854201a3044516">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\35.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\disklrucache\4.0.0-RC1\1b4bba8f8d3df8db064c875c043c01e9ca3cdee9\disklrucache-4.0.0-RC1.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="1b4bba8f8d3df8db064c875c043c01e9ca3cdee9">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\44.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\io.reactivex.rxjava2\rxjava\2.1.0\2fdf84dedcaaeabb9d70cde9dbb8aad4eccb80a1\rxjava-2.1.0.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="2fdf84dedcaaeabb9d70cde9dbb8aad4eccb80a1">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\43.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\leakcanary-android-no-op-1.3.aar\d0482b556875496a4b75f1280238ad84\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="4efe9814ec1d5fbbe146fbfb01895deaa321f488">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\29.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.android.support.constraint\constraint-layout-solver\1.1.2\bfc967828daffc35ba01c9ee204d98b664930a0f\constraint-layout-solver-1.1.2.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="bfc967828daffc35ba01c9ee204d98b664930a0f">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\46.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\fragmentation-1.0.0.aar\4cfbaea6c538ba10f1919653d8e184b4\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="7319e43f511c1231896b4dbc18d13f46c984702b">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\28.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\jiaozivideoplayer-6.2.12.aar\25f703728d027967461cfb1fd7801f35\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="e8b8485793ed9a7510caecf73873a1ab18a61a41">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\20.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.3.0.aar\70bf2b36cf3cedc18eb4718479592fa1\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="29c426f3ff52238291c86e939dff6bd8a877b86c">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\16.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\io.reactivex\rxjava\1.1.6\2586312cd2b8a511e4c6236736f5a039fc0f2273\rxjava-1.1.6.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="2586312cd2b8a511e4c6236736f5a039fc0f2273">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\10.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\048571a7d8a2d5d1a573001497ab022f\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="7efef32744ca4a436492d5cf28c08698cc2af256">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\34.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\rxlifecycle-components-2.1.0.aar\a331796e1111de4588451926698c686c\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="e20f3c5e0e1bdbcf0edad8b16771497b36f68875">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.trello.rxlifecycle2\rxlifecycle\2.1.0\ceb847e21d527d2ef285cd3dd187379220ffb223\rxlifecycle-2.1.0.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="ceb847e21d527d2ef285cd3dd187379220ffb223">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\13.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\lottie-2.1.0.aar\1e3fc0db59964fb3209a69ab05b249de\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="9daa13c380b137664418db19808af212c49d9934">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\15.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\libs\jpush-android-3.1.5.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="b4b3d43cfde866eb660e54c9823bc06ed5cee321">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\SmartRefreshLayout-1.1.0-alpha-14.aar\16296ad6cb3d945a815fe19c2791ede9\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="8932612f6cdf61c0c4350b5927182878a8c44997">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\19.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\8eb51b2c8f1d48284aa5c52ad7ee731f\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="f428e2fbc9ed0b297e3a3f420e51e6982f66822d">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\23.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\butterknife-8.8.1.aar\1ab0d33a18d2e379f54c893cbbc5b48c\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="6a2bcb61342d09fe9acf55c9daf63961c8866cc0">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\14.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\98a17c34a7a9909d9812e7e3a94b286a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="b12cd9c87c3dfb012a911b6e38d2444ed0a65e1f">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\32.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\org.reactivestreams\reactive-streams\1.0.0\14b8c877d98005ba3941c9257cfe09f6ed0e0d74\reactive-streams-1.0.0.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="14b8c877d98005ba3941c9257cfe09f6ed0e0d74">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\51.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\annotations\4.0.0-RC1\84c524dcd1a3088edd5560a8ac176eae1317f770\annotations-4.0.0-RC1.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="84c524dcd1a3088edd5560a8ac176eae1317f770">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\45.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\android.arch.core\common\1.0.0\a2d487452376193fc8c103dd2b9bd5f2b1b44563\common-1.0.0.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="a2d487452376193fc8c103dd2b9bd5f2b1b44563">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\54.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\flexbox-1.0.0.aar\d15943a8acb8dfa876a3e722bb28730e\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="1ecac0cfc3162ae6060dd1e1a340b5cb5cca8fb1">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\26.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.google.dagger\dagger\2.14.1\3784d6ed15ecebfa999b26ed0aaeb2b4194e0d3\dagger-2.14.1.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="03784d6ed15ecebfa999b26ed0aaeb2b4194e0d3">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\27.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.1.0\aa557d71ead91cbf26e0c316a0f593d168303309\converter-gson-2.1.0.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\gifdecoder\4.0.0-RC1\c425e31eda1069f978a0e823ad50e567ab422656\gifdecoder-4.0.0-RC1.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="c425e31eda1069f978a0e823ad50e567ab422656">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\31.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\4af3c48e5bae72a55fff608dcb456d06\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="58b12bdb21a84f22e0dc3b047aeceb0a546b1b44">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\22.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.11.0\840897fcd7223a8143f1d9b6f69714e7be34fd50\okio-1.11.0.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="840897fcd7223a8143f1d9b6f69714e7be34fd50">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\55.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\d8be03214c261e9e6dc022c5542deb15\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="a37fc31c5ceeaa4532a37358add1b189d8db4af1">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\21.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\rxandroid-2.0.1.aar\462c474c122994ed97d81bd032a43841\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="4119ea97a7191ff9b8f33b534ea220448f62f491">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\42.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\5ef94094c5a08cf312749b20556d5223\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="40392f30a601db5675cdf18192aab013d6fee6ec">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\33.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\8975645c319e60647424309e3f44bee1\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="6f4138a4e065826cb044d49faea4cfd7191773d1">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\36.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\26.1.0\814258103cf26a15fcc26ecce35f5b7d24b73f8\support-annotations-26.1.0.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="0814258103cf26a15fcc26ecce35f5b7d24b73f8">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\40.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\9c7b44f123d6e8359c80beff87d4d8e5\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="f97cf85b0fe70d37a705111dafa6b1b418ea1650">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\37.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\rxandroid-1.2.1.aar\87d49ce3926f37a8708b382a6193fc25\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.6.0\69edde9fc4b01c9fd51d25b83428837478c27254\okhttp-3.6.0.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\41.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.1.0.aar\9c3443f3616985d9e55a8dd905e17d6c\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="b4d6fbbb48b42dd03fd9c5a09b3b7a53266df6ed">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\adapter-rxjava2\2.2.0\3ee0e527143abbe130ddba4c1fa6c4be5d66ed5c\adapter-rxjava2-2.2.0.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="3ee0e527143abbe130ddba4c1fa6c4be5d66ed5c">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.squareup.leakcanary\leakcanary-watcher\1.3\632482a61ad24b7ec864072945d221369f9a606\leakcanary-watcher-1.3.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="0632482a61ad24b7ec864072945d221369f9a606">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\50.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\a9c4fdee3d804b60e11157e92235b34b\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="b62fdc4cfef174c1e456014195c83fa7de7dc041">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\52.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\c166311b199e7a5b9d79cd0936f21dde\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="182370a4a0bba7903c6ff2cb7b6ac21ca4a4bf89">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\25.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\rxlifecycle-android-2.1.0.aar\9a51437493278aafdca4c8cb9cb9cb8f\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="a1589af4546e0299f3e0c77de3215ecfd3a0e19d">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\12.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\utilcode-1.3.6.aar\f430ccd0b0facc831040dfba0c5709b3\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="ba59fb4b61dbea4d12ed5f204f22cf37c70fbc30">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\android.arch.lifecycle\common\1.0.0\e414a4cb28434e25c4f6aa71426eb20cf4874ae9\common-1.0.0.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="e414a4cb28434e25c4f6aa71426eb20cf4874ae9">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\53.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\30ecf43858bede6784ffc49b02698a05\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="233f60a165ae622c8b36731502ebbda0f65e1930">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\38.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\47.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\48.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\fragmentation-core-1.0.0.aar\48924df051302e7962c551eefce3a774\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="1863f03ddfc977211a609b0d2eddfb13bee0b107">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\49.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\4.0.0-RC1\7baec7d5132e7343100a99630a56a6584a33addc\glide-4.0.0-RC1.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="7baec7d5132e7343100a99630a56a6584a33addc">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\18.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.8.1\bc373fb6bc7bca3035041b924f158fd2b946ee8d\butterknife-annotations-8.8.1.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="bc373fb6bc7bca3035041b924f158fd2b946ee8d">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\30.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\demo\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\736a19e13214e49afa987d4bea5c5313\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="18"
+        optimize="true"
+        revision="26.0.3"
+        sha1="2442771a5590dd4eb4bce00c2e9dca9e22e4c963">
+        <dex dex="F:\myLearnMvp\xuexiaojianguan\xuexiaojianguan\app\build\intermediates\transforms\preDex\release\39.jar" />
+    </item>
+
+</items>

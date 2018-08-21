@@ -18,6 +18,7 @@ import com.cxzy.xxjg.ui.adapter.RegulatoryInformationAdapter;
 import com.cxzy.xxjg.utils.SharedPreferencesUtils;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 监管信息
@@ -44,7 +45,7 @@ public class RegulatoryInformationActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        String url = ApiConstants.sIFengApi + "index.html#/app/notice" + "?Authorization=Bearer " + SharedPreferencesUtils.getParam(MyApp.appComponent.getContext(), "app_token", "");
+        String url = ApiConstants.getInstance().getsIFengApi() + "index.html#/app/notice" + "?Authorization=Bearer " + SharedPreferencesUtils.getParam(MyApp.appComponent.getContext(), "app_token", "");
         // 设置WebView属性，能够执行Javascript脚本
         mWebView.getSettings().setDomStorageEnabled(true);//设置适应Html5 //重点是这个设置
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -73,5 +74,16 @@ public class RegulatoryInformationActivity extends BaseActivity {
     @Override
     public void onRetry() {
 
+    }
+
+    @OnClick({R.id.back_btn_id})
+    @Override
+    public void onViewClicked(View view) {
+        super.onViewClicked(view);
+        switch (view.getId()){
+            case R.id.back_btn_id ://返回
+                finish();
+                break;
+        }
     }
 }

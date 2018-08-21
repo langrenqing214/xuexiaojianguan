@@ -37,11 +37,11 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
     private List<String> pictureList = new ArrayList<String>(5);//图片地址集合
     private List<String> originalPicList = new ArrayList<String>(5);//图片原始地址
     private String picName;//图片名字
-    private PurchaseApi api ;
+    private PurchaseApi api;
 
     @Inject
-    public PurchaseActivityPresenterImpl(PurchaseApi api){
-        this.api = api ;
+    public PurchaseActivityPresenterImpl(PurchaseApi api) {
+        this.api = api;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
     }
 
     @Override
-    public List<String> dealPicResult(Activity activity , int requestCode, int resultCode, Intent data) {
+    public List<String> dealPicResult(Activity activity, int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case Constants.FLAG_CHOOSE_IMG:// 直接从相册获取
                 if (resultCode == Activity.RESULT_OK) {
@@ -80,26 +80,25 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
                             @Override
                             public void run() {
                                 for (String path : paths) {
-                                    if (!originalPicList.contains(path)) {
-                                        try {
-                                            //压缩图片
-                                            picName = System.currentTimeMillis() + ".jpg";
-                                            String newPath = MyApp.tempDir + File.separator + picName;
-                                            Bitmap bm = BitmapUtil.getBitmapByPath(path, BitmapUtil.getOptions(path), ScreenUtils.getScreenW(), ScreenUtils.getScreenH());
+                                    try {
+                                        //压缩图片
+                                        picName = System.currentTimeMillis() + ".jpg";
+                                        String newPath = MyApp.tempDir + File.separator + picName;
+                                        Bitmap bm = BitmapUtil.getBitmapByPath(path, BitmapUtil.getOptions(path), ScreenUtils.getScreenW(), ScreenUtils.getScreenH());
 
-                                            BitmapUtil.saveMyBitmap(bm, newPath, path, ScreenUtils.getScreenW(), ScreenUtils.getScreenW());
+                                        BitmapUtil.saveMyBitmap(bm, newPath, path, ScreenUtils.getScreenW(), ScreenUtils.getScreenW());
 
-                                            BitmapUtil.setExif(path, newPath);
-                                            pictureList.add(MyApp.tempDir + File.separator + picName);
+                                        BitmapUtil.setExif(path, newPath);
+                                        pictureList.add(MyApp.tempDir + File.separator + picName);
 
 //                                            adapter.notifyDataSetChanged();
-                                        } catch (FileNotFoundException e) {
-                                            e.printStackTrace();
-                                        }
-                                        //原始图片路径 保存这个是为了去掉重复图片
-                                        originalPicList.add(path);
-//                                        hasUpdate = true;
+                                    } catch (FileNotFoundException e) {
+                                        e.printStackTrace();
                                     }
+                                    //原始图片路径 保存这个是为了去掉重复图片
+                                    originalPicList.add(path);
+//                                        hasUpdate = true;
+
                                 }
                                 Message message = handler.obtainMessage();
                                 message.what = 1;
@@ -133,7 +132,7 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
                 break;
 
         }
-        return pictureList ;
+        return pictureList;
     }
 
     @Override
@@ -142,80 +141,80 @@ public class PurchaseActivityPresenterImpl extends BasePresenter<IPurchaseActivi
     }
 
     @Override
-    public Map<String , RequestBody> checkInfo(String name, String type, String price, String weight, String purchasePerson,
+    public Map<String, RequestBody> checkInfo(String name, String type, String price, String weight, String purchasePerson,
                                               String qualityGuaranteeDate, String qualityGuaranteeEndDate,
                                               String suppliers, int flag, String canteenId, List<String> picList) {
-        if (TextUtils.isEmpty(name)){
-            ToastUtil.showShort(MyApp.appComponent.getContext() , "请输入食材名称");
+        if (TextUtils.isEmpty(name)) {
+            ToastUtil.showShort(MyApp.appComponent.getContext(), "请输入食材名称");
             return null;
         }
 
-        if (TextUtils.isEmpty(type)){
-            ToastUtil.showShort(MyApp.appComponent.getContext() , "请选择食材类别");
+        if (TextUtils.isEmpty(type)) {
+            ToastUtil.showShort(MyApp.appComponent.getContext(), "请选择食材类别");
             return null;
         }
 
-        if (TextUtils.isEmpty(price)){
-            ToastUtil.showShort(MyApp.appComponent.getContext() , "请输入食材价格");
-            return null ;
+        if (TextUtils.isEmpty(price)) {
+            ToastUtil.showShort(MyApp.appComponent.getContext(), "请输入食材价格");
+            return null;
         }
 
-        if (TextUtils.isEmpty(weight)){
-            ToastUtil.showShort(MyApp.appComponent.getContext() , "请输入食材重量");
-            return null ;
+        if (TextUtils.isEmpty(weight)) {
+            ToastUtil.showShort(MyApp.appComponent.getContext(), "请输入食材重量");
+            return null;
         }
 
-        if (TextUtils.isEmpty(purchasePerson)){
-            ToastUtil.showShort(MyApp.appComponent.getContext() , "请输入采购人");
-            return null ;
+        if (TextUtils.isEmpty(purchasePerson)) {
+            ToastUtil.showShort(MyApp.appComponent.getContext(), "请输入采购人");
+            return null;
         }
 
-        if (TextUtils.isEmpty(qualityGuaranteeDate)){
-            ToastUtil.showShort(MyApp.appComponent.getContext() , "请选择生产日期");
-            return null ;
+        if (TextUtils.isEmpty(qualityGuaranteeDate)) {
+            ToastUtil.showShort(MyApp.appComponent.getContext(), "请选择生产日期");
+            return null;
         }
 
-        if (TextUtils.isEmpty(qualityGuaranteeEndDate)){
-            ToastUtil.showShort(MyApp.appComponent.getContext() , "请选择保质到期");
-            return null ;
+        if (TextUtils.isEmpty(qualityGuaranteeEndDate)) {
+            ToastUtil.showShort(MyApp.appComponent.getContext(), "请选择保质到期");
+            return null;
         }
 
-        if (TextUtils.isEmpty(suppliers)){
-            ToastUtil.showShort(MyApp.appComponent.getContext() , "请选择供应商");
-            return null ;
+        if (TextUtils.isEmpty(suppliers)) {
+            ToastUtil.showShort(MyApp.appComponent.getContext(), "请选择供应商");
+            return null;
         }
 
-        if (TextUtils.isEmpty(canteenId)){
-            ToastUtil.showShort(MyApp.appComponent.getContext() , "请选择食堂");
-            return null ;
+        if (TextUtils.isEmpty(canteenId)) {
+            ToastUtil.showShort(MyApp.appComponent.getContext(), "请选择食堂");
+            return null;
         }
 
-        if (picList == null || picList.size() == 0){
-            ToastUtil.showShort(MyApp.appComponent.getContext() , "图片不能为空");
-            return null ;
+        if (picList == null || picList.size() == 0) {
+            ToastUtil.showShort(MyApp.appComponent.getContext(), "图片不能为空");
+            return null;
         }
 
         List<File> fileList = new ArrayList<>();
-        for (String str :picList) {
+        for (String str : picList) {
             File folder = new File(str);
             fileList.add(folder);
         }
 
-        Map<String , RequestBody> param = new HashMap<>();
-        param.put("name" , RequestBody.create(MediaType.parse("form-data"),name));
-        param.put("type" , RequestBody.create(MediaType.parse("form-data"),type));
-        param.put("price" , RequestBody.create(MediaType.parse("form-data"),price));
-        param.put("weight" , RequestBody.create(MediaType.parse("form-data"),weight));
-        param.put("purchasePerson" , RequestBody.create(MediaType.parse("form-data"),purchasePerson));
-        param.put("qualityGuaranteeDate" , RequestBody.create(MediaType.parse("form-data"),qualityGuaranteeDate));
-        param.put("qualityGuaranteeEndDate" , RequestBody.create(MediaType.parse("form-data"),qualityGuaranteeEndDate));
-        param.put("supplierId" , RequestBody.create(MediaType.parse("form-data"),suppliers));
-        param.put("flag" , RequestBody.create(MediaType.parse("form-data"),flag + ""));
-        param.put("canteenId" , RequestBody.create(MediaType.parse("form-data"),canteenId));
+        Map<String, RequestBody> param = new HashMap<>();
+        param.put("name", RequestBody.create(MediaType.parse("form-data"), name));
+        param.put("type", RequestBody.create(MediaType.parse("form-data"), type));
+        param.put("price", RequestBody.create(MediaType.parse("form-data"), price));
+        param.put("weight", RequestBody.create(MediaType.parse("form-data"), weight));
+        param.put("purchasePerson", RequestBody.create(MediaType.parse("form-data"), purchasePerson));
+        param.put("qualityGuaranteeDate", RequestBody.create(MediaType.parse("form-data"), qualityGuaranteeDate));
+        param.put("qualityGuaranteeEndDate", RequestBody.create(MediaType.parse("form-data"), qualityGuaranteeEndDate));
+        param.put("supplierId", RequestBody.create(MediaType.parse("form-data"), suppliers));
+        param.put("flag", RequestBody.create(MediaType.parse("form-data"), flag + ""));
+        param.put("canteenId", RequestBody.create(MediaType.parse("form-data"), canteenId));
 //        param.put("files" , fileList);
-        if(fileList != null && !fileList.isEmpty()) {
-            for (File file:fileList){
-                param.put("files\";filename=\""+file.getName(), RequestBody.create(MediaType.parse("form-data"), file));
+        if (fileList != null && !fileList.isEmpty()) {
+            for (File file : fileList) {
+                param.put("files\";filename=\"" + file.getName(), RequestBody.create(MediaType.parse("form-data"), file));
             }
         }
         return param;

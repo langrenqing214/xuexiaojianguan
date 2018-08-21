@@ -99,7 +99,7 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
         tvCanteenShow.setText(canteenName);
         Long str = Calendar.getInstance().getTimeInMillis() - 7 * 24 * 60 * 60 * 1000 ;
         dateStart = DateUtil.timeToDataTime(str.toString());
-        createDateStart = DateUtil.timeToAdviserTimeString(str.toString());
+        createDateStart = DateUtil.timeToDataTimeString(str.toString());
         dateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
         createDateEnd = DateUtil.date2NYR(Calendar.getInstance().getTime());
         tvTimeShow.setText(dateStart + "-" + dateEnd);

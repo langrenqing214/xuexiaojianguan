@@ -129,6 +129,7 @@ public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implemen
                 break;
             case R.id.tv_select_time ://选择时间、
                 SelectTimeDialog timeDialog = new SelectTimeDialog(this , this);
+                timeDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis() - 1000);
                 timeDialog.show();
                 break;
             case R.id.btn_add_menu ://提交

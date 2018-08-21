@@ -70,7 +70,7 @@ public class AboutUsActivity extends BaseActivity {
 
     }
 
-    @OnClick
+    @OnClick({R.id.back_btn_id})
     @Override
     public void onViewClicked(View view) {
         switch (view.getId()){

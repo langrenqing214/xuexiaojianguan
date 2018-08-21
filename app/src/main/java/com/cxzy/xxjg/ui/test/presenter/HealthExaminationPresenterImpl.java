@@ -85,7 +85,6 @@ public class HealthExaminationPresenterImpl extends BasePresenter<IHealthExamina
                         @Override
                         public void run() {
                             for (String path : paths) {
-                                if (!originalPicList.contains(path)) {
                                     try {
                                         //压缩图片
                                         picName = System.currentTimeMillis() + ".jpg";
@@ -104,7 +103,6 @@ public class HealthExaminationPresenterImpl extends BasePresenter<IHealthExamina
                                     //原始图片路径 保存这个是为了去掉重复图片
                                     originalPicList.add(path);
 //                                        hasUpdate = true;
-                                }
                             }
                             Message message = handler.obtainMessage();
                             message.what = 1;

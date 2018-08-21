@@ -54,7 +54,7 @@ public class HttpUtils{
 
                     @Override
                     public void onError(Throwable e) {
-                        if (e.getMessage().contains("401")){
+                        if (e.getMessage().contains("401") || e.getMessage().contains("java.net.SocketTimeoutException")){
                             ToastUtil.showShort(MyApp.appComponent.getContext() , "登录过期，请重新登录");
                             mContext.startActivity(new Intent(mContext , LoginActivity.class));
                             Intent intent = new Intent();

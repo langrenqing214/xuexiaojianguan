@@ -37,6 +37,7 @@ public class LoginActivity extends BaseActivity<LoginActivityPresenterImpl> impl
     EditText etPassWord ;
     @BindView(R.id.et_main_url)
     EditText etMainUrl ;
+    private AppComponent appComponent ;
 
     @Override
     public int getContentLayout() {
@@ -45,6 +46,7 @@ public class LoginActivity extends BaseActivity<LoginActivityPresenterImpl> impl
 
     @Override
     public void initInjector(AppComponent appComponent) {
+        this.appComponent = appComponent ;
         DaggerHttpComponent.builder()
                 .appComponent(appComponent)
                 .build()
@@ -60,6 +62,10 @@ public class LoginActivity extends BaseActivity<LoginActivityPresenterImpl> impl
     public void initData() {
         String mainUrl = (String) SharedPreferencesUtils.getParam(this , "main_url" , "http://47.95.252.122:8080/wisdom/");
         etMainUrl.setText(TextUtils.isEmpty(mainUrl) ? "http://47.95.252.122:8080/wisdom/" : mainUrl);
+        /*DaggerHttpComponent.builder()
+                .appComponent(appComponent)
+                .build()
+                .inject(this);*/
     }
 
     @Override
@@ -83,8 +89,8 @@ public class LoginActivity extends BaseActivity<LoginActivityPresenterImpl> impl
 
         switch (view.getId()){
             case R.id.btn_login :
-                String url = etMainUrl.getText().toString().trim() ;
-                SharedPreferencesUtils.setParam(this , "main_url" , TextUtils.isEmpty(url)? "http://47.95.252.122:8080/wisdom/" : url);
+                String url = TextUtils.isEmpty(etMainUrl.getText().toString().trim())? "http://47.95.252.122:8080/wisdom/" : etMainUrl.getText().toString().trim() ;
+                SharedPreferencesUtils.setParam(this , "main_url" , url);
                 mPresenter.toLogin(etUserName.getText().toString().trim() , etPassWord.getText().toString().trim());
                 break;
         }

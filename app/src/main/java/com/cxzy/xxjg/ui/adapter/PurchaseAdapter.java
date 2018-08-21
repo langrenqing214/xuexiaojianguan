@@ -28,6 +28,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final int SHOW_PIC = 1;//展示图片
     private List<String> datas = new ArrayList<>(5);
     private RecyclerViewItemClickListener mClickListener ;
+    private DeletePicItemListener deleteListener ;
     private Context mContext ;
     private int maxNum ;
 
@@ -80,6 +81,12 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             });
         }else {
             ShowPicHolder showPicHolder = (ShowPicHolder) holder;
+            showPicHolder.ivDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    deleteListener.onDeletePicItem(position);
+                }
+            });
             try {
                 Bitmap newBitmap = BitmapUtil.getBitmapByPath(datas.get(position), BitmapUtil.getOptions(datas.get(position)), MyApp.width, MyApp.height);
                 showPicHolder.ivShowPic.setImageBitmap(newBitmap);
@@ -95,7 +102,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     class PurchaseHolder extends RecyclerView.ViewHolder{
-        private LinearLayout llAddPic ;
+        LinearLayout llAddPic ;
 
         public PurchaseHolder(View itemView) {
             super(itemView);
@@ -104,10 +111,12 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     class ShowPicHolder extends RecyclerView.ViewHolder{
-        private  ImageView ivShowPic ;
+        ImageView ivShowPic ;
+        ImageView ivDelete ;
         public ShowPicHolder(View itemView) {
             super(itemView);
             ivShowPic = itemView.findViewById(R.id.iv_show_pic);
+            ivDelete = itemView.findViewById(R.id.iv_delete_pic);
         }
     }
 
@@ -115,7 +124,15 @@ public class PurchaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         void onItemClick(int position);
     }
 
+    public interface DeletePicItemListener {
+        void onDeletePicItem(int position);
+    }
+
     public void setItemClickListener(RecyclerViewItemClickListener itemClickListener) {
         mClickListener = itemClickListener;
+    }
+
+    public void setDeletePicItemListener(DeletePicItemListener deleteListener){
+        this.deleteListener = deleteListener ;
     }
 }

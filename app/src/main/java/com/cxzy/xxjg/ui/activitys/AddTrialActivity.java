@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -71,6 +72,8 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
     ImageView ivAddTrialPic;
     @BindView(R.id.tv_reaction_time)
     TextView tvReactionTime ;
+    @BindView(R.id.iv_add_pic)
+    ImageView ivAddPicLabel ;
     private ArrayList<SchoolCanteenBean> dataList;
     private String createDateStart = "";
     private String canteenId = "";
@@ -81,7 +84,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
     private ArrayList<ResultItemBean> timeList;
     private String timeId;
     private int timeType = 0 ; //0为试吃时间 1为反应时间
-    private String reactionTime;
+    private String reactionTime = "";
 
     @Override
     public int getContentLayout() {
@@ -144,11 +147,13 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
             case R.id.tv_reaction_time ://选择反应时间
                 timeType = 1 ;
                 SelectTimeDialog reactionTimeDialog = new SelectTimeDialog(this, this);
+                reactionTimeDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis() - 1000);
                 reactionTimeDialog.show();
                 break;
             case R.id.tv_trial_time://选择时间
                 timeType = 0 ;
                 SelectTimeDialog timeDialog = new SelectTimeDialog(this, this);
+                timeDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis() - 1000);
                 timeDialog.show();
                 break;
             case R.id.iv_add_trial_pic://拍照
@@ -177,6 +182,38 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
                 String trialPerson = etTrialPerson.getText().toString().trim();
                 String timeInterval = etTimeInterval.getText().toString().trim();
                 String trialDes = etTrialDes.getText().toString().trim();
+                if (TextUtils.isEmpty(canteenId)){
+                    ToastUtil.showShort(this , "请选择食堂");
+                    return;
+                }
+                if (TextUtils.isEmpty(foodName)){
+                    ToastUtil.showShort(this , "请输入食品名称");
+                    return;
+                }
+                if (TextUtils.isEmpty(trialPerson)){
+                    ToastUtil.showShort(this , "请输入试吃人");
+                    return;
+                }
+                if (TextUtils.isEmpty(createDateStart)){
+                    ToastUtil.showShort(this , "请选择试吃时间");
+                    return;
+                }
+                if (TextUtils.isEmpty(timeId)){
+                    ToastUtil.showShort(this , "请选择间隔时间");
+                    return;
+                }
+                if (TextUtils.isEmpty(trialState)){
+                    ToastUtil.showShort(this , "请选择试吃后反应");
+                    return;
+                }
+                if (TextUtils.isEmpty(foodName)){
+                    ToastUtil.showShort(this , "请输入食品名称");
+                    return;
+                }
+                if (file == null){
+                    ToastUtil.showShort(this , "照片不能为空");
+                    return;
+                }
                 Map<String , RequestBody> param = new HashMap<>();
                 param.put("canteenId", RequestBody.create(MediaType.parse("form-data"),canteenId));
                 param.put("foodName", RequestBody.create(MediaType.parse("form-data"),foodName));
@@ -186,7 +223,6 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
                 param.put("status", RequestBody.create(MediaType.parse("form-data"),trialState));
                 param.put("remarks", RequestBody.create(MediaType.parse("form-data"),trialDes));
                 param.put("statusTime", RequestBody.create(MediaType.parse("form-data"),reactionTime));
-//                param.put("eatImage", file);
                 param.put("eatImage\"; filename=\"" + file.getName() , RequestBody.create(MediaType.parse("form-data"), file) );
                 mPresenter.saveTrial(param);
                 break;
@@ -235,6 +271,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         file = mPresenter.getPicUrl(requestCode, resultCode, data, ivAddTrialPic);
+        ivAddPicLabel.setVisibility(View.GONE);
     }
 
     @Override
@@ -255,7 +292,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
         }else {
             reactionTime = DateUtil.date2NYR(startcal.getTime());
         }
-        TimePickerDialog dialog = new TimePickerDialog(AddTrialActivity.this, TimePicker.AUTOFILL_TYPE_LIST, this, 8, 00, true);
+        TimePickerDialog dialog = new TimePickerDialog(AddTrialActivity.this, TimePicker.AUTOFILL_TYPE_LIST, this, startcal.get(Calendar.HOUR) , startcal.get(Calendar.MINUTE), true);
         dialog.show();
     }
 

@@ -1,5 +1,7 @@
 package com.cxzy.xxjg.di.module;
 
+import android.text.TextUtils;
+
 import com.cxzy.xxjg.app.MyApp;
 import com.cxzy.xxjg.net.AddMenuApi;
 import com.cxzy.xxjg.net.AddMenuService;
@@ -33,6 +35,7 @@ import com.cxzy.xxjg.net.WarningApi;
 import com.cxzy.xxjg.net.WarningService;
 import com.cxzy.xxjg.net.testApi;
 import com.cxzy.xxjg.net.testService;
+import com.cxzy.xxjg.utils.SharedPreferencesUtils;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -50,6 +53,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 @Module
 public class HttpModule {
+
+
+
     @Provides
     OkHttpClient.Builder provideOkHttpClient() {
         // 指定缓存路径,缓存大小100Mb
@@ -70,7 +76,9 @@ public class HttpModule {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient);
     }*/
-
+//    private String url = (String) SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "main_url" , "http://45.95.252.122:8080/wisdom/");
+//        public static final String sIFengApi = "http://47.95.252.122:8080/wisdom/";
+//    private String sIFengApi = TextUtils.isEmpty(url) ? "http://43.95.252.122:8080/wisdom/" : url;
     @Provides
     testApi provideNetTests(OkHttpClient.Builder builder) {
         builder.addInterceptor(RetrofitConfig.sQueryParameterInterceptor);
@@ -81,7 +89,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return testApi.getInstance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(testService.class));
     }
 
@@ -96,7 +104,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return LoginApi.getIntance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(LoginService.class));
     }
 
@@ -111,7 +119,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return MainFragmentApi.getInstance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(MainFragmentService.class));
     }
 
@@ -126,7 +134,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return TrialManagementApi.getIntance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(TrialManagementService.class));
     }
 
@@ -141,7 +149,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return MenuApi.getInstance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(MenuService.class));
     }
 
@@ -156,7 +164,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return AddMenuApi.getInstance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(AddMenuService.class));
     }
 
@@ -171,7 +179,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return PurchaseApi.getInstance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(PurchaseService.class));
     }
 
@@ -186,7 +194,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return AddRetentionApi.getInstance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(AddRetentionService.class));
     }
 
@@ -201,7 +209,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return RetentionApi.getInstance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(RetentionService.class));
     }
 
@@ -216,7 +224,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return WarningApi.getInstance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(WarningService.class));
     }
 
@@ -231,7 +239,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return AddTrialApi.getInstance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(AddTrialService.class));
     }
 
@@ -246,7 +254,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return HealthExaminationApi.getInstance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(HealthExaminationService.class));
     }
 
@@ -261,7 +269,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return ScanResultApi.getInstance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(ScanResultService.class));
     }
 
@@ -276,7 +284,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return VideoApi.getInstance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(VideoService.class));
     }
 
@@ -291,7 +299,7 @@ public class HttpModule {
                 .client(builder.build());
 
         return ChangePwdApi.getInstance(retrofitBuilder
-                .baseUrl(ApiConstants.sIFengApi)
+                .baseUrl(ApiConstants.getInstance().getsIFengApi())
                 .build().create(ChangePwdService.class));
     }
 }

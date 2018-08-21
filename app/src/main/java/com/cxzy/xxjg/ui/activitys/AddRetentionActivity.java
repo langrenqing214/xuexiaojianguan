@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -107,6 +108,26 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
             case R.id.btn_add_retention://添加留样
                 String foodName = etFoodName.getText().toString().trim();
                 String person = tvRetentionPerson.getText().toString().trim();
+                if (TextUtils.isEmpty(canteenId)){
+                    ToastUtil.showShort(this , "请选择食堂");
+                    return;
+                }
+                if (TextUtils.isEmpty(foodName)){
+                    ToastUtil.showShort(this , "请输入食品名称");
+                    return;
+                }
+                if (TextUtils.isEmpty(retentionDate)){
+                    ToastUtil.showShort(this , "请选择留样时间");
+                    return;
+                }
+                if (TextUtils.isEmpty(person)){
+                    ToastUtil.showShort(this , "请输入留样人");
+                    return;
+                }
+                if (TextUtils.isEmpty(expiryTime)){
+                    ToastUtil.showShort(this , "请选择到期时间");
+                    return;
+                }
                 Map<String, Object> param = new HashMap<>();
                 param.put("canteenId" , canteenId);
                 param.put("foodName" , foodName);
@@ -122,11 +143,13 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
             case R.id.tv_select_expiry_time://选择到期时间
                 clickType = 1;
                 SelectTimeDialog endTimeDialog = new SelectTimeDialog(this, this);
+                endTimeDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis() - 1000);
                 endTimeDialog.show();
                 break;
             case R.id.tv_add_retention_date://选择留样时间
                 clickType = 0;
                 SelectTimeDialog timeDialog = new SelectTimeDialog(this, this);
+                timeDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis() - 1000);
                 timeDialog.show();
                 break;
         }
@@ -145,7 +168,7 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
             retentionDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
 //            tvRetentionDate.setText(retentionDate);
         }
-        TimePickerDialog dialog = new TimePickerDialog(AddRetentionActivity.this , TimePicker.AUTOFILL_TYPE_LIST,this , 8 , 00 , true);
+        TimePickerDialog dialog = new TimePickerDialog(AddRetentionActivity.this , TimePicker.AUTOFILL_TYPE_LIST,this , startcal.get(Calendar.HOUR) , startcal.get(Calendar.MINUTE) , true);
         dialog.show();
     }
 

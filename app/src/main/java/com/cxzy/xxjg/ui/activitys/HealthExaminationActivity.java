@@ -60,7 +60,7 @@ import okhttp3.RequestBody;
 /**
  * 卫生检查
  */
-public class HealthExaminationActivity extends BaseActivity<HealthExaminationPresenterImpl> implements IHealthExaminationContract.View , SelectCanteenDialog.SelectCanteenItemListener, RadioGroup.OnCheckedChangeListener, PurchaseAdapter.RecyclerViewItemClickListener {
+public class HealthExaminationActivity extends BaseActivity<HealthExaminationPresenterImpl> implements IHealthExaminationContract.View , SelectCanteenDialog.SelectCanteenItemListener, RadioGroup.OnCheckedChangeListener, PurchaseAdapter.RecyclerViewItemClickListener, PurchaseAdapter.DeletePicItemListener {
 
     @BindView(R.id.rg_check)
     RadioGroup rgCheck;
@@ -139,6 +139,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     public void initData() {
         rgCheck.setOnCheckedChangeListener(this);
         picAdapter.setItemClickListener(this);
+        picAdapter.setDeletePicItemListener(this);
     }
 
     @Override
@@ -389,6 +390,12 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     @Override
     public void refreshPicAdapter() {
         picAdapter.setDatas(picList);
+        picAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDeletePicItem(int position) {
+        picList.remove(position);
         picAdapter.notifyDataSetChanged();
     }
 }

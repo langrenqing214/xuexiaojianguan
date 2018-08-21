@@ -50,7 +50,7 @@ import okhttp3.ResponseBody;
 /**
  * 食材采购
  */
-public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl> implements IPurchaseActivityContract.View, PurchaseAdapter.RecyclerViewItemClickListener, SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, SelectSupplierDialog.SelectSupplierListener, SelectFoodStyleDialog.SelectFoodStyleListener {
+public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl> implements IPurchaseActivityContract.View, PurchaseAdapter.RecyclerViewItemClickListener, SelectCanteenDialog.SelectCanteenItemListener, DatePickerDialog.OnDateSetListener, SelectSupplierDialog.SelectSupplierListener, SelectFoodStyleDialog.SelectFoodStyleListener, PurchaseAdapter.DeletePicItemListener {
 
     @BindView(R.id.rv_add_pic)
     RecyclerView rvAddPic;
@@ -118,6 +118,7 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
         mAdapter = new PurchaseAdapter(this, picList , 5);
         rvAddPic.setAdapter(mAdapter);
         mAdapter.setItemClickListener(this);
+        mAdapter.setDeletePicItemListener(this);
     }
 
     @Override
@@ -313,5 +314,11 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
     public void selectFoodStyleItem(int positon, ResultItemBean info) {
         etFoodStyle.setText(info.name);
         foodStyleId = info.key;
+    }
+
+    @Override
+    public void onDeletePicItem(int position) {
+        picList.remove(position);
+        mAdapter.notifyDataSetChanged();
     }
 }

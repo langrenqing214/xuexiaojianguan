@@ -112,7 +112,7 @@ public class RetrofitConfig {
             }
             //打印url信息
             Log.w(TAG, "intercept: " + request.url() + (request.body() != null ? "?" + _parseParams(request.body(), requestBuffer) : ""));
-            final Response response = chain.proceed(request);
+            Response response = chain.proceed(request);
 
             return response;
         }

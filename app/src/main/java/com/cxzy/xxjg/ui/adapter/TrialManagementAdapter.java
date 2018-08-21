@@ -51,7 +51,7 @@ public class TrialManagementAdapter extends RecyclerView.Adapter<TrialManagement
         holder.tvTrialPerson.setText("试吃人:" + info.eatPerson);
         holder.tvTrialTime.setText("试吃时间:" + DateUtil.timeToAdviserTimeString(info.eatTime));
         holder.tvTrialDes.setText(info.remarks);
-        String str = info.eatImage == null ? "" : ApiConstants.sIFengApi + info.eatImage.substring(1);
+        String str = info.eatImage == null ? "" : ApiConstants.getInstance().getsIFengApi() + info.eatImage.substring(1);
         ImageLoaderUtil.LoadImage(mContext , str , holder.ivFood);
         if ("INIT".equals(info.status)){//未出结果
             holder.tvTrialState.setText("未出结果");

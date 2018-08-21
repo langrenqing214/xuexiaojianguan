@@ -16,6 +16,7 @@ import com.cxzy.xxjg.bean.RetentionItemBean;
 import com.cxzy.xxjg.utils.DateUtil;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -51,13 +52,14 @@ public class RetentionManageAdapter extends RecyclerView.Adapter<RetentionManage
         holder.tvRetentionPerson.setText("留样人:" + info.reservedPerson);
         Long statusTime = TextUtils.isEmpty(info.reservedTime) ? 0 : Long.valueOf(info.reservedTime);
         Long expiryTime = TextUtils.isEmpty(info.expiryTime) ? 0 : Long.valueOf(info.expiryTime);
-        if (statusTime - expiryTime >= 0){//正常
+        Long nowTime = Calendar.getInstance().getTimeInMillis();
+        if (nowTime - expiryTime <= 0){//正常
             holder.tvFoodState.setText("正常");
             holder.tvFoodState.setTextColor(ContextCompat.getColor(mContext , R.color.green_text));
             holder.tvExpiryTime.setText("到期时间:" + DateUtil.timeToSeckillTimeString(info.expiryTime == null ? "" : info.expiryTime ));
             holder.tvExpiryTime.setTextColor(ContextCompat.getColor(mContext , R.color.green_text));
         }else{
-            holder.tvFoodState.setText("已过期");
+            holder.tvFoodState.setText("已到期");
             holder.tvFoodState.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));
             holder.tvExpiryTime.setText("到期时间:" + DateUtil.timeToSeckillTimeString(info.expiryTime == null ? "" : info.expiryTime));
             holder.tvExpiryTime.setTextColor(ContextCompat.getColor(mContext , R.color.red_text));

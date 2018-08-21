@@ -51,7 +51,7 @@
 
             <TextView
                 style="@style/main_text_style"
-                android:text="密码：　"
+                android:text="　密码："
                 />
 
             <EditText
