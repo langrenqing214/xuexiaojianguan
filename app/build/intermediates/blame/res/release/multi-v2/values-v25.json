@@ -1,0 +1,45 @@
+{
+    "logs": [
+        {
+            "outputFile": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-v25\\values-v25.xml",
+            "map": [
+                {
+                    "source": "F:\\myLearnMvp\\xuexiaojianguan\\xuexiaojianguan\\app\\src\\main\\res\\values-v25\\dimens.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "90",
+                        "endColumns": "52",
+                        "endOffsets": "138"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "52",
+                        "endOffsets": "103"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\demo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\8eb51b2c8f1d48284aa5c52ad7ee731f\\res\\values-v25\\values-v25.xml",
+                    "from": {
+                        "startLines": "2,3,4,6",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,126,209,308",
+                        "endLines": "2,3,5,7",
+                        "endColumns": "70,82,12,12",
+                        "endOffsets": "121,204,303,414"
+                    },
+                    "to": {
+                        "startLines": "3,4,5,7",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "108,179,262,361",
+                        "endLines": "3,4,6,8",
+                        "endColumns": "70,82,12,12",
+                        "endOffsets": "174,257,356,467"
+                    }
+                }
+            ]
+        }
+    ]
+}

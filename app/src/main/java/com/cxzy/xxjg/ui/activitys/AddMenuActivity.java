@@ -57,6 +57,7 @@ public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implemen
     private String lunch;
     private String dinner;
     private String releaseTime;
+    private String id;
 
     @Override
     public int getContentLayout() {
@@ -82,6 +83,7 @@ public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implemen
         lunch = getIntent().getStringExtra("lunch" );
         dinner = getIntent().getStringExtra("dinner" );
         releaseTime = getIntent().getStringExtra("releaseTime" );
+        id = getIntent().getStringExtra("id");
         if (type == 1){
             tvCanteen.setText(canteenName);
             tvTime.setText(DateUtil.timeToDataTimeString(releaseTime == null ? "" : releaseTime ));
@@ -143,10 +145,11 @@ public class AddMenuActivity extends BaseActivity<AddMenuPresenterImpl> implemen
                 }
                 Map<String , Object> param = new HashMap<>();
                 param.put("breakfast" , etBreakfast.getText().toString().trim());
-                param.put("dinner" , etLunch.getText().toString().trim());
-                param.put("lunch" , etDinner.getText().toString().trim());
+                param.put("dinner" , etDinner.getText().toString().trim());
+                param.put("lunch" , etLunch.getText().toString().trim());
                 param.put("releaseTime" , releaseTime);
                 param.put("canteenId" , canteenId);
+                param.put("id" , id);
                 mPresenter.saveMenu(param);
                 break;
         }

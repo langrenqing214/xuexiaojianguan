@@ -154,6 +154,7 @@ public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implem
         mPresenter.getMenuList(canteenId , page , pageSize);
     }
 
+    //编辑菜谱
     @Override
     public void editMenuClickListener(int position) {
         Intent intent = new Intent(this , AddMenuActivity.class);
@@ -164,6 +165,7 @@ public class MenuActivity extends BaseActivity<MenuActivityPresenterImpl> implem
         intent.putExtra("lunch" , bean.list.get(position).lunch);
         intent.putExtra("dinner" , bean.list.get(position).dinner);
         intent.putExtra("releaseTime" , bean.list.get(position).releaseTime);
+        intent.putExtra("id" , bean.list.get(position).id);
         intent.putExtra("type" , 1);
         startActivityForResult(intent , 1);
     }
