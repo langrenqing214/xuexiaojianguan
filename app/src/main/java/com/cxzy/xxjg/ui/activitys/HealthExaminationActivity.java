@@ -2,6 +2,7 @@ package com.cxzy.xxjg.ui.activitys;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -60,7 +61,7 @@ import okhttp3.RequestBody;
 /**
  * 卫生检查
  */
-public class HealthExaminationActivity extends BaseActivity<HealthExaminationPresenterImpl> implements IHealthExaminationContract.View , SelectCanteenDialog.SelectCanteenItemListener, RadioGroup.OnCheckedChangeListener, PurchaseAdapter.RecyclerViewItemClickListener, PurchaseAdapter.DeletePicItemListener {
+public class HealthExaminationActivity extends BaseActivity<HealthExaminationPresenterImpl> implements IHealthExaminationContract.View, SelectCanteenDialog.SelectCanteenItemListener, RadioGroup.OnCheckedChangeListener, PurchaseAdapter.RecyclerViewItemClickListener, PurchaseAdapter.DeletePicItemListener {
 
     @BindView(R.id.rg_check)
     RadioGroup rgCheck;
@@ -83,13 +84,13 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     @BindView(R.id.rv_add_pic)
     RecyclerView rvAddPic;
     @BindView(R.id.ll_nomor)
-    LinearLayout llNomor ;
+    LinearLayout llNomor;
     @BindView(R.id.iv_normal)
-    ImageView ivNormal ;
+    ImageView ivNormal;
     @BindView(R.id.ll_error)
-    LinearLayout llError ;
+    LinearLayout llError;
     @BindView(R.id.iv_error)
-    ImageView ivError ;
+    ImageView ivError;
     private String canteenId;
     private ArrayList<SchoolCanteenBean> dataList = new ArrayList<>();
     private HealthExaminationBean bean = new HealthExaminationBean();
@@ -99,12 +100,13 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     private List<PersonsBean> throughPerson = new ArrayList<>(); //检查通过
     private List<PersonsBean> noThroughPerson = new ArrayList<>(); //检查未通过
     private List<PersonsBean> allList = new ArrayList<>();
+    private List<PersonsBean> infoLists = new ArrayList<>();
     private String typeId = "";
     private String envState = "";
     private static final int MY_PERMISSIONS_READ_EXTERNAL_STORAGE = 1;
     private PurchaseAdapter picAdapter;
     private List<String> picList = new ArrayList<>();
-    private int clickType ; //1为提交
+    private int clickType; //1为提交
 
 
     @Override
@@ -131,7 +133,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
         mAdapter = new CheckItemsAdapter(this, itemList);
         lvCheckItems.setAdapter(mAdapter);
         rvAddPic.setLayoutManager(new GridLayoutManager(this, 3));
-        picAdapter = new PurchaseAdapter(this , picList , 4);
+        picAdapter = new PurchaseAdapter(this, picList, 4);
         rvAddPic.setAdapter(picAdapter);
     }
 
@@ -152,17 +154,18 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
             }
             rgCheck.check(R.id.rb_morning_check);
             mAdapter.notifyDataSetChanged();
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
 
-        if (clickType == 1){
-            ToastUtil.showShort(this , "提交成功");
+        if (clickType == 1) {
+            ToastUtil.showShort(this, "提交成功");
             finish();
         }
     }
 
     @Override
     public void refreshFaild(String faildCode) {
-        if ("401".equals(faildCode)){
+        if ("401".equals(faildCode)) {
             finish();
         }
     }
@@ -173,7 +176,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     }
 
     @OnClick({R.id.back_btn_id, R.id.ll_select_canteen, R.id.btn_add_through_person, R.id.btn_save_morningcheck, R.id.btn_add_no_through_person,
-            R.id.btn_save_environmental_check ,R.id.ll_nomor , R.id.ll_error})
+            R.id.btn_save_environmental_check, R.id.ll_nomor, R.id.ll_error})
     @Override
     public void onViewClicked(View view) {
 
@@ -188,7 +191,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 break;
             case R.id.btn_save_morningcheck://提交晨检
                 List<File> fileList = new ArrayList<>();
-                for (String str : picList){
+                for (String str : picList) {
                     File folder = new File(str);
                     fileList.add(folder);
                 }
@@ -196,44 +199,45 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 allList.clear();
                 allList.addAll(throughPerson);
                 allList.addAll(noThroughPerson);
-                if (allList == null || allList.size() == 0){
-                    ToastUtil.showShort(this , "请对人员进行筛选");
+                if (allList == null || allList.size() == 0) {
+                    ToastUtil.showShort(this, "请对人员进行筛选");
                     return;
                 }
-                if (fileList == null || fileList.size() == 0){
-                    ToastUtil.showShort(this , "拍照不能为空");
+                if (fileList == null || fileList.size() == 0) {
+                    ToastUtil.showShort(this, "拍照不能为空");
                     return;
                 }
                 Map<String, RequestBody> param = new HashMap<>();
-                param.put("persons", RequestBody.create(MediaType.parse("form-data"),new Gson().toJson(allList)));
+                param.put("persons", RequestBody.create(MediaType.parse("form-data"), new Gson().toJson(allList)));
 //                param.put("files", fileList);
-                if(fileList != null && !fileList.isEmpty()) {
-                    for (File file:fileList){
-                        param.put("files\";filename=\""+file.getName(), RequestBody.create(MediaType.parse("form-data"), file));
+                if (fileList != null && !fileList.isEmpty()) {
+                    for (File file : fileList) {
+                        param.put("files\";filename=\"" + file.getName(), RequestBody.create(MediaType.parse("form-data"), file));
                     }
                 }
-                param.put("canteenId", RequestBody.create(MediaType.parse("form-data"),canteenId));
-                param.put("typeId", RequestBody.create(MediaType.parse("form-data"),typeId));
+                param.put("canteenId", RequestBody.create(MediaType.parse("form-data"), canteenId));
+                param.put("typeId", RequestBody.create(MediaType.parse("form-data"), typeId));
 
                 mPresenter.saveMorningCheck(param);
-                clickType = 1 ;
+                clickType = 1;
                 break;
             case R.id.btn_save_environmental_check://提交环境检查
-                if (TextUtils.isEmpty(envState)){
-                    ToastUtil.showShort(this , "请选择是否正常");
+                if (TextUtils.isEmpty(envState)) {
+                    ToastUtil.showShort(this, "请选择是否正常");
                     return;
                 }
-                Map<String , Object> envParam = new HashMap<>();
-                envParam.put("canteenId" ,canteenId);
-                envParam.put("state" , envState);
-                envParam.put("typeId" , typeId);
+                Map<String, Object> envParam = new HashMap<>();
+                envParam.put("canteenId", canteenId);
+                envParam.put("state", envState);
+                envParam.put("typeId", typeId);
                 mPresenter.saveEnvCheck(envParam);
-                clickType = 1 ;
+                clickType = 1;
                 break;
             case R.id.btn_add_through_person://添加检查通过
-                SelectPersonDialog dialog = new SelectPersonDialog(this, 0, personBean, new SelectPersonDialog.SelectPersonClickLister() {
+                final SelectPersonDialog dialog = new SelectPersonDialog(this, 0, personBean, new SelectPersonDialog.SelectPersonClickLister() {
                     @Override
                     public void selectItemPerson(List<PersonsBean> infoList) {
+                        infoLists = infoList ;
                         throughPerson.addAll(infoList);
                         for (PersonsBean bean : infoList) {
                             if (personBean != null && personBean.contains(bean)) {
@@ -250,6 +254,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                         PersonLabelAdapter adapter = new PersonLabelAdapter(throughPerson, HealthExaminationActivity.this);
                         rvThroughPerson.setAdapter(adapter);
 //                        adapter.notifyDataSetChanged();
+
                     }
                 });
                 dialog.show();
@@ -277,12 +282,12 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                 });
                 dialog1.show();
                 break;
-            case R.id.ll_nomor ://正常
+            case R.id.ll_nomor://正常
                 ivNormal.setBackgroundResource(R.drawable.icon_normal);
                 ivError.setBackgroundResource(R.drawable.icon_circle);
                 envState = "NORMAL";
                 break;
-            case R.id.ll_error ://异常
+            case R.id.ll_error://异常
                 ivNormal.setBackgroundResource(R.drawable.icon_circle);
                 ivError.setBackgroundResource(R.drawable.icon_error);
                 envState = "ERROR";
@@ -336,8 +341,8 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
-        switch (i){
-            case R.id.rb_morning_check ://晨检
+        switch (i) {
+            case R.id.rb_morning_check://晨检
                 try {
                     llMorningCheck.setVisibility(View.VISIBLE);
                     llEnvironmentalCheck.setVisibility(View.GONE);
@@ -347,19 +352,21 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
                     itemList.addAll(bean.types.get(0).items);
                     mAdapter.notifyDataSetChanged();
                     typeId = bean.types.get(0).typeId;
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
                 break;
-            case R.id.rb_environmental_check ://环境检查
+            case R.id.rb_environmental_check://环境检查
                 try {
-                llMorningCheck.setVisibility(View.GONE);
-                llEnvironmentalCheck.setVisibility(View.VISIBLE);
-                tvCheckName.setText(bean.types.get(1).typeName);
-                tvCheckDes.setText(bean.types.get(1).typeDesc);
-                itemList.clear();
-                itemList.addAll(bean.types.get(1).items);
-                mAdapter.notifyDataSetChanged();
-                typeId = bean.types.get(1).typeId;
-                }catch (Exception e){}
+                    llMorningCheck.setVisibility(View.GONE);
+                    llEnvironmentalCheck.setVisibility(View.VISIBLE);
+                    tvCheckName.setText(bean.types.get(1).typeName);
+                    tvCheckDes.setText(bean.types.get(1).typeDesc);
+                    itemList.clear();
+                    itemList.addAll(bean.types.get(1).items);
+                    mAdapter.notifyDataSetChanged();
+                    typeId = bean.types.get(1).typeId;
+                } catch (Exception e) {
+                }
                 break;
         }
     }
@@ -368,7 +375,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            picList = mPresenter.dealPicResult(requestCode , resultCode , data);
+            picList = mPresenter.dealPicResult(requestCode, resultCode, data);
         }
     }
 
@@ -376,7 +383,7 @@ public class HealthExaminationActivity extends BaseActivity<HealthExaminationPre
     public void onItemClick(int position) {
         if (!hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE) || !hasPermission(Manifest.permission.CAMERA)) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE , Manifest.permission.CAMERA},
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA},
                     MY_PERMISSIONS_READ_EXTERNAL_STORAGE);
         } else {
             ScreenUtils.initScreen(this);

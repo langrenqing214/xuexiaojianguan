@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="处理人　:"
+            android:text="　处理人:"
             android:textSize="15dp"
             android:textColor="@color/text_gray_color"
             />

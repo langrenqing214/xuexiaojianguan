@@ -168,7 +168,7 @@ public class AddRetentionActivity extends BaseActivity<AddRetentionPresenterImpl
             retentionDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
 //            tvRetentionDate.setText(retentionDate);
         }
-        TimePickerDialog dialog = new TimePickerDialog(AddRetentionActivity.this , TimePicker.AUTOFILL_TYPE_LIST,this , startcal.get(Calendar.HOUR) , startcal.get(Calendar.MINUTE) , true);
+        TimePickerDialog dialog = new TimePickerDialog(AddRetentionActivity.this , TimePicker.AUTOFILL_TYPE_LIST,this , startcal.get(Calendar.HOUR_OF_DAY) , startcal.get(Calendar.MINUTE) , true);
         dialog.show();
     }
 

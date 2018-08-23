@@ -142,7 +142,7 @@ public class DealTrialDialog extends Dialog implements View.OnClickListener, Dat
         startcal.set(Calendar.MONTH,month);
         startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
         nyTime = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
-        TimePickerDialog dialog = new TimePickerDialog(mContext , TimePicker.AUTOFILL_TYPE_LIST,this , startcal.get(Calendar.HOUR) , startcal.get(Calendar.MINUTE) , true);
+        TimePickerDialog dialog = new TimePickerDialog(mContext , TimePicker.AUTOFILL_TYPE_LIST,this , startcal.get(Calendar.HOUR_OF_DAY) , startcal.get(Calendar.MINUTE) , true);
         dialog.show();
         createDateStart = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
     }

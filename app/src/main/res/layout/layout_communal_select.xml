@@ -18,7 +18,6 @@
         <TextView
             android:id="@+id/tv_canteen_show"
             style="@style/main_text_style"
-            android:text="第一食堂"
             android:textSize="14dp"
             />
         
@@ -49,7 +48,6 @@
         <TextView
             android:id="@+id/tv_time_show"
             style="@style/main_text_style"
-            android:text="第一食堂"
             android:textSize="14dp"
             />
 

@@ -157,6 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
+                    android:inputType="phone"
                     android:hint="请输入价格(元)"
                     android:textSize="14dp" />
 
@@ -184,6 +185,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
+                    android:inputType="phone"
                     android:hint="请输入重量(KG)"
                     android:textSize="14dp" />
 

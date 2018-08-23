@@ -101,7 +101,7 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
         if (type == 0) {
             Long str = Calendar.getInstance().getTimeInMillis() - 7 * 24 * 60 * 60 * 1000 ;
             dateStart = DateUtil.timeToDataTime(str.toString());
-            createDateStart = DateUtil.timeToAdviserTimeString(str.toString());
+            createDateStart = DateUtil.timeToDataTimeString(str.toString());
             dateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
             createDateEnd = DateUtil.date2NYR(Calendar.getInstance().getTime());
         }else {
@@ -134,7 +134,7 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
             itemList.addAll(bean.list);
             mAdapter.setData(itemList);
             if (itemList != null && itemList.size() >= bean.total){
-                srlWarning.setEnableLoadMore(false);;//启用加载;
+                srlWarning.setEnableLoadMore(false);//启用加载;
             }else {
                 srlWarning.setEnableLoadMore(true);
             }

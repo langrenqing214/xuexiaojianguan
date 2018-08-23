@@ -2,8 +2,10 @@ package com.cxzy.xxjg.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -74,7 +76,17 @@ public class SelectPersonDialog extends Dialog {
                 dismiss();
             }
         });
+        this.setOnCancelListener(new OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                for (PersonsBean info : needReturn){
+                    info.personState = "";
+                }
+            }
+        });
     }
+
+
 
     @Override
     public void show() {

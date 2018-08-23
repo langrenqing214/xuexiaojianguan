@@ -292,7 +292,7 @@ public class AddTrialActivity extends BaseActivity<AddTrialPresenterImpl> implem
         }else {
             reactionTime = DateUtil.date2NYR(startcal.getTime());
         }
-        TimePickerDialog dialog = new TimePickerDialog(AddTrialActivity.this, TimePicker.AUTOFILL_TYPE_LIST, this, startcal.get(Calendar.HOUR) , startcal.get(Calendar.MINUTE), true);
+        TimePickerDialog dialog = new TimePickerDialog(AddTrialActivity.this, TimePicker.AUTOFILL_TYPE_LIST, this, startcal.get(Calendar.HOUR_OF_DAY) , startcal.get(Calendar.MINUTE), true);
         dialog.show();
     }
 
