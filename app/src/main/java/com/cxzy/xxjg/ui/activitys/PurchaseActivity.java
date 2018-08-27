@@ -295,11 +295,11 @@ public class PurchaseActivity extends BaseActivity<PurchaseActivityPresenterImpl
         startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
         if (clickType == 0){//生产日期
             String nyTime = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
-            manufactureDate = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
+            manufactureDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
             etManufactureDate.setText(nyTime);
         }else {//保质到期
             String nyTime = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
-            shelfLifeEnd = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date(startcal.getTimeInMillis()));
+            shelfLifeEnd = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
             etShelfLifeEnd.setText(nyTime);
         }
     }

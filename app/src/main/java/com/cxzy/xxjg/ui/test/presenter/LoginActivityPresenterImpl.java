@@ -68,8 +68,8 @@ public class LoginActivityPresenterImpl extends BasePresenter<ILoginActivityCont
         params.put("loginName", userName);
         params.put("password", passWord);
 
-        String url = (String) SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "main_url" , "http://47.95.252.122:8080/wisdom/");
-        String sIFengApi = TextUtils.isEmpty(url) ? "http://47.95.252.122:8080/wisdom/" : url;
+        String url = (String) SharedPreferencesUtils.getParam(MyApp.appComponent.getContext() , "main_url" , "http://xmh.s1.natapp.cc/wisdom/");
+        String sIFengApi = TextUtils.isEmpty(url) ? "http://xmh.s1.natapp.cc/wisdom/" : url;
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(sIFengApi)

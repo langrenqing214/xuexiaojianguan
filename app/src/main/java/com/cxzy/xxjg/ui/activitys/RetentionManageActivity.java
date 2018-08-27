@@ -63,7 +63,7 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
     private String canteenId;
     private ArrayList<SchoolCanteenBean> dataList;
     private RetentionManageAdapter mAdapter;
-    private int page = 0;
+    private int page = 1;
     private int pageSize = 10;
     private String createDateStart = "" ;
     private String createDateEnd = "" ;
@@ -106,7 +106,7 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
 
         srlRetention.setOnRefreshLoadMoreListener(this);
         srlRetention.setEnableLoadMore(false);
-        page = 0 ;
+        page = 1 ;
         mPresenter.getRetentionList(canteenId, createDateStart , createDateEnd , page, pageSize);
         rvRetention.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new RetentionManageAdapter(this , this);
@@ -186,7 +186,7 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
     @Override
     public void selectCanteenItem(int positon, String canteenName, String canteenId) {
         this.canteenId = canteenId ;
-        page = 0 ;
+        page = 1 ;
         tvCanteenShow.setText(canteenName);
         mPresenter.getRetentionList(canteenId , createDateStart , createDateEnd , page , pageSize);
     }
@@ -209,7 +209,7 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
                 dateEnd = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
                 createDateEnd = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
                 tvTimeShow.setText(dateStart + "-" + dateEnd);
-                page = 0 ;
+                page = 1 ;
                 mPresenter.getRetentionList(canteenId , createDateStart , createDateEnd , page , pageSize);
             }
         });
@@ -224,7 +224,7 @@ public class RetentionManageActivity extends BaseActivity<RetentionPresenterImpl
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        page = 0 ;
+        page = 1 ;
         mPresenter.getRetentionList(canteenId , createDateStart , createDateEnd , page , pageSize);
     }
 

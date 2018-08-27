@@ -11,4 +11,5 @@ import java.util.List;
 public class DictMapBean implements Serializable{
     public ArrayList<ResultItemBean> FOOD_TYPE = new ArrayList();
     public ArrayList<ResultItemBean> REACTION_INTERVAL = new ArrayList();
+    public ArrayList<ResultItemBean> ALARM_LEVEL = new ArrayList();
 }

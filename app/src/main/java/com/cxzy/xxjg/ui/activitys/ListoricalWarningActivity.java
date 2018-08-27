@@ -62,7 +62,7 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     private WarningAdapter mAdapter;
     private ArrayList<SchoolCanteenBean> dataList;
     private String canteenId;
-    private int page = 0 ;
+    private int page = 1 ;
     private int pageSize = 10 ;
     private String createDateStart = "" ;
     private String createDateEnd = "" ;
@@ -128,7 +128,7 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     public void refreshView(Object mData) {
         if(mData != null) {
             WarningBean bean = (WarningBean) mData;
-            if (page == 0){
+            if (page == 1){
                 itemList.clear();
             }
             itemList.addAll(bean.list);
@@ -197,8 +197,8 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
                 startcal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
                 dateEnd = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
                 createDateEnd = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
-                tvTimeShow.setText(createDateStart + "-" + createDateEnd);
-                page = 0 ;
+                tvTimeShow.setText(dateStart + "-" + dateEnd);
+                page = 1 ;
                 mPresenter.getWarningList(level , canteenId , createDateStart , createDateEnd , page , pageSize);
             }
         });
@@ -209,7 +209,7 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
     public void selectCanteenItem(int positon, String canteenName, String canteenId) {
         this.canteenId = canteenId ;
         tvCanteenShow.setText(canteenName);
-        page = 0 ;
+        page = 1 ;
         mPresenter.getWarningList(level , canteenId , createDateStart , createDateEnd , page , pageSize);
     }
 
@@ -228,7 +228,7 @@ public class ListoricalWarningActivity extends BaseActivity<WarningPresenterImpl
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        page = 0 ;
+        page = 1 ;
         mPresenter.getWarningList(level , canteenId , createDateStart , createDateEnd , page , pageSize);
     }
 

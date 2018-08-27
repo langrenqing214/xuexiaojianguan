@@ -64,7 +64,7 @@ public class WarningAdapter extends RecyclerView.Adapter<WarningAdapter.WarningH
         }
 
         holder.tvStateDes.setText(info.configDesc);
-        holder.tvCheckTime.setText(DateUtil.timeToAdviserTimeString(info.dealDate == null ? "" : info.dealDate));
+        holder.tvCheckTime.setText(DateUtil.timeToAdviserTimeString(info.createDate == null ? "" : info.createDate));
         holder.tvAbnormalTerm.setText(info.remarks);
         holder.btnDealWarning.setOnClickListener(new View.OnClickListener() {
             @Override

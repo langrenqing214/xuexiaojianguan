@@ -62,7 +62,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
     private String canteenId = "";
     private String canteenName = "";
     private TrialManagementAdapter mAdapter;
-    private int page = 0;
+    private int page = 1;
     private int pageSize = 10;
     private String createDateStart = "";
     private String createDateEnd = "";
@@ -97,7 +97,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
         tvCanteenShow.setText(canteenName);
         Long str = Calendar.getInstance().getTimeInMillis() - 7 * 24 * 60 * 60 * 1000 ;
         dateStart = DateUtil.timeToDataTime(str.toString());
-        createDateStart = DateUtil.timeToAdviserTimeString(str.toString());
+        createDateStart = DateUtil.timeToDataTimeString(str.toString());
         dateEnd = DateUtil.date2yyyyMMdd(Calendar.getInstance().getTime());
         createDateEnd = DateUtil.date2NYR(Calendar.getInstance().getTime());
         tvTimeShow.setText(dateStart + "-" + dateEnd);
@@ -105,7 +105,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
         srlTrial.setOnRefreshLoadMoreListener(this);
         srlTrial.setEnableLoadMore(false);
 
-        page = 0 ;
+        page = 1 ;
         mPresenter.getTrialList(page, canteenId, createDateStart, createDateEnd, pageSize);
 
         rvTrial.setLayoutManager(new LinearLayoutManager(this));
@@ -117,7 +117,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
     public void refreshView(Object mData) {
         if (mData != null) {
             TrialBean bean = (TrialBean) mData;
-            if (page == 0){
+            if (page == 1){
                 beanList.clear();
             }
             beanList.addAll(bean.list);
@@ -199,8 +199,8 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
                 startcal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 dateEnd = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date(startcal.getTimeInMillis()));
                 createDateEnd = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(startcal.getTimeInMillis()));
-                tvTimeShow.setText(createDateStart + "-" + createDateEnd);
-                page = 0 ;
+                tvTimeShow.setText(dateStart + "-" + dateEnd);
+                page = 1 ;
                 mPresenter.getTrialList(page, canteenId, createDateStart, createDateEnd, pageSize);
             }
         });
@@ -211,7 +211,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
     public void selectCanteenItem(int positon, String canteenName, String canteenId) {
         this.canteenId = canteenId;
         tvCanteenShow.setText(canteenName);
-        page = 0 ;
+        page = 1 ;
         mPresenter.getTrialList(page, canteenId, createDateStart, createDateEnd, pageSize);
     }
 
@@ -242,7 +242,7 @@ public class TrialManagementActivity extends BaseActivity<TrialManagementPresent
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        page = 0 ;
+        page = 1 ;
         mPresenter.getTrialList(page, canteenId, createDateStart, createDateEnd, pageSize);
     }
 }

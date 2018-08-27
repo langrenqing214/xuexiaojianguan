@@ -9,12 +9,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -289,8 +291,21 @@ public class MainFragment extends BaseFragment<MainFragmentContractPresenterImpl
                 tvWarning.setText(bean.warnTotal);
                 tvDeal.setText(bean.dealTotal);
                 tvUserName.setText(bean.user.loginName);
+                if ("ALARM".equals(bean.dictMap.ALARM_LEVEL.get(1).key)) {
+                    Log.e("haha" , bean.dictMap.ALARM_LEVEL.get(1).name);
+                    civAlarm.setImageResource(Color.parseColor(bean.dictMap.ALARM_LEVEL.get(1).name));
+                }
+                if ("WARN".equals(bean.dictMap.ALARM_LEVEL.get(0).key)) {
+                    Log.e("haha" , bean.dictMap.ALARM_LEVEL.get(0).name);
+                    civWarning.setImageResource(Color.parseColor(bean.dictMap.ALARM_LEVEL.get(0).name));
+                }
+                if ("COMPLETE".equals(bean.dictMap.ALARM_LEVEL.get(2).key)) {
+                    Log.e("haha" , bean.dictMap.ALARM_LEVEL.get(2).name);
+                    civDeal.setImageResource(Color.parseColor(bean.dictMap.ALARM_LEVEL.get(2).name));
+                }
             }
         } catch (Exception e) {
+            Log.e("haha" , e.getMessage());
         }
 
     }
